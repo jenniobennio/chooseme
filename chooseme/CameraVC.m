@@ -39,16 +39,6 @@
     
     // self.navigationController.navigationBarHidden = YES;
     
-    // Swipe left
-    UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeLeft:)];
-    swipeLeft.direction = UISwipeGestureRecognizerDirectionLeft;
-    [self.view addGestureRecognizer:swipeLeft];
-    
-    // Swipe right
-    UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeRight:)];
-    swipeRight.direction = UISwipeGestureRecognizerDirectionRight;
-    [self.view addGestureRecognizer:swipeRight];
-   
     // Error if camera doesn't exist
     /*if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         
@@ -69,24 +59,6 @@
 }
 
 # pragma mark - private methods
-- (void)swipeLeft:(UISwipeGestureRecognizer *)gestureRecognizer
-{
-    NSLog(@"Swipe left");
-    
-    if (gestureRecognizer.state == UIGestureRecognizerStateRecognized)
-    {
-    
-    }
-    
-    FeedVC *fvc = [[FeedVC alloc] init];
-    [self.navigationController pushViewController:fvc animated:YES];
-}
-
-- (void)swipeRight:(UISwipeGestureRecognizer *)gestureRecognizer
-{
-    NSLog(@"Swipe right");
-}
-
 - (void) formatPic:(UIButton *)button isSelected:(BOOL)selected
 {
     button.layer.masksToBounds = YES;
@@ -132,7 +104,7 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
   
     UIImage *chosenImage = info[UIImagePickerControllerOriginalImage];
-//    UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
+//    UIImage *chosenImage = info[UIImagePickerControllerEditedImage]; // if we want to crop image
     self.mainPic.image = chosenImage;
     
     if (self.picIndex == 0) {

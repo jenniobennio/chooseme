@@ -124,8 +124,6 @@
     PostVC *postVC = [[PostVC alloc] initWithNibName:@"PostVC" bundle:nil];
     postVC.post = [self.questions objectAtIndex:indexPath.row];
     [self presentModalViewController:postVC animated:YES];
-    
-    NSLog(@"didSelectRow");
 }
 
 #pragma mark - Private methods

@@ -9,6 +9,7 @@
 #import "PostVC.h"
 
 @interface PostVC ()
+@property (nonatomic, assign) BOOL interactionInProgress;
 
 @end
 
@@ -27,6 +28,10 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+
+    UISwipeGestureRecognizer *swipeDownGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(onSwipeDown:)];
+    swipeDownGesture.direction = UISwipeGestureRecognizerDirectionDown;
+    [self.view addGestureRecognizer:swipeDownGesture];
     
     self.name.text = self.post.name;
     self.question.text = self.post.question;
@@ -39,7 +44,29 @@
 }
 
 - (IBAction)onBack:(id)sender {
-//    [self.presentingViewController popViewControllerAnimated:YES];
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)onSwipeDown:(UIGestureRecognizer *) sender
+{
+    // Should this gesture be changed to pan?
+    if (sender.state == UIGestureRecognizerStateBegan) {
+        NSLog(@"Down swipe recognized: began");
+        self.interactionInProgress = YES;
+
+    }
+    else if (sender.state == UIGestureRecognizerStateChanged) {
+        NSLog(@"Down swipe recognized: changed");
+        
+    }
+    else if (sender.state == UIGestureRecognizerStateEnded)
+    {
+        NSLog(@"Down swipe recognized: ended");
+        self.interactionInProgress = NO;
+
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+    
+
 }
 @end

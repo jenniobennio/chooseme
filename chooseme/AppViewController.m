@@ -9,6 +9,7 @@
 #import "AppViewController.h"
 #import "CameraVC.h"
 #import "FeedVC.h"
+#import <Parse/Parse.h>
 
 @interface AppViewController ()
 
@@ -29,6 +30,27 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    // The permissions requested from the user
+    NSArray *permissionsArray = @[ @"user_about_me", @"user_relationships", @"user_birthday", @"user_location"];
+    
+    // Login PFUser using Facebook
+    // subha todo: put ui loading indicators
+    [PFFacebookUtils logInWithPermissions:permissionsArray block:^(PFUser *user, NSError *error) {
+        if (!user) {
+            if (!error) {
+                NSLog(@"Uh oh. The user cancelled the Facebook login.");
+            } else {
+                NSLog(@"Uh oh. An error occurred: %@", error);
+            }
+        } else if (user.isNew) {
+            NSLog(@"User with facebook signed up and logged in!");
+            NSLog(@"%@", user);
+        } else {
+            NSLog(@"User with facebook logged in!");
+            NSLog(@"%@", user);        }
+    }];
+    
     
     self.pageVC = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
     

@@ -33,6 +33,17 @@
 		26351A9718A80EC7000A30C9 /* PostVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 26351A9518A80EC7000A30C9 /* PostVC.m */; };
 		26351A9818A80EC7000A30C9 /* PostVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26351A9618A80EC7000A30C9 /* PostVC.xib */; };
 		B031302B82C840708B86AE68 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43619A4B92F840368B218FE4 /* libPods.a */; };
+		D572FE4718B1DAFE000DB1D0 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D572FE4618B1DAFE000DB1D0 /* FacebookSDK.framework */; };
+		D572FE4918B1DBC6000DB1D0 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D572FE4818B1DBC6000DB1D0 /* Parse.framework */; };
+		D572FE4B18B1DBF7000DB1D0 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D572FE4A18B1DBF7000DB1D0 /* AudioToolbox.framework */; };
+		D572FE4D18B1DBFE000DB1D0 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D572FE4C18B1DBFE000DB1D0 /* CFNetwork.framework */; };
+		D572FE4F18B1DC0F000DB1D0 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D572FE4E18B1DC0F000DB1D0 /* CoreLocation.framework */; };
+		D572FE5118B1DC18000DB1D0 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D572FE5018B1DC18000DB1D0 /* libz.dylib */; };
+		D572FE5318B1DC21000DB1D0 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D572FE5218B1DC21000DB1D0 /* MobileCoreServices.framework */; };
+		D572FE5518B1DC2A000DB1D0 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D572FE5418B1DC2A000DB1D0 /* QuartzCore.framework */; };
+		D572FE5718B1DC35000DB1D0 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D572FE5618B1DC35000DB1D0 /* Security.framework */; };
+		D572FE5918B1DC3C000DB1D0 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D572FE5818B1DC3C000DB1D0 /* StoreKit.framework */; };
+		D572FE5B18B1DC46000DB1D0 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D572FE5A18B1DC46000DB1D0 /* SystemConfiguration.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +94,17 @@
 		26351A9618A80EC7000A30C9 /* PostVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostVC.xib; sourceTree = "<group>"; };
 		39891BCB79A34F009E78550D /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		43619A4B92F840368B218FE4 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		D572FE4618B1DAFE000DB1D0 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
+		D572FE4818B1DBC6000DB1D0 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		D572FE4A18B1DBF7000DB1D0 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		D572FE4C18B1DBFE000DB1D0 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		D572FE4E18B1DC0F000DB1D0 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		D572FE5018B1DC18000DB1D0 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		D572FE5218B1DC21000DB1D0 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		D572FE5418B1DC2A000DB1D0 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		D572FE5618B1DC35000DB1D0 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		D572FE5818B1DC3C000DB1D0 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		D572FE5A18B1DC46000DB1D0 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,9 +112,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D572FE5B18B1DC46000DB1D0 /* SystemConfiguration.framework in Frameworks */,
+				D572FE5918B1DC3C000DB1D0 /* StoreKit.framework in Frameworks */,
+				D572FE5718B1DC35000DB1D0 /* Security.framework in Frameworks */,
+				D572FE5518B1DC2A000DB1D0 /* QuartzCore.framework in Frameworks */,
+				D572FE5318B1DC21000DB1D0 /* MobileCoreServices.framework in Frameworks */,
+				D572FE5118B1DC18000DB1D0 /* libz.dylib in Frameworks */,
+				D572FE4F18B1DC0F000DB1D0 /* CoreLocation.framework in Frameworks */,
 				263519F918A5D1FF000A30C9 /* CoreGraphics.framework in Frameworks */,
+				D572FE4D18B1DBFE000DB1D0 /* CFNetwork.framework in Frameworks */,
+				D572FE4B18B1DBF7000DB1D0 /* AudioToolbox.framework in Frameworks */,
+				D572FE4718B1DAFE000DB1D0 /* FacebookSDK.framework in Frameworks */,
 				263519FB18A5D1FF000A30C9 /* UIKit.framework in Frameworks */,
 				263519F718A5D1FF000A30C9 /* Foundation.framework in Frameworks */,
+				D572FE4918B1DBC6000DB1D0 /* Parse.framework in Frameworks */,
 				B031302B82C840708B86AE68 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -133,6 +166,17 @@
 		263519F518A5D1FF000A30C9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D572FE5A18B1DC46000DB1D0 /* SystemConfiguration.framework */,
+				D572FE5818B1DC3C000DB1D0 /* StoreKit.framework */,
+				D572FE5618B1DC35000DB1D0 /* Security.framework */,
+				D572FE5418B1DC2A000DB1D0 /* QuartzCore.framework */,
+				D572FE5218B1DC21000DB1D0 /* MobileCoreServices.framework */,
+				D572FE5018B1DC18000DB1D0 /* libz.dylib */,
+				D572FE4E18B1DC0F000DB1D0 /* CoreLocation.framework */,
+				D572FE4C18B1DBFE000DB1D0 /* CFNetwork.framework */,
+				D572FE4A18B1DBF7000DB1D0 /* AudioToolbox.framework */,
+				D572FE4818B1DBC6000DB1D0 /* Parse.framework */,
+				D572FE4618B1DAFE000DB1D0 /* FacebookSDK.framework */,
 				263519F618A5D1FF000A30C9 /* Foundation.framework */,
 				263519F818A5D1FF000A30C9 /* CoreGraphics.framework */,
 				263519FA18A5D1FF000A30C9 /* UIKit.framework */,
@@ -484,6 +528,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/subhagollakota/Documents/ios/chooseme,
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "chooseme/chooseme-Prefix.pch";
 				INFOPLIST_FILE = "chooseme/chooseme-Info.plist";
@@ -498,6 +546,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/subhagollakota/Documents/ios/chooseme,
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "chooseme/chooseme-Prefix.pch";
 				INFOPLIST_FILE = "chooseme/chooseme-Info.plist";

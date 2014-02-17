@@ -23,12 +23,15 @@
 @property (strong, nonatomic) IBOutlet UIButton *choosePicButton;
 @property (strong, nonatomic) IBOutlet UIButton *pic1;
 @property (strong, nonatomic) IBOutlet UIButton *pic2;
+@property (strong, nonatomic) NSURL *picURL1;
+@property (strong, nonatomic) NSURL *picURL2;
 
 @property (nonatomic) int picIndex;
 - (IBAction)takePic:(id)sender;
 - (IBAction)choosePic:(id)sender;
 - (IBAction)onPic1:(id)sender;
 - (IBAction)onPic2:(id)sender;
+- (IBAction)onPost:(id)sender;
 
 - (IBAction)onMe:(id)sender;
 - (IBAction)onFriends:(id)sender;

@@ -110,9 +110,11 @@
     if (self.picIndex == 0) {
         [self.pic1 setImage:chosenImage forState:UIControlStateNormal];
         [self.pic1 setBackgroundColor:[UIColor clearColor]];
+        self.picURL1 = [info objectForKey:UIImagePickerControllerReferenceURL];
     } else {
         [self.pic2 setImage:chosenImage forState:UIControlStateNormal];
         [self.pic2 setBackgroundColor:[UIColor clearColor]];
+        self.picURL2 = [info objectForKey:UIImagePickerControllerReferenceURL];
     }
     
     // Select next picture
@@ -158,6 +160,12 @@
     NSLog(@"Select pic2");
     [self selectPic:1];
     self.mainPic.image = self.pic2.imageView.image;
+}
+
+- (IBAction)onPost:(id)sender {
+    NSLog(@"on post.");
+    NSLog(@"image one: %@", self.picURL1);
+    NSLog(@"image two: %@", self.picURL2);
 }
 
 - (IBAction)onMe:(id)sender {

@@ -210,8 +210,7 @@
 				26351A9418A80EC7000A30C9 /* PostVC.h */,
 				26351A9518A80EC7000A30C9 /* PostVC.m */,
 				26351A9618A80EC7000A30C9 /* PostVC.xib */,
-				26351A9118A7F59E000A30C9 /* Question.h */,
-				26351A9218A7F59E000A30C9 /* Question.m */,
+				D52B901918B32214004005D7 /* Model */,
 			);
 			path = chooseme;
 			sourceTree = "<group>";
@@ -243,6 +242,15 @@
 				26351A2118A5D1FF000A30C9 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D52B901918B32214004005D7 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				26351A9118A7F59E000A30C9 /* Question.h */,
+				26351A9218A7F59E000A30C9 /* Question.m */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

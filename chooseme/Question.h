@@ -7,8 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <Parse/Parse.h>
 
-@interface Question : NSObject
+@interface Question : PFObject<PFSubclassing>
 
 @property (nonatomic, strong) NSString *profilePic;
 @property (nonatomic, strong) NSString *name;
@@ -20,5 +21,8 @@
 @property (nonatomic, assign) float count2;
 @property (nonatomic, assign) BOOL youVoted1;
 @property (nonatomic, assign) BOOL youVoted2;
+@property (nonatomic, strong) PFUser *author;
+
++ (NSString *)parseClassName;
 
 @end

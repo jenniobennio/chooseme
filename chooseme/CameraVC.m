@@ -119,6 +119,7 @@
     } else {
         [self.pic2 setImage:chosenImage forState:UIControlStateNormal];
         [self.pic2 setBackgroundColor:[UIColor clearColor]];
+        
         self.currentQuestion.image2 = [info objectForKey:UIImagePickerControllerReferenceURL];
     }
     
@@ -178,7 +179,21 @@
         }
     }];
     
+    // Reset the question and view.
     self.currentQuestion = [[Question alloc] init];
+    self.mainPic.image = nil;
+    
+    [self.pic1 setImage:nil forState:UIControlStateNormal];
+    self.pic1.titleLabel.text = @"1";
+    self.pic1.titleLabel.textColor = [UIColor whiteColor];
+    self.pic1.backgroundColor = [UIColor colorWithWhite:0.76 alpha:1.0];
+    self.pic1.alpha = 0.8;
+    
+    [self.pic2 setImage:nil forState:UIControlStateNormal];
+    self.pic2.titleLabel.text = @"2";
+    self.pic2.titleLabel.textColor = [UIColor whiteColor];
+    self.pic2.backgroundColor = [UIColor colorWithWhite:0.76 alpha:1.0];
+    self.pic2.alpha = 0.8;
 }
 
 - (IBAction)onAddFriends:(id)sender {

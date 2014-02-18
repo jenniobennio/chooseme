@@ -15,8 +15,8 @@
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *time;
 @property (nonatomic, strong) NSString *question;
-@property (nonatomic, strong) NSString *image1;
-@property (nonatomic, strong) NSString *image2;
+@property (nonatomic, strong) NSURL *image1;
+@property (nonatomic, strong) NSURL *image2;
 @property (nonatomic, assign) float count1;
 @property (nonatomic, assign) float count2;
 @property (nonatomic, assign) BOOL youVoted1;

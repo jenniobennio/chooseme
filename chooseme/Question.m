@@ -24,20 +24,20 @@
     self[@"author"] = user;
 }
 
-- (NSString *) image1 {
-    return self[@"image1"];
+- (NSURL *) image1 {
+    return [NSURL URLWithString:self[@"image1"]];
 }
 
-- (void) setImage1:(NSString *)image1 {
-    self[@"image1"] = image1;
+- (void) setImage1:(NSURL *)image1 {
+    self[@"image1"] = [image1 absoluteString];
 }
 
-- (NSString *) image2 {
-    return self[@"image2"];
+- (NSURL *) image2 {
+    return [NSURL URLWithString:self[@"image2"]];
 }
 
-- (void) setImage2:(NSString *)image2 {
-    self[@"image2"] = image2;
+- (void) setImage2:(NSURL *)image2 {
+    self[@"image2"] = [image2 absoluteString];
 }
 
 @end

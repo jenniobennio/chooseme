@@ -21,6 +21,8 @@
                   clientKey:@"BG7d4qM7m8gGxG9hbMNRalLTPbdzvYOjkVCcnTHJ"];
     
     [PFFacebookUtils initializeFacebook];
+    
+    [Question registerSubclass];
 
     // Override point for customization after application launch.
     AppViewController *avc = [[AppViewController alloc] init];

@@ -11,6 +11,8 @@
 
 @interface CameraVC ()
 
+@property (strong, nonatomic) FBFriendPickerViewController *friendPickerController;
+
 @end
 
 @implementation CameraVC
@@ -36,6 +38,8 @@
     self.takePicButton.layer.cornerRadius = 25;
     [self formatPic:self.pic1 isSelected:YES];
     [self formatPic:self.pic2 isSelected:NO];
+    
+    self.currentQuestion = [[Question alloc] init];
     
     // self.navigationController.navigationBarHidden = YES;
     
@@ -110,11 +114,12 @@
     if (self.picIndex == 0) {
         [self.pic1 setImage:chosenImage forState:UIControlStateNormal];
         [self.pic1 setBackgroundColor:[UIColor clearColor]];
-        self.picURL1 = [info objectForKey:UIImagePickerControllerReferenceURL];
+        
+        self.currentQuestion.image1 = [info objectForKey:UIImagePickerControllerReferenceURL];
     } else {
         [self.pic2 setImage:chosenImage forState:UIControlStateNormal];
         [self.pic2 setBackgroundColor:[UIColor clearColor]];
-        self.picURL2 = [info objectForKey:UIImagePickerControllerReferenceURL];
+        self.currentQuestion.image2 = [info objectForKey:UIImagePickerControllerReferenceURL];
     }
     
     // Select next picture
@@ -163,10 +168,53 @@
 }
 
 - (IBAction)onPost:(id)sender {
-    NSLog(@"on post.");
-    NSLog(@"image one: %@", self.picURL1);
-    NSLog(@"image two: %@", self.picURL2);
+    NSLog(@"Posting question.");
+    
+    [self.currentQuestion saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (succeeded) {
+            NSLog(@"successfully posted question");
+        } else {
+            NSLog(@"failed to post question.");
+        }
+    }];
+    
+    self.currentQuestion = [[Question alloc] init];
 }
+
+- (IBAction)onAddFriends:(id)sender {
+    if (self.friendPickerController == nil) {
+        // Create friend picker, and get data loaded into it.
+        self.friendPickerController = [[FBFriendPickerViewController alloc] init];
+        self.friendPickerController.title = @"Pick Friends";
+        self.friendPickerController.delegate = self;
+    }
+    
+    [self.friendPickerController loadData];
+    [self.friendPickerController clearSelection];
+    
+    [self presentViewController:self.friendPickerController animated:YES completion:nil];
+}
+
+# pragma mark - facebook friend picker delegate methods
+- (void)facebookViewControllerDoneWasPressed:(id)sender {
+    NSLog(@"getting done press.");
+    NSMutableString *text = [[NSMutableString alloc] init];
+    
+    // we pick up the users from the selection, and create a string that we use to update the text view
+    // at the bottom of the display; note that self.selection is a property inherited from our base class
+    for (id<FBGraphUser> user in self.friendPickerController.selection) {
+        if ([text length]) {
+            [text appendString:@", "];
+        }
+        [text appendString:user.name];
+    }
+    
+    NSLog(@"%@", text);
+    
+    [self dismissViewControllerAnimated:YES completion:NULL];
+}
+
+# pragma mark - IBActions
 
 - (IBAction)onMe:(id)sender {
     [self.delegate nextPage:self.index];

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		263295E318B3337600A84CB2 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 263295E218B3337600A84CB2 /* Parse.framework */; };
+		263295E718B33DA700A84CB2 /* QuestionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 263295E518B33DA700A84CB2 /* QuestionVC.m */; };
+		263295E818B33DA700A84CB2 /* QuestionVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 263295E618B33DA700A84CB2 /* QuestionVC.xib */; };
 		263519F718A5D1FF000A30C9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 263519F618A5D1FF000A30C9 /* Foundation.framework */; };
 		263519F918A5D1FF000A30C9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 263519F818A5D1FF000A30C9 /* CoreGraphics.framework */; };
 		263519FB18A5D1FF000A30C9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 263519FA18A5D1FF000A30C9 /* UIKit.framework */; };
@@ -34,7 +37,6 @@
 		26351A9818A80EC7000A30C9 /* PostVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26351A9618A80EC7000A30C9 /* PostVC.xib */; };
 		B031302B82C840708B86AE68 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43619A4B92F840368B218FE4 /* libPods.a */; };
 		D572FE4718B1DAFE000DB1D0 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D572FE4618B1DAFE000DB1D0 /* FacebookSDK.framework */; };
-		D572FE4918B1DBC6000DB1D0 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D572FE4818B1DBC6000DB1D0 /* Parse.framework */; };
 		D572FE4B18B1DBF7000DB1D0 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D572FE4A18B1DBF7000DB1D0 /* AudioToolbox.framework */; };
 		D572FE4D18B1DBFE000DB1D0 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D572FE4C18B1DBFE000DB1D0 /* CFNetwork.framework */; };
 		D572FE4F18B1DC0F000DB1D0 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D572FE4E18B1DC0F000DB1D0 /* CoreLocation.framework */; };
@@ -57,6 +59,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		263295E218B3337600A84CB2 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		263295E418B33DA700A84CB2 /* QuestionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionVC.h; sourceTree = "<group>"; };
+		263295E518B33DA700A84CB2 /* QuestionVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionVC.m; sourceTree = "<group>"; };
+		263295E618B33DA700A84CB2 /* QuestionVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuestionVC.xib; sourceTree = "<group>"; };
 		263519F318A5D1FF000A30C9 /* chooseme.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = chooseme.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		263519F618A5D1FF000A30C9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		263519F818A5D1FF000A30C9 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -95,7 +101,6 @@
 		39891BCB79A34F009E78550D /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		43619A4B92F840368B218FE4 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D572FE4618B1DAFE000DB1D0 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
-		D572FE4818B1DBC6000DB1D0 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		D572FE4A18B1DBF7000DB1D0 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		D572FE4C18B1DBFE000DB1D0 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		D572FE4E18B1DC0F000DB1D0 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -116,6 +121,7 @@
 				D572FE5918B1DC3C000DB1D0 /* StoreKit.framework in Frameworks */,
 				D572FE5718B1DC35000DB1D0 /* Security.framework in Frameworks */,
 				D572FE5518B1DC2A000DB1D0 /* QuartzCore.framework in Frameworks */,
+				263295E318B3337600A84CB2 /* Parse.framework in Frameworks */,
 				D572FE5318B1DC21000DB1D0 /* MobileCoreServices.framework in Frameworks */,
 				D572FE5118B1DC18000DB1D0 /* libz.dylib in Frameworks */,
 				D572FE4F18B1DC0F000DB1D0 /* CoreLocation.framework in Frameworks */,
@@ -125,7 +131,6 @@
 				D572FE4718B1DAFE000DB1D0 /* FacebookSDK.framework in Frameworks */,
 				263519FB18A5D1FF000A30C9 /* UIKit.framework in Frameworks */,
 				263519F718A5D1FF000A30C9 /* Foundation.framework in Frameworks */,
-				D572FE4918B1DBC6000DB1D0 /* Parse.framework in Frameworks */,
 				B031302B82C840708B86AE68 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -166,6 +171,7 @@
 		263519F518A5D1FF000A30C9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				263295E218B3337600A84CB2 /* Parse.framework */,
 				D572FE5A18B1DC46000DB1D0 /* SystemConfiguration.framework */,
 				D572FE5818B1DC3C000DB1D0 /* StoreKit.framework */,
 				D572FE5618B1DC35000DB1D0 /* Security.framework */,
@@ -175,7 +181,6 @@
 				D572FE4E18B1DC0F000DB1D0 /* CoreLocation.framework */,
 				D572FE4C18B1DBFE000DB1D0 /* CFNetwork.framework */,
 				D572FE4A18B1DBF7000DB1D0 /* AudioToolbox.framework */,
-				D572FE4818B1DBC6000DB1D0 /* Parse.framework */,
 				D572FE4618B1DAFE000DB1D0 /* FacebookSDK.framework */,
 				263519F618A5D1FF000A30C9 /* Foundation.framework */,
 				263519F818A5D1FF000A30C9 /* CoreGraphics.framework */,
@@ -201,6 +206,9 @@
 				26351A2E18A5D24D000A30C9 /* CameraVC.h */,
 				26351A2F18A5D24D000A30C9 /* CameraVC.m */,
 				26351A3018A5D24D000A30C9 /* CameraVC.xib */,
+				263295E418B33DA700A84CB2 /* QuestionVC.h */,
+				263295E518B33DA700A84CB2 /* QuestionVC.m */,
+				263295E618B33DA700A84CB2 /* QuestionVC.xib */,
 				26351A3318A5FB6B000A30C9 /* FeedVC.h */,
 				26351A3418A5FB6B000A30C9 /* FeedVC.m */,
 				26351A3518A5FB6B000A30C9 /* FeedVC.xib */,
@@ -331,6 +339,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				263295E818B33DA700A84CB2 /* QuestionVC.xib in Resources */,
 				26351A0D18A5D1FF000A30C9 /* Main_iPad.storyboard in Resources */,
 				26351A1218A5D1FF000A30C9 /* Images.xcassets in Resources */,
 				26351A8618A72449000A30C9 /* AppViewController.xib in Resources */,
@@ -398,6 +407,7 @@
 				26351A8E18A7EEF4000A30C9 /* FeedCell.m in Sources */,
 				26351A9318A7F59E000A30C9 /* Question.m in Sources */,
 				26351A0318A5D1FF000A30C9 /* main.m in Sources */,
+				263295E718B33DA700A84CB2 /* QuestionVC.m in Sources */,
 				26351A3118A5D24D000A30C9 /* CameraVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -539,6 +549,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/subhagollakota/Documents/ios/chooseme,
+					/Users/jennykwan/Documents/chooseme,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "chooseme/chooseme-Prefix.pch";
@@ -557,6 +568,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/subhagollakota/Documents/ios/chooseme,
+					/Users/jennykwan/Documents/chooseme,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "chooseme/chooseme-Prefix.pch";

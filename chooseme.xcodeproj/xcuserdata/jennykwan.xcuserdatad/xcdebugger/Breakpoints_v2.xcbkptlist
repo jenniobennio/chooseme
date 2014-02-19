@@ -20,12 +20,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "chooseme/CameraVC.m"
-            timestampString = "413579335.051111"
+            timestampString = "414489494.405702"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "132"
-            endingLineNumber = "132"
-            landmarkName = "-imagePickerController:didFinishPickingMediaWithInfo:"
+            startingLineNumber = "184"
+            endingLineNumber = "184"
+            landmarkName = "-imagePickerControllerDidCancel:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -36,13 +36,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "chooseme/CameraVC.h"
-            timestampString = "413657060.18769"
+            timestampString = "414449526.857178"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "11"
-            endingLineNumber = "11"
-            landmarkName = "@protocol CameraVCDelegate"
-            landmarkType = "2">
+            endingLineNumber = "11">
             <Locations>
                <Location
                   shouldBeEnabled = "No"

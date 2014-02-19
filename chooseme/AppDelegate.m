@@ -17,8 +17,12 @@
     self.window=[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     // Parse
-    [Parse setApplicationId:@"1q6rXfoidEYTZfC4LLhioIrdV9aTq2PGzykVLpOK"
-                  clientKey:@"BG7d4qM7m8gGxG9hbMNRalLTPbdzvYOjkVCcnTHJ"];
+//    [Parse setApplicationId:@"1q6rXfoidEYTZfC4LLhioIrdV9aTq2PGzykVLpOK"
+//                  clientKey:@"BG7d4qM7m8gGxG9hbMNRalLTPbdzvYOjkVCcnTHJ"];
+    
+    // Jenny's Parse
+    [Parse setApplicationId:@"LCUdp9RjlxCKuelMUD537DyZXCqBZZ6tGCchdaey"
+                  clientKey:@"qDbt4rj4es4OoqP5bHdA67QWSdTHSzSl8pVaNcGv"];
     
     [PFFacebookUtils initializeFacebook];
     

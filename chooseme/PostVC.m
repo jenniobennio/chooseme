@@ -9,8 +9,6 @@
 #import "PostVC.h"
 
 @interface PostVC ()
-@property (nonatomic, assign) BOOL interactionInProgress;
-
 @end
 
 @implementation PostVC
@@ -29,9 +27,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
 
-    UISwipeGestureRecognizer *swipeDownGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(onSwipeDown:)];
-    swipeDownGesture.direction = UISwipeGestureRecognizerDirectionDown;
-    [self.view addGestureRecognizer:swipeDownGesture];
+    UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(onPan:)];
+    [self.view addGestureRecognizer:panGesture];
     
     self.name.text = self.post.name;
     self.question.text = self.post.question;
@@ -47,24 +44,21 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)onSwipeDown:(UIGestureRecognizer *) sender
+- (void)onPan:(UIPanGestureRecognizer *) sender
 {
-    // Should this gesture be changed to pan?
     if (sender.state == UIGestureRecognizerStateBegan) {
-        NSLog(@"Down swipe recognized: began");
-        self.interactionInProgress = YES;
-
     }
     else if (sender.state == UIGestureRecognizerStateChanged) {
-        NSLog(@"Down swipe recognized: changed");
-        
+        CGPoint translation = [sender translationInView:self.view];
+        self.view.center = CGPointMake(self.view.frame.size.width/2, translation.y + self.view.frame.size.height/2);
     }
     else if (sender.state == UIGestureRecognizerStateEnded)
     {
-        NSLog(@"Down swipe recognized: ended");
-        self.interactionInProgress = NO;
-
-        [self dismissViewControllerAnimated:YES completion:nil];
+        CGPoint translation = [sender translationInView:self.view];
+        if (translation.y > 100)
+            [self dismissViewControllerAnimated:YES completion:nil];
+        else
+            self.view.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2);
     }
     
 

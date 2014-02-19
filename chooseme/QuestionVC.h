@@ -7,7 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Question.h"
 
-@interface QuestionVC : UIViewController
+@protocol QuestionVCDelegate <NSObject>
+- (void)pictureClicked:(int)picNum;
+- (void)clearImages;
+@end
+
+@interface QuestionVC : UIViewController <UITextFieldDelegate>
+@property (nonatomic, weak) id <QuestionVCDelegate> delegate;
+@property (nonatomic, strong) Question *question;
+@property (nonatomic, strong) UIImage *image1;
+@property (nonatomic, strong) UIImage *image2;
 
 @end

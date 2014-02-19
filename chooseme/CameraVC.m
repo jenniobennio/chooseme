@@ -67,20 +67,6 @@
     }*/
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
-    /*if ((self.picIndex == 0 && self.currentQuestion.image1) || (self.picIndex == 1 && self.currentQuestion.image2)) {
-        self.takePicButton.selected = NO;
-        self.takePicButton.highlighted = YES;
-    }*/
-    
-    if (!self.pic1.imageView.image && self.currentQuestion.image1)
-        NSLog(@"Load pic1");
-    if (!self.pic2.imageView.image && self.currentQuestion.image2)
-        NSLog(@"Load pic2");
-
-}
-
 # pragma mark - private methods
 
 // Initial formatting for thumbnail image buttons
@@ -93,7 +79,8 @@
     else
         button.layer.borderWidth = 0;
 
-    button.backgroundColor = [UIColor colorWithWhite:.79 alpha:0.5];
+    button.backgroundColor = [UIColor colorWithWhite:.76 alpha:1];
+    button.alpha = 0.8;
     button.layer.borderColor = [UIColor.lightGrayColor CGColor];
     button.layer.cornerRadius = 5;
     [button.imageView setContentMode:UIViewContentModeScaleAspectFill];
@@ -259,8 +246,10 @@
         }
     }];
     
+    [self clearImages];
+    
     // Reset the question and view.
-    self.currentQuestion = [[Question alloc] init];
+    /*self.currentQuestion = [[Question alloc] init];
     self.mainPic.image = nil;
     
     [self.pic1 setImage:nil forState:UIControlStateNormal];
@@ -273,7 +262,7 @@
     self.pic2.titleLabel.text = @"2";
     self.pic2.titleLabel.textColor = [UIColor whiteColor];
     self.pic2.backgroundColor = [UIColor colorWithWhite:0.76 alpha:1.0];
-    self.pic2.alpha = 0.8;
+    self.pic2.alpha = 0.8;*/
 }
 
 - (IBAction)onAddFriends:(id)sender {
@@ -341,16 +330,18 @@
 
 - (void)clearImages {
     NSLog(@"Clear images");
-    self.currentQuestion = nil;
-    UIImage *imgClear = [UIImage imageNamed:@"clear"];
+    self.currentQuestion = [[Question alloc] init];
+    [self.mainPic setImage:nil];
     
-    // Weirdness. Just setting the image to nil doesn't work. Need to additionally set the button image to nil forState
     [self.pic1 setImage:nil forState:UIControlStateNormal];
     [self.pic1.imageView setImage:nil];
-    self.pic1.backgroundColor = [UIColor colorWithWhite:.79 alpha:0.5];
-    [self.pic2 setImage:imgClear forState:UIControlStateNormal];
+    self.pic1.backgroundColor = [UIColor colorWithWhite:.76 alpha:1];
+    self.pic1.alpha = 0.8;
+
+    [self.pic2 setImage:nil forState:UIControlStateNormal];
     [self.pic2.imageView setImage:nil];
-    self.pic2.backgroundColor = [UIColor colorWithWhite:.79 alpha:0.5];
+    self.pic2.backgroundColor = [UIColor colorWithWhite:.76 alpha:1];
+    self.pic2.alpha = 0.8;
 
 }
 @end

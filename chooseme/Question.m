@@ -16,6 +16,10 @@
     return @"question";
 }
 
+- (NSString *) question {
+    return @"question text placeholder";
+}
+
 - (PFUser *) author {
     return self[@"author"];
 }

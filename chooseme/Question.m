@@ -17,7 +17,11 @@
 }
 
 - (NSString *) question {
-    return @"question text placeholder";
+    return self[@"question"];
+}
+
+- (void) setQuestion:(NSString *) text {
+    self[@"question"] = text;
 }
 
 - (PFUser *) author {

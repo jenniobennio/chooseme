@@ -11,7 +11,11 @@
 @interface QuestionVC ()
 @property (strong, nonatomic) IBOutlet UIButton *pic1;
 @property (strong, nonatomic) IBOutlet UIButton *pic2;
+@property (strong, nonatomic) IBOutlet UITableView *friendsTable;
+
 @property (strong, nonatomic) FBFriendPickerViewController *friendPickerController;
+
+@property (nonatomic, strong) NSMutableArray *friends;
 
 - (IBAction)onBack:(id)sender;
 - (IBAction)onSubmit:(id)sender;
@@ -45,12 +49,16 @@
     [self.pic2 setImage:self.image2 forState:UIControlStateNormal];
     self.pic2.imageView.contentMode = UIViewContentModeScaleAspectFill;
     
+    self.friendsTable.delegate = self;
+    self.friendsTable.dataSource = self;
+    
+    self.friends = [[NSMutableArray alloc] init];
+    
 }
 
-- (void)didReceiveMemoryWarning
+- (void)viewWillAppear:(BOOL)animated
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    [self.friendsTable reloadData];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
@@ -69,6 +77,10 @@
     
     NSLog(@"Posting question.");
     
+    if (![self.questionTextField.text isEqualToString:@""])
+        self.question.question = self.questionTextField.text;
+    else
+        self.question.question = @"Which one?";
     self.question.author = [PFUser currentUser];
     [self.question saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
@@ -122,10 +134,37 @@
             [text appendString:@", "];
         }
         [text appendString:user.name];
+        [self.friends addObject:user.name];
     }
     
     NSLog(@"%@", text);
     
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
+
+
+#pragma mark - Table view methods
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    NSLog(@"Friend count = %d", self.friends.count);
+
+    return self.friends.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [[UITableViewCell alloc] init];
+    NSString *friend = self.friends[indexPath.row];
+    cell.textLabel.text = friend;
+    NSLog(@"Friend %d: %@", indexPath.row, friend);
+    
+    return cell;
+}
+
 @end

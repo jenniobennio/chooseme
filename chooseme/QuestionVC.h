@@ -14,7 +14,7 @@
 - (void)clearImages;
 @end
 
-@interface QuestionVC : UIViewController <UITextFieldDelegate, FBFriendPickerDelegate>
+@interface QuestionVC : UIViewController <UITextFieldDelegate, FBFriendPickerDelegate, UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, weak) id <QuestionVCDelegate> delegate;
 @property (nonatomic, strong) Question *question;
 @property (nonatomic, strong) UIImage *image1;

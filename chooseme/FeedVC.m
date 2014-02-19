@@ -64,7 +64,8 @@
         PFQuery *query = [Question query];
         [query whereKey:@"author" equalTo:[PFUser currentUser]];
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-            self.questions = [objects mutableCopy];
+            // Newest posts on top for now.. Eventually, custom order by recently edited or unresolved
+            self.questions = [[[objects mutableCopy] reverseObjectEnumerator] allObjects];
             [self.feedView reloadData];
         }];
     } else {
@@ -102,12 +103,16 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    CGFloat height;
     Question *q = self.questions[indexPath.row];
-    CGFloat height = [self textViewHeightForAttributedText:[[NSAttributedString alloc] initWithString:q.question] andWidth:240];
+    if (q.question != nil)
+        height = [self textViewHeightForAttributedText:[[NSAttributedString alloc] initWithString:q.question] andWidth:240];
+    else
+        height = 0;
     if (height > 0) {
         return height + 200;
     } else
-        return 100;
+        return 220;
 }
 
 - (CGFloat)textViewHeightForAttributedText: (NSAttributedString*)text andWidth: (CGFloat)width {

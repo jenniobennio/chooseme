@@ -6,6 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="QuestionVC">
             <connections>
+                <outlet property="friendsTable" destination="Uab-wZ-7ib" id="hsG-GF-1rr"/>
                 <outlet property="pic1" destination="tG1-0c-g84" id="I9b-eV-9XT"/>
                 <outlet property="pic2" destination="oG9-wj-8wr" id="vQt-Cc-RMQ"/>
                 <outlet property="questionTextField" destination="mR0-1Q-r93" id="few-Vf-NMj"/>

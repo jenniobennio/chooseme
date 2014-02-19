@@ -171,6 +171,7 @@
 - (IBAction)onPost:(id)sender {
     NSLog(@"Posting question.");
     
+    self.currentQuestion.author = [PFUser currentUser];
     [self.currentQuestion saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
             NSLog(@"successfully posted question");

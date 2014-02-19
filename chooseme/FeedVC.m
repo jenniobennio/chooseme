@@ -40,16 +40,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    // FIXME: Remove this eventually
-    self.questions = [[NSMutableArray alloc] init];
-    for (int i = 0; i < 10; i++)
-    {
-        Question *q = [[Question alloc] init];
-        q.name = [NSString stringWithFormat:@"Name%d", i];
-        q.question = [NSString stringWithFormat:@"Question%d", i];
-        [self.questions addObject:q];
-    }
-    
+    // Set up feed view.
     [self.feedView registerNib:[UINib nibWithNibName:@"FeedCell" bundle:nil] forCellReuseIdentifier:@"FeedCell"];
     self.feedView.dataSource = self;
     self.feedView.delegate = self;
@@ -68,7 +59,26 @@
     [refresh addTarget:self action:@selector(refreshMe:) forControlEvents:UIControlEventValueChanged];
     [self.feedView addSubview:refresh];
     
-    [self.feedView reloadData];
+    // Load the question array
+    if ([self isMe]) {
+        PFQuery *query = [Question query];
+        [query whereKey:@"author" equalTo:[PFUser currentUser]];
+        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            self.questions = [objects mutableCopy];
+            [self.feedView reloadData];
+        }];
+    } else {
+        // FIXME: Remove this eventually
+        self.questions = [[NSMutableArray alloc] init];
+        for (int i = 0; i < 10; i++)
+        {
+            Question *q = [[Question alloc] init];
+            q.name = [NSString stringWithFormat:@"Name%d", i];
+            q.question = [NSString stringWithFormat:@"Question%d", i];
+            [self.questions addObject:q];
+        }
+        [self.feedView reloadData];
+    }
 }
 
 - (void)didReceiveMemoryWarning

@@ -11,7 +11,6 @@
 #import "QuestionVC.h"
 
 @interface CameraVC ()
-@property (strong, nonatomic) FBFriendPickerViewController *friendPickerController;
 
 @property (strong, nonatomic) UIImage *image1;
 @property (strong, nonatomic) UIImage *image2;
@@ -234,50 +233,6 @@
     self.mainPic.image = self.pic2.imageView.image;
 }
 
-- (IBAction)onPost:(id)sender {
-    NSLog(@"Posting question.");
-    
-    self.currentQuestion.author = [PFUser currentUser];
-    [self.currentQuestion saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        if (succeeded) {
-            NSLog(@"successfully posted question");
-        } else {
-            NSLog(@"failed to post question.");
-        }
-    }];
-    
-    [self clearImages];
-    
-    // Reset the question and view.
-    /*self.currentQuestion = [[Question alloc] init];
-    self.mainPic.image = nil;
-    
-    [self.pic1 setImage:nil forState:UIControlStateNormal];
-    self.pic1.titleLabel.text = @"1";
-    self.pic1.titleLabel.textColor = [UIColor whiteColor];
-    self.pic1.backgroundColor = [UIColor colorWithWhite:0.76 alpha:1.0];
-    self.pic1.alpha = 0.8;
-    
-    [self.pic2 setImage:nil forState:UIControlStateNormal];
-    self.pic2.titleLabel.text = @"2";
-    self.pic2.titleLabel.textColor = [UIColor whiteColor];
-    self.pic2.backgroundColor = [UIColor colorWithWhite:0.76 alpha:1.0];
-    self.pic2.alpha = 0.8;*/
-}
-
-- (IBAction)onAddFriends:(id)sender {
-    if (self.friendPickerController == nil) {
-        // Create friend picker, and get data loaded into it.
-        self.friendPickerController = [[FBFriendPickerViewController alloc] init];
-        self.friendPickerController.title = @"Pick Friends";
-        self.friendPickerController.delegate = self;
-    }
-    
-    [self.friendPickerController loadData];
-    [self.friendPickerController clearSelection];
-    
-    [self presentViewController:self.friendPickerController animated:YES completion:nil];
-}
 
 - (IBAction)onMe:(id)sender {
     [self.delegate nextPage:self.index];
@@ -299,24 +254,6 @@
     [self goToQuestionVC];
 }
 
-# pragma mark - facebook friend picker delegate methods
-- (void)facebookViewControllerDoneWasPressed:(id)sender {
-    NSLog(@"getting done press.");
-    NSMutableString *text = [[NSMutableString alloc] init];
-    
-    // we pick up the users from the selection, and create a string that we use to update the text view
-    // at the bottom of the display; note that self.selection is a property inherited from our base class
-    for (id<FBGraphUser> user in self.friendPickerController.selection) {
-        if ([text length]) {
-            [text appendString:@", "];
-        }
-        [text appendString:user.name];
-    }
-    
-    NSLog(@"%@", text);
-    
-    [self dismissViewControllerAnimated:YES completion:NULL];
-}
 
 # pragma mark - QuestionVCDelegate methods
 

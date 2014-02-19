@@ -11,6 +11,7 @@
 @interface QuestionVC ()
 @property (strong, nonatomic) IBOutlet UIButton *pic1;
 @property (strong, nonatomic) IBOutlet UIButton *pic2;
+@property (strong, nonatomic) FBFriendPickerViewController *friendPickerController;
 
 - (IBAction)onBack:(id)sender;
 - (IBAction)onSubmit:(id)sender;
@@ -66,6 +67,17 @@
 - (IBAction)onSubmit:(id)sender {
     // TODO: Upload images to server
     
+    NSLog(@"Posting question.");
+    
+    self.question.author = [PFUser currentUser];
+    [self.question saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (succeeded) {
+            NSLog(@"successfully posted question");
+        } else {
+            NSLog(@"failed to post question.");
+        }
+    }];
+    
     [self.delegate clearImages];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -80,5 +92,40 @@
     NSLog(@"Selected pic2 to redo");
     [self.delegate pictureClicked:2];
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+
+- (IBAction)onAddFriends:(id)sender {
+    if (self.friendPickerController == nil) {
+        // Create friend picker, and get data loaded into it.
+        self.friendPickerController = [[FBFriendPickerViewController alloc] init];
+        self.friendPickerController.title = @"Pick Friends";
+        self.friendPickerController.delegate = self;
+    }
+    
+    [self.friendPickerController loadData];
+    [self.friendPickerController clearSelection];
+    
+    [self presentViewController:self.friendPickerController animated:YES completion:nil];
+}
+
+
+# pragma mark - facebook friend picker delegate methods
+- (void)facebookViewControllerDoneWasPressed:(id)sender {
+    NSLog(@"getting done press.");
+    NSMutableString *text = [[NSMutableString alloc] init];
+    
+    // we pick up the users from the selection, and create a string that we use to update the text view
+    // at the bottom of the display; note that self.selection is a property inherited from our base class
+    for (id<FBGraphUser> user in self.friendPickerController.selection) {
+        if ([text length]) {
+            [text appendString:@", "];
+        }
+        [text appendString:user.name];
+    }
+    
+    NSLog(@"%@", text);
+    
+    [self dismissViewControllerAnimated:YES completion:NULL];
 }
 @end

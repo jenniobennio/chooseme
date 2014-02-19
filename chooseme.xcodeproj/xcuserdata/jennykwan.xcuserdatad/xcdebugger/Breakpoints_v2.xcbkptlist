@@ -20,11 +20,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "chooseme/CameraVC.m"
-            timestampString = "414491594.970178"
+            timestampString = "414492137.288518"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "171"
-            endingLineNumber = "171"
+            startingLineNumber = "170"
+            endingLineNumber = "170"
             landmarkName = "@implementation CameraVC"
             landmarkType = "3">
          </BreakpointContent>

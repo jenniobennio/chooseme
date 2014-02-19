@@ -93,6 +93,9 @@
                     <state key="normal" title="  + Add friends">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="onAddFriends:" destination="-1" eventType="touchUpInside" id="FtM-A4-Vj7"/>
+                    </connections>
                 </button>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Uab-wZ-7ib">
                     <rect key="frame" x="12" y="326" width="296" height="192"/>

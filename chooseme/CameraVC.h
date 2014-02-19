@@ -16,7 +16,7 @@
 -(void)nextPage:(NSUInteger)index;
 @end
 
-@interface CameraVC : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate, FBFriendPickerDelegate, QuestionVCDelegate>
+@interface CameraVC : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate, QuestionVCDelegate>
 
 // CameraVC's delegate will be the AppViewController for swipe navigating between pages
 @property (nonatomic, weak) id<CameraVCDelegate> delegate;
@@ -39,8 +39,6 @@
 - (IBAction)choosePic:(id)sender;
 - (IBAction)onPic1:(id)sender;
 - (IBAction)onPic2:(id)sender;
-- (IBAction)onPost:(id)sender;
-- (IBAction)onAddFriends:(id)sender;
 - (IBAction)onMe:(id)sender;
 - (IBAction)onFriends:(id)sender;
 

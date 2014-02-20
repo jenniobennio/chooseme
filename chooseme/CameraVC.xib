@@ -139,6 +139,30 @@
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C85-0Y-mJr">
+                    <rect key="frame" x="126" y="110" width="59" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" title="QuickFill">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="quickFill:" destination="-1" eventType="touchUpInside" id="6Ed-xh-WoW"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dsf-V0-nV2">
+                    <rect key="frame" x="264" y="191" width="30" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="30" id="mek-4b-KA0"/>
+                        <constraint firstAttribute="height" constant="30" id="wTu-Ar-unK"/>
+                    </constraints>
+                    <state key="normal" title="C">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="onClear:" destination="-1" eventType="touchUpInside" id="coc-Zo-pNI"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <gestureRecognizers/>
@@ -147,6 +171,7 @@
                 <constraint firstAttribute="trailing" secondItem="Srs-PC-D1b" secondAttribute="trailing" constant="16" id="3Vz-ng-odA"/>
                 <constraint firstAttribute="centerX" secondItem="2ZE-D9-CZk" secondAttribute="centerX" id="9fP-Dm-CT5"/>
                 <constraint firstItem="mYJ-OK-HYe" firstAttribute="centerY" secondItem="fQV-Wy-4pm" secondAttribute="centerY" id="DPE-20-D00"/>
+                <constraint firstAttribute="trailing" secondItem="dsf-V0-nV2" secondAttribute="trailing" constant="26" id="Fe2-BU-cpa"/>
                 <constraint firstAttribute="trailing" secondItem="h0R-PJ-Qan" secondAttribute="trailing" constant="16" id="FsV-yA-sXP"/>
                 <constraint firstAttribute="trailing" secondItem="jS4-HL-qP4" secondAttribute="trailing" constant="16" id="HL5-Cv-WEX"/>
                 <constraint firstItem="Srs-PC-D1b" firstAttribute="top" secondItem="h0R-PJ-Qan" secondAttribute="bottom" constant="28" id="Iil-od-aFo"/>
@@ -158,6 +183,7 @@
                 <constraint firstItem="T78-pM-AKV" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="cxn-bE-lRa"/>
                 <constraint firstItem="mYJ-OK-HYe" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="12" id="eoP-pv-ed2"/>
                 <constraint firstAttribute="centerY" secondItem="h0R-PJ-Qan" secondAttribute="centerY" id="fEh-Nd-UNA"/>
+                <constraint firstItem="jS4-HL-qP4" firstAttribute="top" secondItem="dsf-V0-nV2" secondAttribute="bottom" constant="8" id="fvy-4Q-MVT"/>
                 <constraint firstItem="mYJ-OK-HYe" firstAttribute="centerY" secondItem="2ZE-D9-CZk" secondAttribute="centerY" id="hAm-sn-yWo"/>
                 <constraint firstItem="P5h-rC-llG" firstAttribute="centerY" secondItem="2ZE-D9-CZk" secondAttribute="centerY" id="s0S-9n-QIX"/>
                 <constraint firstItem="T78-pM-AKV" firstAttribute="top" secondItem="1" secondAttribute="top" id="xZ1-l1-b5u"/>

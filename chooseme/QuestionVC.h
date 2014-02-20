@@ -15,7 +15,10 @@
 @end
 
 @interface QuestionVC : UIViewController <UITextFieldDelegate, FBFriendPickerDelegate, UITableViewDelegate, UITableViewDataSource>
+// CameraVC will be its delegate so we can pass it information (e.g. which pic was selected to redo, whether we submitted)
 @property (nonatomic, weak) id <QuestionVCDelegate> delegate;
+
+// Current Question object
 @property (nonatomic, strong) Question *question;
 @property (nonatomic, strong) UIImage *image1;
 @property (nonatomic, strong) UIImage *image2;

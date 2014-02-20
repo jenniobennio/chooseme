@@ -18,12 +18,12 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Question" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hi0-Pu-Gk2">
-                    <rect key="frame" x="12" y="62" width="75" height="16"/>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ask a question:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hi0-Pu-Gk2">
+                    <rect key="frame" x="12" y="62" width="200" height="16"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="16" id="CeV-Yo-5At"/>
-                        <constraint firstAttribute="width" constant="75" id="j5I-0C-vZE"/>
+                        <constraint firstAttribute="width" constant="200" id="GpA-Vp-MiK"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -50,14 +50,14 @@
                         <action selector="onSubmit:" destination="-1" eventType="touchUpInside" id="0fF-3m-7me"/>
                     </connections>
                 </button>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Which one?" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="mR0-1Q-r93">
-                    <rect key="frame" x="12" y="90" width="296" height="30"/>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Which one?" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="mR0-1Q-r93">
+                    <rect key="frame" x="12" y="91" width="296" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                    <textInputTraits key="textInputTraits" returnKeyType="done"/>
                 </textField>
-                <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tG1-0c-g84">
-                    <rect key="frame" x="12" y="132" width="140" height="140"/>
+                <button opaque="NO" contentMode="scaleAspectFit" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tG1-0c-g84">
+                    <rect key="frame" x="12" y="133" width="140" height="140"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.93548318610000003" green="0.93548318610000003" blue="0.93548318610000003" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
@@ -72,8 +72,8 @@
                         <action selector="onPic1:" destination="-1" eventType="touchUpInside" id="uqq-hZ-PAN"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oG9-wj-8wr">
-                    <rect key="frame" x="164" y="132" width="140" height="140"/>
+                <button opaque="NO" contentMode="scaleAspectFit" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oG9-wj-8wr">
+                    <rect key="frame" x="164" y="133" width="140" height="140"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.93548318610000003" green="0.93548318610000003" blue="0.93548318610000003" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
@@ -88,8 +88,8 @@
                         <action selector="onPic2:" destination="-1" eventType="touchUpInside" id="3Z1-f3-PER"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Dx-Qa-alw">
-                    <rect key="frame" x="12" y="284" width="296" height="30"/>
+                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Dx-Qa-alw">
+                    <rect key="frame" x="12" y="285" width="296" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <state key="normal" title="  + Add friends">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -98,8 +98,8 @@
                         <action selector="onAddFriends:" destination="-1" eventType="touchUpInside" id="FtM-A4-Vj7"/>
                     </connections>
                 </button>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Uab-wZ-7ib">
-                    <rect key="frame" x="12" y="326" width="296" height="192"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Uab-wZ-7ib">
+                    <rect key="frame" x="12" y="327" width="296" height="229"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </tableView>
@@ -108,6 +108,7 @@
             <constraints>
                 <constraint firstItem="Hi0-Pu-Gk2" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="12" id="3eq-J2-JYt"/>
                 <constraint firstItem="mR0-1Q-r93" firstAttribute="top" secondItem="Hi0-Pu-Gk2" secondAttribute="bottom" constant="12" id="AaK-OR-zpu"/>
+                <constraint firstAttribute="bottom" secondItem="Uab-wZ-7ib" secondAttribute="bottom" constant="12" id="BNV-eH-BTs"/>
                 <constraint firstItem="tG1-0c-g84" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="12" id="CjL-Hc-6XB"/>
                 <constraint firstItem="4pa-SQ-qgp" firstAttribute="top" secondItem="1" secondAttribute="top" constant="20" id="Cyq-JK-QpE"/>
                 <constraint firstItem="Uab-wZ-7ib" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="12" id="Go7-UG-rav"/>

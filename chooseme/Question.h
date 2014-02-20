@@ -11,18 +11,24 @@
 
 @interface Question : PFObject<PFSubclassing>
 
-@property (nonatomic, strong) NSString *profilePic;
+@property (nonatomic, strong) PFUser *author;
+@property (nonatomic, strong) NSData *profilePic;
 @property (nonatomic, strong) NSString *name;
-@property (nonatomic, strong) NSString *time;
+
+@property (nonatomic, strong) NSDate *time;
 @property (nonatomic, strong) NSString *question;
+@property (nonatomic, strong) NSData *imageData1;
+@property (nonatomic, strong) NSData *imageData2;
+// Note: Using image data for library files.. For online pics, store URL?
 @property (nonatomic, strong) NSURL *image1;
 @property (nonatomic, strong) NSURL *image2;
-@property (nonatomic, assign) float count1;
-@property (nonatomic, assign) float count2;
-@property (nonatomic, assign) BOOL youVoted1;
-@property (nonatomic, assign) BOOL youVoted2;
-@property (nonatomic, strong) PFUser *author;
+
+@property (nonatomic, strong) NSNumber *youVoted;
+
+@property (nonatomic, strong) NSMutableArray *friends;
+@property (nonatomic, strong) NSMutableArray *friendsVoted;
 
 + (NSString *)parseClassName;
+- (NSString *)formattedDate;
 
 @end

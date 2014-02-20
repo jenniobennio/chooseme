@@ -15,9 +15,9 @@
 
 @interface FeedVC : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
+// FeedVC's delegate will be the AppViewController for swipe navigating between pages
 @property (nonatomic, weak) id<FeedVCDelegate> delegate;
+// Index in pageViewController
 @property (assign, nonatomic) NSInteger index;
-
-@property (strong, nonatomic) IBOutlet UILabel *titleLabel;
 
 @end

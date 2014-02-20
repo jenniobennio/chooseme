@@ -9,6 +9,23 @@
 #import "PostVC.h"
 
 @interface PostVC ()
+
+// View elements
+@property (strong, nonatomic) IBOutlet UIButton *backButton;
+@property (strong, nonatomic) IBOutlet UIImageView *profilePic;
+@property (strong, nonatomic) IBOutlet UILabel *name;
+@property (strong, nonatomic) IBOutlet UILabel *time;
+@property (strong, nonatomic) IBOutlet UILabel *question;
+@property (strong, nonatomic) IBOutlet UIImageView *image1;
+@property (strong, nonatomic) IBOutlet UIImageView *image2;
+@property (strong, nonatomic) IBOutlet UILabel *count1;
+@property (strong, nonatomic) IBOutlet UILabel *count2;
+@property (strong, nonatomic) IBOutlet UILabel *youVoted1;
+@property (strong, nonatomic) IBOutlet UILabel *youVoted2;
+
+// Button actions
+- (IBAction)onBack:(id)sender;
+
 @end
 
 @implementation PostVC
@@ -25,27 +42,27 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
 
+    // Add pan gestureRecognizer for going Back
     UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(onPan:)];
     [self.view addGestureRecognizer:panGesture];
     
+    // Load and display Question data
     self.name.text = self.post.name;
     self.question.text = self.post.question;
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+# pragma mark - actions from button presses
 
 - (IBAction)onBack:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+# pragma mark - private methods
+
 - (void)onPan:(UIPanGestureRecognizer *) sender
 {
+    // TODO: Make this more smooth
     if (sender.state == UIGestureRecognizerStateBegan) {
     }
     else if (sender.state == UIGestureRecognizerStateChanged) {

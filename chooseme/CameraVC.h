@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
-#import "Question.h"
 #import "QuestionVC.h"
 
 @protocol CameraVCDelegate <NSObject>
@@ -20,26 +19,7 @@
 
 // CameraVC's delegate will be the AppViewController for swipe navigating between pages
 @property (nonatomic, weak) id<CameraVCDelegate> delegate;
-// Index to keep track of 
+// Index in pageViewController
 @property (assign, nonatomic) NSInteger index;
-
-// Current Question object
-@property (strong, nonatomic) Question *currentQuestion;
-
-// Keep track of which thumbnail image is selected
-@property (nonatomic, assign) int picIndex;
-
-@property (strong, nonatomic) IBOutlet UIImageView *mainPic;
-@property (strong, nonatomic) IBOutlet UIButton *takePicButton;
-@property (strong, nonatomic) IBOutlet UIButton *choosePicButton;
-@property (strong, nonatomic) IBOutlet UIButton *pic1;
-@property (strong, nonatomic) IBOutlet UIButton *pic2;
-
-- (IBAction)takePic:(id)sender;
-- (IBAction)choosePic:(id)sender;
-- (IBAction)onPic1:(id)sender;
-- (IBAction)onPic2:(id)sender;
-- (IBAction)onMe:(id)sender;
-- (IBAction)onFriends:(id)sender;
 
 @end

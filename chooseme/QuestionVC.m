@@ -7,6 +7,7 @@
 //
 
 #import "QuestionVC.h"
+#import "AddFriendCell.h"
 
 @interface QuestionVC ()
 
@@ -24,10 +25,8 @@
 - (IBAction)onPic1:(id)sender;
 - (IBAction)onPic2:(id)sender;
 
-// Friend picker things
+// Friend picker 
 @property (strong, nonatomic) FBFriendPickerViewController *friendPickerController;
-@property (nonatomic, strong) NSMutableArray *friends;
-@property (nonatomic, strong) NSMutableArray *friendsVoted;
 
 // Private user data
 @property (strong, nonatomic) NSString *myName;
@@ -52,6 +51,7 @@
 
     // Set delegates/ datasources
     self.questionTextField.delegate = self;
+    [self.friendsTable registerNib:[UINib nibWithNibName:@"AddFriendCell" bundle:nil] forCellReuseIdentifier:@"AddFriendCell"];
     self.friendsTable.delegate = self;
     self.friendsTable.dataSource = self;
 
@@ -67,21 +67,19 @@
     
     // Load friends
     if (!self.question.friends) {
-        self.friends = [[NSMutableArray alloc] init];
-        self.friendsVoted = [[NSMutableArray alloc] init];
+        self.question.friends = [[NSMutableArray alloc] init];
+        self.question.friendsVoted = [[NSMutableArray alloc] init];
     }
-    else {
-        self.friends = self.question.friends;
-        self.friendsVoted = self.question.friendsVoted;
-    }
-    [self.submitButton setEnabled:self.friends.count > 0];
+    [self.submitButton setEnabled:self.question.friends.count > 0];
     
     // Don't show lines below available cells
     self.friendsTable.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     
     // Add pan gestureRecognizer for going Back
     UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(onPan:)];
-    [self.view addGestureRecognizer:panGesture];
+    
+    // FIXME: Commenting this out for now.. It interferes with the gesture recognizer for editing friendsTable
+//    [self.view addGestureRecognizer:panGesture];
     
     // Create request for user's Facebook data
     FBRequest *request = [FBRequest requestForMe];
@@ -110,7 +108,6 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     self.question.question = self.questionTextField.text;
-    self.question.friends = self.friends;
 }
 
 # pragma mark - actions from button presses
@@ -135,8 +132,7 @@
     self.question.imageData2 = UIImageJPEGRepresentation(self.image2, 0.05f);
     
     self.question.youVoted = [NSNumber numberWithInt:0];
-    self.question.friends = self.friends;
-    self.question.friendsVoted = self.friendsVoted;
+    self.question.question = self.questionTextField.text;
     
     [self.question saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
@@ -187,7 +183,7 @@
 
 # pragma mark - facebook friend picker delegate methods
 - (BOOL)friendPickerViewController:(FBFriendPickerViewController *)friendPicker shouldIncludeUser:(id<FBGraphUser>)user {
-    if ([self.friends containsObject:user])
+    if ([self.question.friends containsObject:user])
         return NO;
     return YES;
 }
@@ -207,11 +203,11 @@
             [text appendString:@", "];
         }
         [text appendString:user.name];
-        [self.friends addObject:user];
-        [self.friendsVoted addObject:[NSNumber numberWithInt:0]];
+        [self.question.friends addObject:user];
+        [self.question.friendsVoted addObject:[NSNumber numberWithInt:0]];
     }
     
-    [self.submitButton setEnabled:self.friends.count > 0];
+    [self.submitButton setEnabled:self.question.friends.count > 0];
     
     NSLog(@"%@", text);
     
@@ -227,15 +223,31 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.friends.count;
+    return self.question.friends.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [[UITableViewCell alloc] init];
-    NSString *friend = [self.friends[indexPath.row] name];
-    cell.textLabel.text = friend;
+    static NSString *CellIdentifier = @"AddFriendCell";
+    AddFriendCell *cell = (AddFriendCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    
+    NSString *friend = [self.question.friends[indexPath.row] name];
+    cell.name.text = friend;
+    [cell.pic setImage:[UIImage imageNamed:@"111834.jpg"]];
     return cell;
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    // Make everything editable except for the last entry
+    return YES;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self.question.friends removeObjectAtIndex:indexPath.row];
+    [self.question.friendsVoted removeObjectAtIndex:indexPath.row];
+
+    [self.friendsTable deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:YES];
+    [self.friendsTable reloadData];
 }
 
 #pragma mark - private methods

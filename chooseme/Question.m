@@ -131,4 +131,45 @@
     }
 }
 
+- (int)numReplies {
+    int totalCount = 0;
+    
+    for (int i = 0; i < self.friendsVoted.count; i++) {
+        // Count the people who submitted votes
+        if ([self.friendsVoted[i] intValue] != 0)
+            totalCount++;
+    }
+    return totalCount;
+}
+
+- (int)numComments {
+    return 0;
+}
+
+- (int)percentPic:(int)picNum {
+    int count1 = 0;
+    int count2 = 0;
+    int totalCount = [self numReplies];
+    
+    for (int i = 0; i < self.friendsVoted.count; i++) {
+        // Count the people who voted for pic1
+        if ([self.friendsVoted[i] intValue] == 1)
+            count1++;
+    }
+    
+    // Calculate percentages and make sure it adds up to 100
+    if (totalCount != 0) {
+        count1 = 100*count1/totalCount;
+        count2 = 100-count1;
+    } else {
+        count1 = 50;
+        count2 = 50;
+    }
+    
+    if (picNum == 1)
+        return count1;
+    else
+        return count2;
+}
+
 @end

@@ -26,4 +26,15 @@
     // Configure the view for the selected state
 }
 
+- (IBAction)onVote1:(id)sender {
+    self.youVoted1.selected = !self.youVoted1.selected;
+    if (self.youVoted1.selected)
+        self.youVoted2.selected = NO;
+}
+
+- (IBAction)onVote2:(id)sender {
+    self.youVoted2.selected = !self.youVoted2.selected;
+    if (self.youVoted2.selected)
+        self.youVoted1.selected = NO;
+}
 @end

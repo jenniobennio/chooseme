@@ -150,17 +150,31 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dsf-V0-nV2">
-                    <rect key="frame" x="264" y="191" width="30" height="30"/>
+                    <rect key="frame" x="257" y="191" width="37" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="30" id="mek-4b-KA0"/>
+                        <constraint firstAttribute="width" constant="37" id="mek-4b-KA0"/>
                         <constraint firstAttribute="height" constant="30" id="wTu-Ar-unK"/>
                     </constraints>
-                    <state key="normal" title="C">
+                    <state key="normal" title="Clear">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
                         <action selector="onClear:" destination="-1" eventType="touchUpInside" id="coc-Zo-pNI"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ipe-Fg-25A">
+                    <rect key="frame" x="262" y="371" width="32" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="32" id="G07-8P-M9u"/>
+                        <constraint firstAttribute="height" constant="30" id="bhh-XT-uxA"/>
+                    </constraints>
+                    <state key="normal" title="Next">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="onNext:" destination="-1" eventType="touchUpInside" id="HjR-0A-3ao"/>
                     </connections>
                 </button>
             </subviews>
@@ -172,6 +186,7 @@
                 <constraint firstAttribute="centerX" secondItem="2ZE-D9-CZk" secondAttribute="centerX" id="9fP-Dm-CT5"/>
                 <constraint firstItem="mYJ-OK-HYe" firstAttribute="centerY" secondItem="fQV-Wy-4pm" secondAttribute="centerY" id="DPE-20-D00"/>
                 <constraint firstAttribute="trailing" secondItem="dsf-V0-nV2" secondAttribute="trailing" constant="26" id="Fe2-BU-cpa"/>
+                <constraint firstItem="ipe-Fg-25A" firstAttribute="top" secondItem="Srs-PC-D1b" secondAttribute="bottom" constant="8" id="FrL-T9-YOP"/>
                 <constraint firstAttribute="trailing" secondItem="h0R-PJ-Qan" secondAttribute="trailing" constant="16" id="FsV-yA-sXP"/>
                 <constraint firstAttribute="trailing" secondItem="jS4-HL-qP4" secondAttribute="trailing" constant="16" id="HL5-Cv-WEX"/>
                 <constraint firstItem="Srs-PC-D1b" firstAttribute="top" secondItem="h0R-PJ-Qan" secondAttribute="bottom" constant="28" id="Iil-od-aFo"/>
@@ -187,6 +202,7 @@
                 <constraint firstItem="mYJ-OK-HYe" firstAttribute="centerY" secondItem="2ZE-D9-CZk" secondAttribute="centerY" id="hAm-sn-yWo"/>
                 <constraint firstItem="P5h-rC-llG" firstAttribute="centerY" secondItem="2ZE-D9-CZk" secondAttribute="centerY" id="s0S-9n-QIX"/>
                 <constraint firstItem="T78-pM-AKV" firstAttribute="top" secondItem="1" secondAttribute="top" id="xZ1-l1-b5u"/>
+                <constraint firstAttribute="trailing" secondItem="ipe-Fg-25A" secondAttribute="trailing" constant="26" id="y2Y-tV-hd2"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>

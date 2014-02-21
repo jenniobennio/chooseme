@@ -32,6 +32,7 @@
 @property (strong, nonatomic) NSString *myName;
 @property (strong, nonatomic) UIImage *myPic;
 
+
 @end
 
 @implementation QuestionVC
@@ -80,7 +81,7 @@
     
     // FIXME: Commenting this out for now.. It interferes with the gesture recognizer for editing friendsTable
 //    [self.view addGestureRecognizer:panGesture];
-    
+        
     // Create request for user's Facebook data
     FBRequest *request = [FBRequest requestForMe];
     
@@ -98,6 +99,12 @@
             self.myName = name;
             self.myPic = [UIImage imageWithData:[NSData dataWithContentsOfURL:pictureURL]];
         }    }];
+    
+    // FIXME: Find a better place to instantiate this cacheDescriptor, preferably, right after we successfully log in?
+    // Create a cache descriptor based on the default friend picker data fetch settings
+    self.cacheDescriptor = [FBFriendPickerViewController cacheDescriptor];
+    // Pre-fetch and cache friend data
+    [self.cacheDescriptor prefetchAndCacheForSession:FBSession.activeSession];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -128,11 +135,11 @@
         self.question.question = self.questionTextField.text;
     else
         self.question.question = @"Which one?";
+
     self.question.imageData1 = UIImageJPEGRepresentation(self.image1, 0.05f);
     self.question.imageData2 = UIImageJPEGRepresentation(self.image2, 0.05f);
     
     self.question.youVoted = [NSNumber numberWithInt:0];
-    self.question.question = self.questionTextField.text;
     
     [self.question saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
@@ -141,8 +148,8 @@
             NSLog(@"failed to post question.");
         }
     }];
-    [self.delegate clearImages];
     
+    [self.delegate clearImages:YES];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -162,6 +169,7 @@
     if (self.friendPickerController == nil) {
         // Create friend picker, and get data loaded into it.
         self.friendPickerController = [[FBFriendPickerViewController alloc] init];
+        [self.friendPickerController configureUsingCachedDescriptor:self.cacheDescriptor];
         self.friendPickerController.title = @"Pick Friends";
         self.friendPickerController.delegate = self;
     }
@@ -204,7 +212,9 @@
         }
         [text appendString:user.name];
         [self.question.friends addObject:user];
-        [self.question.friendsVoted addObject:[NSNumber numberWithInt:0]];
+        
+        // FIXME: For now, initialize to pick a random one
+        [self.question.friendsVoted addObject:[NSNumber numberWithInt:random() % 3]];
     }
     
     [self.submitButton setEnabled:self.question.friends.count > 0];

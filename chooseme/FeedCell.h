@@ -17,7 +17,10 @@
 @property (strong, nonatomic) IBOutlet UIImageView *image2;
 @property (strong, nonatomic) IBOutlet UILabel *count1;
 @property (strong, nonatomic) IBOutlet UILabel *count2;
-@property (strong, nonatomic) IBOutlet UILabel *youVoted1;
-@property (strong, nonatomic) IBOutlet UILabel *youVoted2;
+@property (strong, nonatomic) IBOutlet UILabel *voteCount;
+@property (strong, nonatomic) IBOutlet UIButton *youVoted1;
+@property (strong, nonatomic) IBOutlet UIButton *youVoted2;
+- (IBAction)onVote1:(id)sender;
+- (IBAction)onVote2:(id)sender;
 
 @end

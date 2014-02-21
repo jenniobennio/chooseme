@@ -26,8 +26,11 @@
 - (IBAction)onPic2:(id)sender;
 - (IBAction)onMe:(id)sender;
 - (IBAction)onFriends:(id)sender;
+
+// For testing only
 - (IBAction)quickFill:(id)sender;
 - (IBAction)onClear:(id)sender;
+- (IBAction)onNext:(id)sender;
 
 // Keep track of which thumbnail image is selected
 @property (nonatomic, assign) int picIndex;
@@ -89,6 +92,7 @@
         
         [myAlertView show];
     }*/
+    
 }
 
 # pragma mark - actions from button presses
@@ -180,7 +184,12 @@
 
 // For testing: Clear images
 - (IBAction)onClear:(id)sender {
-    [self clearImages];
+    [self clearImages:NO];
+}
+
+// For testing: Go to next step
+- (IBAction)onNext:(id)sender {
+    [self onTap:nil];
 }
 
 - (void)onTap:(id)sender {
@@ -239,7 +248,7 @@
         [self onPic2:nil];
 }
 
-- (void)clearImages {
+- (void)clearImages:(BOOL)submit {
     NSLog(@"Clear images");
     self.currentQuestion = [[Question alloc] init];
 
@@ -256,6 +265,8 @@
     self.takePicButton.selected = NO;
     self.takePicButton.highlighted = NO;
 
+    if (submit)
+        [self.delegate nextPage:self.index];
 }
 
 # pragma mark - private methods
@@ -331,6 +342,7 @@
         
         // Set delegate so we can later pass info from questionVC to cameraVC
         questionVC.delegate = self;
+        
         [self presentViewController:questionVC animated:YES completion:nil];
         
     }

@@ -129,51 +129,90 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.questions.count;
+    if ([self isMe])
+        return self.questions.count+1;
+    else
+        return self.questions.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     CGFloat height;
-    Question *q = self.questions[indexPath.row];
-    if (q.question != nil)
-        height = [self textViewHeightForAttributedText:[[NSAttributedString alloc] initWithString:q.question] andWidth:240];
-    else
-        height = 0;
-    if (height > 0) {
-        return height + 200;
-    } else
-        return 220;
+    Question *q;
+    
+    if ([self isMe] && indexPath.row == 0)
+        return 40;
+    else {
+        if ([self isMe])
+            q = self.questions[indexPath.row-1];
+        else
+            q = self.questions[indexPath.row];
+        
+        if (q.question != nil)
+            height = [self textViewHeightForAttributedText:[[NSAttributedString alloc] initWithString:q.question] andWidth:240];
+        else
+            height = 0;
+        if (height > 0) {
+            return height + 200;
+        } else
+            return 220;
+    }
 }
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"FeedCell";
-    FeedCell *cell = (FeedCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    
-    Question *q = self.questions[indexPath.row];
-    cell.question.text = q.question;
-    cell.time.text = [q formattedDate];
-    cell.youVoted1.text = [NSString stringWithFormat:@"%d people polled", q.friends.count];
-    cell.image1.image = [UIImage imageWithData:q.imageData1];
-    cell.image2.image = [UIImage imageWithData:q.imageData2];
-    if ([self isMe]) {
-        cell.name.text = self.myName;
-        cell.profilePic.image = self.myPic;
+    if ([self isMe] && indexPath.row == 0) {
+        UITableViewCell *cell = [[UITableViewCell alloc] init];
+        cell.textLabel.text = @"+ Add a Question";
+        cell.textLabel.textAlignment = NSTextAlignmentCenter;
+        return cell;
     } else {
-        cell.name.text = q.name;
-//        cell.profilePic.image = q.profilePic;
-    }
+        static NSString *CellIdentifier = @"FeedCell";
+        FeedCell *cell = (FeedCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    
+        Question *q;
+        if ([self isMe])
+            q = self.questions[indexPath.row-1];
+        else
+            q = self.questions[indexPath.row];
+        
+        cell.question.text = q.question;
+        cell.time.text = [q formattedDate];
+        cell.voteCount.text = [NSString stringWithFormat:@"%d votes, %d comments", [q numReplies], [q numComments]];
 
-    return cell;
+        cell.image1.image = [UIImage imageWithData:q.imageData1];
+        cell.image2.image = [UIImage imageWithData:q.imageData2];
+        if ([self isMe]) {
+            cell.name.text = self.myName;
+            cell.profilePic.image = self.myPic;
+        } else {
+            cell.name.text = q.name;
+            //        cell.profilePic.image = q.profilePic;
+        }
+        cell.count1.text = [NSString stringWithFormat:@"%d", [q percentPic:1]];
+        cell.count2.text = [NSString stringWithFormat:@"%d", [q percentPic:2]];
+        
+        // TODO: Load and update question objected's youVoted
+        [cell.youVoted1 setTitleColor:[UIColor greenColor] forState:UIControlStateSelected];
+        [cell.youVoted2 setTitleColor:[UIColor greenColor] forState:UIControlStateSelected];
+
+        return cell;
+    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    PostVC *postVC = [[PostVC alloc] initWithNibName:@"PostVC" bundle:nil];
-    postVC.post = [self.questions objectAtIndex:indexPath.row];
-    [self presentViewController:postVC animated:YES completion:nil];
+    if (indexPath.row == 0 && [self isMe]) {
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+        [self.delegate previousPage:self.index];
+    } else {
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+        PostVC *postVC = [[PostVC alloc] initWithNibName:@"PostVC" bundle:nil];
+        if ([self isMe])
+            postVC.post = [self.questions objectAtIndex:indexPath.row-1];
+        else
+            postVC.post = [self.questions objectAtIndex:indexPath.row];
+        [self presentViewController:postVC animated:YES completion:nil];
+    }
 }
 
 #pragma mark - Private methods

@@ -137,11 +137,11 @@
     [self.question saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
             NSLog(@"successfully posted question");
-            [self.delegate clearImages];
         } else {
             NSLog(@"failed to post question.");
         }
     }];
+    [self.delegate clearImages];
     
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -238,7 +238,7 @@
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Make everything editable except for the last entry
+    // Make everything editable
     return YES;
 }
 

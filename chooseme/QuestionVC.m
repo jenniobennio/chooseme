@@ -15,6 +15,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *pic1;
 @property (strong, nonatomic) IBOutlet UIButton *pic2;
 @property (strong, nonatomic) IBOutlet UITableView *friendsTable;
+@property (strong, nonatomic) IBOutlet UIButton *submitButton;
 
 // Button actions
 - (IBAction)onBack:(id)sender;
@@ -60,13 +61,20 @@
     [self.pic2 setImage:self.image2 forState:UIControlStateNormal];
     self.pic2.imageView.contentMode = UIViewContentModeScaleAspectFill;
     
-    // Pre-fill question text (for if we 1./ went Back or 2./ clicked one of the pics to redo)
+    // Load question text
     if (self.question.question)
         self.questionTextField.text = self.question.question;
     
-    // Init friends
-    self.friends = [[NSMutableArray alloc] init];
-    self.friendsVoted = [[NSMutableArray alloc] init];
+    // Load friends
+    if (!self.question.friends) {
+        self.friends = [[NSMutableArray alloc] init];
+        self.friendsVoted = [[NSMutableArray alloc] init];
+    }
+    else {
+        self.friends = self.question.friends;
+        self.friendsVoted = self.question.friendsVoted;
+    }
+    [self.submitButton setEnabled:self.friends.count > 0];
     
     // Don't show lines below available cells
     self.friendsTable.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
@@ -97,6 +105,12 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [self.friendsTable reloadData];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    self.question.question = self.questionTextField.text;
+    self.question.friends = self.friends;
 }
 
 # pragma mark - actions from button presses
@@ -164,14 +178,6 @@
 
 
 # pragma mark - UITextFieldDelegate methods
-
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
-{
-    // Save question object's question attribute here in case the user presses any buttons while typing
-    self.question.question = [NSString stringWithFormat:@"%@%@", self.questionTextField.text, string];
-    return YES;
-}
-
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     // Pressing enter dismisses keyboard
@@ -180,6 +186,15 @@
 }
 
 # pragma mark - facebook friend picker delegate methods
+- (BOOL)friendPickerViewController:(FBFriendPickerViewController *)friendPicker shouldIncludeUser:(id<FBGraphUser>)user {
+    if ([self.friends containsObject:user])
+        return NO;
+    return YES;
+}
+
+- (void)facebookViewControllerCancelWasPressed:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 - (void)facebookViewControllerDoneWasPressed:(id)sender {
     NSLog(@"getting done press.");
@@ -192,9 +207,11 @@
             [text appendString:@", "];
         }
         [text appendString:user.name];
-        [self.friends addObject:user.name];
+        [self.friends addObject:user];
         [self.friendsVoted addObject:[NSNumber numberWithInt:0]];
     }
+    
+    [self.submitButton setEnabled:self.friends.count > 0];
     
     NSLog(@"%@", text);
     
@@ -216,7 +233,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [[UITableViewCell alloc] init];
-    NSString *friend = self.friends[indexPath.row];
+    NSString *friend = [self.friends[indexPath.row] name];
     cell.textLabel.text = friend;
     return cell;
 }

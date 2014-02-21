@@ -10,6 +10,8 @@
 		263295E318B3337600A84CB2 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 263295E218B3337600A84CB2 /* Parse.framework */; };
 		263295E718B33DA700A84CB2 /* QuestionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 263295E518B33DA700A84CB2 /* QuestionVC.m */; };
 		263295E818B33DA700A84CB2 /* QuestionVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 263295E618B33DA700A84CB2 /* QuestionVC.xib */; };
+		2632962D18B5DBDE00A84CB2 /* 111834.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2632962B18B5DBDE00A84CB2 /* 111834.jpg */; };
+		2632962E18B5DBDE00A84CB2 /* 131466.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2632962C18B5DBDE00A84CB2 /* 131466.jpg */; };
 		263519F718A5D1FF000A30C9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 263519F618A5D1FF000A30C9 /* Foundation.framework */; };
 		263519F918A5D1FF000A30C9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 263519F818A5D1FF000A30C9 /* CoreGraphics.framework */; };
 		263519FB18A5D1FF000A30C9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 263519FA18A5D1FF000A30C9 /* UIKit.framework */; };
@@ -63,6 +65,8 @@
 		263295E418B33DA700A84CB2 /* QuestionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionVC.h; sourceTree = "<group>"; };
 		263295E518B33DA700A84CB2 /* QuestionVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionVC.m; sourceTree = "<group>"; };
 		263295E618B33DA700A84CB2 /* QuestionVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuestionVC.xib; sourceTree = "<group>"; };
+		2632962B18B5DBDE00A84CB2 /* 111834.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 111834.jpg; sourceTree = "<group>"; };
+		2632962C18B5DBDE00A84CB2 /* 131466.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 131466.jpg; sourceTree = "<group>"; };
 		263519F318A5D1FF000A30C9 /* chooseme.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = chooseme.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		263519F618A5D1FF000A30C9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		263519F818A5D1FF000A30C9 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -226,6 +230,8 @@
 		263519FD18A5D1FF000A30C9 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				2632962B18B5DBDE00A84CB2 /* 111834.jpg */,
+				2632962C18B5DBDE00A84CB2 /* 131466.jpg */,
 				263519FE18A5D1FF000A30C9 /* chooseme-Info.plist */,
 				263519FF18A5D1FF000A30C9 /* InfoPlist.strings */,
 				26351A0218A5D1FF000A30C9 /* main.m */,
@@ -340,10 +346,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				263295E818B33DA700A84CB2 /* QuestionVC.xib in Resources */,
+				2632962D18B5DBDE00A84CB2 /* 111834.jpg in Resources */,
 				26351A0D18A5D1FF000A30C9 /* Main_iPad.storyboard in Resources */,
 				26351A1218A5D1FF000A30C9 /* Images.xcassets in Resources */,
 				26351A8618A72449000A30C9 /* AppViewController.xib in Resources */,
 				26351A0A18A5D1FF000A30C9 /* Main_iPhone.storyboard in Resources */,
+				2632962E18B5DBDE00A84CB2 /* 131466.jpg in Resources */,
 				26351A9018A7EF0C000A30C9 /* FeedCell.xib in Resources */,
 				26351A0118A5D1FF000A30C9 /* InfoPlist.strings in Resources */,
 				26351A9818A80EC7000A30C9 /* PostVC.xib in Resources */,

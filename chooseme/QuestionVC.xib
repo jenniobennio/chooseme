@@ -10,6 +10,7 @@
                 <outlet property="pic1" destination="tG1-0c-g84" id="I9b-eV-9XT"/>
                 <outlet property="pic2" destination="oG9-wj-8wr" id="vQt-Cc-RMQ"/>
                 <outlet property="questionTextField" destination="mR0-1Q-r93" id="few-Vf-NMj"/>
+                <outlet property="submitButton" destination="4pa-SQ-qgp" id="EEQ-oh-3SM"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
         </placeholder>

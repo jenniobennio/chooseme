@@ -12,6 +12,7 @@
 @interface Question : PFObject<PFSubclassing>
 
 @property (nonatomic, strong) PFUser *author;
+@property (nonatomic, strong) NSString *facebookID;
 @property (nonatomic, strong) NSData *profilePic;
 @property (nonatomic, strong) NSString *name;
 

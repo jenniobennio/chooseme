@@ -31,7 +31,7 @@
 // Private user data
 @property (strong, nonatomic) NSString *myName;
 @property (strong, nonatomic) UIImage *myPic;
-
+@property (strong, nonatomic) NSString *facebookID;
 
 @end
 
@@ -97,6 +97,7 @@
             
             // Assign the data accordingly
             self.myName = name;
+            self.facebookID = facebookID;
             self.myPic = [UIImage imageWithData:[NSData dataWithContentsOfURL:pictureURL]];
         }    }];
     
@@ -126,6 +127,7 @@
 - (IBAction)onSubmit:(id)sender {
     NSLog(@"Posting question.");
     
+    self.question.facebookID = self.facebookID;
     self.question.author = [PFUser currentUser];
     self.question.profilePic = UIImageJPEGRepresentation(self.myPic, 0.05f);
     self.question.name = self.myName;
@@ -243,7 +245,11 @@
     
     NSString *friend = [self.question.friends[indexPath.row] name];
     cell.name.text = friend;
-    [cell.pic setImage:[UIImage imageNamed:@"111834.jpg"]];
+    
+    NSString *strurl = [[NSString alloc] initWithFormat:@"https://graph.facebook.com/%@/picture",[[self.question.friends objectAtIndex:indexPath.row] objectForKey:@"id"]];
+    NSURL *url = [NSURL URLWithString:strurl];
+    NSData *data = [NSData dataWithContentsOfURL:url];
+    [cell.pic setImage:[[UIImage alloc] initWithData:data]];
     return cell;
 }
 
@@ -255,7 +261,6 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     [self.question.friends removeObjectAtIndex:indexPath.row];
     [self.question.friendsVoted removeObjectAtIndex:indexPath.row];
-
     [self.friendsTable deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:YES];
     [self.friendsTable reloadData];
 }

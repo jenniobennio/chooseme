@@ -212,7 +212,11 @@
             cell.profilePic.image = self.myPic;
         } else {
             cell.name.text = q.name;
-            //        cell.profilePic.image = q.profilePic;
+            
+            NSString *strurl = [[NSString alloc] initWithFormat:@"https://graph.facebook.com/%@/picture", q.facebookID];
+            NSURL *url = [NSURL URLWithString:strurl];
+            NSData *data = [NSData dataWithContentsOfURL:url];
+            [cell.profilePic setImage:[[UIImage alloc] initWithData:data]];
         }
         cell.count1.text = [NSString stringWithFormat:@"%d", [q percentPic:1]];
         cell.count2.text = [NSString stringWithFormat:@"%d", [q percentPic:2]];

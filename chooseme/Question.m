@@ -16,6 +16,13 @@
     return @"question";
 }
 
+- (NSString *) facebookID {
+    return self[@"facebookID"];
+}
+- (void) setFacebookID:(NSString *)facebookID {
+    self[@"facebookID"] = facebookID;
+}
+
 - (PFUser *) author {
     return self[@"author"];
 }

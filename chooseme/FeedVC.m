@@ -31,6 +31,7 @@
 @property (strong, nonatomic) NSString *myName;
 @property (strong, nonatomic) UIImage *myPic;
 
+- (void) loadQuestionsArray:(NSString *)facebookId;
 @end
 
 @implementation FeedVC 
@@ -76,29 +77,31 @@
     [self.feedView addSubview:refresh];
     
     // Load my data
-    if ([self isMe]) {
-        // Create request for user's Facebook data
-        FBRequest *request = [FBRequest requestForMe];
-        
-        // Send request to Facebook
-        [request startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
-            if (!error) {
-                // result is a dictionary with the user's Facebook data
-                NSDictionary *userData = (NSDictionary *)result;
-                
-                NSString *facebookID = userData[@"id"];
-                NSString *name = userData[@"name"];
-                NSURL *pictureURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", facebookID]];
-                
-                // Assign the data accordingly
-                self.myName = name;
-                self.myPic = [UIImage imageWithData:[NSData dataWithContentsOfURL:pictureURL]];
-                [self.feedView reloadData];
-                
-            }    }];
-    }
-  
-    // Load the question array
+    // Create request for user's Facebook data
+    FBRequest *request = [FBRequest requestForMe];
+    
+    // Send request to Facebook
+    [request startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+        if (!error) {
+            // result is a dictionary with the user's Facebook data
+            NSDictionary *userData = (NSDictionary *)result;
+            
+            NSString *facebookID = userData[@"id"];
+            NSString *name = userData[@"name"];
+            NSURL *pictureURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", facebookID]];
+            
+            // Assign the data accordingly
+            self.myName = name;
+            self.myPic = [UIImage imageWithData:[NSData dataWithContentsOfURL:pictureURL]];
+            
+            // load the questions array
+            [self loadQuestionsArray:facebookID];
+            
+        }
+    }];
+}
+
+- (void) loadQuestionsArray:(NSString *)facebookId {
     if ([self isMe]) {
         PFQuery *query = [Question query];
         [query whereKey:@"author" equalTo:[PFUser currentUser]];
@@ -109,16 +112,22 @@
             self.numQuestions.text = [NSString stringWithFormat:@"%d", self.questions.count];
         }];
     } else {
-        // FIXME: Remove this eventually
+        // FIXME: this is NOT performant
+        PFQuery *query = [Question query];
         self.questions = [[NSMutableArray alloc] init];
-        for (int i = 0; i < 10; i++)
-        {
-            Question *q = [[Question alloc] init];
-            q.name = [NSString stringWithFormat:@"Name%d", i];
-            q.question = [NSString stringWithFormat:@"Question%d", i];
-            [self.questions addObject:q];
-        }
-        [self.feedView reloadData];
+        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            
+            for (Question* question in [[objects reverseObjectEnumerator] allObjects]) {
+                for (NSDictionary* friend in question.friends) {
+                    if ([friend[@"id"] isEqualToString:facebookId]) {
+                        [self.questions addObject:question];
+                        continue;
+                    }
+                }
+            }
+            
+            [self.feedView reloadData];
+        }];
     }
     
 }

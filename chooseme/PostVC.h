@@ -13,5 +13,6 @@
 
 // Current Question object
 @property (nonatomic, strong) Question *post;
+@property (nonatomic, strong) UIImage *posterImage;
 
 @end

@@ -48,6 +48,7 @@
     [self.view addGestureRecognizer:panGesture];
     
     // Load and display Question data
+    self.profilePic.image = self.posterImage;
     self.name.text = self.post.name;
     self.time.text = [self.post formattedDate];
     self.question.text = self.post.question;

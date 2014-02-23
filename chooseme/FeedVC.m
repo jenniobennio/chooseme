@@ -28,6 +28,7 @@
 - (IBAction)goToCamera:(id)sender;
 
 // Private user data
+@property (strong, nonatomic) NSString *myFacebookID;
 @property (strong, nonatomic) NSString *myName;
 @property (strong, nonatomic) UIImage *myPic;
 
@@ -51,7 +52,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    NSLog(@"FeedVC viewDidLoad");
+    NSLog(@"FeedVC viewDidLoad %d", [self isMe]);
     // Set up feed view
     [self.feedView registerNib:[UINib nibWithNibName:@"FeedCell" bundle:nil] forCellReuseIdentifier:@"FeedCell"];
     self.feedView.dataSource = self;
@@ -86,28 +87,31 @@
             // result is a dictionary with the user's Facebook data
             NSDictionary *userData = (NSDictionary *)result;
             
-            NSString *facebookID = userData[@"id"];
+            self.myFacebookID = userData[@"id"];
             NSString *name = userData[@"name"];
-            NSURL *pictureURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", facebookID]];
+            NSURL *pictureURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", self.myFacebookID]];
             
             // Assign the data accordingly
             self.myName = name;
             self.myPic = [UIImage imageWithData:[NSData dataWithContentsOfURL:pictureURL]];
             
             // load the questions array
-            [self loadQuestionsArray:facebookID];
+            [self loadQuestionsArray:self.myFacebookID];
             
         }
     }];
+    
+    // Load friends' data
 }
 
 - (void) loadQuestionsArray:(NSString *)facebookId {
     if ([self isMe]) {
         PFQuery *query = [Question query];
+        // FIXME: Newest posts on top for now.. Eventually, custom order by recently edited or unresolved
+        [query orderByDescending:@"createdAt"];
         [query whereKey:@"author" equalTo:[PFUser currentUser]];
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-            // Newest posts on top for now.. Eventually, custom order by recently edited or unresolved
-            self.questions = [[[objects reverseObjectEnumerator] allObjects] mutableCopy];
+            self.questions = [objects mutableCopy];
             [self.feedView reloadData];
             self.numQuestions.text = [NSString stringWithFormat:@"%d", self.questions.count];
         }];
@@ -200,9 +204,9 @@
         cell.question.text = q.question;
         cell.time.text = [q formattedDate];
         cell.voteCount.text = [NSString stringWithFormat:@"%d votes, %d comments", [q numReplies], [q numComments]];
-
         cell.image1.image = [UIImage imageWithData:q.imageData1];
         cell.image2.image = [UIImage imageWithData:q.imageData2];
+
         if ([self isMe]) {
             cell.name.text = self.myName;
             cell.profilePic.image = self.myPic;
@@ -228,9 +232,10 @@
     } else {
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
         PostVC *postVC = [[PostVC alloc] initWithNibName:@"PostVC" bundle:nil];
-        if ([self isMe])
+        if ([self isMe]) {
             postVC.post = [self.questions objectAtIndex:indexPath.row-1];
-        else
+            postVC.posterImage = self.myPic;
+        } else
             postVC.post = [self.questions objectAtIndex:indexPath.row];
         [self presentViewController:postVC animated:YES completion:nil];
     }
@@ -255,8 +260,13 @@
 }
 
 - (void) refreshMe: (UIRefreshControl *)refresh;{
-    [self.feedView reloadData];
+    [self reload];
     [refresh endRefreshing];
+}
+
+- (void) reload
+{
+    [self loadQuestionsArray:self.myFacebookID];
 }
 
 

@@ -59,7 +59,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+
     // Format things
     self.choosePicButton.layer.cornerRadius = 5;
     
@@ -265,8 +265,9 @@
     self.takePicButton.selected = NO;
     self.takePicButton.highlighted = NO;
 
-    if (submit)
+    if (submit) {
         [self.delegate nextPage:self.index];
+    }
 }
 
 # pragma mark - private methods

@@ -13,6 +13,9 @@
 
 @interface AppViewController ()
 
+@property (nonatomic, strong) FeedVC *friendsQuestionsVC;
+@property (nonatomic, strong) FeedVC *myQuestionsVC;
+
 @end
 
 @implementation AppViewController
@@ -30,6 +33,9 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    self.friendsQuestionsVC = [[FeedVC alloc] initWithNibName:@"FeedVC" bundle:nil];
+    self.myQuestionsVC = [[FeedVC alloc]  initWithNibName:@"FeedVC" bundle:nil];
     
     // The permissions requested from the user
     NSArray *permissionsArray = @[ @"user_about_me", @"user_relationships", @"user_birthday", @"user_location"];
@@ -121,12 +127,21 @@
         childViewController.index = index;
         childViewController.delegate = self;
         return childViewController;
-    } else {
-        FeedVC *childViewController = [[FeedVC alloc] initWithNibName:@"FeedVC" bundle:nil];
-        childViewController.index = index;
-        childViewController.delegate = self;
-        return childViewController;
-    }
+    } else if (index == 0){
+        self.friendsQuestionsVC.index = index;
+        self.friendsQuestionsVC.delegate = self;
+        return self.friendsQuestionsVC;
+    } else if (index == 2) {
+        self.myQuestionsVC.index = index;
+        self.myQuestionsVC.delegate = self;
+        return self.myQuestionsVC;
+    } else
+        return nil;
+    
+    //        FeedVC *childViewController = [[FeedVC alloc] initWithNibName:@"FeedVC" bundle:nil];
+    //        childViewController.index = index;
+    //        childViewController.delegate = self;
+    //        return childViewController;
 }
 
 - (void)previousPage:(NSUInteger)index

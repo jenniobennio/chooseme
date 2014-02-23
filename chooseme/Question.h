@@ -19,6 +19,7 @@
 @property (nonatomic, strong) NSString *question;
 @property (nonatomic, strong) NSData *imageData1;
 @property (nonatomic, strong) NSData *imageData2;
+
 // Note: Using image data for library files.. For online pics, store URL?
 @property (nonatomic, strong) NSURL *image1;
 @property (nonatomic, strong) NSURL *image2;

@@ -138,7 +138,7 @@
 
     self.question.imageData1 = UIImageJPEGRepresentation(self.image1, 0.05f);
     self.question.imageData2 = UIImageJPEGRepresentation(self.image2, 0.05f);
-    
+
     self.question.youVoted = [NSNumber numberWithInt:0];
     
     [self.question saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {

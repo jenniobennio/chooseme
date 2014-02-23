@@ -19,6 +19,10 @@
 @property (strong, nonatomic) IBOutlet UILabel *titleLabel;
 @property (strong, nonatomic) IBOutlet UITableView *feedView;
 @property (strong, nonatomic) IBOutlet UIButton *cameraButton;
+@property (strong, nonatomic) IBOutlet UIView *statsView;
+@property (strong, nonatomic) IBOutlet UILabel *numQuestions;
+@property (strong, nonatomic) IBOutlet UILabel *numVotes;
+@property (strong, nonatomic) IBOutlet UILabel *numFriends;
 
 // Button actions
 - (IBAction)goToCamera:(id)sender;
@@ -46,15 +50,22 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    NSLog(@"FeedVC viewDidLoad");
     // Set up feed view
     [self.feedView registerNib:[UINib nibWithNibName:@"FeedCell" bundle:nil] forCellReuseIdentifier:@"FeedCell"];
     self.feedView.dataSource = self;
     self.feedView.delegate = self;
     
-    if ([self isMe])
+    if ([self isMe]) {
         self.titleLabel.text = @"My Questions";
-    else
+    } else {
         self.titleLabel.text = @"Friends' Questions";
+        self.statsView.hidden = YES;
+//        CGRect newFrame = self.statsView.frame;
+//        newFrame.size.height = 0;
+//        self.statsView.frame = newFrame;
+//        self.statsView.clipsToBounds = YES;
+    }
     
     // Don't show lines below available cells
     self.feedView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
@@ -95,6 +106,7 @@
             // Newest posts on top for now.. Eventually, custom order by recently edited or unresolved
             self.questions = [[[objects reverseObjectEnumerator] allObjects] mutableCopy];
             [self.feedView reloadData];
+            self.numQuestions.text = [NSString stringWithFormat:@"%d", self.questions.count];
         }];
     } else {
         // FIXME: Remove this eventually

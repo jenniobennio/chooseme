@@ -56,14 +56,14 @@
     return self[@"imageData1"];
 }
 - (void) setImageData1:(NSData *) image {
-    self[@"imagedata1"] = image;
+    self[@"imageData1"] = image;
 }
 
 - (NSData *) imageData2 {
     return self[@"imageData2"];
 }
 - (void) setImageData2:(NSData *) image {
-    self[@"imagedata2"] = image;
+    self[@"imageData2"] = image;
 }
 
 - (NSNumber *) youVoted {

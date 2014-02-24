@@ -122,8 +122,10 @@
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
             
             for (Question* question in [[objects reverseObjectEnumerator] allObjects]) {
-                for (NSDictionary* friend in question.friends) {
+                for (int i = 0; i < question.friends.count; i++) {
+                    NSDictionary *friend = [question.friends objectAtIndex:i];
                     if ([friend[@"id"] isEqualToString:facebookId]) {
+                        question.myVoteIndex = i;
                         [self.questions addObject:question];
                         continue;
                     }
@@ -201,9 +203,12 @@
         else
             q = self.questions[indexPath.row];
         
-        cell.question.text = q.question;
+        cell.question = q;
+        cell.questionLabel.text = q.question;
+        [cell updateVoteCount];
+        [cell updateVoteLabels];
+        
         cell.time.text = [q formattedDate];
-        cell.voteCount.text = [NSString stringWithFormat:@"%d votes, %d comments", [q numReplies], [q numComments]];
         cell.image1.image = [UIImage imageWithData:q.imageData1];
         cell.image2.image = [UIImage imageWithData:q.imageData2];
 

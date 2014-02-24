@@ -10,7 +10,8 @@
 #import <Parse/PFObject+Subclass.h>
 
 @implementation Question
-@dynamic author, profilePic, image1, image2;
+@dynamic facebookID, author, profilePic, image1, image2;
+@synthesize myVoteIndex;
 
 + (NSString *)parseClassName {
     return @"question";
@@ -177,6 +178,15 @@
         return count1;
     else
         return count2;
+}
+
+-(void)setVote:(int)vote {
+    [self.friendsVoted setObject:[NSNumber numberWithInt:vote] atIndexedSubscript:self.myVoteIndex];
+    [self saveInBackground];
+}
+
+-(int)vote {
+    return [[self.friendsVoted objectAtIndex:self.myVoteIndex] intValue];
 }
 
 @end

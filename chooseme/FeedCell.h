@@ -7,12 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Question.h"
 
 @interface FeedCell : UITableViewCell
 @property (strong, nonatomic) IBOutlet UIImageView *profilePic;
 @property (strong, nonatomic) IBOutlet UILabel *name;
 @property (strong, nonatomic) IBOutlet UILabel *time;
-@property (strong, nonatomic) IBOutlet UILabel *question;
+@property (strong, nonatomic) IBOutlet UILabel *questionLabel;
 @property (strong, nonatomic) IBOutlet UIImageView *image1;
 @property (strong, nonatomic) IBOutlet UIImageView *image2;
 @property (strong, nonatomic) IBOutlet UILabel *count1;
@@ -20,7 +21,13 @@
 @property (strong, nonatomic) IBOutlet UILabel *voteCount;
 @property (strong, nonatomic) IBOutlet UIButton *youVoted1;
 @property (strong, nonatomic) IBOutlet UIButton *youVoted2;
+
+@property (strong, nonatomic) Question *question;
+@property (assign, nonatomic) int myVoteIndex;
 - (IBAction)onVote1:(id)sender;
 - (IBAction)onVote2:(id)sender;
+
+- (void)updateVoteCount;
+- (void)updateVoteLabels;
 
 @end

@@ -237,8 +237,8 @@
         [text appendString:user.name];
         [self.question.friends addObject:user];
         
-        // FIXME: For now, initialize to pick a random one
-        [self.question.friendsVoted addObject:[NSNumber numberWithInt:random() % 3]];
+        // everyone starts out as never having voted
+        [self.question.friendsVoted addObject:[NSNumber numberWithInt:0]];
     }
     
     [self.submitButton setEnabled:self.question.friends.count > 0];

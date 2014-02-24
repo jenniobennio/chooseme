@@ -30,11 +30,41 @@
     self.youVoted1.selected = !self.youVoted1.selected;
     if (self.youVoted1.selected)
         self.youVoted2.selected = NO;
+    
+    int vote = 0;
+    if (self.youVoted1.selected) {
+        vote = 1;
+    }
+    
+    [self.question setVote:vote];
+    [self updateVoteCount];
+    
 }
 
 - (IBAction)onVote2:(id)sender {
     self.youVoted2.selected = !self.youVoted2.selected;
     if (self.youVoted2.selected)
         self.youVoted1.selected = NO;
+    
+    int vote = 0;
+    if (self.youVoted2.selected) {
+        vote = 2;
+    }
+    
+    [self.question setVote:vote];
+    [self updateVoteCount];
+}
+
+- (void) updateVoteCount {
+    self.voteCount.text = [NSString stringWithFormat:@"%d votes, %d comments", [self.question numReplies], [self.question numComments]];
+}
+
+- (void) updateVoteLabels {
+    int vote = [self.question vote];
+    if (vote == 1) {
+        self.youVoted1.selected = YES;
+    } else if (vote == 2) {
+        self.youVoted2.selected = YES;
+    }
 }
 @end

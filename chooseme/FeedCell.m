@@ -65,6 +65,26 @@
         self.youVoted2.userInteractionEnabled = NO;
         self.youVoted1.hidden = YES;
         self.youVoted2.hidden = YES;
+        
+        if ([[self.question youVoted] intValue] == 1) {
+            [self respondToTapGesture1];
+        } else if ([[self.question youVoted] intValue] == 2) {
+            [self respondToTapGesture2];
+        }
+        
+        if (self.tapGestureRecognizer1 == nil) {
+            self.image1.userInteractionEnabled = YES;
+            self.tapGestureRecognizer1 = [[UITapGestureRecognizer alloc]
+                                          initWithTarget:self action:@selector(respondToTapGesture1)];
+            [self.image1 addGestureRecognizer:self.tapGestureRecognizer1];
+        }
+        if (self.tapGestureRecognizer2 == nil) {
+            self.image2.userInteractionEnabled = YES;
+            self.tapGestureRecognizer2 = [[UITapGestureRecognizer alloc]
+                                          initWithTarget:self action:@selector(respondToTapGesture2)];
+            [self.image2 addGestureRecognizer:self.tapGestureRecognizer2];
+        }
+        
     } else {
         int vote = [self.question vote];
         if (vote == 1) {
@@ -73,5 +93,29 @@
             self.youVoted2.selected = YES;
         }
     }
+}
+
+- (void) respondToTapGesture1 {
+    [self.image1.layer setBorderColor:[[UIColor cyanColor] CGColor]];
+    [self.image1.layer setBorderWidth:5.0];
+    
+    // deselect image 2
+    [self.image2.layer setBorderColor:[[UIColor clearColor] CGColor]];
+    
+    // update model
+    self.question.youVoted = [NSNumber numberWithInt:1];
+    [self.question saveInBackground];
+}
+
+- (void) respondToTapGesture2 {
+    [self.image2.layer setBorderColor:[[UIColor cyanColor] CGColor]];
+    [self.image2.layer setBorderWidth:5.0];
+    
+    // deselect image 1
+    [self.image2.layer setBorderColor:[[UIColor clearColor] CGColor]];
+    
+    // update model
+    self.question.youVoted = [NSNumber numberWithInt:2];
+    [self.question saveInBackground];
 }
 @end

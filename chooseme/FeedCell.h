@@ -22,6 +22,9 @@
 @property (strong, nonatomic) IBOutlet UIButton *youVoted1;
 @property (strong, nonatomic) IBOutlet UIButton *youVoted2;
 
+@property (strong, nonatomic) UITapGestureRecognizer *tapGestureRecognizer1;
+@property (strong, nonatomic) UITapGestureRecognizer *tapGestureRecognizer2;
+
 @property (strong, nonatomic) Question *question;
 @property (assign, nonatomic) int myVoteIndex;
 @property (assign, nonatomic) BOOL isMyQuestion;
@@ -30,5 +33,8 @@
 
 - (void)updateVoteCount;
 - (void)updateVoteLabels;
+
+- (void)respondToTapGesture1;
+- (void)respondToTapGesture1;
 
 @end

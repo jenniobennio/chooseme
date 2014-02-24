@@ -14,7 +14,7 @@
 - (void)clearImages:(BOOL)submit;
 @end
 
-@interface QuestionVC : UIViewController <UITextFieldDelegate, FBFriendPickerDelegate, UITableViewDelegate, UITableViewDataSource>
+@interface QuestionVC : UIViewController <UITextFieldDelegate, FBFriendPickerDelegate, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
 // CameraVC will be its delegate so we can pass it information (e.g. which pic was selected to redo, whether we submitted)
 @property (nonatomic, weak) id <QuestionVCDelegate> delegate;
 

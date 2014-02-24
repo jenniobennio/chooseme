@@ -25,8 +25,10 @@
 - (IBAction)onPic1:(id)sender;
 - (IBAction)onPic2:(id)sender;
 
-// Friend picker 
+// Friend picker + search bar
 @property (strong, nonatomic) FBFriendPickerViewController *friendPickerController;
+@property (retain, nonatomic) UISearchBar *searchBar;
+@property (retain, nonatomic) NSString *searchText;
 
 // Private user data
 @property (strong, nonatomic) NSString *myName;
@@ -108,6 +110,11 @@
     [self.cacheDescriptor prefetchAndCacheForSession:FBSession.activeSession];
 }
 
+- (void)viewDidUnload
+{
+    self.searchBar = nil;
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [self.friendsTable reloadData];
@@ -179,7 +186,9 @@
     [self.friendPickerController loadData];
     [self.friendPickerController clearSelection];
     
-    [self presentViewController:self.friendPickerController animated:YES completion:nil];
+    [self presentViewController:self.friendPickerController animated:YES completion:^(void) {
+        [self addSearchBarToFriendPickerView];
+    }];
 }
 
 
@@ -195,6 +204,19 @@
 - (BOOL)friendPickerViewController:(FBFriendPickerViewController *)friendPicker shouldIncludeUser:(id<FBGraphUser>)user {
     if ([self.question.friends containsObject:user])
         return NO;
+    
+    if (self.searchText && ![self.searchText isEqualToString:@""]) {
+        NSRange result = [user.name
+                          rangeOfString:self.searchText
+                          options:NSCaseInsensitiveSearch];
+        if (result.location != NSNotFound) {
+            return YES;
+        } else {
+            return NO;
+        }
+    } else {
+        return YES;
+    }
     return YES;
 }
 
@@ -226,6 +248,32 @@
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
+- (void)friendPickerViewControllerSelectionDidChange:(FBFriendPickerViewController *)friendPicker
+{
+    [self clearSearch];
+}
+
+# pragma mark - UISearchBar delegate methods
+- (void)searchBarSearchButtonClicked:(UISearchBar*)searchBar
+{
+    [self handleSearch:searchBar];
+    [searchBar resignFirstResponder];
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *) searchBar {
+    [self clearSearch];
+    [searchBar resignFirstResponder];
+}
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
+{
+    if ([searchText isEqualToString:@""]) {
+        [self clearSearch];
+    } else {
+        [self handleSearch:self.searchBar];
+    }
+}
+
 #pragma mark - TableView methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -235,7 +283,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.question.friends.count;
+        return self.question.friends.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -285,6 +333,39 @@
             self.view.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2);
     }
     
-    
+}
+
+- (void)addSearchBarToFriendPickerView
+{
+    if (self.searchBar == nil) {
+        CGFloat searchBarHeight = 44.0;
+        self.searchBar =
+        [[UISearchBar alloc]
+         initWithFrame:
+         CGRectMake(0,0,
+                    self.view.bounds.size.width,
+                    searchBarHeight)];
+//        self.searchBar.autoresizingMask = self.searchBar.autoresizingMask |
+//        UIViewAutoresizingFlexibleWidth;
+        self.searchBar.delegate = self;
+//        self.searchBar.showsCancelButton = YES;
+        
+        [self.friendPickerController.canvasView addSubview:self.searchBar];
+        CGRect newFrame = self.friendPickerController.view.bounds;
+        newFrame.size.height -= searchBarHeight;
+        newFrame.origin.y = searchBarHeight;
+        self.friendPickerController.tableView.frame = newFrame;
+    }
+}
+
+- (void) handleSearch:(UISearchBar *)searchBar {
+    self.searchText = searchBar.text;
+    [self.friendPickerController updateView];
+}
+
+- (void) clearSearch {
+    self.searchBar.text = @"";
+    self.searchText = nil;
+    [self.friendPickerController updateView];
 }
 @end

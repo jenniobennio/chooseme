@@ -203,6 +203,7 @@
         else
             q = self.questions[indexPath.row];
         
+        cell.isMyQuestion = [self isMe];
         cell.question = q;
         cell.questionLabel.text = q.question;
         [cell updateVoteCount];

@@ -24,6 +24,7 @@
 
 @property (strong, nonatomic) Question *question;
 @property (assign, nonatomic) int myVoteIndex;
+@property (assign, nonatomic) BOOL isMyQuestion;
 - (IBAction)onVote1:(id)sender;
 - (IBAction)onVote2:(id)sender;
 

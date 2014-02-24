@@ -60,11 +60,18 @@
 }
 
 - (void) updateVoteLabels {
-    int vote = [self.question vote];
-    if (vote == 1) {
-        self.youVoted1.selected = YES;
-    } else if (vote == 2) {
-        self.youVoted2.selected = YES;
+    if (self.isMyQuestion) {
+        self.youVoted1.userInteractionEnabled = NO;
+        self.youVoted2.userInteractionEnabled = NO;
+        self.youVoted1.hidden = YES;
+        self.youVoted2.hidden = YES;
+    } else {
+        int vote = [self.question vote];
+        if (vote == 1) {
+            self.youVoted1.selected = YES;
+        } else if (vote == 2) {
+            self.youVoted2.selected = YES;
+        }
     }
 }
 @end

@@ -35,6 +35,6 @@
 - (void)updateVoteLabels;
 
 - (void)respondToTapGesture1;
-- (void)respondToTapGesture1;
+- (void)respondToTapGesture2;
 
 @end

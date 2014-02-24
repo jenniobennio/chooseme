@@ -60,17 +60,19 @@
 }
 
 - (void) updateVoteLabels {
+    if ([[self.question youVoted] intValue] == 1) {
+        [self.image1.layer setBorderColor:[[UIColor cyanColor] CGColor]];
+        [self.image1.layer setBorderWidth:5.0];
+    } else if ([[self.question youVoted] intValue] == 2) {
+        [self.image2.layer setBorderColor:[[UIColor cyanColor] CGColor]];
+        [self.image2.layer setBorderWidth:5.0];
+    }
+    
     if (self.isMyQuestion) {
         self.youVoted1.userInteractionEnabled = NO;
         self.youVoted2.userInteractionEnabled = NO;
         self.youVoted1.hidden = YES;
         self.youVoted2.hidden = YES;
-        
-        if ([[self.question youVoted] intValue] == 1) {
-            [self respondToTapGesture1];
-        } else if ([[self.question youVoted] intValue] == 2) {
-            [self respondToTapGesture2];
-        }
         
         if (self.tapGestureRecognizer1 == nil) {
             self.image1.userInteractionEnabled = YES;

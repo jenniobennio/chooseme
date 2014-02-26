@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		263295E318B3337600A84CB2 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 263295E218B3337600A84CB2 /* Parse.framework */; };
 		263295E718B33DA700A84CB2 /* QuestionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 263295E518B33DA700A84CB2 /* QuestionVC.m */; };
 		263295E818B33DA700A84CB2 /* QuestionVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 263295E618B33DA700A84CB2 /* QuestionVC.xib */; };
 		2632962D18B5DBDE00A84CB2 /* 111834.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2632962B18B5DBDE00A84CB2 /* 111834.jpg */; };
@@ -39,6 +38,7 @@
 		26351A9818A80EC7000A30C9 /* PostVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26351A9618A80EC7000A30C9 /* PostVC.xib */; };
 		26644CC318B723C000806490 /* AddFriendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 26644CC118B723C000806490 /* AddFriendCell.m */; };
 		26644CC418B723C000806490 /* AddFriendCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26644CC218B723C000806490 /* AddFriendCell.xib */; };
+		267A5AD018BC868B0029BECF /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 267A5ACF18BC868B0029BECF /* Parse.framework */; };
 		B031302B82C840708B86AE68 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43619A4B92F840368B218FE4 /* libPods.a */; };
 		D572FE4718B1DAFE000DB1D0 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D572FE4618B1DAFE000DB1D0 /* FacebookSDK.framework */; };
 		D572FE4B18B1DBF7000DB1D0 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D572FE4A18B1DBF7000DB1D0 /* AudioToolbox.framework */; };
@@ -63,7 +63,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		263295E218B3337600A84CB2 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		263295E418B33DA700A84CB2 /* QuestionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionVC.h; sourceTree = "<group>"; };
 		263295E518B33DA700A84CB2 /* QuestionVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionVC.m; sourceTree = "<group>"; };
 		263295E618B33DA700A84CB2 /* QuestionVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuestionVC.xib; sourceTree = "<group>"; };
@@ -107,6 +106,7 @@
 		26644CC018B723C000806490 /* AddFriendCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddFriendCell.h; sourceTree = "<group>"; };
 		26644CC118B723C000806490 /* AddFriendCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddFriendCell.m; sourceTree = "<group>"; };
 		26644CC218B723C000806490 /* AddFriendCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddFriendCell.xib; sourceTree = "<group>"; };
+		267A5ACF18BC868B0029BECF /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		39891BCB79A34F009E78550D /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		43619A4B92F840368B218FE4 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D572FE4618B1DAFE000DB1D0 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
@@ -130,7 +130,7 @@
 				D572FE5918B1DC3C000DB1D0 /* StoreKit.framework in Frameworks */,
 				D572FE5718B1DC35000DB1D0 /* Security.framework in Frameworks */,
 				D572FE5518B1DC2A000DB1D0 /* QuartzCore.framework in Frameworks */,
-				263295E318B3337600A84CB2 /* Parse.framework in Frameworks */,
+				267A5AD018BC868B0029BECF /* Parse.framework in Frameworks */,
 				D572FE5318B1DC21000DB1D0 /* MobileCoreServices.framework in Frameworks */,
 				D572FE5118B1DC18000DB1D0 /* libz.dylib in Frameworks */,
 				D572FE4F18B1DC0F000DB1D0 /* CoreLocation.framework in Frameworks */,
@@ -180,7 +180,7 @@
 		263519F518A5D1FF000A30C9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				263295E218B3337600A84CB2 /* Parse.framework */,
+				267A5ACF18BC868B0029BECF /* Parse.framework */,
 				D572FE5A18B1DC46000DB1D0 /* SystemConfiguration.framework */,
 				D572FE5818B1DC3C000DB1D0 /* StoreKit.framework */,
 				D572FE5618B1DC35000DB1D0 /* Security.framework */,
@@ -566,7 +566,6 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/subhagollakota/Documents/ios/chooseme,
 					/Users/jennykwan/Documents/chooseme,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -585,7 +584,6 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/subhagollakota/Documents/ios/chooseme,
 					/Users/jennykwan/Documents/chooseme,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

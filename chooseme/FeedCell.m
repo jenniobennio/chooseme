@@ -61,10 +61,10 @@
 
 - (void) updateVoteLabels {
     if ([[self.question youVoted] intValue] == 1) {
-        [self.image1.layer setBorderColor:[[UIColor cyanColor] CGColor]];
+        [self.image1.layer setBorderColor:[[UIColor colorWithRed:0.753 green:0.878 blue:0.690 alpha:1] CGColor]];
         [self.image1.layer setBorderWidth:5.0];
     } else if ([[self.question youVoted] intValue] == 2) {
-        [self.image2.layer setBorderColor:[[UIColor cyanColor] CGColor]];
+        [self.image2.layer setBorderColor:[[UIColor colorWithRed:0.753 green:0.878 blue:0.690 alpha:1] CGColor]];
         [self.image2.layer setBorderWidth:5.0];
     }
     
@@ -98,11 +98,12 @@
 }
 
 - (void) respondToTapGesture1 {
-    [self.image1.layer setBorderColor:[[UIColor cyanColor] CGColor]];
+    [self.image1.layer setBorderColor:[[UIColor colorWithRed:0.753 green:0.878 blue:0.690 alpha:1] CGColor]];
     [self.image1.layer setBorderWidth:5.0];
     
     // deselect image 2
-    [self.image2.layer setBorderColor:[[UIColor clearColor] CGColor]];
+    [self.image2.layer setBorderColor:[[UIColor colorWithRed:0.753 green:0.878 blue:0.690 alpha:1] CGColor]];
+    [self.image2.layer setBorderWidth:0];
     
     // update model
     self.question.youVoted = [NSNumber numberWithInt:1];
@@ -110,11 +111,12 @@
 }
 
 - (void) respondToTapGesture2 {
-    [self.image2.layer setBorderColor:[[UIColor cyanColor] CGColor]];
+    [self.image2.layer setBorderColor:[[UIColor colorWithRed:0.753 green:0.878 blue:0.690 alpha:1] CGColor]];
     [self.image2.layer setBorderWidth:5.0];
     
     // deselect image 1
-    [self.image2.layer setBorderColor:[[UIColor clearColor] CGColor]];
+    [self.image1.layer setBorderColor:[[UIColor colorWithRed:0.753 green:0.878 blue:0.690 alpha:1] CGColor]];
+    [self.image1.layer setBorderWidth:0];
     
     // update model
     self.question.youVoted = [NSNumber numberWithInt:2];

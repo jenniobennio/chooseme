@@ -36,6 +36,8 @@
 + (NSString *)parseClassName;
 - (NSString *)formattedDate;
 - (int)numReplies;
+- (int)numVoted1;
+- (int)numVoted2;
 - (int)numComments;
 - (int)percentPic:(int)picNum;
 - (int)vote;

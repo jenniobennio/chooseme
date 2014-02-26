@@ -20,8 +20,10 @@
 @property (strong, nonatomic) IBOutlet UIImageView *image2;
 @property (strong, nonatomic) IBOutlet UILabel *count1;
 @property (strong, nonatomic) IBOutlet UILabel *count2;
-@property (strong, nonatomic) IBOutlet UILabel *youVoted1;
-@property (strong, nonatomic) IBOutlet UILabel *youVoted2;
+@property (strong, nonatomic) IBOutlet UILabel *numVoted1;
+@property (strong, nonatomic) IBOutlet UILabel *numVoted2;
+@property (strong, nonatomic) IBOutlet UIScrollView *friendsVoted1;
+@property (strong, nonatomic) IBOutlet UIScrollView *friendsVoted2;
 
 // Button actions
 - (IBAction)onBack:(id)sender;
@@ -56,7 +58,9 @@
     self.image2.image = [UIImage imageWithData:self.post.imageData2];
     self.count1.text = [NSString stringWithFormat:@"%d", [self.post percentPic:1]];
     self.count2.text = [NSString stringWithFormat:@"%d", [self.post percentPic:2]];
-    self.youVoted1.text = [NSString stringWithFormat:@"%d friends voted", [self.post numReplies]];
+    self.numVoted1.text = [NSString stringWithFormat:@"%d", [self.post numVoted1]];
+    self.numVoted2.text = [NSString stringWithFormat:@"%d", [self.post numVoted2]];
+
 
 }
 

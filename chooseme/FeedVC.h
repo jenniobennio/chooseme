@@ -13,7 +13,7 @@
 -(void)nextPage:(NSUInteger)index;
 @end
 
-@interface FeedVC : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@interface FeedVC : UIViewController <UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate>
 
 // FeedVC's delegate will be the AppViewController for swipe navigating between pages
 @property (nonatomic, weak) id<FeedVCDelegate> delegate;

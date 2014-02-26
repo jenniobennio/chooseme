@@ -150,6 +150,28 @@
     return totalCount;
 }
 
+- (int)numVoted1 {
+    int totalCount = 0;
+    
+    for (int i = 0; i < self.friendsVoted.count; i++) {
+        // Count the people who submitted votes for pic1
+        if ([self.friendsVoted[i] intValue] == 1)
+            totalCount++;
+    }
+    return totalCount;
+}
+
+- (int)numVoted2 {
+    int totalCount = 0;
+    
+    for (int i = 0; i < self.friendsVoted.count; i++) {
+        // Count the people who submitted votes for pic1
+        if ([self.friendsVoted[i] intValue] == 2)
+            totalCount++;
+    }
+    return totalCount;
+}
+
 - (int)numComments {
     return 0;
 }

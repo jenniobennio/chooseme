@@ -16,6 +16,7 @@
 @property (nonatomic, strong) NSMutableArray *questions;
 
 // View elements
+@property (strong, nonatomic) IBOutlet UIView *titleView;
 @property (strong, nonatomic) IBOutlet UILabel *titleLabel;
 @property (strong, nonatomic) IBOutlet UITableView *feedView;
 @property (strong, nonatomic) IBOutlet UIButton *cameraButton;
@@ -31,6 +32,17 @@
 @property (strong, nonatomic) NSString *myFacebookID;
 @property (strong, nonatomic) NSString *myName;
 @property (strong, nonatomic) UIImage *myPic;
+
+@property (nonatomic, assign) BOOL hiddenTitleView;
+@property (nonatomic, assign) CGPoint lastContentOffset;
+@property (nonatomic, assign) BOOL scrollingDown;
+
+@property (nonatomic, assign) CGRect origTitleFrame;
+@property (nonatomic, assign) CGRect origStatsFrame;
+@property (nonatomic, assign) CGRect origTableFrame;
+@property (nonatomic, assign) CGRect newTitleFrame;
+@property (nonatomic, assign) CGRect newStatsFrame;
+@property (nonatomic, assign) CGRect newTableFrame;
 
 - (void) loadQuestionsArray:(NSString *)facebookId;
 @end
@@ -51,23 +63,24 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
+
     NSLog(@"FeedVC viewDidLoad %d", [self isMe]);
     // Set up feed view
     [self.feedView registerNib:[UINib nibWithNibName:@"FeedCell" bundle:nil] forCellReuseIdentifier:@"FeedCell"];
     self.feedView.dataSource = self;
     self.feedView.delegate = self;
     
-    if ([self isMe]) {
-        self.titleLabel.text = @"My Questions";
-    } else {
-        self.titleLabel.text = @"Friends' Questions";
-        self.statsView.hidden = YES;
-//        CGRect newFrame = self.statsView.frame;
-//        newFrame.size.height = 0;
-//        self.statsView.frame = newFrame;
-//        self.statsView.clipsToBounds = YES;
-    }
+    if ([self isMe])
+        self.titleLabel.text = @"MY QUESTIONS";
+    else
+        self.titleLabel.text = @"FRIENDS' QUESTIONS";
+    
+    self.view.backgroundColor = [UIColor colorWithRed:0.329 green:0.733 blue:0.616 alpha:1];
+    self.titleView.backgroundColor = [UIColor colorWithRed:0.329 green:0.733 blue:0.616 alpha:1];
+    
+    self.origTitleFrame = self.titleView.frame;
+    self.origStatsFrame = self.statsView.frame;
+    self.origTableFrame = self.feedView.frame;
     
     // Don't show lines below available cells
     self.feedView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
@@ -102,6 +115,24 @@
     }];
     
     // Load friends' data
+}
+
+// This is called after the view has laid out its subviews
+- (void)viewDidLayoutSubviews {
+    
+    // Hide stats view for friends' questions page
+    if ([self isFriends]) {
+        [self hideStatsBar];
+        self.origStatsFrame = self.statsView.frame;
+        self.origTableFrame = self.feedView.frame;
+    }
+    
+//    NSLog(@"viewDidLayoutSubviews");
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    self.titleView.alpha = 1;
 }
 
 - (void) loadQuestionsArray:(NSString *)facebookId {
@@ -251,6 +282,70 @@
     }
 }
 
+# pragma mark - ScrollView methods
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+//    NSLog(@"scrollViewDidEndDragging");
+    CGPoint scrollPos = scrollView.contentOffset;
+    
+    if ([self isMe] && scrollPos.y < 40) {
+        [self showTitleBar:scrollView withScrollToTop:YES];
+    } else if (self.scrollingDown) {
+        [self showTitleBar:scrollView withScrollToTop:NO];
+    } else {
+        [self hideTitleBar];
+    }
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+//    NSLog(@"scrollViewDidEndDecelerating");
+    CGPoint scrollPos = scrollView.contentOffset;
+    
+    if ([self isMe] && scrollPos.y < 40) {
+        [self showTitleBar:scrollView withScrollToTop:YES];
+    }
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    CGPoint scrollPos = scrollView.contentOffset;
+//    NSLog(@"scrollPos %f %f", scrollPos.x, scrollPos.y);
+    
+    int offset;
+    if ([self isMe])
+        offset = 40;
+    else
+        offset = 0;
+    
+    if (scrollPos.y >= offset && (scrollView.contentOffset.y > self.lastContentOffset.y)) {
+        // If the user scrolls very slowly, update the frames accordingly
+        CGRect newTitleFrame = self.origTitleFrame;
+        newTitleFrame.size.height -= scrollPos.y-offset;
+        if (newTitleFrame.size.height < 0)
+            newTitleFrame.size.height = 0;
+        CGRect newStatsFrame = self.origStatsFrame;
+        newStatsFrame.origin.y -= scrollPos.y-offset;
+        if (newStatsFrame.origin.y < 17)
+            newStatsFrame.origin.y = 17;
+        CGRect newTableFrame = self.origTableFrame;
+        newTableFrame.origin.y -= scrollPos.y-offset;
+        if (newTableFrame.origin.y < offset+18)
+            newTableFrame.origin.y = offset+18;
+        newTableFrame.size.height = self.origTableFrame.size.height + 25;
+        
+        self.titleView.frame = newTitleFrame;
+        self.statsView.frame = newStatsFrame;
+        self.feedView.frame = newTableFrame;
+        
+        if (scrollPos.y <= (offset+25))
+            self.titleView.alpha = 1-(scrollPos.y-offset)/25;
+    }
+    
+    self.scrollingDown = scrollView.contentOffset.y < self.lastContentOffset.y;
+    self.lastContentOffset = scrollView.contentOffset;
+}
+
 #pragma mark - Private methods
 - (CGFloat)textViewHeightForAttributedText: (NSAttributedString*)text andWidth: (CGFloat)width {
     UITextView *calculationView = [[UITextView alloc] init];
@@ -279,5 +374,49 @@
     [self loadQuestionsArray:self.myFacebookID];
 }
 
+- (void)showTitleBar:(UIScrollView *)scrollView withScrollToTop:(BOOL)scrollToTop;
+{
+    // Animate to show title bar
+    [UIView animateWithDuration:0.2f animations:^{
+        self.titleView.frame = self.origTitleFrame;
+        self.statsView.frame = self.origStatsFrame;
+        self.feedView.frame = self.origTableFrame;
+        self.titleView.alpha = 1;
+        if (scrollToTop)
+            [scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+    }];
+}
 
+- (void)hideTitleBar
+{
+    // Complete animation to hide title bar
+    CGRect newTitleFrame = self.origTitleFrame;
+    newTitleFrame.size.height -= 25;
+    CGRect newStatsFrame = self.origStatsFrame;
+    newStatsFrame.origin.y -= 25;
+    CGRect newTableFrame = self.origTableFrame;
+    newTableFrame.origin.y -= 25;
+    self.titleView.alpha = 0;
+    
+    [UIView animateWithDuration:0.2f animations:^{
+        self.titleView.frame = newTitleFrame;
+        self.statsView.frame = newStatsFrame;
+        self.feedView.frame = newTableFrame;
+    }];
+}
+
+- (void)hideStatsBar
+{
+    self.statsView.hidden = YES;
+    
+    CGRect newFrame = self.statsView.frame;
+    newFrame.size.height = 0;
+    self.statsView.frame = newFrame;
+    
+    newFrame = self.feedView.frame;
+    newFrame.size.height += 40;
+    newFrame.origin.y -= 40;
+    self.feedView.frame = newFrame;
+}
+    
 @end

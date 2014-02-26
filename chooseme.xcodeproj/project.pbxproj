@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2627EA2218BDAF7000ECD2A5 /* 86-camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 2627EA2118BDAF7000ECD2A5 /* 86-camera.png */; };
+		2627EA2418BDB02F00ECD2A5 /* 11-clock.png in Resources */ = {isa = PBXBuildFile; fileRef = 2627EA2318BDB02F00ECD2A5 /* 11-clock.png */; };
+		2627EA2618BDB06D00ECD2A5 /* 111-user.png in Resources */ = {isa = PBXBuildFile; fileRef = 2627EA2518BDB06D00ECD2A5 /* 111-user.png */; };
+		2627EA2818BDB07200ECD2A5 /* 112-group.png in Resources */ = {isa = PBXBuildFile; fileRef = 2627EA2718BDB07200ECD2A5 /* 112-group.png */; };
+		2627EA2A18BDB09800ECD2A5 /* 117-todo.png in Resources */ = {isa = PBXBuildFile; fileRef = 2627EA2918BDB09800ECD2A5 /* 117-todo.png */; };
+		2627EA2D18BDBDDE00ECD2A5 /* UIImage+mask.m in Sources */ = {isa = PBXBuildFile; fileRef = 2627EA2C18BDBDDE00ECD2A5 /* UIImage+mask.m */; };
 		263295E718B33DA700A84CB2 /* QuestionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 263295E518B33DA700A84CB2 /* QuestionVC.m */; };
 		263295E818B33DA700A84CB2 /* QuestionVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 263295E618B33DA700A84CB2 /* QuestionVC.xib */; };
 		2632962D18B5DBDE00A84CB2 /* 111834.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2632962B18B5DBDE00A84CB2 /* 111834.jpg */; };
@@ -63,6 +69,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2627EA2118BDAF7000ECD2A5 /* 86-camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "86-camera.png"; sourceTree = "<group>"; };
+		2627EA2318BDB02F00ECD2A5 /* 11-clock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "11-clock.png"; sourceTree = "<group>"; };
+		2627EA2518BDB06D00ECD2A5 /* 111-user.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "111-user.png"; sourceTree = "<group>"; };
+		2627EA2718BDB07200ECD2A5 /* 112-group.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "112-group.png"; sourceTree = "<group>"; };
+		2627EA2918BDB09800ECD2A5 /* 117-todo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "117-todo.png"; sourceTree = "<group>"; };
+		2627EA2B18BDBDDE00ECD2A5 /* UIImage+mask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+mask.h"; sourceTree = "<group>"; };
+		2627EA2C18BDBDDE00ECD2A5 /* UIImage+mask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+mask.m"; sourceTree = "<group>"; };
 		263295E418B33DA700A84CB2 /* QuestionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionVC.h; sourceTree = "<group>"; };
 		263295E518B33DA700A84CB2 /* QuestionVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionVC.m; sourceTree = "<group>"; };
 		263295E618B33DA700A84CB2 /* QuestionVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuestionVC.xib; sourceTree = "<group>"; };
@@ -231,6 +244,8 @@
 				26351A9518A80EC7000A30C9 /* PostVC.m */,
 				26351A9618A80EC7000A30C9 /* PostVC.xib */,
 				D52B901918B32214004005D7 /* Model */,
+				2627EA2B18BDBDDE00ECD2A5 /* UIImage+mask.h */,
+				2627EA2C18BDBDDE00ECD2A5 /* UIImage+mask.m */,
 			);
 			path = chooseme;
 			sourceTree = "<group>";
@@ -238,6 +253,11 @@
 		263519FD18A5D1FF000A30C9 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				2627EA2918BDB09800ECD2A5 /* 117-todo.png */,
+				2627EA2718BDB07200ECD2A5 /* 112-group.png */,
+				2627EA2518BDB06D00ECD2A5 /* 111-user.png */,
+				2627EA2318BDB02F00ECD2A5 /* 11-clock.png */,
+				2627EA2118BDAF7000ECD2A5 /* 86-camera.png */,
 				2632962B18B5DBDE00A84CB2 /* 111834.jpg */,
 				2632962C18B5DBDE00A84CB2 /* 131466.jpg */,
 				263519FE18A5D1FF000A30C9 /* chooseme-Info.plist */,
@@ -357,14 +377,19 @@
 				263295E818B33DA700A84CB2 /* QuestionVC.xib in Resources */,
 				2632962D18B5DBDE00A84CB2 /* 111834.jpg in Resources */,
 				26351A0D18A5D1FF000A30C9 /* Main_iPad.storyboard in Resources */,
+				2627EA2418BDB02F00ECD2A5 /* 11-clock.png in Resources */,
 				26351A1218A5D1FF000A30C9 /* Images.xcassets in Resources */,
 				26351A8618A72449000A30C9 /* AppViewController.xib in Resources */,
 				26351A0A18A5D1FF000A30C9 /* Main_iPhone.storyboard in Resources */,
 				2632962E18B5DBDE00A84CB2 /* 131466.jpg in Resources */,
 				26351A9018A7EF0C000A30C9 /* FeedCell.xib in Resources */,
 				26351A0118A5D1FF000A30C9 /* InfoPlist.strings in Resources */,
+				2627EA2A18BDB09800ECD2A5 /* 117-todo.png in Resources */,
+				2627EA2218BDAF7000ECD2A5 /* 86-camera.png in Resources */,
+				2627EA2818BDB07200ECD2A5 /* 112-group.png in Resources */,
 				26351A9818A80EC7000A30C9 /* PostVC.xib in Resources */,
 				26351A3718A5FB6B000A30C9 /* FeedVC.xib in Resources */,
+				2627EA2618BDB06D00ECD2A5 /* 111-user.png in Resources */,
 				26351A3218A5D24D000A30C9 /* CameraVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -422,6 +447,7 @@
 				26351A9718A80EC7000A30C9 /* PostVC.m in Sources */,
 				26351A0718A5D1FF000A30C9 /* AppDelegate.m in Sources */,
 				26351A8E18A7EEF4000A30C9 /* FeedCell.m in Sources */,
+				2627EA2D18BDBDDE00ECD2A5 /* UIImage+mask.m in Sources */,
 				26351A9318A7F59E000A30C9 /* Question.m in Sources */,
 				26351A0318A5D1FF000A30C9 /* main.m in Sources */,
 				26644CC318B723C000806490 /* AddFriendCell.m in Sources */,

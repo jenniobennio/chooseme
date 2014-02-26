@@ -9,6 +9,7 @@
 #import "CameraVC.h"
 #import "FeedVC.h"
 #import "Question.h"
+#import "UIImage+mask.h"
 
 @interface CameraVC ()
 
@@ -18,6 +19,8 @@
 @property (strong, nonatomic) IBOutlet UIButton *choosePicButton;
 @property (strong, nonatomic) IBOutlet UIButton *pic1;
 @property (strong, nonatomic) IBOutlet UIButton *pic2;
+@property (strong, nonatomic) IBOutlet UIButton *friendsButton;
+@property (strong, nonatomic) IBOutlet UIButton *meButton;
 
 // Button actions
 - (IBAction)takePic:(id)sender;
@@ -72,6 +75,9 @@
     [self.takePicButton setTitle:@"+" forState:UIControlStateNormal];
     [self.takePicButton setTitle:@"OK" forState:UIControlStateSelected];
     [self.takePicButton setTitle:@"REDO" forState:UIControlStateHighlighted];
+    
+    [self.friendsButton setImage:[[UIImage imageNamed:@"112-group.png"] maskWithColor:[UIColor whiteColor]] forState:UIControlStateNormal];
+    [self.meButton setImage:[[UIImage imageNamed:@"111-user.png"] maskWithColor:[UIColor whiteColor]] forState:UIControlStateNormal];
     
     // Init currentQuestion
     self.currentQuestion = [[Question alloc] init];

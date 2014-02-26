@@ -10,6 +10,7 @@
 #import "FeedCell.h"
 #import "Question.h"
 #import "PostVC.h"
+#import "UIImage+mask.h"
 
 @interface FeedVC ()
 
@@ -77,6 +78,8 @@
     
     self.view.backgroundColor = [UIColor colorWithRed:0.329 green:0.733 blue:0.616 alpha:1];
     self.titleView.backgroundColor = [UIColor colorWithRed:0.329 green:0.733 blue:0.616 alpha:1];
+    
+    [self.cameraButton setImage:[[UIImage imageNamed:@"86-camera.png"] maskWithColor:[UIColor whiteColor]] forState:UIControlStateNormal];
     
     self.origTitleFrame = self.titleView.frame;
     self.origStatsFrame = self.statsView.frame;
@@ -341,6 +344,8 @@
         
         if (scrollPos.y <= (offset+25))
             self.titleView.alpha = 1-(scrollPos.y-offset)/25;
+        else
+            self.titleView.alpha = 0;
     }
     
     self.scrollingDown = scrollView.contentOffset.y < self.lastContentOffset.y;

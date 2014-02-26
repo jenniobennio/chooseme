@@ -129,6 +129,14 @@
                             <action selector="onVote2:" destination="KNI-lb-mnH" eventType="touchUpInside" id="99S-Wh-Yob"/>
                         </connections>
                     </button>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="11-clock.png" translatesAutoresizingMaskIntoConstraints="NO" id="h9k-oF-HLD">
+                        <rect key="frame" x="271" y="10" width="10" height="10"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="10" id="Pck-qH-2Rk"/>
+                            <constraint firstAttribute="width" constant="10" id="U65-Re-6bm"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="ShM-1k-o2u" firstAttribute="leading" secondItem="Cmi-l3-qqu" secondAttribute="trailing" constant="55" id="1AV-Pm-Uty"/>
@@ -147,11 +155,13 @@
                     <constraint firstItem="KWo-I2-WUz" firstAttribute="leading" secondItem="RwE-6u-66l" secondAttribute="trailing" constant="8" id="Wkk-yh-lTu"/>
                     <constraint firstItem="Ddb-y2-xW3" firstAttribute="top" secondItem="bdl-lr-H6b" secondAttribute="top" constant="6" id="ZMw-Dk-iJL"/>
                     <constraint firstItem="0eu-58-2Bn" firstAttribute="top" secondItem="KWo-I2-WUz" secondAttribute="bottom" constant="8" id="Zaz-YN-HAV"/>
+                    <constraint firstItem="2Jp-zt-G0O" firstAttribute="leading" secondItem="h9k-oF-HLD" secondAttribute="trailing" constant="5" id="brC-Ez-YEI"/>
                     <constraint firstItem="jaf-ft-rlm" firstAttribute="top" secondItem="KWo-I2-WUz" secondAttribute="bottom" constant="113" id="eeh-46-omd"/>
                     <constraint firstAttribute="trailing" secondItem="2Jp-zt-G0O" secondAttribute="trailing" constant="11" id="fPQ-iq-MVt"/>
                     <constraint firstItem="jaf-ft-rlm" firstAttribute="leading" secondItem="0eu-58-2Bn" secondAttribute="trailing" constant="6" id="jLs-w9-q5S"/>
                     <constraint firstItem="RwE-6u-66l" firstAttribute="leading" secondItem="bdl-lr-H6b" secondAttribute="leading" constant="7" id="neO-F2-wyb"/>
                     <constraint firstItem="zJi-DX-Qkn" firstAttribute="top" secondItem="0eu-58-2Bn" secondAttribute="bottom" constant="8" id="noQ-sL-Ttk"/>
+                    <constraint firstItem="h9k-oF-HLD" firstAttribute="top" secondItem="bdl-lr-H6b" secondAttribute="top" constant="10" id="occ-gu-Wfw"/>
                     <constraint firstItem="uXF-XZ-VYU" firstAttribute="leading" secondItem="ShM-1k-o2u" secondAttribute="trailing" constant="6" id="pYZ-Kg-lvX"/>
                     <constraint firstItem="KWo-I2-WUz" firstAttribute="top" secondItem="2Jp-zt-G0O" secondAttribute="bottom" constant="1" id="q2e-n7-Cn6"/>
                     <constraint firstItem="Cmi-l3-qqu" firstAttribute="top" secondItem="RwE-6u-66l" secondAttribute="bottom" constant="113" id="q6q-fD-evm"/>
@@ -171,6 +181,7 @@
                 <outlet property="name" destination="Ddb-y2-xW3" id="k6H-Aq-GX3"/>
                 <outlet property="profilePic" destination="RwE-6u-66l" id="k4F-sf-kkj"/>
                 <outlet property="question" destination="KWo-I2-WUz" id="bG0-oJ-2D9"/>
+                <outlet property="questionLabel" destination="KWo-I2-WUz" id="yux-EL-6j7"/>
                 <outlet property="time" destination="2Jp-zt-G0O" id="hiY-Ic-rNw"/>
                 <outlet property="voteCount" destination="zJi-DX-Qkn" id="6Ed-Px-kgd"/>
                 <outlet property="youVoted1" destination="ShM-1k-o2u" id="Cny-Po-Mbc"/>
@@ -178,4 +189,7 @@
             </connections>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="11-clock.png" width="25" height="25"/>
+    </resources>
 </document>

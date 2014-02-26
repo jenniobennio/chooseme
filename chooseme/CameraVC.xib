@@ -7,7 +7,9 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CameraVC">
             <connections>
                 <outlet property="choosePicButton" destination="P5h-rC-llG" id="5jY-6e-pth"/>
+                <outlet property="friendsButton" destination="mYJ-OK-HYe" id="d9N-P4-wsS"/>
                 <outlet property="mainPic" destination="T78-pM-AKV" id="wdW-IN-Gfg"/>
+                <outlet property="meButton" destination="fQV-Wy-4pm" id="q2q-bm-rLi"/>
                 <outlet property="pic1" destination="jS4-HL-qP4" id="szy-cY-A7T"/>
                 <outlet property="pic2" destination="Srs-PC-D1b" id="bJo-ZA-Bpq"/>
                 <outlet property="takePicButton" destination="2ZE-D9-CZk" id="XNb-Q1-qhe"/>
@@ -97,28 +99,28 @@
                         <constraint firstAttribute="width" constant="100" id="hg1-Co-444"/>
                     </constraints>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mYJ-OK-HYe">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mYJ-OK-HYe">
                     <rect key="frame" x="12" y="516" width="30" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="30" id="Hsn-mG-dsu"/>
                         <constraint firstAttribute="height" constant="30" id="kJ8-D3-NaP"/>
                     </constraints>
-                    <state key="normal" title="F">
+                    <state key="normal" image="112-group.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
                         <action selector="onFriends:" destination="-1" eventType="touchUpInside" id="sN5-1O-j0Z"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fQV-Wy-4pm">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fQV-Wy-4pm">
                     <rect key="frame" x="278" y="516" width="30" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="30" id="34H-6H-bbh"/>
                         <constraint firstAttribute="height" constant="30" id="xxS-5R-u7U"/>
                     </constraints>
-                    <state key="normal" title="M">
+                    <state key="normal" image="111-user.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -208,4 +210,8 @@
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>
     </objects>
+    <resources>
+        <image name="111-user.png" width="24" height="21"/>
+        <image name="112-group.png" width="32" height="21"/>
+    </resources>
 </document>

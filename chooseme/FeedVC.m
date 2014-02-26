@@ -294,7 +294,8 @@
     } else if (self.scrollingDown) {
         [self showTitleBar:scrollView withScrollToTop:NO];
     } else {
-        [self hideTitleBar];
+        if (!self.hiddenTitleView)
+            [self hideTitleBar];
     }
 }
 
@@ -376,6 +377,8 @@
 
 - (void)showTitleBar:(UIScrollView *)scrollView withScrollToTop:(BOOL)scrollToTop;
 {
+    self.hiddenTitleView = NO;
+    
     // Animate to show title bar
     [UIView animateWithDuration:0.2f animations:^{
         self.titleView.frame = self.origTitleFrame;
@@ -389,6 +392,8 @@
 
 - (void)hideTitleBar
 {
+    self.hiddenTitleView = YES;
+    
     // Complete animation to hide title bar
     CGRect newTitleFrame = self.origTitleFrame;
     newTitleFrame.size.height -= 25;
@@ -396,6 +401,8 @@
     newStatsFrame.origin.y -= 25;
     CGRect newTableFrame = self.origTableFrame;
     newTableFrame.origin.y -= 25;
+    newTableFrame.size.height += 25;
+
     self.titleView.alpha = 0;
     
     [UIView animateWithDuration:0.2f animations:^{

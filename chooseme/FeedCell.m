@@ -57,6 +57,9 @@
 
 - (void) updateVoteCount {
     self.voteCount.text = [NSString stringWithFormat:@"%d votes, %d comments", [self.question numReplies], [self.question numComments]];
+    
+    self.count1.text = [NSString stringWithFormat:@"%d", [self.question percentPic:1]];
+    self.count2.text = [NSString stringWithFormat:@"%d", [self.question percentPic:2]];
 }
 
 - (void) updateVoteLabels {

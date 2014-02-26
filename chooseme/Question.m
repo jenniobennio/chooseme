@@ -115,19 +115,27 @@
     [format setDateFormat:@"EEE MMM dd HH:mm:ss Z y"];
     NSTimeInterval timeSinceDate = [[NSDate date] timeIntervalSinceDate:self.time];
     
-    // print up to 24 hours as a relative offset
-    if(timeSinceDate < 24.0 * 60.0 * 60.0)
-    {
-        int hoursSinceDate = (int)(timeSinceDate / (60.0 * 60.0));
-        
-        switch(hoursSinceDate)
+    // print up to 7 days as a relative offset
+    if (timeSinceDate < 7 * 24.0 * 60.0 * 60.0) {
+        int daysSinceDate = (int)(timeSinceDate / (24.0 * 60.0 * 60.0));
+        switch (daysSinceDate)
         {
-            default: return [NSString stringWithFormat:@"%dh", hoursSinceDate];
-            case 1: return @"1h";
+            default: return [NSString stringWithFormat:@"%dd", daysSinceDate];
+            case 1: return @"1d";
             case 0: {
-                int minutesSinceDate = (int)(timeSinceDate / 60.0);
-                return [NSString stringWithFormat:@"%dm", minutesSinceDate];
-                break;
+                int hoursSinceDate = (int)(timeSinceDate / (60.0 * 60.0));
+                
+                switch(hoursSinceDate)
+                {
+                    default: return [NSString stringWithFormat:@"%dh", hoursSinceDate];
+                    case 1: return @"1h";
+                    case 0: {
+                        int minutesSinceDate = (int)(timeSinceDate / 60.0);
+                        return [NSString stringWithFormat:@"%dm", minutesSinceDate];
+                        break;
+                    }
+                }
+
             }
         }
     }

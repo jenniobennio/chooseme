@@ -66,9 +66,11 @@
     if ([[self.question youVoted] intValue] == 1) {
         [self.image1.layer setBorderColor:[[UIColor colorWithRed:0.753 green:0.878 blue:0.690 alpha:1] CGColor]];
         [self.image1.layer setBorderWidth:5.0];
+        [self.image2.layer setBorderWidth:0];
     } else if ([[self.question youVoted] intValue] == 2) {
         [self.image2.layer setBorderColor:[[UIColor colorWithRed:0.753 green:0.878 blue:0.690 alpha:1] CGColor]];
         [self.image2.layer setBorderWidth:5.0];
+        [self.image1.layer setBorderWidth:0];
     }
     
     if (self.isMyQuestion) {

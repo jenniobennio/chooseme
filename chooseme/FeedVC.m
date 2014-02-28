@@ -21,6 +21,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *titleLabel;
 @property (strong, nonatomic) IBOutlet UITableView *feedView;
 @property (strong, nonatomic) IBOutlet UIButton *cameraButton;
+@property (strong, nonatomic) IBOutlet UIButton *otherButton;
+@property (strong, nonatomic) IBOutlet UILabel *plusLabel;
 @property (strong, nonatomic) IBOutlet UIView *statsView;
 @property (strong, nonatomic) IBOutlet UILabel *numQuestions;
 @property (strong, nonatomic) IBOutlet UILabel *numVotes;
@@ -28,6 +30,7 @@
 
 // Button actions
 - (IBAction)goToCamera:(id)sender;
+- (IBAction)onOtherButton:(id)sender;
 
 // Private user data
 @property (strong, nonatomic) NSString *myFacebookID;
@@ -80,6 +83,12 @@
     self.titleView.backgroundColor = [UIColor colorWithRed:0.329 green:0.733 blue:0.616 alpha:1];
     
     [self.cameraButton setImage:[[UIImage imageNamed:@"86-camera.png"] maskWithColor:[UIColor whiteColor]] forState:UIControlStateNormal];
+    if ([self isMe]) {
+        [self.otherButton setImage:[[UIImage imageNamed:@"19-gear.png"] maskWithColor:[UIColor whiteColor]] forState:UIControlStateNormal];
+        self.plusLabel.hidden = YES;
+    } else
+        [self.otherButton setImage:[[UIImage imageNamed:@"111-user.png"] maskWithColor:[UIColor whiteColor]] forState:UIControlStateNormal];
+
     
     self.origTitleFrame = self.titleView.frame;
     self.origStatsFrame = self.statsView.frame;
@@ -179,6 +188,10 @@
         [self.delegate previousPage:self.index];
     else
         [self.delegate nextPage:self.index];
+}
+
+- (IBAction)onOtherButton:(id)sender {
+    NSLog(@"Other button pressed");
 }
 
 #pragma mark - TableView methods

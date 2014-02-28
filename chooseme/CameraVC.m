@@ -21,19 +21,26 @@
 @property (strong, nonatomic) IBOutlet UIButton *pic2;
 @property (strong, nonatomic) IBOutlet UIButton *friendsButton;
 @property (strong, nonatomic) IBOutlet UIButton *meButton;
+@property (weak, nonatomic) IBOutlet UIButton *galleryButton;
+@property (weak, nonatomic) IBOutlet UIButton *cameraButton;
+@property (weak, nonatomic) IBOutlet UIButton *pinterestButton;
 
 // Button actions
 - (IBAction)takePic:(id)sender;
-- (IBAction)choosePic:(id)sender;
 - (IBAction)onPic1:(id)sender;
 - (IBAction)onPic2:(id)sender;
 - (IBAction)onMe:(id)sender;
 - (IBAction)onFriends:(id)sender;
+- (IBAction)choosePicSource:(id)sender;
+- (IBAction)choosePicFromGallery:(id)sender;
+- (IBAction)choosePicFromPinterest:(id)sender;
 
 // For testing only
 - (IBAction)quickFill:(id)sender;
 - (IBAction)onClear:(id)sender;
 - (IBAction)onNext:(id)sender;
+
+- (void)hideImageSourceButtons;
 
 // Keep track of which thumbnail image is selected
 @property (nonatomic, assign) int picIndex;
@@ -125,10 +132,8 @@
         else
             [self choosePicFromLib];
     }
-}
-
-- (IBAction)choosePic:(id)sender {
-    [self choosePicFromLib];
+    
+    [self hideImageSourceButtons];
 }
 
 - (IBAction)onPic1:(id)sender {
@@ -167,6 +172,29 @@
 
 - (IBAction)onFriends:(id)sender {
     [self.delegate previousPage:self.index];
+}
+
+- (IBAction)choosePicSource:(id)sender {
+    NSLog(@"choose pic source.");
+    
+    if (self.galleryButton.hidden) {
+        self.galleryButton.hidden = NO;
+        self.cameraButton.hidden = NO;
+        self.pinterestButton.hidden = NO;
+    } else {
+        [self hideImageSourceButtons];
+    }
+}
+
+- (IBAction)choosePicFromGallery:(id)sender {
+    NSLog(@"choose pic from gallery");
+    [self choosePicFromLib];
+    [self hideImageSourceButtons];
+}
+
+- (IBAction)choosePicFromPinterest:(id)sender {
+    NSLog(@"choose pic from pinterest.");
+    [self hideImageSourceButtons];
 }
 
 // For testing: Pre-fill in images
@@ -353,6 +381,12 @@
         [self presentViewController:questionVC animated:YES completion:nil];
         
     }
+}
+
+- (void)hideImageSourceButtons {
+    self.galleryButton.hidden = YES;
+    self.cameraButton.hidden = YES;
+    self.pinterestButton.hidden = YES;
 }
 
 

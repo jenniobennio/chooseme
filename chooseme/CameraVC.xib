@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4514" systemVersion="13A603" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4514" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CameraVC">
             <connections>
+                <outlet property="cameraButton" destination="E1u-GF-wfn" id="hWB-Oh-3BO"/>
                 <outlet property="choosePicButton" destination="P5h-rC-llG" id="5jY-6e-pth"/>
                 <outlet property="friendsButton" destination="mYJ-OK-HYe" id="d9N-P4-wsS"/>
+                <outlet property="galleryButton" destination="c3g-4O-0yZ" id="meK-zb-GvZ"/>
                 <outlet property="mainPic" destination="T78-pM-AKV" id="wdW-IN-Gfg"/>
                 <outlet property="meButton" destination="fQV-Wy-4pm" id="q2q-bm-rLi"/>
                 <outlet property="pic1" destination="jS4-HL-qP4" id="szy-cY-A7T"/>
                 <outlet property="pic2" destination="Srs-PC-D1b" id="bJo-ZA-Bpq"/>
+                <outlet property="pinterestButton" destination="dHX-5L-Ofu" id="14C-4y-oWi"/>
                 <outlet property="takePicButton" destination="2ZE-D9-CZk" id="XNb-Q1-qhe"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
@@ -41,7 +44,7 @@
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="takePic:" destination="-1" eventType="touchUpInside" id="MhU-dU-sVs"/>
+                        <action selector="choosePicSource:" destination="-1" eventType="touchUpInside" id="C8j-Im-raN"/>
                     </connections>
                 </button>
                 <button hidden="YES" opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P5h-rC-llG">
@@ -179,21 +182,57 @@
                         <action selector="onNext:" destination="-1" eventType="touchUpInside" id="HjR-0A-3ao"/>
                     </connections>
                 </button>
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E1u-GF-wfn">
+                    <rect key="frame" x="147" y="448" width="27" height="22"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" image="slr_camera-32.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="takePic:" destination="-1" eventType="touchUpInside" id="YdO-co-IaM"/>
+                    </connections>
+                </button>
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dHX-5L-Ofu">
+                    <rect key="frame" x="187" y="470" width="29" height="29"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" image="pinterest-32.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="choosePicFromPinterest:" destination="-1" eventType="touchUpInside" id="Ugc-bx-D63"/>
+                    </connections>
+                </button>
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c3g-4O-0yZ">
+                    <rect key="frame" x="103" y="472" width="31" height="27"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" image="stack_of_photos-32.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="choosePicFromGallery:" destination="-1" eventType="touchUpInside" id="gy1-Ji-V86"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <gestureRecognizers/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="T78-pM-AKV" secondAttribute="trailing" id="2F1-en-pdH"/>
                 <constraint firstAttribute="trailing" secondItem="Srs-PC-D1b" secondAttribute="trailing" constant="16" id="3Vz-ng-odA"/>
+                <constraint firstAttribute="bottom" secondItem="c3g-4O-0yZ" secondAttribute="bottom" constant="69" id="6KI-i5-Qdd"/>
                 <constraint firstAttribute="centerX" secondItem="2ZE-D9-CZk" secondAttribute="centerX" id="9fP-Dm-CT5"/>
+                <constraint firstItem="dHX-5L-Ofu" firstAttribute="leading" secondItem="c3g-4O-0yZ" secondAttribute="trailing" constant="53" id="A7y-Kp-9XK"/>
                 <constraint firstItem="mYJ-OK-HYe" firstAttribute="centerY" secondItem="fQV-Wy-4pm" secondAttribute="centerY" id="DPE-20-D00"/>
                 <constraint firstAttribute="trailing" secondItem="dsf-V0-nV2" secondAttribute="trailing" constant="26" id="Fe2-BU-cpa"/>
                 <constraint firstItem="ipe-Fg-25A" firstAttribute="top" secondItem="Srs-PC-D1b" secondAttribute="bottom" constant="8" id="FrL-T9-YOP"/>
                 <constraint firstAttribute="trailing" secondItem="h0R-PJ-Qan" secondAttribute="trailing" constant="16" id="FsV-yA-sXP"/>
                 <constraint firstAttribute="trailing" secondItem="jS4-HL-qP4" secondAttribute="trailing" constant="16" id="HL5-Cv-WEX"/>
+                <constraint firstAttribute="bottom" secondItem="dHX-5L-Ofu" secondAttribute="bottom" constant="69" id="IB4-aq-49d"/>
                 <constraint firstItem="Srs-PC-D1b" firstAttribute="top" secondItem="h0R-PJ-Qan" secondAttribute="bottom" constant="28" id="Iil-od-aFo"/>
+                <constraint firstItem="c3g-4O-0yZ" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="103" id="IzK-jR-KkZ"/>
                 <constraint firstItem="2ZE-D9-CZk" firstAttribute="leading" secondItem="P5h-rC-llG" secondAttribute="trailing" constant="31" id="Q0A-wo-WJe"/>
+                <constraint firstAttribute="trailing" secondItem="dHX-5L-Ofu" secondAttribute="trailing" constant="104" id="UdH-DN-aUi"/>
                 <constraint firstAttribute="bottom" secondItem="2ZE-D9-CZk" secondAttribute="bottom" constant="12" id="V38-xk-FUZ"/>
+                <constraint firstItem="E1u-GF-wfn" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="147" id="YSV-Ej-2ik"/>
                 <constraint firstAttribute="trailing" secondItem="fQV-Wy-4pm" secondAttribute="trailing" constant="12" id="ZaX-Up-jPu"/>
                 <constraint firstItem="h0R-PJ-Qan" firstAttribute="top" secondItem="jS4-HL-qP4" secondAttribute="bottom" constant="5" id="azl-zw-Sl1"/>
                 <constraint firstAttribute="bottom" secondItem="T78-pM-AKV" secondAttribute="bottom" id="bsJ-Rg-az3"/>
@@ -202,9 +241,12 @@
                 <constraint firstAttribute="centerY" secondItem="h0R-PJ-Qan" secondAttribute="centerY" id="fEh-Nd-UNA"/>
                 <constraint firstItem="jS4-HL-qP4" firstAttribute="top" secondItem="dsf-V0-nV2" secondAttribute="bottom" constant="8" id="fvy-4Q-MVT"/>
                 <constraint firstItem="mYJ-OK-HYe" firstAttribute="centerY" secondItem="2ZE-D9-CZk" secondAttribute="centerY" id="hAm-sn-yWo"/>
+                <constraint firstItem="2ZE-D9-CZk" firstAttribute="top" secondItem="E1u-GF-wfn" secondAttribute="bottom" constant="36" id="iRv-zc-sf7"/>
                 <constraint firstItem="P5h-rC-llG" firstAttribute="centerY" secondItem="2ZE-D9-CZk" secondAttribute="centerY" id="s0S-9n-QIX"/>
+                <constraint firstItem="dHX-5L-Ofu" firstAttribute="leading" secondItem="c3g-4O-0yZ" secondAttribute="trailing" constant="53" id="s3w-On-O8n"/>
                 <constraint firstItem="T78-pM-AKV" firstAttribute="top" secondItem="1" secondAttribute="top" id="xZ1-l1-b5u"/>
                 <constraint firstAttribute="trailing" secondItem="ipe-Fg-25A" secondAttribute="trailing" constant="26" id="y2Y-tV-hd2"/>
+                <constraint firstAttribute="trailing" secondItem="E1u-GF-wfn" secondAttribute="trailing" constant="146" id="zKL-N3-rJ6"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
@@ -213,5 +255,8 @@
     <resources>
         <image name="111-user.png" width="24" height="21"/>
         <image name="112-group.png" width="32" height="21"/>
+        <image name="pinterest-32.png" width="32" height="32"/>
+        <image name="slr_camera-32.png" width="32" height="32"/>
+        <image name="stack_of_photos-32.png" width="32" height="32"/>
     </resources>
 </document>

@@ -46,6 +46,9 @@
 		26644CC418B723C000806490 /* AddFriendCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26644CC218B723C000806490 /* AddFriendCell.xib */; };
 		B031302B82C840708B86AE68 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43619A4B92F840368B218FE4 /* libPods.a */; };
 		D5074FD318C05EB70028ED2F /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5074FD218C05EB70028ED2F /* Parse.framework */; };
+		D5074FDD18C06EF30028ED2F /* slr_camera-32.png in Resources */ = {isa = PBXBuildFile; fileRef = D5074FDC18C06EF30028ED2F /* slr_camera-32.png */; };
+		D5074FDF18C06F080028ED2F /* stack_of_photos-32.png in Resources */ = {isa = PBXBuildFile; fileRef = D5074FDE18C06F080028ED2F /* stack_of_photos-32.png */; };
+		D5074FE118C06F130028ED2F /* pinterest-32.png in Resources */ = {isa = PBXBuildFile; fileRef = D5074FE018C06F130028ED2F /* pinterest-32.png */; };
 		D572FE4718B1DAFE000DB1D0 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D572FE4618B1DAFE000DB1D0 /* FacebookSDK.framework */; };
 		D572FE4B18B1DBF7000DB1D0 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D572FE4A18B1DBF7000DB1D0 /* AudioToolbox.framework */; };
 		D572FE4D18B1DBFE000DB1D0 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D572FE4C18B1DBFE000DB1D0 /* CFNetwork.framework */; };
@@ -122,6 +125,9 @@
 		39891BCB79A34F009E78550D /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		43619A4B92F840368B218FE4 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5074FD218C05EB70028ED2F /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		D5074FDC18C06EF30028ED2F /* slr_camera-32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "slr_camera-32.png"; sourceTree = "<group>"; };
+		D5074FDE18C06F080028ED2F /* stack_of_photos-32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stack_of_photos-32.png"; sourceTree = "<group>"; };
+		D5074FE018C06F130028ED2F /* pinterest-32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pinterest-32.png"; sourceTree = "<group>"; };
 		D572FE4618B1DAFE000DB1D0 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		D572FE4A18B1DBF7000DB1D0 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		D572FE4C18B1DBFE000DB1D0 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -255,6 +261,9 @@
 			children = (
 				2627EA2918BDB09800ECD2A5 /* 117-todo.png */,
 				2627EA2718BDB07200ECD2A5 /* 112-group.png */,
+				D5074FDC18C06EF30028ED2F /* slr_camera-32.png */,
+				D5074FDE18C06F080028ED2F /* stack_of_photos-32.png */,
+				D5074FE018C06F130028ED2F /* pinterest-32.png */,
 				2627EA2518BDB06D00ECD2A5 /* 111-user.png */,
 				2627EA2318BDB02F00ECD2A5 /* 11-clock.png */,
 				2627EA2118BDAF7000ECD2A5 /* 86-camera.png */,
@@ -375,9 +384,11 @@
 			files = (
 				26644CC418B723C000806490 /* AddFriendCell.xib in Resources */,
 				263295E818B33DA700A84CB2 /* QuestionVC.xib in Resources */,
+				D5074FE118C06F130028ED2F /* pinterest-32.png in Resources */,
 				2632962D18B5DBDE00A84CB2 /* 111834.jpg in Resources */,
 				26351A0D18A5D1FF000A30C9 /* Main_iPad.storyboard in Resources */,
 				2627EA2418BDB02F00ECD2A5 /* 11-clock.png in Resources */,
+				D5074FDF18C06F080028ED2F /* stack_of_photos-32.png in Resources */,
 				26351A1218A5D1FF000A30C9 /* Images.xcassets in Resources */,
 				26351A8618A72449000A30C9 /* AppViewController.xib in Resources */,
 				26351A0A18A5D1FF000A30C9 /* Main_iPhone.storyboard in Resources */,
@@ -387,6 +398,7 @@
 				2627EA2A18BDB09800ECD2A5 /* 117-todo.png in Resources */,
 				2627EA2218BDAF7000ECD2A5 /* 86-camera.png in Resources */,
 				2627EA2818BDB07200ECD2A5 /* 112-group.png in Resources */,
+				D5074FDD18C06EF30028ED2F /* slr_camera-32.png in Resources */,
 				26351A9818A80EC7000A30C9 /* PostVC.xib in Resources */,
 				26351A3718A5FB6B000A30C9 /* FeedVC.xib in Resources */,
 				2627EA2618BDB06D00ECD2A5 /* 111-user.png in Resources */,

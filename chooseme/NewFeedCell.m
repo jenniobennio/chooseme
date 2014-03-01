@@ -45,8 +45,8 @@
 
 - (void)loadCell:(UIColor *)color withQuestion:(Question *)q withUserImage:(UIImage *)userImage
 {
-    UIImage *image1 = [UIImage imageWithData:q.imageData1];
-    UIImage *image2 = [UIImage imageWithData:q.imageData2];
+    UIImage *image1 = q.image1;
+    UIImage *image2 = q.image2;
     
     // Use the URL instead
 //    UIImage *userImage = [UIImage imageWithData:q.profilePic];

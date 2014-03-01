@@ -59,9 +59,9 @@
     self.friendsTable.dataSource = self;
 
     // Pre-fill images and format
-    [self.pic1 setImage:self.image1 forState:UIControlStateNormal];
+    [self.pic1 setImage:self.question.image1 forState:UIControlStateNormal];
     self.pic1.imageView.contentMode = UIViewContentModeScaleAspectFill;
-    [self.pic2 setImage:self.image2 forState:UIControlStateNormal];
+    [self.pic2 setImage:self.question.image2 forState:UIControlStateNormal];
     self.pic2.imageView.contentMode = UIViewContentModeScaleAspectFill;
     
     // Load question text
@@ -144,10 +144,6 @@
         self.question.question = self.questionTextField.text;
     else
         self.question.question = @"Which one?";
-
-    // FIXME: What compression/ quality do we want?
-    self.question.imageData1 = UIImageJPEGRepresentation(self.image1, 0.5f);
-    self.question.imageData2 = UIImageJPEGRepresentation(self.image2, 0.5f);
 
     self.question.youVoted = [NSNumber numberWithInt:0];
     

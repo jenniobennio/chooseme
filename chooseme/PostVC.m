@@ -54,14 +54,12 @@
     self.name.text = self.post.name;
     self.time.text = [self.post formattedDate];
     self.question.text = self.post.question;
-    self.image1.image = [UIImage imageWithData:self.post.imageData1];
-    self.image2.image = [UIImage imageWithData:self.post.imageData2];
+    self.image1.image = self.post.image1;
+    self.image2.image = self.post.image2;
     self.count1.text = [NSString stringWithFormat:@"%d", [self.post percentPic:1]];
     self.count2.text = [NSString stringWithFormat:@"%d", [self.post percentPic:2]];
     self.numVoted1.text = [NSString stringWithFormat:@"%d", [self.post numVoted1]];
     self.numVoted2.text = [NSString stringWithFormat:@"%d", [self.post numVoted2]];
-
-
 }
 
 # pragma mark - actions from button presses

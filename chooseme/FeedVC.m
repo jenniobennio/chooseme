@@ -257,8 +257,8 @@
         [cell updateVoteLabels];
         
         cell.time.text = [q formattedDate];
-        cell.image1.image = [UIImage imageWithData:q.imageData1];
-        cell.image2.image = [UIImage imageWithData:q.imageData2];
+        cell.image1.image = q.image1;
+        cell.image2.image = q.image2;
 
         if ([self isMe]) {
             cell.name.text = self.myName;

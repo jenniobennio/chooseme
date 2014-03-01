@@ -20,8 +20,7 @@
 
 // Current Question object
 @property (nonatomic, strong) Question *question;
-@property (nonatomic, strong) UIImage *image1;
-@property (nonatomic, strong) UIImage *image2;
+
 
 // FB cacheDescriptor for friends list
 @property (strong, nonatomic) FBCacheDescriptor *cacheDescriptor;

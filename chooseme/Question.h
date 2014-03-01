@@ -18,12 +18,14 @@
 
 @property (nonatomic, strong) NSDate *time;
 @property (nonatomic, strong) NSString *question;
-@property (nonatomic, strong) NSData *imageData1;
-@property (nonatomic, strong) NSData *imageData2;
 
-// Note: Using image data for library files.. For online pics, store URL?
-@property (nonatomic, strong) NSURL *image1;
-@property (nonatomic, strong) NSURL *image2;
+// Note: Using image data for library files. For online pics, store URL.
+@property (nonatomic, strong) UIImage *image1;
+@property (nonatomic, strong) UIImage *image2;
+- (void)setImage1WithURL:(NSURL *)imageURL;
+- (void)setImage2WithURL:(NSURL *)imageURL;
+- (void)setImage1WithData:(NSData *)imageData;
+- (void)setImage2WithData:(NSData *)imageData;
 
 @property (nonatomic, strong) NSNumber *youVoted;
 

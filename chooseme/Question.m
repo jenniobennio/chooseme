@@ -45,7 +45,6 @@
     self[@"name"] = text;
 }
 
-
 - (NSDate *) time {
     return self[@"time"];
 }
@@ -60,18 +59,46 @@
     self[@"question"] = text;
 }
 
-- (NSData *) imageData1 {
-    return self[@"imageData1"];
-}
-- (void) setImageData1:(NSData *) image {
-    self[@"imageData1"] = image;
+- (UIImage *) image1 {
+    UIImage *result;
+    if (self[@"imageData1"] != nil) {
+        NSData *imageData = self[@"imageData1"];
+        result = [UIImage imageWithData:imageData];
+    } else {
+        NSString *picURL = self[@"imageURL1"];
+        result = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:picURL]]];
+    }
+    
+    return result;
 }
 
-- (NSData *) imageData2 {
-    return self[@"imageData2"];
+- (void) setImage1WithData:(NSData *)imageData {
+    self[@"imageData1"] = imageData;
 }
-- (void) setImageData2:(NSData *) image {
-    self[@"imageData2"] = image;
+
+- (void) setImage1WithURL:(NSURL *)imageURL {
+    self[@"imageURL1"] = [imageURL absoluteString];
+}
+
+- (UIImage *) image2 {
+    UIImage *result;
+    if (self[@"imageData2"] != nil) {
+        NSData *imageData = self[@"imageData2"];
+        result = [UIImage imageWithData:imageData];
+    } else {
+        NSString *picURL = self[@"imageURL2"];
+        result = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:picURL]]];
+    }
+    
+    return result;
+}
+
+- (void) setImage2WithData:(NSData *)imageData {
+    self[@"imageData2"] = imageData;
+}
+
+- (void) setImage2WithURL:(NSURL *)imageURL {
+    self[@"imageURL2"] = [imageURL absoluteString];
 }
 
 - (NSNumber *) youVoted {
@@ -95,19 +122,7 @@
     self[@"friendsVoted"] = array;
 }
 
-- (NSURL *) image1 {
-    return [NSURL URLWithString:self[@"image1"]];
-}
-- (void) setImage1:(NSURL *)image1 {
-    self[@"image1"] = [image1 absoluteString];
-}
 
-- (NSURL *) image2 {
-    return [NSURL URLWithString:self[@"image2"]];
-}
-- (void) setImage2:(NSURL *)image2 {
-    self[@"image2"] = [image2 absoluteString];
-}
 
 - (NSString *)formattedQuestion
 {

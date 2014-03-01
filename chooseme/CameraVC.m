@@ -255,10 +255,13 @@
         self.image1 = chosenImage;
         [self.pic1 setImage:chosenImage forState:UIControlStateNormal];
         [self.pic1 setBackgroundColor:[UIColor clearColor]];
+        // FIXME: what compression / quality do we want?
+        [self.currentQuestion setImage1WithData:UIImageJPEGRepresentation(self.image1, 0.5f)];
     } else {
         self.image2 = chosenImage;
         [self.pic2 setImage:chosenImage forState:UIControlStateNormal];
         [self.pic2 setBackgroundColor:[UIColor clearColor]];
+        [self.currentQuestion setImage2WithData:UIImageJPEGRepresentation(self.image2, 0.5f)];
     }
     
     // Select next picture
@@ -286,12 +289,12 @@
         self.image1 = chosenImage;
         [self.pic1 setImage:chosenImage forState:UIControlStateNormal];
         [self.pic1 setBackgroundColor:[UIColor clearColor]];
-        self.currentQuestion.image1 = pinURL;
+        [self.currentQuestion setImage1WithURL:pinURL];
     } else {
         self.image2 = chosenImage;
         [self.pic2 setImage:chosenImage forState:UIControlStateNormal];
         [self.pic2 setBackgroundColor:[UIColor clearColor]];
-        self.currentQuestion.image2 = pinURL;
+        [self.currentQuestion setImage2WithURL:pinURL];
     }
     
     // Select next picture
@@ -401,10 +404,6 @@
     if (self.pic1.imageView.image && self.pic2.imageView.image) {
         QuestionVC *questionVC = [[QuestionVC alloc] initWithNibName:@"QuestionVC" bundle:nil];
         questionVC.question = self.currentQuestion;
-        
-        // Pass images for now since can't get image from local file URL
-        questionVC.image1 = self.image1;
-        questionVC.image2 = self.image2;
         
         // Set delegate so we can later pass info from questionVC to cameraVC
         questionVC.delegate = self;

@@ -109,6 +109,15 @@
     self[@"image2"] = [image2 absoluteString];
 }
 
+- (NSString *)formattedQuestion
+{
+    return [self.question uppercaseString];
+}
+
+- (NSString *)formattedName {
+    return [self.name uppercaseString];
+}
+
 - (NSString *)formattedDate {
     NSDateFormatter *format = [[NSDateFormatter alloc] init];
     [format setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
@@ -120,18 +129,18 @@
         int daysSinceDate = (int)(timeSinceDate / (24.0 * 60.0 * 60.0));
         switch (daysSinceDate)
         {
-            default: return [NSString stringWithFormat:@"%dd", daysSinceDate];
-            case 1: return @"1d";
+            default: return [NSString stringWithFormat:@"%d DAYS AGO", daysSinceDate];
+            case 1: return @"1 DAY AGO";
             case 0: {
                 int hoursSinceDate = (int)(timeSinceDate / (60.0 * 60.0));
                 
                 switch(hoursSinceDate)
                 {
-                    default: return [NSString stringWithFormat:@"%dh", hoursSinceDate];
-                    case 1: return @"1h";
+                    default: return [NSString stringWithFormat:@"%d HOURS AGO", hoursSinceDate];
+                    case 1: return @"1 HOUR AGO";
                     case 0: {
                         int minutesSinceDate = (int)(timeSinceDate / 60.0);
-                        return [NSString stringWithFormat:@"%dm", minutesSinceDate];
+                        return [NSString stringWithFormat:@"%d MIN AGO", minutesSinceDate];
                         break;
                     }
                 }

@@ -34,6 +34,8 @@
 @property (assign) int myVoteIndex;
 
 + (NSString *)parseClassName;
+- (NSString *)formattedQuestion;
+- (NSString *)formattedName;
 - (NSString *)formattedDate;
 - (int)numReplies;
 - (int)numVoted1;

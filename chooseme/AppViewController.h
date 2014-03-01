@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "CameraVC.h"
-#import "FeedVC.h"
+#import "NewFeedVC.h"
 
-@interface AppViewController : UIViewController <UIPageViewControllerDataSource, CameraVCDelegate, FeedVCDelegate>
+@interface AppViewController : UIViewController <UIPageViewControllerDataSource, CameraVCDelegate, NewFeedVCDelegate>
 
 @property (strong, nonatomic) UIPageViewController *pageVC;
 @end

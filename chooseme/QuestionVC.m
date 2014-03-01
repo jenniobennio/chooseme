@@ -145,8 +145,9 @@
     else
         self.question.question = @"Which one?";
 
-    self.question.imageData1 = UIImageJPEGRepresentation(self.image1, 0.05f);
-    self.question.imageData2 = UIImageJPEGRepresentation(self.image2, 0.05f);
+    // FIXME: What compression/ quality do we want?
+    self.question.imageData1 = UIImageJPEGRepresentation(self.image1, 0.5f);
+    self.question.imageData2 = UIImageJPEGRepresentation(self.image2, 0.5f);
 
     self.question.youVoted = [NSNumber numberWithInt:0];
     

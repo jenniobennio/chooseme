@@ -10,13 +10,22 @@
 #import "PictureView.h"
 #import "UserQuestionView.h"
 #import "NewFeedCell.h"
+#import "Question.h"
 
 @interface NewFeedVC ()
+
+@property (nonatomic, strong) NSMutableArray *questions;
+
 @property (strong, nonatomic) IBOutlet UIView *titleView;
 @property (strong, nonatomic) IBOutlet UITableView *feedTable;
 
 @property (strong, nonatomic) NSMutableArray *colors;
 @property (nonatomic, assign) int lastIndexDisplayed;
+
+// Private user data
+@property (strong, nonatomic) NSString *myFacebookID;
+@property (strong, nonatomic) NSString *myName;
+@property (strong, nonatomic) UIImage *myPic;
 
 @end
 
@@ -41,9 +50,10 @@
     self.feedTable.delegate = self;
     self.feedTable.dataSource = self;
     
+    // Pretty flat UI colors!
     self.colors = [[NSMutableArray alloc] init];
-    [self.colors addObject:[UIColor colorWithRed:0.149 green:0.706 blue:0.835 alpha:0.5]];
     [self.colors addObject:[UIColor colorWithRed:0.329 green:0.733 blue:0.616 alpha:0.5]];
+    [self.colors addObject:[UIColor colorWithRed:0.149 green:0.706 blue:0.835 alpha:0.5]];
     [self.colors addObject:[UIColor colorWithRed:0.933 green:0.733 blue:0 alpha:0.5]];
     [self.colors addObject:[UIColor colorWithRed:0.702 green:0.141 blue:0.110 alpha:0.5]];
     [self.colors addObject:[UIColor colorWithRed:0.878 green:0.416 blue:0.039 alpha:0.5]];
@@ -53,7 +63,69 @@
     
     self.view.backgroundColor = self.colors[0];
     
+    // Load my data
+    // Create request for user's Facebook data
+    FBRequest *request = [FBRequest requestForMe];
+    
+    // Send request to Facebook
+    [request startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+        if (!error) {
+            // result is a dictionary with the user's Facebook data
+            NSDictionary *userData = (NSDictionary *)result;
+            
+            self.myFacebookID = userData[@"id"];
+            NSString *name = userData[@"name"];
+            NSURL *pictureURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", self.myFacebookID]];
+            
+            // Assign the data accordingly
+            self.myName = name;
+            self.myPic = [UIImage imageWithData:[NSData dataWithContentsOfURL:pictureURL]];
+            
+            // Only reload image instead of entire table
+//            NewFeedCell *cell = (NewFeedCell *)[self.feedTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+//            [cell reloadUserPic:self.myPic];
+            
+            // load the questions array
+            [self loadQuestionsArray:self.myFacebookID];
+            
+        }
+    }];
+
 }
+
+- (void) loadQuestionsArray:(NSString *)facebookId {
+    if ([self isMe]) {
+        PFQuery *query = [Question query];
+        // FIXME: Newest posts on top for now.. Eventually, custom order by recently edited or unresolved
+        [query orderByDescending:@"createdAt"];
+        [query whereKey:@"author" equalTo:[PFUser currentUser]];
+        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            self.questions = [objects mutableCopy];
+            [self.feedTable reloadData];
+        }];
+    } else {
+        // FIXME: this is NOT performant
+        PFQuery *query = [Question query];
+        self.questions = [[NSMutableArray alloc] init];
+        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            
+            for (Question* question in [[objects reverseObjectEnumerator] allObjects]) {
+                for (int i = 0; i < question.friends.count; i++) {
+                    NSDictionary *friend = [question.friends objectAtIndex:i];
+                    if ([friend[@"id"] isEqualToString:facebookId]) {
+                        question.myVoteIndex = i;
+                        [self.questions addObject:question];
+                        continue;
+                    }
+                }
+            }
+            
+            [self.feedTable reloadData];
+        }];
+    }
+    
+}
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -71,7 +143,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 10;
+    return self.questions.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -87,7 +159,16 @@
     cell.backgroundColor = self.colors[indexPath.row % self.colors.count];
     
     // Load views and format them and stuff
-    [cell loadCell:self.colors[indexPath.row % self.colors.count]];
+//    UIImage *image1 = [UIImage imageNamed:@"111834.jpg"];
+//    UIImage *image2 = [UIImage imageNamed:@"131466.jpg"];
+    Question *q = self.questions[indexPath.row];
+    if ([self isMe])
+        [cell loadCell:self.colors[indexPath.row % self.colors.count] withQuestion:q withUserImage:self.myPic];
+    else
+        [cell loadCell:self.colors[indexPath.row % self.colors.count] withQuestion:q withUserImage:[UIImage imageWithData:q.profilePic]];
+        //withImage1:image1 withImage2:image2 withUserImage:self.myPic];
+    
+    
     
     // Need to set this so that top tableView can scrollToTop
     cell.pView.friendsVotedScrollView.scrollsToTop = NO;
@@ -97,6 +178,7 @@
     cell.pView.thumbnail1.tag = 1;
     [cell.pView.thumbnail2 addTarget:self action:@selector(onTapPic2:) forControlEvents:UIControlEventTouchUpInside];
     cell.pView.thumbnail2.tag = 2;
+    
     
     // Set up gesture recognizers. Is this the right place to do this?
 //    UITapGestureRecognizer *tapPic1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTapPic1:)];
@@ -139,5 +221,16 @@
 {
     NSLog(@"on tap button 2, tag = %d", button.tag);
 }
+
+- (BOOL)isFriends
+{
+    return (self.index == 0);
+}
+
+- (BOOL)isMe
+{
+    return (self.index == 2);
+}
+
 
 @end

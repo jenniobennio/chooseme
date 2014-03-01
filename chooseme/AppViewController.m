@@ -13,7 +13,7 @@
 #import <Parse/Parse.h>
 @interface AppViewController ()
 
-@property (nonatomic, strong) FeedVC *friendsQuestionsVC;
+@property (nonatomic, strong) NewFeedVC *friendsQuestionsVC;
 @property (nonatomic, strong) NewFeedVC *myQuestionsVC;
 
 @end
@@ -34,7 +34,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    self.friendsQuestionsVC = [[FeedVC alloc] initWithNibName:@"FeedVC" bundle:nil];
+    self.friendsQuestionsVC = [[NewFeedVC alloc] initWithNibName:@"NewFeedVC" bundle:nil];
     self.myQuestionsVC = [[NewFeedVC alloc]  initWithNibName:@"NewFeedVC" bundle:nil];
     
     // The permissions requested from the user
@@ -89,7 +89,7 @@
     if ([viewController isKindOfClass:[CameraVC class]])
         index = [(CameraVC *)viewController index];
     else
-        index = [(FeedVC *)viewController index];
+        index = [(NewFeedVC *)viewController index];
     
     if (index == 0) {
         return nil;
@@ -108,7 +108,7 @@
     if ([viewController isKindOfClass:[CameraVC class]])
         index = [(CameraVC *)viewController index];
     else
-        index = [(FeedVC *)viewController index];
+        index = [(NewFeedVC *)viewController index];
     
     index++;
     

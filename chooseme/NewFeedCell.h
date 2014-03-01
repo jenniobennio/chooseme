@@ -9,12 +9,17 @@
 #import <UIKit/UIKit.h>
 #import "PictureView.h"
 #import "UserQuestionView.h"
+#import "Question.h"
 
 @interface NewFeedCell : UITableViewCell
 
 @property (strong, nonatomic) PictureView *pView;
 @property (strong, nonatomic) UserQuestionView *uqView;
 
-- (void)loadCell:(UIColor *)color;
+- (void)reloadUserPic:(UIImage *)userImage;
+- (void)reloadBigPic:(UIImage *)image1;
+//- (void)loadCell:(UIColor *)color withImage1:(UIImage *)image1 withImage2:(UIImage *)image2 withUserImage:(UIImage *)userImage;
+- (void)loadCell:(UIColor *)color withQuestion:(Question *)q withUserImage:(UIImage *)userImage;
+
 
 @end

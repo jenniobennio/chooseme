@@ -10,11 +10,16 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="160"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Cby-qP-jTA">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RYk-SR-o2q">
+                    <rect key="frame" x="0.0" y="0.0" width="160" height="160"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                </view>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Cby-qP-jTA">
                     <rect key="frame" x="0.0" y="0.0" width="160" height="160"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 </imageView>
-                <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FdM-Jd-PMP">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FdM-Jd-PMP">
                     <rect key="frame" x="160" y="0.0" width="160" height="160"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
@@ -55,9 +60,14 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstItem="Cby-qP-jTA" firstAttribute="top" secondItem="RYk-SR-o2q" secondAttribute="top" id="4Xx-dp-hee"/>
+                <constraint firstItem="Cby-qP-jTA" firstAttribute="leading" secondItem="RYk-SR-o2q" secondAttribute="leading" id="8Ct-Ut-KKs"/>
+                <constraint firstItem="FdM-Jd-PMP" firstAttribute="leading" secondItem="Cby-qP-jTA" secondAttribute="trailing" id="Duk-2u-djq"/>
                 <constraint firstItem="Cby-qP-jTA" firstAttribute="top" secondItem="1" secondAttribute="top" id="GCw-Mq-Y93"/>
                 <constraint firstItem="Cby-qP-jTA" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="JBP-pG-1fQ"/>
                 <constraint firstItem="Cby-qP-jTA" firstAttribute="width" secondItem="FdM-Jd-PMP" secondAttribute="width" id="MXs-pc-NNc"/>
+                <constraint firstItem="Cby-qP-jTA" firstAttribute="bottom" secondItem="RYk-SR-o2q" secondAttribute="bottom" id="Ovz-SJ-eak"/>
+                <constraint firstItem="Cby-qP-jTA" firstAttribute="trailing" secondItem="RYk-SR-o2q" secondAttribute="trailing" id="SCq-qK-Pn0"/>
                 <constraint firstAttribute="trailing" secondItem="FdM-Jd-PMP" secondAttribute="trailing" id="cad-jm-yf4"/>
                 <constraint firstAttribute="bottom" secondItem="FdM-Jd-PMP" secondAttribute="bottom" id="g6Y-ZN-fZK"/>
                 <constraint firstAttribute="bottom" secondItem="Cby-qP-jTA" secondAttribute="bottom" id="qxM-ob-Zab"/>
@@ -70,6 +80,7 @@
                 <outlet property="questionLabel" destination="2wi-uu-sPu" id="KuM-yT-jQJ"/>
                 <outlet property="timestampLabel" destination="cWo-Ys-rjv" id="zgW-aG-xil"/>
                 <outlet property="userPic" destination="Cby-qP-jTA" id="Qwr-MK-wMa"/>
+                <outlet property="userPicBgColor" destination="RYk-SR-o2q" id="86Z-nS-mek"/>
             </connections>
         </view>
     </objects>

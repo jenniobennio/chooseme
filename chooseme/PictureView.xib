@@ -10,6 +10,11 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="368"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="10k-sx-hZO">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="368"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                </view>
                 <imageView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="epC-Fx-2YC">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="368"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -81,6 +86,7 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstItem="epC-Fx-2YC" firstAttribute="leading" secondItem="10k-sx-hZO" secondAttribute="leading" id="2pX-Rg-ZzP"/>
                 <constraint firstAttribute="trailing" secondItem="6Et-yO-dND" secondAttribute="trailing" constant="6" id="3lh-Gu-eNC"/>
                 <constraint firstAttribute="trailing" secondItem="epC-Fx-2YC" secondAttribute="trailing" id="3yv-8h-ECt"/>
                 <constraint firstItem="yU5-kE-Dhm" firstAttribute="leading" secondItem="uEq-Tx-Lwp" secondAttribute="trailing" constant="20" id="5qG-nw-SgR"/>
@@ -90,9 +96,12 @@
                 <constraint firstAttribute="bottom" secondItem="WYh-5w-mVE" secondAttribute="bottom" constant="5" id="GZQ-Rx-gIW"/>
                 <constraint firstItem="epC-Fx-2YC" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="H83-Jy-ccq"/>
                 <constraint firstAttribute="bottom" secondItem="uEq-Tx-Lwp" secondAttribute="bottom" constant="15" id="HvF-wg-qPk"/>
+                <constraint firstItem="epC-Fx-2YC" firstAttribute="trailing" secondItem="10k-sx-hZO" secondAttribute="trailing" id="QOi-Yd-5d3"/>
                 <constraint firstAttribute="bottom" secondItem="yU5-kE-Dhm" secondAttribute="bottom" constant="15" id="Qkg-Xj-6zl"/>
                 <constraint firstItem="uEq-Tx-Lwp" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="100" id="Ve2-73-TZa"/>
                 <constraint firstAttribute="bottom" secondItem="Tq6-Lf-wKA" secondAttribute="bottom" constant="8" id="cYT-Ct-1NV"/>
+                <constraint firstItem="epC-Fx-2YC" firstAttribute="top" secondItem="10k-sx-hZO" secondAttribute="top" id="dVf-OS-NXQ"/>
+                <constraint firstItem="epC-Fx-2YC" firstAttribute="bottom" secondItem="10k-sx-hZO" secondAttribute="bottom" id="l3a-xJ-63g"/>
                 <constraint firstItem="WYh-5w-mVE" firstAttribute="leading" secondItem="Tq6-Lf-wKA" secondAttribute="trailing" constant="11" id="m2c-23-AB9"/>
                 <constraint firstAttribute="bottom" secondItem="GE7-Yx-a8g" secondAttribute="bottom" constant="5" id="mza-N6-gcA"/>
                 <constraint firstAttribute="bottom" secondItem="6Et-yO-dND" secondAttribute="bottom" constant="8" id="nfr-Uw-d42"/>
@@ -101,7 +110,10 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="bigPic" destination="epC-Fx-2YC" id="Wnh-aN-wWN"/>
+                <outlet property="bigPicBgColor" destination="10k-sx-hZO" id="gSr-S8-W2I"/>
+                <outlet property="commentIcon" destination="6Et-yO-dND" id="7U1-yS-E1F"/>
                 <outlet property="friendsVotedScrollView" destination="vm8-fu-DWk" id="lKg-VI-gw9"/>
+                <outlet property="heartIcon" destination="Tq6-Lf-wKA" id="3hH-Y6-OcV"/>
                 <outlet property="numCommentsLabel" destination="WYh-5w-mVE" id="4Fu-QE-bna"/>
                 <outlet property="numVotesLabel" destination="GE7-Yx-a8g" id="Uzl-tc-69K"/>
                 <outlet property="thumbnail1" destination="uEq-Tx-Lwp" id="djR-Ve-H22"/>

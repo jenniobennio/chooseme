@@ -527,8 +527,11 @@
 			files = (
 				26351A8518A72449000A30C9 /* AppViewController.m in Sources */,
 				2680196918C09C8C00B4A22D /* NewFeedCell.m in Sources */,
+<<<<<<< Updated upstream
 				2680196218C095D100B4A22D /* UserQuestionView.m in Sources */,
 				D5438ADD18C1C3B400C94D3B /* PinCell.m in Sources */,
+=======
+>>>>>>> Stashed changes
 				26351A3618A5FB6B000A30C9 /* FeedVC.m in Sources */,
 				26351A9718A80EC7000A30C9 /* PostVC.m in Sources */,
 				26351A0718A5D1FF000A30C9 /* AppDelegate.m in Sources */,

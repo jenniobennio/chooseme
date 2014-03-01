@@ -7,6 +7,7 @@
 //
 
 #import "PictureView.h"
+#import "UIImage+mask.h"
 
 @implementation PictureView
 
@@ -31,13 +32,11 @@
 - (void)formatThumbnails
 {
     self.thumbnail1.layer.borderWidth = 1;
-//    self.thumbnail1.layer.borderColor = [[UIColor lightGrayColor] CGColor];
     self.thumbnail1.layer.cornerRadius = 25;
     [self.thumbnail1.imageView setContentMode:UIViewContentModeScaleAspectFill];
     self.thumbnail1.layer.masksToBounds = YES;
 
     self.thumbnail2.layer.borderWidth = 1;
-//    self.thumbnail2.layer.borderColor = [[UIColor lightGrayColor] CGColor];
     self.thumbnail2.layer.cornerRadius = 25;
     [self.thumbnail2.imageView setContentMode:UIViewContentModeScaleAspectFill];
     self.thumbnail2.layer.masksToBounds = YES;
@@ -52,6 +51,15 @@
     } else {
         self.thumbnail1.alpha = 0.25;
     }
+}
+
+- (void)colorIcons
+{
+    UIColor *color = [UIColor grayColor];
+    self.heartIcon.image = [self.heartIcon.image maskWithColor:color];
+    self.commentIcon.image = [self.commentIcon.image maskWithColor:color];
+    self.numVotesLabel.textColor = color;
+    self.numCommentsLabel.textColor = color;
 }
 
 - (void)updateVotes:(int)votes

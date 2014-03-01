@@ -369,8 +369,9 @@
 - (CGFloat)textViewHeightForAttributedText: (NSAttributedString*)text andWidth: (CGFloat)width {
     UITextView *calculationView = [[UITextView alloc] init];
     [calculationView setAttributedText:text];
-    CGSize size = [calculationView sizeThatFits:CGSizeMake(width, FLT_MAX)];
-    return size.height;
+//    CGSize size = [calculationView sizeThatFits:CGSizeMake(width, FLT_MAX)];
+//    return size.height;
+    return 200;
 }
 
 - (BOOL)isFriends

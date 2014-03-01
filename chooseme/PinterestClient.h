@@ -10,6 +10,6 @@
 
 @interface PinterestClient : NSObject
 
-- (void) get;
+- (void) get:(void (^)(NSMutableArray *pins))success;
 
 @end

@@ -11,14 +11,22 @@
 
 @implementation PinterestClient
 
-- (void)get {
+- (void) get:(void (^)(NSMutableArray *pins))success {
     
     NSString *getPinsURL = @"http://pinterestapi.co.uk/subhastar/pins";
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     
     [manager GET:getPinsURL parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"success %@", responseObject);
+        
+        NSDictionary *allPins = [responseObject objectForKey:@"body"];
+        NSMutableArray *pinURLs = [[NSMutableArray alloc] initWithCapacity:allPins.count];
+
+        for (NSDictionary *pin in allPins) {
+            [pinURLs addObject:[pin objectForKey:@"src"]];
+        }
+        
+        success(pinURLs);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
     }];

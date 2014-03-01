@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PinterestVC : UIViewController
+@interface PinterestVC : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate>
 
 @end

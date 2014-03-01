@@ -15,8 +15,8 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="03y-SX-BVg">
-                    <rect key="frame" x="-32" y="117" width="320" height="456"/>
+                <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="03y-SX-BVg">
+                    <rect key="frame" x="0.0" y="103" width="320" height="465"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="nl3-Va-B9C">
                         <size key="itemSize" width="50" height="50"/>
@@ -30,10 +30,41 @@
                         <outlet property="delegate" destination="-1" id="dmq-ya-dEn"/>
                     </connections>
                 </collectionView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="pinterest-128.png" translatesAutoresizingMaskIntoConstraints="NO" id="5K9-WB-CGC">
+                    <rect key="frame" x="20" y="42" width="67" height="53"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="67" id="IqW-f2-dH1"/>
+                        <constraint firstAttribute="height" constant="53" id="mOj-TM-c3F"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Choose a Pin" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uW2-Ir-H9s">
+                    <rect key="frame" x="102" y="58" width="131" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="uW2-Ir-H9s" firstAttribute="leading" secondItem="5K9-WB-CGC" secondAttribute="trailing" constant="35" id="7YA-Pd-VVv"/>
+                <constraint firstItem="03y-SX-BVg" firstAttribute="top" relation="greaterThanOrEqual" secondItem="1" secondAttribute="top" constant="103" id="7y2-aJ-BrO"/>
+                <constraint firstItem="5K9-WB-CGC" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="20" id="BQd-GY-3Kx"/>
+                <constraint firstItem="03y-SX-BVg" firstAttribute="top" secondItem="uW2-Ir-H9s" secondAttribute="bottom" constant="24" id="Bq9-ak-7gf"/>
+                <constraint firstAttribute="bottom" secondItem="03y-SX-BVg" secondAttribute="bottom" id="Iek-ZJ-RW6"/>
+                <constraint firstItem="03y-SX-BVg" firstAttribute="top" secondItem="5K9-WB-CGC" secondAttribute="bottom" constant="8" id="dLc-yL-cDj"/>
+                <constraint firstAttribute="trailing" secondItem="uW2-Ir-H9s" secondAttribute="trailing" constant="87" id="doA-fa-8xP"/>
+                <constraint firstAttribute="trailing" secondItem="03y-SX-BVg" secondAttribute="trailing" id="hYe-Jr-ZDa"/>
+                <constraint firstItem="03y-SX-BVg" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="rEA-o5-zMc"/>
+                <constraint firstItem="03y-SX-BVg" firstAttribute="top" secondItem="5K9-WB-CGC" secondAttribute="bottom" constant="10" id="rUr-cc-RQC"/>
+                <constraint firstItem="uW2-Ir-H9s" firstAttribute="leading" secondItem="5K9-WB-CGC" secondAttribute="trailing" constant="15" id="rqn-sk-Tef"/>
+            </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>
     </objects>
+    <resources>
+        <image name="pinterest-128.png" width="128" height="128"/>
+    </resources>
 </document>

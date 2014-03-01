@@ -15,7 +15,7 @@
 @interface NewFeedVC ()
 
 @property (nonatomic, strong) NSMutableArray *questions;
-
+@property (strong, nonatomic) IBOutlet UILabel *titleLabel;
 @property (strong, nonatomic) IBOutlet UIView *titleView;
 @property (strong, nonatomic) IBOutlet UITableView *feedTable;
 
@@ -50,6 +50,12 @@
     self.feedTable.delegate = self;
     self.feedTable.dataSource = self;
     
+    // Set title
+    if ([self isMe])
+        self.titleLabel.text = @"MY QUESTIONS";
+    else
+        self.titleLabel.text = @"FRIENDS' QUESTIONS";
+    
     // Pretty flat UI colors!
     self.colors = [[NSMutableArray alloc] init];
     [self.colors addObject:[UIColor colorWithRed:0.329 green:0.733 blue:0.616 alpha:0.5]];
@@ -62,6 +68,14 @@
     [self.colors addObject:[UIColor colorWithRed:0.153 green:0.220 blue:0.298 alpha:0.5]];
     
     self.view.backgroundColor = self.colors[0];
+    
+    // Don't show lines below available cells
+    self.feedTable.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    
+    // Refresh control
+    UIRefreshControl *refresh = [[UIRefreshControl alloc] init];
+    [refresh addTarget:self action:@selector(refreshMe:) forControlEvents:                         UIControlEventValueChanged];
+    [self.feedTable addSubview:refresh];
     
     // Load my data
     // Create request for user's Facebook data
@@ -232,5 +246,14 @@
     return (self.index == 2);
 }
 
+- (void)reload
+{
+    [self loadQuestionsArray:self.myFacebookID];
+}
+
+- (void) refreshMe: (UIRefreshControl *)refresh;{
+    [self reload];
+    [refresh endRefreshing];
+}
 
 @end

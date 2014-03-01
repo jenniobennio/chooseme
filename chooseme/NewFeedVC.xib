@@ -7,6 +7,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NewFeedVC">
             <connections>
                 <outlet property="feedTable" destination="KJt-qP-kbc" id="QaP-uY-LKw"/>
+                <outlet property="titleLabel" destination="F5q-2T-hn4" id="HGb-Tc-lkA"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
         </placeholder>
@@ -15,13 +16,31 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="KJt-qP-kbc">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="KJt-qP-kbc">
                     <rect key="frame" x="0.0" y="40" width="320" height="528"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </tableView>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F5q-2T-hn4">
+                    <rect key="frame" x="148" y="18" width="25" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="sil-Jk-Mcm"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="15"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="KJt-qP-kbc" firstAttribute="top" secondItem="1" secondAttribute="top" constant="40" id="6gD-0c-EWa"/>
+                <constraint firstItem="F5q-2T-hn4" firstAttribute="top" secondItem="1" secondAttribute="top" constant="18" id="D6j-eN-597"/>
+                <constraint firstAttribute="bottom" secondItem="KJt-qP-kbc" secondAttribute="bottom" id="Ki6-74-lyz"/>
+                <constraint firstItem="KJt-qP-kbc" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="Rdg-7c-gg0"/>
+                <constraint firstAttribute="centerX" secondItem="F5q-2T-hn4" secondAttribute="centerX" id="y1q-Lf-1sN"/>
+                <constraint firstAttribute="trailing" secondItem="KJt-qP-kbc" secondAttribute="trailing" id="yDg-rV-kuW"/>
+            </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>

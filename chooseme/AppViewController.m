@@ -9,12 +9,12 @@
 #import "AppViewController.h"
 #import "CameraVC.h"
 #import "FeedVC.h"
+#import "NewFeedVC.h"
 #import <Parse/Parse.h>
-
 @interface AppViewController ()
 
 @property (nonatomic, strong) FeedVC *friendsQuestionsVC;
-@property (nonatomic, strong) FeedVC *myQuestionsVC;
+@property (nonatomic, strong) NewFeedVC *myQuestionsVC;
 
 @end
 
@@ -35,7 +35,7 @@
     // Do any additional setup after loading the view from its nib.
     
     self.friendsQuestionsVC = [[FeedVC alloc] initWithNibName:@"FeedVC" bundle:nil];
-    self.myQuestionsVC = [[FeedVC alloc]  initWithNibName:@"FeedVC" bundle:nil];
+    self.myQuestionsVC = [[NewFeedVC alloc]  initWithNibName:@"NewFeedVC" bundle:nil];
     
     // The permissions requested from the user
     NSArray *permissionsArray = @[ @"user_about_me", @"user_relationships", @"user_birthday", @"user_location"];

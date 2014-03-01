@@ -9,6 +9,8 @@
 #import "AppDelegate.h"
 #import "AppViewController.h"
 #import <Parse/Parse.h>
+#import "NewFeedVC.h"
+
 
 @implementation AppDelegate
 
@@ -31,6 +33,9 @@
     // Override point for customization after application launch.
     AppViewController *avc = [[AppViewController alloc] init];
     self.window.rootViewController = avc;
+
+//    NewFeedVC *vc = [[NewFeedVC alloc] init];
+//    self.window.rootViewController = vc;
     
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];

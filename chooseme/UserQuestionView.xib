@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4514" systemVersion="13A603" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="1" customClass="UserQuestionView">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="160"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Cby-qP-jTA">
+                    <rect key="frame" x="0.0" y="0.0" width="160" height="160"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                </imageView>
+                <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FdM-Jd-PMP">
+                    <rect key="frame" x="160" y="0.0" width="160" height="160"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="WHICH ONE?" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="140" translatesAutoresizingMaskIntoConstraints="NO" id="2wi-uu-sPu">
+                            <rect key="frame" x="10" y="0.0" width="140" height="73"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="73" id="hP5-QX-fsU"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="26"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="FRANK UNDERWOOD" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="140" translatesAutoresizingMaskIntoConstraints="NO" id="xg5-wE-zyg">
+                            <rect key="frame" x="10" y="108" width="140" height="41"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="41" id="eFY-B8-amk"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="5 MIN AGO" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="140" translatesAutoresizingMaskIntoConstraints="NO" id="cWo-Ys-rjv">
+                            <rect key="frame" x="10" y="130" width="140" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="0.95011559311224492" green="0.95011559311224492" blue="0.95011559311224492" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstItem="xg5-wE-zyg" firstAttribute="top" secondItem="2wi-uu-sPu" secondAttribute="bottom" constant="35" id="hwh-IK-Uai"/>
+                        <constraint firstItem="cWo-Ys-rjv" firstAttribute="top" secondItem="xg5-wE-zyg" secondAttribute="bottom" constant="-19" id="mAl-Xg-xnf"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="Cby-qP-jTA" firstAttribute="top" secondItem="1" secondAttribute="top" id="GCw-Mq-Y93"/>
+                <constraint firstItem="Cby-qP-jTA" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="JBP-pG-1fQ"/>
+                <constraint firstItem="Cby-qP-jTA" firstAttribute="width" secondItem="FdM-Jd-PMP" secondAttribute="width" id="MXs-pc-NNc"/>
+                <constraint firstAttribute="trailing" secondItem="FdM-Jd-PMP" secondAttribute="trailing" id="cad-jm-yf4"/>
+                <constraint firstAttribute="bottom" secondItem="FdM-Jd-PMP" secondAttribute="bottom" id="g6Y-ZN-fZK"/>
+                <constraint firstAttribute="bottom" secondItem="Cby-qP-jTA" secondAttribute="bottom" id="qxM-ob-Zab"/>
+                <constraint firstItem="FdM-Jd-PMP" firstAttribute="top" secondItem="1" secondAttribute="top" id="uA9-kQ-juh"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="colorView" destination="FdM-Jd-PMP" id="4wf-fU-ssN"/>
+                <outlet property="nameLabel" destination="xg5-wE-zyg" id="pHj-B9-zs6"/>
+                <outlet property="questionLabel" destination="2wi-uu-sPu" id="KuM-yT-jQJ"/>
+                <outlet property="timestampLabel" destination="cWo-Ys-rjv" id="zgW-aG-xil"/>
+                <outlet property="userPic" destination="Cby-qP-jTA" id="Qwr-MK-wMa"/>
+            </connections>
+        </view>
+    </objects>
+</document>

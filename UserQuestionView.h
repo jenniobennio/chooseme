@@ -9,5 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface UserQuestionView : UIView
+@property (strong, nonatomic) IBOutlet UIImageView *userPic;
+@property (strong, nonatomic) IBOutlet UIView *colorView;
+@property (strong, nonatomic) IBOutlet UILabel *questionLabel;
+@property (strong, nonatomic) IBOutlet UILabel *nameLabel;
+@property (strong, nonatomic) IBOutlet UILabel *timestampLabel;
 
 @end

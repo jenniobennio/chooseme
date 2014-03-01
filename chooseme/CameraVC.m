@@ -51,6 +51,9 @@
 @property (strong, nonatomic) UIImage *image1;
 @property (strong, nonatomic) UIImage *image2;
 
+// Private variable for checking whether we just selected some image
+@property (nonatomic, assign) BOOL justSelectedImage;
+
 @end
 
 @implementation CameraVC
@@ -110,8 +113,10 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    // If both images are set, go to questionVC
-    [self goToQuestionVC];
+    if (self.justSelectedImage) {
+        // If both images are set, go to questionVC
+        [self goToQuestionVC];
+    }
 }
 
 # pragma mark - actions from button presses
@@ -256,6 +261,9 @@
     // Select next picture
     [self selectPic:(self.picIndex + 1) % 2];
     
+    // Set BOOL so we know we can possibly move onto QuestionVC
+    self.justSelectedImage = YES;
+    
     [picker dismissViewControllerAnimated:YES completion:NULL];
 }
 
@@ -369,6 +377,7 @@
         // Set delegate so we can later pass info from questionVC to cameraVC
         questionVC.delegate = self;
         
+        self.justSelectedImage = NO;
         [self presentViewController:questionVC animated:YES completion:nil];
         
     }

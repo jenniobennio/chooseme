@@ -7,6 +7,7 @@
 //
 
 #import "PinterestVC.h"
+#import "PinterestClient.h"
 
 @interface PinterestVC ()
 
@@ -29,6 +30,8 @@
     // Do any additional setup after loading the view from its nib.
     
     NSLog(@"Pinterest vc view did load.");
+    PinterestClient *pinterestClient = [[PinterestClient alloc] init];
+    [pinterestClient get];
 }
 
 - (void)didReceiveMemoryWarning

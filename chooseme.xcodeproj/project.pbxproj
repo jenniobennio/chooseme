@@ -59,6 +59,8 @@
 		D5074FDD18C06EF30028ED2F /* slr_camera-32.png in Resources */ = {isa = PBXBuildFile; fileRef = D5074FDC18C06EF30028ED2F /* slr_camera-32.png */; };
 		D5074FDF18C06F080028ED2F /* stack_of_photos-32.png in Resources */ = {isa = PBXBuildFile; fileRef = D5074FDE18C06F080028ED2F /* stack_of_photos-32.png */; };
 		D5074FE118C06F130028ED2F /* pinterest-32.png in Resources */ = {isa = PBXBuildFile; fileRef = D5074FE018C06F130028ED2F /* pinterest-32.png */; };
+		D5438AD618C1B34A00C94D3B /* PinterestVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D5438AD418C1B34A00C94D3B /* PinterestVC.m */; };
+		D5438AD718C1B34A00C94D3B /* PinterestVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5438AD518C1B34A00C94D3B /* PinterestVC.xib */; };
 		D572FE4718B1DAFE000DB1D0 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D572FE4618B1DAFE000DB1D0 /* FacebookSDK.framework */; };
 		D572FE4B18B1DBF7000DB1D0 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D572FE4A18B1DBF7000DB1D0 /* AudioToolbox.framework */; };
 		D572FE4D18B1DBFE000DB1D0 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D572FE4C18B1DBFE000DB1D0 /* CFNetwork.framework */; };
@@ -152,6 +154,9 @@
 		D5074FDC18C06EF30028ED2F /* slr_camera-32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "slr_camera-32.png"; sourceTree = "<group>"; };
 		D5074FDE18C06F080028ED2F /* stack_of_photos-32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stack_of_photos-32.png"; sourceTree = "<group>"; };
 		D5074FE018C06F130028ED2F /* pinterest-32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pinterest-32.png"; sourceTree = "<group>"; };
+		D5438AD318C1B34A00C94D3B /* PinterestVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinterestVC.h; sourceTree = "<group>"; };
+		D5438AD418C1B34A00C94D3B /* PinterestVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinterestVC.m; sourceTree = "<group>"; };
+		D5438AD518C1B34A00C94D3B /* PinterestVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PinterestVC.xib; sourceTree = "<group>"; };
 		D572FE4618B1DAFE000DB1D0 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		D572FE4A18B1DBF7000DB1D0 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		D572FE4C18B1DBFE000DB1D0 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -288,6 +293,9 @@
 				D52B901918B32214004005D7 /* Model */,
 				2627EA2B18BDBDDE00ECD2A5 /* UIImage+mask.h */,
 				2627EA2C18BDBDDE00ECD2A5 /* UIImage+mask.m */,
+				D5438AD318C1B34A00C94D3B /* PinterestVC.h */,
+				D5438AD418C1B34A00C94D3B /* PinterestVC.m */,
+				D5438AD518C1B34A00C94D3B /* PinterestVC.xib */,
 			);
 			path = chooseme;
 			sourceTree = "<group>";
@@ -427,6 +435,7 @@
 				2680195D18C08E9000B4A22D /* 29-heart.png in Resources */,
 				D5074FE118C06F130028ED2F /* pinterest-32.png in Resources */,
 				2632962D18B5DBDE00A84CB2 /* 111834.jpg in Resources */,
+				D5438AD718C1B34A00C94D3B /* PinterestVC.xib in Resources */,
 				26351A0D18A5D1FF000A30C9 /* Main_iPad.storyboard in Resources */,
 				2680196B18C09D1200B4A22D /* NewFeedCell.xib in Resources */,
 				2627EA2418BDB02F00ECD2A5 /* 11-clock.png in Resources */,
@@ -513,6 +522,7 @@
 				2680195518C0770800B4A22D /* NewFeedVC.m in Sources */,
 				263295E718B33DA700A84CB2 /* QuestionVC.m in Sources */,
 				26351A3118A5D24D000A30C9 /* CameraVC.m in Sources */,
+				D5438AD618C1B34A00C94D3B /* PinterestVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

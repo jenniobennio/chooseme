@@ -8,6 +8,7 @@
 
 #import "CameraVC.h"
 #import "FeedVC.h"
+#import "PinterestVC.h"
 #import "Question.h"
 #import "UIImage+mask.h"
 
@@ -192,6 +193,9 @@
 - (IBAction)choosePicFromPinterest:(id)sender {
     NSLog(@"choose pic from pinterest.");
     [self hideImageSourceButtons];
+    
+    PinterestVC *pinterestVC = [[PinterestVC alloc] initWithNibName:@"PinterestVC" bundle:nil];
+    [self presentViewController:pinterestVC animated:YES completion:nil];
 }
 
 // For testing: Pre-fill in images

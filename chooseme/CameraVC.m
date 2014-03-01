@@ -80,7 +80,6 @@
     self.takePicButton.layer.cornerRadius = 25;
     [self.takePicButton.titleLabel setAdjustsFontSizeToFitWidth:YES];
     [self.takePicButton setTitle:@"+" forState:UIControlStateNormal];
-    [self.takePicButton setTitle:@"OK" forState:UIControlStateSelected];
     [self.takePicButton setTitle:@"REDO" forState:UIControlStateHighlighted];
     
     [self.friendsButton setImage:[[UIImage imageNamed:@"112-group.png"] maskWithColor:[UIColor whiteColor]] forState:UIControlStateNormal];
@@ -90,8 +89,9 @@
     self.currentQuestion = [[Question alloc] init];
     
     // Add tapRecognizer
-    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTap:)];
-    [self.view addGestureRecognizer:tapRecognizer];
+    // FIXME: Removed the tap gesture recognizer because pressing on the Pinterest/ camera/ library icons triggered it
+//    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTap:)];
+//    [self.view addGestureRecognizer:tapRecognizer];
     
     // FIXME: Uncomment for when running on actual device
     // Error if camera doesn't exist
@@ -108,32 +108,28 @@
     
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    // If both images are set, go to questionVC
+    [self goToQuestionVC];
+}
+
 # pragma mark - actions from button presses
 
 - (IBAction)takePic:(id)sender {
-    // Confirm (OK) pic
-    if (self.takePicButton.selected == YES) {
-        self.takePicButton.selected = NO;
-        
-        // Select next picture
-        [self selectPic:(self.picIndex + 1) % 2];
-        
-        // Clear main pic
-        self.mainPic.image = nil;
-        
-        // If both images are set, go to questionVC
-        [self goToQuestionVC];
-    } else
-        // Take pic
-    {
-         // Choosing pic from library when camera isn't available
-        if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
-            [self takePicFromCamera];
-        else
-            [self choosePicFromLib];
-    }
-    
+    // Choosing pic from library when camera isn't available
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
+        [self takePicFromCamera];
+    else
+        [self choosePicFromLib];
     [self hideImageSourceButtons];
+    
+    // Clear main pic
+    self.mainPic.image = nil;
+        
+    // If both images are set, go to questionVC
+    [self goToQuestionVC];
+    
 }
 
 - (IBAction)onPic1:(id)sender {
@@ -141,10 +137,8 @@
     
     if (self.currentQuestion.image1) {
         // REDO pic
-        self.takePicButton.selected = NO;
         self.takePicButton.highlighted = YES;
     } else {
-        self.takePicButton.selected = NO;
         self.takePicButton.highlighted = NO;
     }
     [self selectPic:0];
@@ -156,10 +150,8 @@
     
     if (self.currentQuestion.image2) {
         // REDO pic
-        self.takePicButton.selected = NO;
         self.takePicButton.highlighted = YES;
     } else {
-        self.takePicButton.selected = NO;
         self.takePicButton.highlighted = NO;
     }
     [self selectPic:1];
@@ -231,7 +223,6 @@
     // A tap on the view is treated like an OK/ cancel, but
     // if both images are set, go to questionVC
     
-    self.takePicButton.selected = NO;
     self.takePicButton.highlighted = NO;
     self.mainPic.image = nil;
     
@@ -262,8 +253,8 @@
         self.currentQuestion.image2 = [info objectForKey:UIImagePickerControllerReferenceURL];
     }
     
-    // Change takePicButton to OK
-    self.takePicButton.selected = YES;
+    // Select next picture
+    [self selectPic:(self.picIndex + 1) % 2];
     
     [picker dismissViewControllerAnimated:YES completion:NULL];
 }
@@ -367,7 +358,7 @@
 // Go to questionVC if both pictures are there and confirmed
 - (void)goToQuestionVC
 {
-    if (self.pic1.imageView.image && self.pic2.imageView.image && !self.takePicButton.selected) {
+    if (self.pic1.imageView.image && self.pic2.imageView.image) {
         QuestionVC *questionVC = [[QuestionVC alloc] initWithNibName:@"QuestionVC" bundle:nil];
         questionVC.question = self.currentQuestion;
         

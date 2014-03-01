@@ -34,7 +34,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    NSLog(@"Pinterest vc view did load.");
     [self.collectionView registerClass:[PinCell class] forCellWithReuseIdentifier:@"PinCell"];
     UINib *cellNib = [UINib nibWithNibName:@"PinCell" bundle:nil];
     [self.collectionView registerNib:cellNib forCellWithReuseIdentifier:@"PinCell"];
@@ -42,7 +41,7 @@
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     [flowLayout setItemSize:CGSizeMake(100, 100)];
     [flowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
-        
+    
     [self.collectionView setCollectionViewLayout:flowLayout];
     self.collectionView.backgroundColor = [UIColor clearColor];
     
@@ -67,6 +66,12 @@
     [cell setPinURL:pinURL];
     
     return cell;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    NSString *pinURL = [self.pins objectAtIndex:indexPath.row];
+    [self.delegate pinChosen:[NSURL URLWithString:pinURL]];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - random methods

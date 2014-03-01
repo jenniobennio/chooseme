@@ -8,9 +8,9 @@
 
 #import "CameraVC.h"
 #import "FeedVC.h"
-#import "PinterestVC.h"
 #import "Question.h"
 #import "UIImage+mask.h"
+#import "UIImageView+AFNetworking.h"
 
 @interface CameraVC ()
 
@@ -195,6 +195,7 @@
     [self hideImageSourceButtons];
     
     PinterestVC *pinterestVC = [[PinterestVC alloc] initWithNibName:@"PinterestVC" bundle:nil];
+    pinterestVC.delegate = self;
     [self presentViewController:pinterestVC animated:YES completion:nil];
 }
 
@@ -254,12 +255,10 @@
         self.image1 = chosenImage;
         [self.pic1 setImage:chosenImage forState:UIControlStateNormal];
         [self.pic1 setBackgroundColor:[UIColor clearColor]];
-        self.currentQuestion.image1 = [info objectForKey:UIImagePickerControllerReferenceURL];
     } else {
         self.image2 = chosenImage;
         [self.pic2 setImage:chosenImage forState:UIControlStateNormal];
         [self.pic2 setBackgroundColor:[UIColor clearColor]];
-        self.currentQuestion.image2 = [info objectForKey:UIImagePickerControllerReferenceURL];
     }
     
     // Select next picture
@@ -273,6 +272,35 @@
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     [picker dismissViewControllerAnimated:YES completion:NULL];
+}
+
+# pragma mark - PinterestVCDelegate methods
+
+- (void)pinChosen:(NSURL *)pinURL {
+    NSLog(@"inside camera vc, receiving chosen pin with URL: %@", pinURL);
+    
+    [self.mainPic setImageWithURL:pinURL];
+    UIImage *chosenImage = self.mainPic.image;
+    
+    if (self.picIndex == 0) {
+        self.image1 = chosenImage;
+        [self.pic1 setImage:chosenImage forState:UIControlStateNormal];
+        [self.pic1 setBackgroundColor:[UIColor clearColor]];
+        self.currentQuestion.image1 = pinURL;
+    } else {
+        self.image2 = chosenImage;
+        [self.pic2 setImage:chosenImage forState:UIControlStateNormal];
+        [self.pic2 setBackgroundColor:[UIColor clearColor]];
+        self.currentQuestion.image2 = pinURL;
+    }
+    
+    // Select next picture
+    [self selectPic:(self.picIndex + 1) % 2];
+    
+    // Set BOOL so we know we can possibly move onto QuestionVC
+    self.justSelectedImage = YES;
+    
+    
 }
 
 # pragma mark - QuestionVCDelegate methods
@@ -392,6 +420,5 @@
     self.cameraButton.hidden = YES;
     self.pinterestButton.hidden = YES;
 }
-
 
 @end

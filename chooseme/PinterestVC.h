@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol PinterestVCDelegate <NSObject>
+- (void)pinChosen:(NSURL *)pinURL;
+@end
+
 @interface PinterestVC : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate>
 
+@property (nonatomic, weak) id <PinterestVCDelegate> delegate;
 @end

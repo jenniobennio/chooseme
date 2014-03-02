@@ -95,8 +95,10 @@
     self.currentQuestion = [[Question alloc] init];
     
     // Pre Fetching
-    [FacebookClient instance];
-    [PinterestClient instance];
+    void (^success)(void) = ^void {
+        [PinterestClient instance]; // Pinterest depends on facebook id values.
+    };
+    [[FacebookClient instance] meRequest:success];
     
     // Add tapRecognizer
     // FIXME: Removed the tap gesture recognizer because pressing on the Pinterest/ camera/ library icons triggered it

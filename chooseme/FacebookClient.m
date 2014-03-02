@@ -22,13 +22,6 @@
     return instance;
 }
 
-- (id) init {
-    if (self = [super init]) {
-        [self meRequest:nil];
-    }
-    return self;
-}
-
 - (void) meRequest:(void (^)())onSuccess {
     // Load my data
     // Create request for user's Facebook data

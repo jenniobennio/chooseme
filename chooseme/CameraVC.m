@@ -12,6 +12,7 @@
 #import "UIImage+mask.h"
 #import "UIImageView+AFNetworking.h"
 #import "FacebookClient.h"
+#import "PinterestClient.h"
 
 @interface CameraVC ()
 
@@ -93,7 +94,9 @@
     // Init currentQuestion
     self.currentQuestion = [[Question alloc] init];
     
+    // Pre Fetching
     [FacebookClient instance];
+    [PinterestClient instance];
     
     // Add tapRecognizer
     // FIXME: Removed the tap gesture recognizer because pressing on the Pinterest/ camera/ library icons triggered it
@@ -283,8 +286,6 @@
 # pragma mark - PinterestVCDelegate methods
 
 - (void)pinChosen:(NSURL *)pinURL {
-    NSLog(@"inside camera vc, receiving chosen pin with URL: %@", pinURL);
-    
     [self.mainPic setImageWithURL:pinURL];
     UIImage *chosenImage = self.mainPic.image;
     

@@ -45,8 +45,7 @@
     [self.collectionView setCollectionViewLayout:flowLayout];
     self.collectionView.backgroundColor = [UIColor clearColor];
     
-    PinterestClient *pinterestClient = [[PinterestClient alloc] init];
-    [pinterestClient get:^(NSMutableArray *pins) {
+    [[PinterestClient instance] get:^(NSMutableArray *pins) {
         self.pins = pins;
         [self.collectionView reloadData];
     }];

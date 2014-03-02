@@ -48,17 +48,15 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="uW2-Ir-H9s" firstAttribute="leading" secondItem="5K9-WB-CGC" secondAttribute="trailing" constant="35" id="7YA-Pd-VVv"/>
-                <constraint firstItem="03y-SX-BVg" firstAttribute="top" relation="greaterThanOrEqual" secondItem="1" secondAttribute="top" constant="103" id="7y2-aJ-BrO"/>
-                <constraint firstItem="5K9-WB-CGC" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="20" id="BQd-GY-3Kx"/>
-                <constraint firstItem="03y-SX-BVg" firstAttribute="top" secondItem="uW2-Ir-H9s" secondAttribute="bottom" constant="24" id="Bq9-ak-7gf"/>
-                <constraint firstAttribute="bottom" secondItem="03y-SX-BVg" secondAttribute="bottom" id="Iek-ZJ-RW6"/>
-                <constraint firstItem="03y-SX-BVg" firstAttribute="top" secondItem="5K9-WB-CGC" secondAttribute="bottom" constant="8" id="dLc-yL-cDj"/>
-                <constraint firstAttribute="trailing" secondItem="uW2-Ir-H9s" secondAttribute="trailing" constant="87" id="doA-fa-8xP"/>
-                <constraint firstAttribute="trailing" secondItem="03y-SX-BVg" secondAttribute="trailing" id="hYe-Jr-ZDa"/>
-                <constraint firstItem="03y-SX-BVg" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="rEA-o5-zMc"/>
-                <constraint firstItem="03y-SX-BVg" firstAttribute="top" secondItem="5K9-WB-CGC" secondAttribute="bottom" constant="10" id="rUr-cc-RQC"/>
-                <constraint firstItem="uW2-Ir-H9s" firstAttribute="leading" secondItem="5K9-WB-CGC" secondAttribute="trailing" constant="15" id="rqn-sk-Tef"/>
+                <constraint firstItem="03y-SX-BVg" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="7HQ-e7-sis"/>
+                <constraint firstItem="uW2-Ir-H9s" firstAttribute="leading" secondItem="5K9-WB-CGC" secondAttribute="trailing" constant="15" id="M5J-eM-Lyt"/>
+                <constraint firstAttribute="bottom" secondItem="03y-SX-BVg" secondAttribute="bottom" id="NOR-fM-1qv"/>
+                <constraint firstItem="uW2-Ir-H9s" firstAttribute="leading" secondItem="5K9-WB-CGC" secondAttribute="trailing" constant="15" id="NwH-Ii-X7g"/>
+                <constraint firstItem="5K9-WB-CGC" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="20" id="Ru0-Hd-Urm"/>
+                <constraint firstItem="03y-SX-BVg" firstAttribute="top" secondItem="uW2-Ir-H9s" secondAttribute="bottom" constant="24" id="rnX-G2-A6j"/>
+                <constraint firstAttribute="trailing" secondItem="03y-SX-BVg" secondAttribute="trailing" id="sdc-oS-zDM"/>
+                <constraint firstAttribute="trailing" secondItem="uW2-Ir-H9s" secondAttribute="trailing" constant="87" id="xKe-vv-MCh"/>
+                <constraint firstItem="03y-SX-BVg" firstAttribute="top" secondItem="5K9-WB-CGC" secondAttribute="bottom" constant="8" id="xKu-9K-WGG"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>

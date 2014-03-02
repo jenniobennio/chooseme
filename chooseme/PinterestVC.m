@@ -9,6 +9,7 @@
 #import "PinterestVC.h"
 #import "PinterestClient.h"
 #import "PinCell.h"
+#import "MBProgressHUD.h"
 
 @interface PinterestVC ()
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
@@ -45,9 +46,11 @@
     [self.collectionView setCollectionViewLayout:flowLayout];
     self.collectionView.backgroundColor = [UIColor clearColor];
     
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [[PinterestClient instance] get:^(NSMutableArray *pins) {
         self.pins = pins;
         [self.collectionView reloadData];
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
     }];
 }
 

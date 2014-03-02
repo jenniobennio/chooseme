@@ -9,6 +9,7 @@
 #import "GoogleVC.h"
 #import "GoogleClient.h"
 #import "PinCell.h"
+#import "MBProgressHUD.h"
 
 @interface GoogleVC ()
 
@@ -73,6 +74,7 @@
 {
     [self clearResults];
     [self handleSearch:searchBar.text];
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [searchBar resignFirstResponder];
 }
 
@@ -100,6 +102,7 @@
         } else {
             NSLog(@"reloading. %d %d", self.start, self.searchResults.count);
             [self.collectionView reloadData];
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
         }
     }];
 }

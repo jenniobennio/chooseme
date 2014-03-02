@@ -227,7 +227,8 @@ takePicButtonLongPress;
     NSLog(@"choose pic from gallery");
     if (self.shouldSetDefaultPicSource) {
         self.defaultPicSource = self.galleryButton;
-        [self.takePicButton setImage:self.galleryButton.imageView.image forState:UIControlStateNormal];
+        [self.takePicButton setImage:[UIImage imageNamed:@"stack_of_photos-128.png"] forState:UIControlStateNormal];
+        self.takePicButton.titleLabel.text = @"";
         self.shouldSetDefaultPicSource = NO;
     }
     [self choosePicFromLib];
@@ -238,7 +239,8 @@ takePicButtonLongPress;
     NSLog(@"choose pic from pinterest.");
     if (self.shouldSetDefaultPicSource) {
         self.defaultPicSource = self.pinterestButton;
-        [self.takePicButton setImage:self.pinterestButton.imageView.image forState:UIControlStateNormal];
+        [self.takePicButton setImage:[UIImage imageNamed:@"pinterest-128.png"] forState:UIControlStateNormal];
+        self.takePicButton.titleLabel.text = @"";
         self.shouldSetDefaultPicSource = NO;
     }
     [self hideImageSourceButtons];
@@ -444,7 +446,8 @@ takePicButtonLongPress;
     
     if (self.shouldSetDefaultPicSource) {
         self.defaultPicSource = self.cameraButton;
-        [self.takePicButton setImage:self.cameraButton.imageView.image forState:UIControlStateNormal];
+        [self.takePicButton setImage:[UIImage imageNamed:@"slr_camera-128.png"] forState:UIControlStateNormal];
+        self.takePicButton.titleLabel.text = @"";
         self.shouldSetDefaultPicSource = NO;
     }
 

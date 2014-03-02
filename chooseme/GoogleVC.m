@@ -7,9 +7,11 @@
 //
 
 #import "GoogleVC.h"
+#import "GoogleClient.h"
 
 @interface GoogleVC ()
 
+@property(strong, nonatomic) NSMutableArray *searchResults;
 @end
 
 @implementation GoogleVC
@@ -51,6 +53,11 @@
 - (void) handleSearch:(UISearchBar *)searchBar
 {
     NSLog(@"search text is %@", searchBar.text);
+    
+    [[GoogleClient instance] get:searchBar.text andCallback:^(NSMutableArray *results) {
+        self.searchResults = results;
+        NSLog(@"search results are : %@", self.searchResults);
+    }];
 }
 
 - (void) clearSearch {

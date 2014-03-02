@@ -23,8 +23,8 @@
 }
 
 - (void) get:(NSString *)query andCallback:(void (^)(NSMutableArray *results))success {
-    NSString *baseURL = @"https://ajax.googleapis.com/ajax/services/search/images";
-    NSString *queryURL = baseURL; // add more stuff to this
+    NSString *baseURL = @"https://ajax.googleapis.com/ajax/services/search/images?rsz=8&start=0&v=1.0&q=";
+    NSString *queryURL = [NSString stringWithFormat:@"%@%@", baseURL, query];
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     
@@ -33,6 +33,10 @@
         NSMutableArray *results = [[NSMutableArray alloc] init];
         
         // grab the URLs out of the results array here
+        NSDictionary *allResults = [[responseObject objectForKey:@"responseData"] objectForKey:@"results"];
+        for (NSDictionary *imageResult in allResults) {
+            [results addObject:[imageResult objectForKey:@"url"]];
+        }
         
         if (success) {
             success(results);

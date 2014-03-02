@@ -27,9 +27,13 @@
 @property (weak, nonatomic) IBOutlet UIButton *galleryButton;
 @property (weak, nonatomic) IBOutlet UIButton *cameraButton;
 @property (weak, nonatomic) IBOutlet UIButton *pinterestButton;
+@property (weak, nonatomic) UIButton *defaultPicSource;
+@property (nonatomic) BOOL shouldSetDefaultPicSource;
 
 // Button actions
 - (IBAction)takePic:(id)sender;
+- (void)
+takePicButtonLongPress;
 - (IBAction)onPic1:(id)sender;
 - (IBAction)onPic2:(id)sender;
 - (IBAction)onMe:(id)sender;
@@ -87,6 +91,11 @@
     [self.takePicButton.titleLabel setAdjustsFontSizeToFitWidth:YES];
     [self.takePicButton setTitle:@"+" forState:UIControlStateNormal];
     [self.takePicButton setTitle:@"REDO" forState:UIControlStateHighlighted];
+    
+    UILongPressGestureRecognizer *longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(takePicButtonLongPress)];
+    longPressRecognizer.delegate = self;
+    longPressRecognizer.minimumPressDuration = 1.0; //seconds
+    [self.takePicButton addGestureRecognizer:longPressRecognizer];
     
     [self.friendsButton setImage:[[UIImage imageNamed:@"112-group.png"] maskWithColor:[UIColor whiteColor]] forState:UIControlStateNormal];
     [self.meButton setImage:[[UIImage imageNamed:@"111-user.png"] maskWithColor:[UIColor whiteColor]] forState:UIControlStateNormal];
@@ -183,6 +192,17 @@
 - (IBAction)choosePicSource:(id)sender {
     NSLog(@"choose pic source.");
     
+    if (self.defaultPicSource != nil) {
+        if (self.defaultPicSource == self.galleryButton) {
+            [self choosePicFromGallery:nil];
+        } else if (self.defaultPicSource == self.pinterestButton) {
+            [self choosePicFromPinterest:nil];
+        } else {
+            [self takePicFromCamera];
+        }
+        return;
+    }
+    
     if (self.galleryButton.hidden) {
         self.galleryButton.hidden = NO;
         self.cameraButton.hidden = NO;
@@ -192,14 +212,35 @@
     }
 }
 
+- (void) takePicButtonLongPress {
+    NSLog(@"receving long press.");
+    self.shouldSetDefaultPicSource = true;
+    
+    if (self.galleryButton.hidden) {
+        self.galleryButton.hidden = NO;
+        self.cameraButton.hidden = NO;
+        self.pinterestButton.hidden = NO;
+    }
+}
+
 - (IBAction)choosePicFromGallery:(id)sender {
     NSLog(@"choose pic from gallery");
+    if (self.shouldSetDefaultPicSource) {
+        self.defaultPicSource = self.galleryButton;
+        [self.takePicButton setImage:self.galleryButton.imageView.image forState:UIControlStateNormal];
+        self.shouldSetDefaultPicSource = NO;
+    }
     [self choosePicFromLib];
     [self hideImageSourceButtons];
 }
 
 - (IBAction)choosePicFromPinterest:(id)sender {
     NSLog(@"choose pic from pinterest.");
+    if (self.shouldSetDefaultPicSource) {
+        self.defaultPicSource = self.pinterestButton;
+        [self.takePicButton setImage:self.pinterestButton.imageView.image forState:UIControlStateNormal];
+        self.shouldSetDefaultPicSource = NO;
+    }
     [self hideImageSourceButtons];
     
     PinterestVC *pinterestVC = [[PinterestVC alloc] initWithNibName:@"PinterestVC" bundle:nil];
@@ -283,6 +324,12 @@
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     [picker dismissViewControllerAnimated:YES completion:NULL];
+}
+
+#pragma mark - GestureRecognizerDelegate methods 
+//used for long press
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    return YES;
 }
 
 # pragma mark - PinterestVCDelegate methods
@@ -394,6 +441,12 @@
 - (void)takePicFromCamera
 {
     NSLog(@"Take pic from camera");
+    
+    if (self.shouldSetDefaultPicSource) {
+        self.defaultPicSource = self.cameraButton;
+        [self.takePicButton setImage:self.cameraButton.imageView.image forState:UIControlStateNormal];
+        self.shouldSetDefaultPicSource = NO;
+    }
 
     // This doesn't work in the iOS simulator-- Need a real device to test camera
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];

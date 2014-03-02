@@ -17,7 +17,7 @@
 @end
 
 @interface CameraVC : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate, QuestionVCDelegate,
-    PinterestVCDelegate>
+    PinterestVCDelegate, UIGestureRecognizerDelegate>
 
 // CameraVC's delegate will be the AppViewController for swipe navigating between pages
 @property (nonatomic, weak) id<CameraVCDelegate> delegate;

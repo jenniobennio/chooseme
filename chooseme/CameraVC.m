@@ -260,7 +260,7 @@ takePicButtonLongPress;
 - (IBAction)choosePicFromGoogle:(id)sender {
     NSLog(@"choose pic from google.");
     if (self.shouldSetDefaultPicSource) {
-        self.defaultPicSource = self.pinterestButton;
+        self.defaultPicSource = self.searchButton;
         [self.takePicButton setImage:[UIImage imageNamed:@"search-128.png"] forState:UIControlStateNormal];
         self.takePicButton.titleLabel.text = @"";
         self.shouldSetDefaultPicSource = NO;

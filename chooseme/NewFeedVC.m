@@ -11,6 +11,7 @@
 #import "UserQuestionView.h"
 #import "NewFeedCell.h"
 #import "Question.h"
+#import "FacebookClient.h"
 
 @interface NewFeedVC ()
 
@@ -78,33 +79,20 @@
     [self.feedTable addSubview:refresh];
     
     // Load my data
-    // Create request for user's Facebook data
-    FBRequest *request = [FBRequest requestForMe];
-    
-    // Send request to Facebook
-    [request startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
-        if (!error) {
-            // result is a dictionary with the user's Facebook data
-            NSDictionary *userData = (NSDictionary *)result;
-            
-            self.myFacebookID = userData[@"id"];
-            NSString *name = userData[@"name"];
-            NSURL *pictureURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", self.myFacebookID]];
-            
-            // Assign the data accordingly
-            self.myName = name;
-            self.myPic = [UIImage imageWithData:[NSData dataWithContentsOfURL:pictureURL]];
-            
-            // Only reload image instead of entire table
-//            NewFeedCell *cell = (NewFeedCell *)[self.feedTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-//            [cell reloadUserPic:self.myPic];
-            
-            // load the questions array
-            [self loadQuestionsArray:self.myFacebookID];
-            
-        }
-    }];
+    void (^onSuccess)(void) = ^{
+        FacebookClient *facebookClient = [FacebookClient instance];
 
+        self.myName = [facebookClient myName];
+        self.myFacebookID = [facebookClient myFacebookID];
+        self.myPic = [facebookClient myPic];
+        
+        [self loadQuestionsArray:self.myFacebookID];
+    };
+    if ([[FacebookClient instance] myFacebookID] == nil) { // hasn't loaded yet
+        [[FacebookClient instance] meRequest:onSuccess];
+    } else {
+        onSuccess();
+    }
 }
 
 - (void) loadQuestionsArray:(NSString *)facebookId {

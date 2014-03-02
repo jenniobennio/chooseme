@@ -11,6 +11,7 @@
 #import "Question.h"
 #import "UIImage+mask.h"
 #import "UIImageView+AFNetworking.h"
+#import "FacebookClient.h"
 
 @interface CameraVC ()
 
@@ -91,6 +92,8 @@
     
     // Init currentQuestion
     self.currentQuestion = [[Question alloc] init];
+    
+    [FacebookClient instance];
     
     // Add tapRecognizer
     // FIXME: Removed the tap gesture recognizer because pressing on the Pinterest/ camera/ library icons triggered it

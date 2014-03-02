@@ -22,7 +22,8 @@
     return instance;
 }
 
-- (void) get:(NSString *)query andCallback:(void (^)(NSMutableArray *results))success {
+- (void) get:(NSString *)rawQuery andCallback:(void (^)(NSMutableArray *results))success {
+    NSString *query = [rawQuery stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSString *baseURL = @"https://ajax.googleapis.com/ajax/services/search/images?rsz=8&start=0&v=1.0&q=";
     NSString *queryURL = [NSString stringWithFormat:@"%@%@", baseURL, query];
     

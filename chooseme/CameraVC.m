@@ -13,6 +13,7 @@
 #import "UIImageView+AFNetworking.h"
 #import "FacebookClient.h"
 #import "PinterestClient.h"
+#import "GoogleVC.h"
 
 @interface CameraVC ()
 
@@ -265,9 +266,9 @@ takePicButtonLongPress;
         self.shouldSetDefaultPicSource = NO;
     }
     [self hideImageSourceButtons];
-
     
-    NSLog(@"would launch google view controller here.");
+    GoogleVC *googleVC = [[GoogleVC alloc] initWithNibName:@"GoogleVC" bundle:nil];
+    [self presentViewController:googleVC animated:YES completion:nil];
 }
 
 // For testing: Pre-fill in images

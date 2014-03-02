@@ -65,6 +65,8 @@
 		D514C3F918C2F484007DF913 /* GoogleClient.m in Sources */ = {isa = PBXBuildFile; fileRef = D514C3F818C2F484007DF913 /* GoogleClient.m */; };
 		D514C3FF18C2F81E007DF913 /* search-32.png in Resources */ = {isa = PBXBuildFile; fileRef = D514C3FE18C2F81E007DF913 /* search-32.png */; };
 		D514C40118C2F828007DF913 /* search-128.png in Resources */ = {isa = PBXBuildFile; fileRef = D514C40018C2F828007DF913 /* search-128.png */; };
+		D514C40A18C30222007DF913 /* GoogleVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D514C40818C30222007DF913 /* GoogleVC.m */; };
+		D514C40B18C30222007DF913 /* GoogleVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D514C40918C30222007DF913 /* GoogleVC.xib */; };
 		D5438AD618C1B34A00C94D3B /* PinterestVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D5438AD418C1B34A00C94D3B /* PinterestVC.m */; };
 		D5438AD718C1B34A00C94D3B /* PinterestVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5438AD518C1B34A00C94D3B /* PinterestVC.xib */; };
 		D5438ADA18C1B47F00C94D3B /* PinterestClient.m in Sources */ = {isa = PBXBuildFile; fileRef = D5438AD918C1B47F00C94D3B /* PinterestClient.m */; };
@@ -172,6 +174,9 @@
 		D514C3F818C2F484007DF913 /* GoogleClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoogleClient.m; sourceTree = "<group>"; };
 		D514C3FE18C2F81E007DF913 /* search-32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "search-32.png"; sourceTree = "<group>"; };
 		D514C40018C2F828007DF913 /* search-128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "search-128.png"; sourceTree = "<group>"; };
+		D514C40718C30222007DF913 /* GoogleVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoogleVC.h; sourceTree = "<group>"; };
+		D514C40818C30222007DF913 /* GoogleVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoogleVC.m; sourceTree = "<group>"; };
+		D514C40918C30222007DF913 /* GoogleVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GoogleVC.xib; sourceTree = "<group>"; };
 		D5438AD318C1B34A00C94D3B /* PinterestVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinterestVC.h; sourceTree = "<group>"; };
 		D5438AD418C1B34A00C94D3B /* PinterestVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinterestVC.m; sourceTree = "<group>"; };
 		D5438AD518C1B34A00C94D3B /* PinterestVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PinterestVC.xib; sourceTree = "<group>"; };
@@ -310,6 +315,9 @@
 				D5438AD318C1B34A00C94D3B /* PinterestVC.h */,
 				D5438AD418C1B34A00C94D3B /* PinterestVC.m */,
 				D5438AD518C1B34A00C94D3B /* PinterestVC.xib */,
+				D514C40718C30222007DF913 /* GoogleVC.h */,
+				D514C40818C30222007DF913 /* GoogleVC.m */,
+				D514C40918C30222007DF913 /* GoogleVC.xib */,
 				D5438ADB18C1C3B400C94D3B /* PinCell.h */,
 				D5438ADC18C1C3B400C94D3B /* PinCell.m */,
 				D5438ADE18C1C49500C94D3B /* PinCell.xib */,
@@ -489,6 +497,7 @@
 				263295E818B33DA700A84CB2 /* QuestionVC.xib in Resources */,
 				2680195D18C08E9000B4A22D /* 29-heart.png in Resources */,
 				D514C3F618C2EFC0007DF913 /* slr_camera-128.png in Resources */,
+				D514C40B18C30222007DF913 /* GoogleVC.xib in Resources */,
 				D514C40118C2F828007DF913 /* search-128.png in Resources */,
 				D5074FE118C06F130028ED2F /* pinterest-32.png in Resources */,
 				2632962D18B5DBDE00A84CB2 /* 111834.jpg in Resources */,
@@ -584,6 +593,7 @@
 				26644CC318B723C000806490 /* AddFriendCell.m in Sources */,
 				2680195518C0770800B4A22D /* NewFeedVC.m in Sources */,
 				263295E718B33DA700A84CB2 /* QuestionVC.m in Sources */,
+				D514C40A18C30222007DF913 /* GoogleVC.m in Sources */,
 				D5438ADA18C1B47F00C94D3B /* PinterestClient.m in Sources */,
 				26351A3118A5D24D000A30C9 /* CameraVC.m in Sources */,
 				D5438AD618C1B34A00C94D3B /* PinterestVC.m in Sources */,

@@ -27,6 +27,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *galleryButton;
 @property (weak, nonatomic) IBOutlet UIButton *cameraButton;
 @property (weak, nonatomic) IBOutlet UIButton *pinterestButton;
+@property (weak, nonatomic) IBOutlet UIButton *searchButton;
 @property (weak, nonatomic) UIButton *defaultPicSource;
 @property (nonatomic) BOOL shouldSetDefaultPicSource;
 
@@ -41,6 +42,7 @@ takePicButtonLongPress;
 - (IBAction)choosePicSource:(id)sender;
 - (IBAction)choosePicFromGallery:(id)sender;
 - (IBAction)choosePicFromPinterest:(id)sender;
+- (IBAction)choosePicFromGoogle:(id)sender;
 
 // For testing only
 - (IBAction)quickFill:(id)sender;
@@ -197,6 +199,8 @@ takePicButtonLongPress;
             [self choosePicFromGallery:nil];
         } else if (self.defaultPicSource == self.pinterestButton) {
             [self choosePicFromPinterest:nil];
+        } else if (self.defaultPicSource == self.searchButton) {
+            [self choosePicFromGoogle:nil];
         } else {
             [self takePicFromCamera];
         }
@@ -207,6 +211,7 @@ takePicButtonLongPress;
         self.galleryButton.hidden = NO;
         self.cameraButton.hidden = NO;
         self.pinterestButton.hidden = NO;
+        self.searchButton.hidden = NO;
     } else {
         [self hideImageSourceButtons];
     }
@@ -220,6 +225,7 @@ takePicButtonLongPress;
         self.galleryButton.hidden = NO;
         self.cameraButton.hidden = NO;
         self.pinterestButton.hidden = NO;
+        self.searchButton.hidden = NO;
     }
 }
 
@@ -248,6 +254,20 @@ takePicButtonLongPress;
     PinterestVC *pinterestVC = [[PinterestVC alloc] initWithNibName:@"PinterestVC" bundle:nil];
     pinterestVC.delegate = self;
     [self presentViewController:pinterestVC animated:YES completion:nil];
+}
+
+- (IBAction)choosePicFromGoogle:(id)sender {
+    NSLog(@"choose pic from google.");
+    if (self.shouldSetDefaultPicSource) {
+        self.defaultPicSource = self.pinterestButton;
+        [self.takePicButton setImage:[UIImage imageNamed:@"search-128.png"] forState:UIControlStateNormal];
+        self.takePicButton.titleLabel.text = @"";
+        self.shouldSetDefaultPicSource = NO;
+    }
+    [self hideImageSourceButtons];
+
+    
+    NSLog(@"would launch google view controller here.");
 }
 
 // For testing: Pre-fill in images
@@ -480,6 +500,7 @@ takePicButtonLongPress;
     self.galleryButton.hidden = YES;
     self.cameraButton.hidden = YES;
     self.pinterestButton.hidden = YES;
+    self.searchButton.hidden = YES;
 }
 
 @end

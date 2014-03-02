@@ -22,10 +22,13 @@
     return instance;
 }
 
-- (void) get:(NSString *)rawQuery andCallback:(void (^)(NSMutableArray *results))success {
+- (void) get:(NSString *)rawQuery withStart:(NSInteger)start andCallback:(void (^)(NSMutableArray *results))success {
     NSString *query = [rawQuery stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSString *baseURL = @"https://ajax.googleapis.com/ajax/services/search/images?rsz=8&start=0&v=1.0&q=";
-    NSString *queryURL = [NSString stringWithFormat:@"%@%@", baseURL, query];
+    NSString *baseURL = @"https://ajax.googleapis.com/ajax/services/search/images?rsz=8"; //start=%@&v=1.0&q=%@";
+    NSString *startParam = [NSString stringWithFormat:@"&start=%d", start];
+    NSString *versionParam = @"&v=1.0";
+    NSString *queryParam = [NSString stringWithFormat:@"&q=%@", query];
+    NSString *queryURL = [NSString stringWithFormat:@"%@%@%@%@", baseURL, startParam, versionParam, queryParam];
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     

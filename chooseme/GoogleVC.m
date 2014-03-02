@@ -13,6 +13,7 @@
 @interface GoogleVC ()
 
 @property(strong, nonatomic) NSMutableArray *searchResults;
+@property(nonatomic) NSInteger start;
 @end
 
 @implementation GoogleVC
@@ -22,6 +23,8 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        self.start = 0;
+        self.searchResults = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -68,7 +71,8 @@
 # pragma mark - UISearchBar delegate methods
 - (void)searchBarSearchButtonClicked:(UISearchBar*)searchBar
 {
-    [self handleSearch:searchBar];
+    [self clearResults];
+    [self handleSearch:searchBar.text];
     [searchBar resignFirstResponder];
 }
 
@@ -84,16 +88,30 @@
     }
 }
 
-- (void) handleSearch:(UISearchBar *)searchBar
+- (void) handleSearch:(NSString *)searchText
 {
-    [[GoogleClient instance] get:searchBar.text andCallback:^(NSMutableArray *results) {
-        self.searchResults = results;
-        [self.collectionView reloadData];
+    [[GoogleClient instance] get:searchText withStart:self.start andCallback:^(NSMutableArray *results) {
+        [self.searchResults addObjectsFromArray:results];
+        self.start = self.start + 8;
+        
+        if (self.start < 20) {
+            NSLog(@"updating start and calling recursive %d %d", self.start, self.searchResults.count);
+            [self handleSearch:searchText];
+        } else {
+            NSLog(@"reloading. %d %d", self.start, self.searchResults.count);
+            [self.collectionView reloadData];
+        }
     }];
 }
 
 - (void) clearSearch {
     self.searchBar.text = @"";
+    [self clearResults];
+}
+
+- (void) clearResults {
+    [self.searchResults removeAllObjects];
+    self.start = 0;
 }
 
 #pragma mark - random methods

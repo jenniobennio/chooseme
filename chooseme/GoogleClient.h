@@ -12,6 +12,6 @@
 
 + (GoogleClient *) instance;
 
-- (void) get:(NSString *)query andCallback:(void (^)(NSMutableArray *results))success;
+- (void) get:(NSString *)query withStart:(NSInteger)start andCallback:(void (^)(NSMutableArray *results))success;
 
 @end

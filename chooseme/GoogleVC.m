@@ -8,6 +8,7 @@
 
 #import "GoogleVC.h"
 #import "GoogleClient.h"
+#import "PinCell.h"
 
 @interface GoogleVC ()
 
@@ -29,6 +30,39 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    [self.collectionView registerClass:[PinCell class] forCellWithReuseIdentifier:@"PinCell"];
+    UINib *cellNib = [UINib nibWithNibName:@"PinCell" bundle:nil];
+    [self.collectionView registerNib:cellNib forCellWithReuseIdentifier:@"PinCell"];
+    
+    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+    [flowLayout setItemSize:CGSizeMake(100, 100)];
+    [flowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
+    
+    [self.collectionView setCollectionViewLayout:flowLayout];
+    self.collectionView.backgroundColor = [UIColor clearColor];
+}
+
+#pragma mark - UICollectionView methods
+
+- (NSInteger) collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return self.searchResults.count;
+}
+
+- (UICollectionViewCell *) collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    NSString *identifier = @"PinCell";
+    PinCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
+    
+    NSString *pinURL = [self.searchResults objectAtIndex:indexPath.row];
+    [cell setPinURL:pinURL];
+    
+    return cell;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    NSString *pinURL = [self.searchResults objectAtIndex:indexPath.row];
+    [self.delegate pinChosen:[NSURL URLWithString:pinURL]];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 # pragma mark - UISearchBar delegate methods
@@ -52,11 +86,9 @@
 
 - (void) handleSearch:(UISearchBar *)searchBar
 {
-    NSLog(@"search text is %@", searchBar.text);
-    
     [[GoogleClient instance] get:searchBar.text andCallback:^(NSMutableArray *results) {
         self.searchResults = results;
-        NSLog(@"search results are : %@", self.searchResults);
+        [self.collectionView reloadData];
     }];
 }
 

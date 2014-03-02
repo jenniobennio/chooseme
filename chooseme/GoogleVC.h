@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PinterestVC.h"
 
-@interface GoogleVC : UIViewController <UISearchBarDelegate>
+@interface GoogleVC : UIViewController <UISearchBarDelegate, UICollectionViewDataSource, UICollectionViewDelegate>
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (nonatomic, weak) id <PinterestVCDelegate> delegate;
 
 @end

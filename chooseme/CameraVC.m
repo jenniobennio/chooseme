@@ -268,6 +268,7 @@ takePicButtonLongPress;
     [self hideImageSourceButtons];
     
     GoogleVC *googleVC = [[GoogleVC alloc] initWithNibName:@"GoogleVC" bundle:nil];
+    googleVC.delegate = self;
     [self presentViewController:googleVC animated:YES completion:nil];
 }
 

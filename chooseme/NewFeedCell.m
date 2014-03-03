@@ -202,6 +202,7 @@
 - (void)doHeartPic:(UITapGestureRecognizer *)tap
 {
     if (tap.numberOfTapsRequired == 2) {
+        // do the animation no matter what
         UIImageView *largeHeart = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"like-256.png"]];
         largeHeart.image = [largeHeart.image maskWithColor:[UIColor colorWithRed:1 green:0.07 blue:0.5 alpha:0.8]];
         largeHeart.center = self.pView.bigPic.center;
@@ -216,6 +217,18 @@
                 [largeHeart removeFromSuperview];
             }
         }];
+        
+        // double tap can only like an image, so if your vote already matches the current displayed image, do nothing.
+        int vote = 0;
+        if ([[[PFUser currentUser] objectId] isEqualToString:[self.q.author objectId]]) {
+            vote = [self.q.youVoted intValue];
+        } else {
+            vote = [self.q vote];
+        }
+        int image = (self.pView.thumbnail1.alpha == 1) ? 1 : 2;
+        if (vote == image) {
+            return;
+        }
     }
     
     [self doHeartPic];

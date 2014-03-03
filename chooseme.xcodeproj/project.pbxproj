@@ -64,6 +64,7 @@
 		26BBA6F818C41DCC0071F80D /* FriendCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26BBA6F718C41DCC0071F80D /* FriendCell.xib */; };
 		26BBA6FA18C429840071F80D /* arrow-48.png in Resources */ = {isa = PBXBuildFile; fileRef = 26BBA6F918C429840071F80D /* arrow-48.png */; };
 		26BBA6FC18C438040071F80D /* icon_5440.png in Resources */ = {isa = PBXBuildFile; fileRef = 26BBA6FB18C438040071F80D /* icon_5440.png */; };
+		26BBA6FF18C446680071F80D /* Colorful.m in Sources */ = {isa = PBXBuildFile; fileRef = 26BBA6FE18C446680071F80D /* Colorful.m */; };
 		B031302B82C840708B86AE68 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43619A4B92F840368B218FE4 /* libPods.a */; };
 		D5074FD318C05EB70028ED2F /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5074FD218C05EB70028ED2F /* Parse.framework */; };
 		D5074FDD18C06EF30028ED2F /* slr_camera-32.png in Resources */ = {isa = PBXBuildFile; fileRef = D5074FDC18C06EF30028ED2F /* slr_camera-32.png */; };
@@ -182,6 +183,8 @@
 		26BBA6F718C41DCC0071F80D /* FriendCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendCell.xib; sourceTree = "<group>"; };
 		26BBA6F918C429840071F80D /* arrow-48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow-48.png"; sourceTree = "<group>"; };
 		26BBA6FB18C438040071F80D /* icon_5440.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_5440.png; sourceTree = "<group>"; };
+		26BBA6FD18C446680071F80D /* Colorful.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Colorful.h; sourceTree = "<group>"; };
+		26BBA6FE18C446680071F80D /* Colorful.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Colorful.m; sourceTree = "<group>"; };
 		39891BCB79A34F009E78550D /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		43619A4B92F840368B218FE4 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5074FD218C05EB70028ED2F /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
@@ -315,6 +318,8 @@
 				26351A2E18A5D24D000A30C9 /* CameraVC.h */,
 				26351A2F18A5D24D000A30C9 /* CameraVC.m */,
 				26351A3018A5D24D000A30C9 /* CameraVC.xib */,
+				26BBA6FD18C446680071F80D /* Colorful.h */,
+				26BBA6FE18C446680071F80D /* Colorful.m */,
 				26BBA6F418C41DBB0071F80D /* FriendCell.h */,
 				26BBA6F518C41DBB0071F80D /* FriendCell.m */,
 				26BBA6F718C41DCC0071F80D /* FriendCell.xib */,
@@ -649,6 +654,7 @@
 				D514C40A18C30222007DF913 /* GoogleVC.m in Sources */,
 				D5438ADA18C1B47F00C94D3B /* PinterestClient.m in Sources */,
 				26351A3118A5D24D000A30C9 /* CameraVC.m in Sources */,
+				26BBA6FF18C446680071F80D /* Colorful.m in Sources */,
 				D5438AD618C1B34A00C94D3B /* PinterestVC.m in Sources */,
 				26BBA6F618C41DBB0071F80D /* FriendCell.m in Sources */,
 			);

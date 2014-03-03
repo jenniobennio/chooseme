@@ -11,6 +11,7 @@
 #import "PictureView.h"
 #import "UIImage+mask.h"
 #import "FriendCell.h"
+#import "Colorful.h"
 
 @interface QuestionVC ()
 
@@ -77,8 +78,9 @@
     self.friendsView.backgroundColor = [UIColor clearColor];
     
     // Format title bar
-    UIColor *greenColor = [UIColor colorWithRed:0.329 green:0.733 blue:0.616 alpha:0.75];
-    self.titleView.backgroundColor = greenColor;
+    Colorful *colorManager = [Colorful sharedManager];
+    UIColor *color = colorManager.colors[colorManager.colorIndex];
+    self.titleView.backgroundColor = color;
     self.titleLabel.text = @"ASK A QUESTION";
     
     self.backButton.imageView.image = [self.backButton.imageView.image maskWithColor:[UIColor whiteColor]];
@@ -94,8 +96,8 @@
     [self.pView.bigPic setImage:self.question.image1];
     [self.pView.thumbnail1 setImage:self.question.image1 forState:UIControlStateNormal];
     [self.pView.thumbnail2 setImage:self.question.image2 forState:UIControlStateNormal];
-    self.pView.thumbnail1.layer.borderColor = [greenColor CGColor];
-    self.pView.thumbnail2.layer.borderColor = [greenColor CGColor];
+    self.pView.thumbnail1.layer.borderColor = [color CGColor];
+    self.pView.thumbnail2.layer.borderColor = [color CGColor];
     [self.pView highlightImage:1];
     [self.view addSubview:self.pView];
     [self.view sendSubviewToBack:self.pView];
@@ -198,6 +200,14 @@
             NSLog(@"failed to post question.");
         }
     }];
+    
+    // Pick the next color
+    // Note that we go backwards so that feed can go forward
+    Colorful *colorManager = [Colorful sharedManager];
+    if (colorManager.colorIndex == 0)
+        colorManager.colorIndex = colorManager.colors.count-1;
+    else
+        colorManager.colorIndex = colorManager.colorIndex-1;
     
     [self.delegate clearImages:YES];
     [self dismissViewControllerAnimated:YES completion:nil];

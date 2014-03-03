@@ -175,12 +175,6 @@
     // Need to set this so that top tableView can scrollToTop
     cell.pView.friendsVotedScrollView.scrollsToTop = NO;
     
-    // Set up button touch actions
-    [cell.pView.thumbnail1 addTarget:self action:@selector(onTapPic1:) forControlEvents:UIControlEventTouchUpInside];
-    cell.pView.thumbnail1.tag = 1;
-    [cell.pView.thumbnail2 addTarget:self action:@selector(onTapPic2:) forControlEvents:UIControlEventTouchUpInside];
-    cell.pView.thumbnail2.tag = 2;
-    
     // Set up gesture recognizers. Is this the right place to do this?
 //    UITapGestureRecognizer *tapPic1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTapPic1:)];
 //    UITapGestureRecognizer *tapPic2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTapPic2:)];
@@ -214,14 +208,6 @@
 }
 
 # pragma mark - private methods
-- (void)onTapPic1:(UIButton *)button
-{
-    NSLog(@"on tap button 1, tag = %d", button.tag);
-}
-- (void)onTapPic2:(UIButton *)button
-{
-    NSLog(@"on tap button 2, tag = %d", button.tag);
-}
 
 - (BOOL)isFriends
 {

@@ -45,6 +45,8 @@
 
 - (void)loadCell:(UIColor *)color withQuestion:(Question *)q withUserImage:(UIImage *)userImage
 {
+    self.q = q;
+    
     UIImage *image1 = q.image1;
     UIImage *image2 = q.image2;
     
@@ -66,7 +68,7 @@
     [self.pView.thumbnail1 setImage:image1 forState:UIControlStateNormal];
     [self.pView.thumbnail2 setImage:image2 forState:UIControlStateNormal];
 
-    // Set the big pig background color to fade from
+    // Set the big pic background color to fade from
     self.pView.bigPicBgColor.backgroundColor = color;
     // Load and fade in big pic
     [self reloadBigPic:image1];
@@ -76,6 +78,14 @@
     self.pView.thumbnail2.layer.borderColor = [color CGColor];
     [self.pView formatThumbnails];
     [self.pView highlightImage:1];
+    
+    // Set up button touch actions
+    [self.pView.thumbnail1 addTarget:self action:@selector(onTapPic1:) forControlEvents:UIControlEventTouchUpInside];
+    self.pView.thumbnail1.tag = 1;
+    [self.pView.thumbnail2 addTarget:self action:@selector(onTapPic2:) forControlEvents:UIControlEventTouchUpInside];
+    self.pView.thumbnail2.tag = 2;
+    
+    [self.pView enableSwipe];
     
     // Format icons
     [self.pView colorIcons];
@@ -113,6 +123,17 @@
     
     // Add as subview
     [self.contentView addSubview:self.uqView];
+}
+
+- (void)onTapPic1:(UIButton *)button
+{
+    [self reloadBigPic:self.q.image1];
+    [self.pView highlightImage:1];
+}
+- (void)onTapPic2:(UIButton *)button
+{
+    [self reloadBigPic:self.q.image2];
+    [self.pView highlightImage:2];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

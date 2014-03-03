@@ -15,6 +15,7 @@
 
 @property (strong, nonatomic) PictureView *pView;
 @property (strong, nonatomic) UserQuestionView *uqView;
+@property (strong, nonatomic) Question *q;
 
 - (void)reloadUserPic:(UIImage *)userImage;
 - (void)reloadBigPic:(UIImage *)image1;

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PictureView : UIView
+@interface PictureView : UIView <UIGestureRecognizerDelegate>
 @property (strong, nonatomic) IBOutlet UIImageView *bigPic;
 @property (strong, nonatomic) IBOutlet UIView *bigPicBgColor;
 @property (strong, nonatomic) IBOutlet UIButton *thumbnail1;
@@ -25,5 +25,6 @@
 - (void)highlightImage:(int)index;
 - (void)updateVotes:(int)votes;
 - (void)updateComments:(int)comments;
+- (void)enableSwipe;
 
 @end

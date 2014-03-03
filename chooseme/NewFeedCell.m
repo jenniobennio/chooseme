@@ -7,6 +7,7 @@
 //
 
 #import "NewFeedCell.h"
+#import "UIImage+mask.h"
 
 @implementation NewFeedCell
 
@@ -79,6 +80,7 @@
     [self.pView formatThumbnails];
     [self.pView highlightImage:1];
     
+    // ************* Image Switching *********************
     // Set up button touch actions
     [self.pView.thumbnail1 addTarget:self action:@selector(onTapPic1:) forControlEvents:UIControlEventTouchUpInside];
     self.pView.thumbnail1.tag = 1;
@@ -97,6 +99,16 @@
     
     [self.pView.bigPic addGestureRecognizer:rightSwipe];
     [self.pView.bigPic addGestureRecognizer:leftSwipe];
+    
+    // ************** Voting ********************************
+    // Enable double tap to vote
+    UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doHeartPic:)];
+    doubleTap.numberOfTapsRequired = 2;
+    [self.pView.bigPic addGestureRecognizer:doubleTap];
+    
+    self.pView.heartIcon.userInteractionEnabled = YES;
+    UITapGestureRecognizer *heartTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doHeartPic:)];
+    [self.pView.heartIcon addGestureRecognizer:heartTap];
     
     // Format icons
     [self.pView colorIcons];
@@ -164,6 +176,17 @@
     } else {
         [self onTapPic1:nil];
     }
+}
+
+- (void)doHeartPic:(UITapGestureRecognizer *)swipe
+{
+    [self doHeartPic];
+}
+
+- (void) doHeartPic
+{
+    NSLog(@"do heart pic. calling mask.");
+    self.pView.heartIcon.image = [self.pView.heartIcon.image maskWithColor:[UIColor colorWithRed:1 green:0.07 blue:0.5 alpha:0.8]];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

@@ -95,14 +95,11 @@ takePicButtonLongPress;
     self.takePicButton.layer.cornerRadius = 25;
     [self.takePicButton.titleLabel setAdjustsFontSizeToFitWidth:YES];
     [self.takePicButton setTitle:@"+" forState:UIControlStateNormal];
-    [self.takePicButton setTitle:@"REDO" forState:UIControlStateHighlighted];
+    [self.takePicButton setTitle:@"REDO" forState:UIControlStateSelected];
     
-    self.nextButton.imageView.image = [self.nextButton.imageView.image maskWithColor:[UIColor colorWithRed:0.329 green:0.733 blue:0.616 alpha:1]];
-    self.nextButton.backgroundColor = [UIColor colorWithWhite:.94 alpha:1];
-    self.nextButton.layer.cornerRadius = 25;
-    self.nextButton.layer.borderWidth = 1;
-    self.nextButton.layer.borderColor = [[UIColor colorWithRed:0.329 green:0.733 blue:0.616 alpha:0.75] CGColor];
-    self.nextButton.hidden = YES;
+//    self.nextButton.imageView.image = [self.nextButton.imageView.image maskWithColor:[UIColor whiteColor]];
+//    self.nextButton.imageView.image = [self.nextButton.imageView.image imageWithShadow];
+//    self.nextButton.hidden = YES;
     
     UILongPressGestureRecognizer *longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(takePicButtonLongPress)];
     longPressRecognizer.delegate = self;
@@ -141,17 +138,30 @@ takePicButtonLongPress;
     
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    if ([self.takePicButton.titleLabel.text isEqualToString:@"+"]) {
+        [self.takePicButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 8, 0)];
+    } else if ([self.takePicButton.titleLabel.text isEqualToString:@"REDO"]) {
+        [self.takePicButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 15, 0)];
+    } else {
+        [self.takePicButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+    }
+}
+
 - (void)viewDidAppear:(BOOL)animated
 {
-    self.nextButton.hidden = YES;
+    
+//    self.nextButton.hidden = YES;
     
     if (self.justSelectedImage) {
         // If both images are set, go to questionVC
         [self goToQuestionVC];
-    } else if (self.pic1.imageView.image && self.pic2.imageView.image) {
-        self.nextButton.imageView.image = [self.nextButton.imageView.image maskWithColor:[UIColor colorWithRed:0.329 green:0.733 blue:0.616 alpha:1]];
-        self.nextButton.hidden = NO;
     }
+    /*else if (self.pic1.imageView.image && self.pic2.imageView.image) {
+        self.nextButton.imageView.image = [self.nextButton.imageView.image maskWithColor:[UIColor whiteColor]];
+        self.nextButton.hidden = NO;
+    }*/
 }
 
 # pragma mark - actions from button presses
@@ -177,12 +187,16 @@ takePicButtonLongPress;
     
     if (self.currentQuestion.image1) {
         // REDO pic
-        self.takePicButton.highlighted = YES;
+        self.takePicButton.selected = YES;
     } else {
-        self.takePicButton.highlighted = NO;
+        self.takePicButton.selected = NO;
     }
     [self selectPic:0];
     self.mainPic.image = self.pic1.imageView.image;
+    
+    // Add these lines so we don't need the dumb-looking arrow
+    if (self.pic1.imageView.image && self.pic2.imageView.image)
+        [self goToQuestionVC];
 }
 
 - (IBAction)onPic2:(id)sender {
@@ -190,12 +204,16 @@ takePicButtonLongPress;
     
     if (self.currentQuestion.image2) {
         // REDO pic
-        self.takePicButton.highlighted = YES;
+        self.takePicButton.selected = YES;
     } else {
-        self.takePicButton.highlighted = NO;
+        self.takePicButton.selected = NO;
     }
     [self selectPic:1];
     self.mainPic.image = self.pic2.imageView.image;
+    
+    // Add these lines so we don't need the dumb-looking arrow
+    if (self.pic1.imageView.image && self.pic2.imageView.image)
+        [self goToQuestionVC];
 }
 
 - (IBAction)onMe:(id)sender {
@@ -320,7 +338,7 @@ takePicButtonLongPress;
     // A tap on the view is treated like an OK/ cancel, but
     // if both images are set, go to questionVC
     
-    self.takePicButton.highlighted = NO;
+    self.takePicButton.selected = NO;
     self.mainPic.image = nil;
     
     // Select next picture
@@ -422,7 +440,6 @@ takePicButtonLongPress;
     [self formatPic:self.pic2 isSelected:NO];
     
     self.takePicButton.selected = NO;
-    self.takePicButton.highlighted = NO;
 
     if (submit) {
         [self.delegate nextPage:self.index];

@@ -64,6 +64,11 @@
     
     self.pageVC = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
     
+    for (UIGestureRecognizer *recognizer in self.pageVC.gestureRecognizers) {
+//        recognizer.enabled = NO;
+        NSLog(@"Gesture recognizer");
+    }
+    
     self.pageVC.dataSource = self;
     [[self.pageVC view] setFrame:[[self view] bounds]];
     

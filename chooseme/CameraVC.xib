@@ -41,7 +41,6 @@
                         <constraint firstAttribute="width" constant="50" id="J6d-hY-gX8"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                    <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="8"/>
                     <state key="normal" title="+">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -170,14 +169,15 @@
                         <action selector="onClear:" destination="-1" eventType="touchUpInside" id="coc-Zo-pNI"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ipe-Fg-25A">
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ipe-Fg-25A">
                     <rect key="frame" x="254" y="391" width="50" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="50" id="OMw-nj-kds"/>
                         <constraint firstAttribute="height" constant="50" id="uQW-UN-jNz"/>
                     </constraints>
-                    <state key="normal" image="right-32.png">
+                    <size key="titleShadowOffset" width="1" height="1"/>
+                    <state key="normal" image="icon_5440.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -270,8 +270,8 @@
     <resources>
         <image name="111-user.png" width="24" height="21"/>
         <image name="112-group.png" width="32" height="21"/>
+        <image name="icon_5440.png" width="1200" height="1200"/>
         <image name="pinterest-32.png" width="32" height="32"/>
-        <image name="right-32.png" width="32" height="32"/>
         <image name="search-32.png" width="32" height="32"/>
         <image name="slr_camera-32.png" width="32" height="32"/>
         <image name="stack_of_photos-32.png" width="32" height="32"/>

@@ -11,5 +11,6 @@
 @interface UIImage (mask)
 
 -(UIImage *)maskWithColor:(UIColor *)color;
+- (UIImage*)imageWithShadow;
 
 @end

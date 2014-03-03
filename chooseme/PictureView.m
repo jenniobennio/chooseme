@@ -84,15 +84,4 @@
     self.numCommentsLabel.text = [NSString stringWithFormat:@"%d", comments];
 }
 
-- (void)handleSwipe:(UISwipeGestureRecognizer *)swipe
-{
-    NSLog(@"receiving swipe.");
-    // direction doesn't matter. just toggle.
-    if (swipe.direction == UISwipeGestureRecognizerDirectionRight) {
-        NSLog(@"right swipe");
-    } else if (swipe.direction == UISwipeGestureRecognizerDirectionLeft) {
-        NSLog(@"left swipe.");
-    }
-}
-
 @end

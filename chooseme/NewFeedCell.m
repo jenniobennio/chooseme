@@ -88,11 +88,15 @@
     // Enable Swiping
     self.pView.userInteractionEnabled = YES;
     self.pView.bigPic.userInteractionEnabled = YES;
-    UISwipeGestureRecognizer *recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
-    recognizer.delegate = self;
-    recognizer.direction = (UISwipeGestureRecognizerDirectionRight|UISwipeGestureRecognizerDirectionLeft);
+    UISwipeGestureRecognizer *rightSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleRightSwipe:)];
+    rightSwipe.delegate = self;
+    rightSwipe.direction = UISwipeGestureRecognizerDirectionRight;
+    UISwipeGestureRecognizer *leftSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleLeftSwipe:)];
+    leftSwipe.delegate = self;
+    leftSwipe.direction = UISwipeGestureRecognizerDirectionLeft;
     
-    [self.pView.bigPic addGestureRecognizer:recognizer];
+    [self.pView.bigPic addGestureRecognizer:rightSwipe];
+    [self.pView.bigPic addGestureRecognizer:leftSwipe];
     
     // Format icons
     [self.pView colorIcons];
@@ -143,14 +147,22 @@
     [self.pView highlightImage:2];
 }
 
+- (void)handleRightSwipe:(UISwipeGestureRecognizer *)swipe
+{
+    [self handleSwipe:swipe];
+}
+
+- (void)handleLeftSwipe:(UISwipeGestureRecognizer *)swipe
+{
+    [self handleSwipe:swipe];
+}
+
 - (void)handleSwipe:(UISwipeGestureRecognizer *)swipe
 {
-    NSLog(@"receiving swipe.");
-    // direction doesn't matter. just toggle.
-    if (swipe.direction == UISwipeGestureRecognizerDirectionRight) {
-        NSLog(@"right swipe");
-    } else if (swipe.direction == UISwipeGestureRecognizerDirectionLeft) {
-        NSLog(@"left swipe.");
+    if (self.pView.thumbnail1.alpha == 1) {
+        [self onTapPic2:nil];
+    } else {
+        [self onTapPic1:nil];
     }
 }
 

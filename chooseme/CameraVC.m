@@ -104,7 +104,6 @@ takePicButtonLongPress;
     [self formatPic:self.pic2 isSelected:NO];
     
     // Customize takePicButton depending on state
-    self.takePicButton.backgroundColor = self.color;
     self.takePicButton.layer.cornerRadius = 25;
     [self.takePicButton.titleLabel setAdjustsFontSizeToFitWidth:YES];
     [self.takePicButton setTitle:@"+" forState:UIControlStateNormal];
@@ -153,6 +152,13 @@ takePicButtonLongPress;
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    // Set colors
+    Colorful *colorManager = [Colorful sharedManager];
+    self.color = colorManager.colors[colorManager.colorIndex];
+    self.takePicButton.backgroundColor = self.color;
+    self.pic1.layer.borderColor = [self.color CGColor];
+    self.pic2.layer.borderColor = [self.color CGColor];
+    
     if ([self.takePicButton.titleLabel.text isEqualToString:@"+"]) {
         [self.takePicButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 8, 0)];
     } else if ([self.takePicButton.titleLabel.text isEqualToString:@"REDO"]) {
@@ -479,7 +485,6 @@ takePicButtonLongPress;
 
     button.backgroundColor = [UIColor colorWithWhite:.76 alpha:1];
     button.layer.borderWidth = 1;
-    button.layer.borderColor = [self.color CGColor];
     button.layer.cornerRadius = 25;
     [button.imageView setContentMode:UIViewContentModeScaleAspectFill];
 }

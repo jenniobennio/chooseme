@@ -9,7 +9,7 @@
 #import "Colorful.h"
 
 @implementation Colorful
-
+@synthesize friendsColorIndex;
 @synthesize colorIndex;
 @synthesize colors;
 
@@ -25,6 +25,7 @@
 - (id)init {
     if (self = [super init]) {
         colorIndex = 0;
+        friendsColorIndex = 0;
         
         // Pretty flat UI colors!
         colors = [[NSMutableArray alloc] init];

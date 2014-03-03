@@ -62,7 +62,11 @@
         self.titleLabel.text = @"FRIENDS' QUESTIONS";
     
     self.colorManager = [Colorful sharedManager];
-    self.view.backgroundColor = self.colorManager.colors[self.colorManager.colorIndex];
+    if ([self isFriends]) {
+        self.colorManager.friendsColorIndex = arc4random() % self.colorManager.colors.count;
+        self.view.backgroundColor = self.colorManager.colors[self.colorManager.friendsColorIndex+1 % self.colorManager.colors.count];
+    } else
+        self.view.backgroundColor = self.colorManager.colors[self.colorManager.colorIndex+1 % self.colorManager.colors.count];
     
     // Don't show lines below available cells
     self.feedTable.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
@@ -88,6 +92,7 @@
         onSuccess();
     }
 }
+
 
 - (void) loadQuestionsArray:(NSString *)facebookId {
     if ([self isMe]) {
@@ -152,7 +157,10 @@
     static NSString *CellIdentifier = @"NewFeedCell";
     NewFeedCell *cell = (NewFeedCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.backgroundColor = self.colorManager.colors[(indexPath.row + self.colorManager.colorIndex) % self.colorManager.colors.count];
+    if ([self isFriends])
+        cell.backgroundColor = self.colorManager.colors[(indexPath.row + self.colorManager.friendsColorIndex + 1) % self.colorManager.colors.count];
+    else
+        cell.backgroundColor = self.colorManager.colors[(indexPath.row + self.colorManager.colorIndex + 1) % self.colorManager.colors.count];
 
     // Load views and format them and stuff
 //    UIImage *image1 = [UIImage imageNamed:@"111834.jpg"];
@@ -185,14 +193,22 @@
     CGPoint offset = [scrollView contentOffset];
     int index = offset.y / 528;
     if (offset.y - index*528 > 330) {
-        UIColor *newColor = self.colorManager.colors[(self.colorManager.colorIndex+index+1) % self.colorManager.colors.count];
+        UIColor *newColor;
+        if ([self isFriends])
+            newColor = self.colorManager.colors[(self.colorManager.friendsColorIndex + 1 +index+1) % self.colorManager.colors.count];
+        else
+            newColor = self.colorManager.colors[(self.colorManager.colorIndex + 1 +index+1) % self.colorManager.colors.count];
         if (self.view.backgroundColor != newColor) {
             [UIView animateWithDuration:0.3 animations:^{
                 self.view.backgroundColor = newColor;
             }];
         }
     } else {
-        UIColor *newColor = self.colorManager.colors[(self.colorManager.colorIndex + index) % self.colorManager.colors.count];
+        UIColor *newColor;
+        if ([self isFriends])
+            newColor = self.colorManager.colors[(self.colorManager.friendsColorIndex + 1 + index) % self.colorManager.colors.count];
+        else
+            newColor = self.colorManager.colors[(self.colorManager.colorIndex + 1 + index) % self.colorManager.colors.count];
         if (self.view.backgroundColor != newColor) {
             [UIView animateWithDuration:0.3 animations:^{
                 self.view.backgroundColor = newColor;

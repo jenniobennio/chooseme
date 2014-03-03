@@ -10,10 +10,13 @@
 
 @interface Colorful : NSObject {
     int colorIndex;
+    int friendsColorIndex;
     NSMutableArray *colors;
 }
 
 @property (nonatomic, assign) int colorIndex;
+@property (nonatomic, assign) int friendsColorIndex;
+
 @property (nonatomic, strong) NSMutableArray *colors;
 
 + (id)sharedManager;

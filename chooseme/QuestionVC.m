@@ -201,6 +201,14 @@
         }
     }];
     
+    // Pick the next color
+    // Note that we go backwards so that feed can go forward
+    Colorful *colorManager = [Colorful sharedManager];
+    if (colorManager.colorIndex == 0)
+        colorManager.colorIndex = colorManager.colors.count-1;
+    else
+        colorManager.colorIndex = colorManager.colorIndex-1;
+    
     [self.delegate clearImages:YES];
     [self dismissViewControllerAnimated:YES completion:nil];
 }

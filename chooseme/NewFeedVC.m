@@ -64,7 +64,7 @@
     self.colorManager = [Colorful sharedManager];
     if ([self isFriends]) {
         self.colorManager.friendsColorIndex = arc4random() % self.colorManager.colors.count;
-        self.view.backgroundColor = self.colorManager.colors[self.colorManager.friendsColorIndex % self.colorManager.colors.count];
+        self.view.backgroundColor = self.colorManager.colors[(self.colorManager.friendsColorIndex+1) % self.colorManager.colors.count];
     } else
         self.view.backgroundColor = self.colorManager.colors[(self.colorManager.colorIndex+1) % self.colorManager.colors.count];
     

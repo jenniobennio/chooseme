@@ -7,12 +7,10 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CameraVC">
             <connections>
                 <outlet property="cameraButton" destination="E1u-GF-wfn" id="hWB-Oh-3BO"/>
-                <outlet property="choosePicButton" destination="P5h-rC-llG" id="5jY-6e-pth"/>
                 <outlet property="friendsButton" destination="mYJ-OK-HYe" id="d9N-P4-wsS"/>
                 <outlet property="galleryButton" destination="c3g-4O-0yZ" id="meK-zb-GvZ"/>
                 <outlet property="mainPic" destination="T78-pM-AKV" id="wdW-IN-Gfg"/>
                 <outlet property="meButton" destination="fQV-Wy-4pm" id="q2q-bm-rLi"/>
-                <outlet property="nextButton" destination="ipe-Fg-25A" id="DYu-2N-qfy"/>
                 <outlet property="pic1" destination="jS4-HL-qP4" id="szy-cY-A7T"/>
                 <outlet property="pic2" destination="Srs-PC-D1b" id="bJo-ZA-Bpq"/>
                 <outlet property="pinterestButton" destination="dHX-5L-Ofu" id="14C-4y-oWi"/>
@@ -46,18 +44,6 @@
                     </state>
                     <connections>
                         <action selector="choosePicSource:" destination="-1" eventType="touchUpInside" id="C8j-Im-raN"/>
-                    </connections>
-                </button>
-                <button hidden="YES" opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P5h-rC-llG">
-                    <rect key="frame" x="74" y="516" width="30" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                    <state key="normal" title="Lib">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="choosePic:" destination="-1" eventType="touchUpInside" id="tWh-wS-KRD"/>
                     </connections>
                 </button>
                 <button opaque="NO" alpha="0.80000000000000004" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jS4-HL-qP4">
@@ -131,62 +117,13 @@
                         <action selector="onMe:" destination="-1" eventType="touchUpInside" id="WaO-vz-Rys"/>
                     </connections>
                 </button>
-                <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wPY-9s-ObY">
-                    <rect key="frame" x="254" y="95" width="32" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="Post">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                </button>
-                <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UOF-3k-QR3">
-                    <rect key="frame" x="224" y="57" width="84" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="Add Friends">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                </button>
-                <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C85-0Y-mJr">
-                    <rect key="frame" x="126" y="110" width="59" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="QuickFill">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="quickFill:" destination="-1" eventType="touchUpInside" id="6Ed-xh-WoW"/>
-                    </connections>
-                </button>
-                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dsf-V0-nV2">
-                    <rect key="frame" x="257" y="191" width="37" height="30"/>
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E1u-GF-wfn">
+                    <rect key="frame" x="75" y="488" width="25" height="25"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="37" id="mek-4b-KA0"/>
-                        <constraint firstAttribute="height" constant="30" id="wTu-Ar-unK"/>
+                        <constraint firstAttribute="height" constant="25" id="E8a-RH-ogk"/>
+                        <constraint firstAttribute="width" constant="25" id="URF-Qd-cLQ"/>
                     </constraints>
-                    <state key="normal" title="Clear">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="onClear:" destination="-1" eventType="touchUpInside" id="coc-Zo-pNI"/>
-                    </connections>
-                </button>
-                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ipe-Fg-25A">
-                    <rect key="frame" x="254" y="391" width="50" height="50"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="50" id="OMw-nj-kds"/>
-                        <constraint firstAttribute="height" constant="50" id="uQW-UN-jNz"/>
-                    </constraints>
-                    <size key="titleShadowOffset" width="1" height="1"/>
-                    <state key="normal" image="icon_5440.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="onNext:" destination="-1" eventType="touchUpInside" id="HjR-0A-3ao"/>
-                    </connections>
-                </button>
-                <button hidden="YES" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E1u-GF-wfn">
-                    <rect key="frame" x="91" y="486" width="27" height="22"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <state key="normal" image="slr_camera-32.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -194,29 +131,13 @@
                         <action selector="takePic:" destination="-1" eventType="touchUpInside" id="YdO-co-IaM"/>
                     </connections>
                 </button>
-                <button hidden="YES" opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dHX-5L-Ofu">
-                    <rect key="frame" x="175" y="435" width="29" height="29"/>
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dQl-MG-sFR">
+                    <rect key="frame" x="113" y="427" width="25" height="25"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" image="pinterest-32.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="choosePicFromPinterest:" destination="-1" eventType="touchUpInside" id="Ugc-bx-D63"/>
-                    </connections>
-                </button>
-                <button hidden="YES" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c3g-4O-0yZ">
-                    <rect key="frame" x="204" y="483" width="31" height="27"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" image="stack_of_photos-32.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="choosePicFromGallery:" destination="-1" eventType="touchUpInside" id="gy1-Ji-V86"/>
-                    </connections>
-                </button>
-                <button hidden="YES" opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dQl-MG-sFR">
-                    <rect key="frame" x="114" y="441" width="38" height="32"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="25" id="Rzn-CA-eV6"/>
+                        <constraint firstAttribute="height" constant="25" id="SSn-Rv-neG"/>
+                    </constraints>
                     <state key="normal" image="search-32.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -224,44 +145,62 @@
                         <action selector="choosePicFromGoogle:" destination="-1" eventType="touchUpInside" id="cCd-n7-Jg7"/>
                     </connections>
                 </button>
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dHX-5L-Ofu">
+                    <rect key="frame" x="179" y="427" width="25" height="25"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="25" id="JJO-pa-iCO"/>
+                        <constraint firstAttribute="height" constant="25" id="RMT-0t-CyQ"/>
+                    </constraints>
+                    <state key="normal" image="pinterest-32.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="choosePicFromPinterest:" destination="-1" eventType="touchUpInside" id="Ugc-bx-D63"/>
+                    </connections>
+                </button>
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c3g-4O-0yZ">
+                    <rect key="frame" x="220" y="488" width="25" height="25"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="25" id="0Za-sE-Qx2"/>
+                        <constraint firstAttribute="width" constant="25" id="9cr-On-4Bb"/>
+                    </constraints>
+                    <state key="normal" image="stack_of_photos-32.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="choosePicFromGallery:" destination="-1" eventType="touchUpInside" id="gy1-Ji-V86"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <gestureRecognizers/>
             <constraints>
-                <constraint firstItem="P5h-rC-llG" firstAttribute="top" secondItem="E1u-GF-wfn" secondAttribute="bottom" constant="8" id="11H-fK-uXy"/>
+                <constraint firstItem="2ZE-D9-CZk" firstAttribute="top" secondItem="dHX-5L-Ofu" secondAttribute="bottom" constant="54" id="1Y8-0O-iiV"/>
+                <constraint firstAttribute="bottom" secondItem="E1u-GF-wfn" secondAttribute="bottom" constant="55" id="1si-vX-Rug"/>
                 <constraint firstAttribute="trailing" secondItem="T78-pM-AKV" secondAttribute="trailing" id="2F1-en-pdH"/>
                 <constraint firstAttribute="trailing" secondItem="Srs-PC-D1b" secondAttribute="trailing" constant="16" id="3Vz-ng-odA"/>
-                <constraint firstItem="c3g-4O-0yZ" firstAttribute="leading" secondItem="2ZE-D9-CZk" secondAttribute="trailing" constant="19" id="4hF-a2-QrZ"/>
-                <constraint firstAttribute="bottom" secondItem="c3g-4O-0yZ" secondAttribute="bottom" constant="58" id="7yG-WM-qr1"/>
-                <constraint firstItem="E1u-GF-wfn" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="91" id="8n2-G5-Z1X"/>
+                <constraint firstItem="2ZE-D9-CZk" firstAttribute="leading" secondItem="E1u-GF-wfn" secondAttribute="trailing" constant="35" id="4Kv-WR-EXh"/>
                 <constraint firstAttribute="centerX" secondItem="2ZE-D9-CZk" secondAttribute="centerX" id="9fP-Dm-CT5"/>
+                <constraint firstItem="dQl-MG-sFR" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="113" id="BYh-B2-yn7"/>
                 <constraint firstItem="mYJ-OK-HYe" firstAttribute="centerY" secondItem="fQV-Wy-4pm" secondAttribute="centerY" id="DPE-20-D00"/>
-                <constraint firstAttribute="trailing" secondItem="dsf-V0-nV2" secondAttribute="trailing" constant="26" id="Fe2-BU-cpa"/>
-                <constraint firstItem="dHX-5L-Ofu" firstAttribute="leading" secondItem="dQl-MG-sFR" secondAttribute="trailing" constant="23" id="FjP-ip-TDv"/>
-                <constraint firstItem="ipe-Fg-25A" firstAttribute="top" secondItem="Srs-PC-D1b" secondAttribute="bottom" constant="28" id="FrL-T9-YOP"/>
                 <constraint firstAttribute="trailing" secondItem="h0R-PJ-Qan" secondAttribute="trailing" constant="16" id="FsV-yA-sXP"/>
                 <constraint firstAttribute="trailing" secondItem="jS4-HL-qP4" secondAttribute="trailing" constant="16" id="HL5-Cv-WEX"/>
                 <constraint firstItem="Srs-PC-D1b" firstAttribute="top" secondItem="h0R-PJ-Qan" secondAttribute="bottom" constant="28" id="Iil-od-aFo"/>
-                <constraint firstAttribute="trailing" secondItem="c3g-4O-0yZ" secondAttribute="trailing" constant="85" id="MB6-bj-prK"/>
-                <constraint firstItem="c3g-4O-0yZ" firstAttribute="leading" secondItem="E1u-GF-wfn" secondAttribute="trailing" constant="86" id="MWC-O0-x1z"/>
-                <constraint firstItem="2ZE-D9-CZk" firstAttribute="leading" secondItem="P5h-rC-llG" secondAttribute="trailing" constant="31" id="Q0A-wo-WJe"/>
+                <constraint firstItem="c3g-4O-0yZ" firstAttribute="leading" secondItem="2ZE-D9-CZk" secondAttribute="trailing" constant="35" id="SIN-7X-E5t"/>
                 <constraint firstAttribute="bottom" secondItem="2ZE-D9-CZk" secondAttribute="bottom" constant="12" id="V38-xk-FUZ"/>
-                <constraint firstItem="dQl-MG-sFR" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="114" id="XIr-oC-1z4"/>
                 <constraint firstAttribute="trailing" secondItem="fQV-Wy-4pm" secondAttribute="trailing" constant="12" id="ZaX-Up-jPu"/>
                 <constraint firstItem="h0R-PJ-Qan" firstAttribute="top" secondItem="jS4-HL-qP4" secondAttribute="bottom" constant="5" id="azl-zw-Sl1"/>
+                <constraint firstAttribute="trailing" secondItem="dHX-5L-Ofu" secondAttribute="trailing" constant="116" id="baJ-Jx-f7j"/>
                 <constraint firstAttribute="bottom" secondItem="T78-pM-AKV" secondAttribute="bottom" id="bsJ-Rg-az3"/>
-                <constraint firstItem="E1u-GF-wfn" firstAttribute="top" secondItem="dQl-MG-sFR" secondAttribute="bottom" constant="13" id="cCN-51-H24"/>
                 <constraint firstItem="T78-pM-AKV" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="cxn-bE-lRa"/>
                 <constraint firstItem="mYJ-OK-HYe" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="12" id="eoP-pv-ed2"/>
                 <constraint firstAttribute="centerY" secondItem="h0R-PJ-Qan" secondAttribute="centerY" id="fEh-Nd-UNA"/>
-                <constraint firstItem="jS4-HL-qP4" firstAttribute="top" secondItem="dsf-V0-nV2" secondAttribute="bottom" constant="8" id="fvy-4Q-MVT"/>
                 <constraint firstItem="mYJ-OK-HYe" firstAttribute="centerY" secondItem="2ZE-D9-CZk" secondAttribute="centerY" id="hAm-sn-yWo"/>
-                <constraint firstItem="dHX-5L-Ofu" firstAttribute="leading" secondItem="dQl-MG-sFR" secondAttribute="trailing" constant="23" id="jcy-7A-rKp"/>
-                <constraint firstAttribute="trailing" secondItem="dHX-5L-Ofu" secondAttribute="trailing" constant="116" id="kKu-gM-tyd"/>
-                <constraint firstItem="2ZE-D9-CZk" firstAttribute="top" secondItem="dHX-5L-Ofu" secondAttribute="bottom" constant="42" id="rAw-vQ-4G0"/>
-                <constraint firstItem="P5h-rC-llG" firstAttribute="centerY" secondItem="2ZE-D9-CZk" secondAttribute="centerY" id="s0S-9n-QIX"/>
+                <constraint firstAttribute="bottom" secondItem="dQl-MG-sFR" secondAttribute="bottom" constant="116" id="o8X-ON-C4b"/>
+                <constraint firstAttribute="bottom" secondItem="c3g-4O-0yZ" secondAttribute="bottom" constant="55" id="vug-lj-xWb"/>
                 <constraint firstItem="T78-pM-AKV" firstAttribute="top" secondItem="1" secondAttribute="top" id="xZ1-l1-b5u"/>
-                <constraint firstAttribute="trailing" secondItem="ipe-Fg-25A" secondAttribute="trailing" constant="16" id="y2Y-tV-hd2"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
@@ -270,7 +209,6 @@
     <resources>
         <image name="111-user.png" width="24" height="21"/>
         <image name="112-group.png" width="32" height="21"/>
-        <image name="icon_5440.png" width="1200" height="1200"/>
         <image name="pinterest-32.png" width="32" height="32"/>
         <image name="search-32.png" width="32" height="32"/>
         <image name="slr_camera-32.png" width="32" height="32"/>

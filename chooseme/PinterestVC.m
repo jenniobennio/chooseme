@@ -63,7 +63,7 @@
     Colorful *colorManager = [Colorful sharedManager];
     UIColor *color = colorManager.colors[colorManager.colorIndex];
     self.titleView.backgroundColor = color;
-    self.titleLabel.text = @"ADD A PIN";
+    self.titleLabel.text = @"Add a Pin";
     
     self.pinterestImage.image = [self.pinterestImage.image maskWithColor:[UIColor whiteColor]];
     self.backButton.imageView.image = [self.backButton.imageView.image maskWithColor:[UIColor whiteColor]];

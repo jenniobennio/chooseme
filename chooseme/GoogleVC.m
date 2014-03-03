@@ -55,7 +55,7 @@
     Colorful *colorManager = [Colorful sharedManager];
     UIColor *color = colorManager.colors[colorManager.colorIndex];
     self.titleView.backgroundColor = color;
-    self.titleLabel.text = @"GOOGLE IMAGE SEARCH";
+    self.titleLabel.text = @"Find an image via Google";
     self.backButton.imageView.image = [self.backButton.imageView.image maskWithColor:[UIColor whiteColor]];
 
     [self.searchBar becomeFirstResponder];

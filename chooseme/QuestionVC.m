@@ -20,9 +20,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *titleLabel;
 
 @property (strong, nonatomic) IBOutlet UITextField *questionTextField;
-//@property (strong, nonatomic) IBOutlet UIButton *pic1;
-//@property (strong, nonatomic) IBOutlet UIButton *pic2;
-@property (strong, nonatomic) IBOutlet UITableView *friendsTable;
 @property (strong, nonatomic) IBOutlet UICollectionView *friendsView;
 @property (strong, nonatomic) IBOutlet UIButton *submitButton;
 @property (strong, nonatomic) IBOutlet UIButton *backButton;
@@ -73,10 +70,6 @@
 
     // Set delegates/ datasources
     self.questionTextField.delegate = self;
-    [self.friendsTable registerNib:[UINib nibWithNibName:@"AddFriendCell" bundle:nil] forCellReuseIdentifier:@"AddFriendCell"];
-    self.friendsTable.delegate = self;
-    self.friendsTable.dataSource = self;
-    
     [self.friendsView registerClass:[FriendCell class] forCellWithReuseIdentifier:@"FriendCell"];
     [self.friendsView registerNib:[UINib nibWithNibName:@"FriendCell" bundle:nil] forCellWithReuseIdentifier:@"FriendCell"];
     self.friendsView.delegate = self;
@@ -85,10 +78,10 @@
     
     // Format title bar
     Colorful *colorManager = [Colorful sharedManager];
-    UIColor *color = colorManager.colors[colorManager.colorIndex];
+    UIColor *color = [colorManager currentColor];
     self.view.backgroundColor = color;
     self.titleView.backgroundColor = [UIColor clearColor]; // so that it's not super dark
-    self.titleLabel.text = @"ASK A QUESTION";
+    self.titleLabel.text = @"Post";
     
     self.backButton.imageView.image = [self.backButton.imageView.image maskWithColor:[UIColor whiteColor]];
     self.submitButton.imageView.image = [self.submitButton.imageView.image maskWithColor:[UIColor whiteColor]];
@@ -98,7 +91,7 @@
     // Pre-fill images and format
     NSArray *nibViews = [[NSBundle mainBundle] loadNibNamed:@"PictureView" owner:self options:nil];
     self.pView = [nibViews objectAtIndex:0];
-    self.pView.frame = CGRectMake(0, 40, self.view.frame.size.width, 368);
+    self.pView.frame = CGRectMake(0, 64, self.view.frame.size.width, 344);
     [self.pView hideDetails];
     [self.pView formatThumbnails];
     [self.pView.bigPic setImage:self.question.image1];
@@ -115,19 +108,16 @@
     [self.pView.thumbnail2 addTarget:self action:@selector(onTapPic2:) forControlEvents:UIControlEventTouchUpInside];
     self.pView.thumbnail2.tag = 2;
     
+    // fakePView was used to set up autolayout constraints, so send it all the way to the back
+    // pView contains the actual image data, etc
     [self.view addSubview:self.pView];
     [self.view sendSubviewToBack:self.pView];
     [self.view sendSubviewToBack:self.fakePView];
     
+    // Format question textField
+    self.questionTextField.autocapitalizationType = UITextAutocapitalizationTypeSentences;
     self.questionTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Share a thought" attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
-    
 
-    
-//    [self.pic1 setImage:self.question.image1 forState:UIControlStateNormal];
-//    self.pic1.imageView.contentMode = UIViewContentModeScaleAspectFill;
-//    [self.pic2 setImage:self.question.image2 forState:UIControlStateNormal];
-//    self.pic2.imageView.contentMode = UIViewContentModeScaleAspectFill;
-    
     // Load question text
     if (self.question.question)
         self.questionTextField.text = self.question.question;
@@ -137,17 +127,13 @@
         self.question.friends = [[NSMutableArray alloc] init];
         self.question.friendsVoted = [[NSMutableArray alloc] init];
     }
+    // Submit button enabled only if at least one friend added
     [self.submitButton setEnabled:self.question.friends.count > 0];
     
-    // Don't show lines below available cells
-//    self.friendsTable.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-    
     // Add pan gestureRecognizer for going Back
-//    UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(onPan:)];
+    UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(onPan:)];
+    [self.view addGestureRecognizer:panGesture];
     
-    // FIXME: Commenting this out for now.. It interferes with the gesture recognizer for editing friendsTable
-//    [self.view addGestureRecognizer:panGesture];
-        
     // Create request for user's Facebook data
     FBRequest *request = [FBRequest requestForMe];
     
@@ -182,8 +168,6 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     self.addFriendButton.imageView.image = [self.addFriendButton.imageView.image maskWithColor:[UIColor whiteColor]];
-
-//    [self.friendsTable reloadData];
     [self.friendsView reloadData];
 }
 
@@ -265,8 +249,10 @@
     [self.friendPickerController loadData];
     [self.friendPickerController clearSelection];
     
+    // FIXME: Is there a better place I can add the SearchBar so that it doesn't come after the friendPicker view has loaded?
     [self presentViewController:self.friendPickerController animated:YES completion:^(void) {
         [self addSearchBarToFriendPickerView];
+        [self.searchBar becomeFirstResponder];
     }];
 }
 
@@ -354,45 +340,6 @@
     }
 }
 
-#pragma mark - TableView methods
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-        return self.question.friends.count;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString *CellIdentifier = @"AddFriendCell";
-    AddFriendCell *cell = (AddFriendCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    
-    NSString *friend = [self.question.friends[indexPath.row] name];
-    cell.name.text = friend;
-    
-    NSString *strurl = [[NSString alloc] initWithFormat:@"https://graph.facebook.com/%@/picture",[[self.question.friends objectAtIndex:indexPath.row] objectForKey:@"id"]];
-    NSURL *url = [NSURL URLWithString:strurl];
-    NSData *data = [NSData dataWithContentsOfURL:url];
-    [cell.pic setImage:[[UIImage alloc] initWithData:data]];
-    return cell;
-}
-
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Make everything editable
-    return YES;
-}
-
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self.question.friends removeObjectAtIndex:indexPath.row];
-    [self.question.friendsVoted removeObjectAtIndex:indexPath.row];
-    [self.friendsTable deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:YES];
-    [self.friendsTable reloadData];
-}
-
 # pragma mark - collection view methods
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -403,15 +350,13 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     FriendCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"FriendCell" forIndexPath:indexPath];
     
-    NSString *friend = [self.question.friends[indexPath.row] name];
+//    NSString *friend = [self.question.friends[indexPath.row] name];
     NSString *strurl = [[NSString alloc] initWithFormat:@"https://graph.facebook.com/%@/picture",[[self.question.friends objectAtIndex:indexPath.row] objectForKey:@"id"]];
     NSURL *url = [NSURL URLWithString:strurl];
     NSData *data = [NSData dataWithContentsOfURL:url];
     [cell.friendImage setImage:[[UIImage alloc] initWithData:data]];
     cell.friendImage.layer.cornerRadius = 25;
     cell.friendImage.clipsToBounds = YES;
-    
-    NSLog(@"Collection View added friend %@", friend);
 
     return cell;
 }
@@ -425,15 +370,19 @@
     }
     else if (sender.state == UIGestureRecognizerStateChanged) {
         CGPoint translation = [sender translationInView:self.view];
-        self.view.center = CGPointMake(self.view.frame.size.width/2, translation.y + self.view.frame.size.height/2);
+        if (translation.y > 0)
+            self.view.center = CGPointMake(self.view.frame.size.width/2, translation.y + self.view.frame.size.height/2);
     }
     else if (sender.state == UIGestureRecognizerStateEnded)
     {
         CGPoint translation = [sender translationInView:self.view];
         if (translation.y > 100)
             [self dismissViewControllerAnimated:YES completion:nil];
-        else
-            self.view.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2);
+        else {
+            [UIView animateWithDuration:0.5f animations:^{
+                self.view.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2);
+            }];
+        }
     }
     
 }
@@ -448,8 +397,8 @@
          CGRectMake(0,0,
                     self.view.bounds.size.width,
                     searchBarHeight)];
-//        self.searchBar.autoresizingMask = self.searchBar.autoresizingMask |
-//        UIViewAutoresizingFlexibleWidth;
+        self.searchBar.autoresizingMask = self.searchBar.autoresizingMask |
+        UIViewAutoresizingFlexibleWidth;
         self.searchBar.delegate = self;
 //        self.searchBar.showsCancelButton = YES;
         
@@ -458,6 +407,7 @@
         newFrame.size.height -= searchBarHeight;
         newFrame.origin.y = searchBarHeight;
         self.friendPickerController.tableView.frame = newFrame;
+        
     }
 }
 

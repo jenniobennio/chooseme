@@ -20,45 +20,41 @@
 
 // View elements
 @property (strong, nonatomic) IBOutlet UIImageView *mainPic;
-@property (strong, nonatomic) IBOutlet UIButton *takePicButton;
-@property (strong, nonatomic) IBOutlet UIButton *choosePicButton;
 @property (strong, nonatomic) IBOutlet UIButton *pic1;
 @property (strong, nonatomic) IBOutlet UIButton *pic2;
+
+@property (strong, nonatomic) IBOutlet UIButton *takePicButton;
 @property (strong, nonatomic) IBOutlet UIButton *friendsButton;
 @property (strong, nonatomic) IBOutlet UIButton *meButton;
-@property (weak, nonatomic) IBOutlet UIButton *galleryButton;
+
 @property (weak, nonatomic) IBOutlet UIButton *cameraButton;
-@property (weak, nonatomic) IBOutlet UIButton *pinterestButton;
 @property (weak, nonatomic) IBOutlet UIButton *searchButton;
-@property (weak, nonatomic) UIButton *defaultPicSource;
-@property (nonatomic) BOOL shouldSetDefaultPicSource;
-@property (strong, nonatomic) IBOutlet UIButton *nextButton;
+@property (weak, nonatomic) IBOutlet UIButton *pinterestButton;
+@property (weak, nonatomic) IBOutlet UIButton *galleryButton;
 
 // Button actions
-- (IBAction)takePic:(id)sender;
-- (void)
-takePicButtonLongPress;
 - (IBAction)onPic1:(id)sender;
 - (IBAction)onPic2:(id)sender;
-- (IBAction)onMe:(id)sender;
+
+- (IBAction)takePic:(id)sender;
 - (IBAction)onFriends:(id)sender;
+- (IBAction)onMe:(id)sender;
+
 - (IBAction)choosePicSource:(id)sender;
 - (IBAction)choosePicFromGallery:(id)sender;
 - (IBAction)choosePicFromPinterest:(id)sender;
 - (IBAction)choosePicFromGoogle:(id)sender;
 
-// For testing only
-- (IBAction)quickFill:(id)sender;
-- (IBAction)onClear:(id)sender;
-- (IBAction)onNext:(id)sender;
+// Private variables:
+// Random themed color
+@property (nonatomic, strong) Colorful *colorManager;
 
-- (void)hideImageSourceButtons;
+// Current Question object
+@property (strong, nonatomic) Question *currentQuestion;
 
 // Keep track of which thumbnail image is selected
 @property (nonatomic, assign) int picIndex;
 
-// Current Question object
-@property (strong, nonatomic) Question *currentQuestion;
 // Store images
 @property (strong, nonatomic) UIImage *image1;
 @property (strong, nonatomic) UIImage *image2;
@@ -66,12 +62,12 @@ takePicButtonLongPress;
 // Private variable for checking whether we just selected some image
 @property (nonatomic, assign) BOOL justSelectedImage;
 
+// For setting default picture source
+@property (weak, nonatomic) UIButton *defaultPicSource;
+@property (nonatomic) BOOL shouldSetDefaultPicSource;
+
 // BOOL to track whether Pinterest is default image source -- this affects formatting for image insets
 @property (nonatomic, assign) BOOL pinterestIsDefault;
-
-// Random color
-@property (nonatomic, strong) UIColor *color;
-
 
 @end
 
@@ -82,8 +78,6 @@ takePicButtonLongPress;
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.title = @"DressMe";
-        self.picIndex = 0;
     }
     return self;
 }
@@ -92,14 +86,16 @@ takePicButtonLongPress;
 {
     [super viewDidLoad];
     
-    Colorful *colorManager = [Colorful sharedManager];
-    // Pick a random color
-    colorManager.colorIndex = arc4random() % colorManager.colors.count;
-    self.color = colorManager.colors[colorManager.colorIndex];
-
-    // Format things
-    self.choosePicButton.layer.cornerRadius = 5;
+    self.picIndex = 0;
     
+    // Pick a random color
+    self.colorManager = [Colorful sharedManager];
+    [self.colorManager randColor];
+
+    // Init currentQuestion
+    self.currentQuestion = [[Question alloc] init];
+    
+    // Format thumbnail buttons
     [self formatPic:self.pic1 isSelected:YES];
     [self formatPic:self.pic2 isSelected:NO];
     
@@ -108,21 +104,15 @@ takePicButtonLongPress;
     [self.takePicButton.titleLabel setAdjustsFontSizeToFitWidth:YES];
     [self.takePicButton setTitle:@"+" forState:UIControlStateNormal];
     [self.takePicButton setTitle:@"REDO" forState:UIControlStateSelected];
-    
-//    self.nextButton.imageView.image = [self.nextButton.imageView.image maskWithColor:[UIColor whiteColor]];
-//    self.nextButton.imageView.image = [self.nextButton.imageView.image imageWithShadow];
-//    self.nextButton.hidden = YES;
-    
+    // Add a long press gesture recognizer
     UILongPressGestureRecognizer *longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(takePicButtonLongPress)];
     longPressRecognizer.delegate = self;
     longPressRecognizer.minimumPressDuration = 1.0; //seconds
     [self.takePicButton addGestureRecognizer:longPressRecognizer];
-    
+
+    // Mask friends/ me buttons with white color
     [self.friendsButton setImage:[[UIImage imageNamed:@"112-group.png"] maskWithColor:[UIColor whiteColor]] forState:UIControlStateNormal];
     [self.meButton setImage:[[UIImage imageNamed:@"111-user.png"] maskWithColor:[UIColor whiteColor]] forState:UIControlStateNormal];
-    
-    // Init currentQuestion
-    self.currentQuestion = [[Question alloc] init];
     
     // Pre Fetching
     void (^success)(void) = ^void {
@@ -130,12 +120,6 @@ takePicButtonLongPress;
     };
     [[FacebookClient instance] meRequest:success];
     
-    // Add tapRecognizer
-    // FIXME: Removed the tap gesture recognizer because pressing on the Pinterest/ camera/ library icons triggered it
-//    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTap:)];
-//    [self.view addGestureRecognizer:tapRecognizer];
-    
-    // FIXME: Uncomment for when running on actual device
     // Error if camera doesn't exist
     /*if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         
@@ -152,90 +136,83 @@ takePicButtonLongPress;
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    // Set colors
-    Colorful *colorManager = [Colorful sharedManager];
-    self.color = colorManager.colors[colorManager.colorIndex];
-    self.takePicButton.backgroundColor = self.color;
-    self.pic1.layer.borderColor = [self.color CGColor];
-    self.pic2.layer.borderColor = [self.color CGColor];
+    [super viewWillAppear:animated];
+
+    // Set mainPic not hidden
+    self.mainPic.hidden = NO;
     
-    if ([self.takePicButton.titleLabel.text isEqualToString:@"+"]) {
-        [self.takePicButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 8, 0)];
-    } else if ([self.takePicButton.titleLabel.text isEqualToString:@"REDO"]) {
-        [self.takePicButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 15, 0)];
-    } else {
-        if ([self pinterestIsDefault])
-            [self.takePicButton setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
-        else
-            [self.takePicButton setImageEdgeInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
-    }
+    // Set colors
+    UIColor *color = [self.colorManager currentColor];
+    self.takePicButton.backgroundColor = color;
+    self.pic1.layer.borderColor = [color CGColor];
+    self.pic2.layer.borderColor = [color CGColor];
+    
+    // Set insets
+    [self setInsets];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
+    [super viewDidAppear:animated];
     
-//    self.nextButton.hidden = YES;
-    
+    // If both images are set (and just selected an image for redo), go to questionVC
     if (self.justSelectedImage) {
-        // If both images are set, go to questionVC
         [self goToQuestionVC];
     }
-    /*else if (self.pic1.imageView.image && self.pic2.imageView.image) {
-        self.nextButton.imageView.image = [self.nextButton.imageView.image maskWithColor:[UIColor whiteColor]];
-        self.nextButton.hidden = NO;
-    }*/
 }
 
 # pragma mark - actions from button presses
 
-- (IBAction)takePic:(id)sender {
-    // Choosing pic from library when camera isn't available
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
-        [self takePicFromCamera];
-    else
-        [self choosePicFromLib];
-    [self hideImageSourceButtons];
-    
-    // Clear main pic
-    self.mainPic.image = nil;
-        
-    // If both images are set, go to questionVC
-    [self goToQuestionVC];
-    
-}
-
 - (IBAction)onPic1:(id)sender {
-    NSLog(@"Select pic1 thumbnail");
-    
     if (self.currentQuestion.image1) {
         // REDO pic
         self.takePicButton.selected = YES;
     } else {
         self.takePicButton.selected = NO;
     }
+    [self setInsets];
+    
     [self selectPic:0];
-    self.mainPic.image = self.pic1.imageView.image;
+
+    if (self.pic1.imageView.image) {
+        self.mainPic.image = self.pic1.imageView.image;
+        self.mainPic.alpha = 0.0f;
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDuration:0.5f];
+        self.mainPic.alpha = 1.0f;
+        [UIView commitAnimations];
+    } else
+        self.mainPic.image = self.pic1.imageView.image;
     
     // Add these lines so we don't need the dumb-looking arrow
-    if (self.pic1.imageView.image && self.pic2.imageView.image)
-        [self goToQuestionVC];
+//    if (self.pic1.imageView.image && self.pic2.imageView.image)
+//        [self goToQuestionVC];
 }
 
 - (IBAction)onPic2:(id)sender {
-    NSLog(@"Select pic2 thumbnail");
-    
     if (self.currentQuestion.image2) {
         // REDO pic
         self.takePicButton.selected = YES;
     } else {
         self.takePicButton.selected = NO;
     }
+    [self setInsets];
+    
     [self selectPic:1];
-    self.mainPic.image = self.pic2.imageView.image;
+    
+    if (self.pic2.imageView.image) {
+        self.mainPic.image = self.pic2.imageView.image;
+        self.mainPic.alpha = 0.0f;
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDuration:0.3f];
+        self.mainPic.alpha = 1.0f;
+        [UIView commitAnimations];
+    } else
+        self.mainPic.image = self.pic2.imageView.image;
     
     // Add these lines so we don't need the dumb-looking arrow
-    if (self.pic1.imageView.image && self.pic2.imageView.image)
-        [self goToQuestionVC];
+//    if (self.pic1.imageView.image && self.pic2.imageView.image)
+//        [self goToQuestionVC];
 }
 
 - (IBAction)onMe:(id)sender {
@@ -269,6 +246,9 @@ takePicButtonLongPress;
         self.searchButton.hidden = NO;
     } else {
         [self hideImageSourceButtons];
+        
+        // If both images filled, go back to QuestionVC
+        [self goToQuestionVC];
     }
 }
 
@@ -282,6 +262,20 @@ takePicButtonLongPress;
         self.pinterestButton.hidden = NO;
         self.searchButton.hidden = NO;
     }
+}
+
+- (IBAction)takePic:(id)sender {
+    [self hideImageSourceButtons];
+    
+    // Choosing pic from library when camera isn't available
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
+        [self takePicFromCamera];
+    else
+        [self choosePicFromLib];
+    
+    // If both images are set, go to questionVC
+    [self goToQuestionVC];
+    
 }
 
 - (IBAction)choosePicFromGallery:(id)sender {
@@ -329,63 +323,17 @@ takePicButtonLongPress;
     [self presentViewController:googleVC animated:YES completion:nil];
 }
 
-// For testing: Pre-fill in images
-- (IBAction)quickFill:(id)sender {
-    UIImage *chosenImage = [UIImage imageNamed:@"111834.jpg"];
-    self.image1 = chosenImage;
-    [self.pic1 setImage:chosenImage forState:UIControlStateNormal];
-    [self.pic1 setBackgroundColor:[UIColor clearColor]];
-    self.currentQuestion.image1 = [NSURL URLWithString:@"111834.jpg"];
-    
-    chosenImage = [UIImage imageNamed:@"131466.jpg"];
-    self.image2 = chosenImage;
-    [self.pic2 setImage:chosenImage forState:UIControlStateNormal];
-    [self.pic2 setBackgroundColor:[UIColor clearColor]];
-    self.currentQuestion.image2 = [NSURL URLWithString:@"131466.jpg"];
-    
-    // If both images are set, go to questionVC
-    [self goToQuestionVC];
-    
-}
-
-// For testing: Clear images
-- (IBAction)onClear:(id)sender {
-    [self clearImages:NO];
-}
-
-// For testing: Go to next step
-- (IBAction)onNext:(id)sender {
-    [self onTap:nil];
-}
-
-- (void)onTap:(id)sender {
-    // FIXME: Is the tapping response intuitive?
-    // A tap on the view is treated like an OK/ cancel, but
-    // if both images are set, go to questionVC
-    
-    self.takePicButton.selected = NO;
-    self.mainPic.image = nil;
-    
-    // Select next picture
-    [self selectPic:(self.picIndex + 1) % 2];
-    
-    // If both images are set, go to questionVC
-    [self goToQuestionVC];
-}
-
 # pragma mark - UIImagePicker methods
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     
-    UIImage *chosenImage = info[UIImagePickerControllerOriginalImage];
-    //    UIImage *chosenImage = info[UIImagePickerControllerEditedImage]; // if we want to crop image
+    UIImage *chosenImage = info[UIImagePickerControllerEditedImage]; // for edited (cropped) image
     self.mainPic.image = chosenImage;
     
     if (self.picIndex == 0) {
         self.image1 = chosenImage;
         [self.pic1 setImage:chosenImage forState:UIControlStateNormal];
         [self.pic1 setBackgroundColor:[UIColor clearColor]];
-        // FIXME: what compression / quality do we want?
         [self.currentQuestion setImage1WithData:UIImageJPEGRepresentation(self.image1, 0.5f)];
     } else {
         self.image2 = chosenImage;
@@ -443,7 +391,6 @@ takePicButtonLongPress;
 # pragma mark - QuestionVCDelegate methods
 
 - (void)pictureClicked:(int)picNum {
-    NSLog(@"Picture clicked for redo: %d", picNum);
     if (picNum == 1)
         [self onPic1:nil];
     else
@@ -476,14 +423,13 @@ takePicButtonLongPress;
 // Initial formatting for thumbnail image buttons
 - (void)formatPic:(UIButton *)button isSelected:(BOOL)selected
 {
-    button.layer.masksToBounds = YES;
-    
     if (selected)
         button.alpha = 1;
     else
         button.alpha = 0.4;
-
+    
     button.backgroundColor = [UIColor colorWithWhite:.76 alpha:1];
+    button.layer.masksToBounds = YES;
     button.layer.borderWidth = 1;
     button.layer.cornerRadius = 25;
     [button.imageView setContentMode:UIViewContentModeScaleAspectFill];
@@ -510,7 +456,7 @@ takePicButtonLongPress;
 
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
     picker.delegate = self;
-    picker.allowsEditing = NO;
+    picker.allowsEditing = YES;
     picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     
     [self presentViewController:picker animated:YES completion:NULL];
@@ -549,6 +495,10 @@ takePicButtonLongPress;
         questionVC.delegate = self;
         
         self.justSelectedImage = NO;
+        
+        // Set mainPic to be hidden so we don't still see it when the QuestionVC is coming up (and it not opaque)
+        self.mainPic.hidden = YES;
+        
         [self presentViewController:questionVC animated:YES completion:nil];
         
     }
@@ -559,6 +509,19 @@ takePicButtonLongPress;
     self.cameraButton.hidden = YES;
     self.pinterestButton.hidden = YES;
     self.searchButton.hidden = YES;
+}
+
+- (void)setInsets {
+    if ([self.takePicButton.titleLabel.text isEqualToString:@"+"]) {
+        [self.takePicButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 8, 0)];
+    } else if ([self.takePicButton.titleLabel.text isEqualToString:@"REDO"]) {
+        [self.takePicButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 15, 0)];
+    } else {
+        if ([self pinterestIsDefault])
+            [self.takePicButton setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+        else
+            [self.takePicButton setImageEdgeInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
+    }
 }
 
 @end

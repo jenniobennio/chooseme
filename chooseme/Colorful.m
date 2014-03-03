@@ -22,6 +22,25 @@
     return sharedMyManager;
 }
 
+- (UIColor *)randColor {
+    colorIndex = arc4random() % colors.count;
+    return colors[colorIndex];
+}
+
+- (UIColor *)currentColor {
+    return colors[colorIndex];
+}
+
+- (UIColor *)randFriendsColor {
+    friendsColorIndex = arc4random() % colors.count;
+    return colors[friendsColorIndex];
+}
+
+- (UIColor *)currentFriendsColor {
+    return colors[friendsColorIndex];
+}
+
+
 - (id)init {
     if (self = [super init]) {
         colorIndex = 0;

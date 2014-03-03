@@ -21,4 +21,10 @@
 
 + (id)sharedManager;
 
+- (UIColor *)randColor;
+- (UIColor *)currentColor;
+
+- (UIColor *)randFriendsColor;
+- (UIColor *)currentFriendsColor;
+
 @end

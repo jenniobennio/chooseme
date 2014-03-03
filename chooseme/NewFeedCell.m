@@ -241,30 +241,20 @@
     // ****** UPDATE MODEL ******
     // you vote on your own pic
     if ([[[PFUser currentUser] objectId] isEqualToString:[self.q.author objectId]]) {
-        if (self.q.youVoted == [NSNumber numberWithInteger:0]) {
-            if (self.pView.thumbnail1.alpha == 1) {
-                self.q.youVoted = [NSNumber numberWithInteger:1];
-                vote = 1;
-            } else {
-                self.q.youVoted = [NSNumber numberWithInteger:2];
-                vote = 2;
-            }
+        if (self.pView.thumbnail1.alpha == 1) {
+            self.q.youVoted = [NSNumber numberWithInteger:1];
+            vote = 1;
         } else {
-            self.q.youVoted = [NSNumber numberWithInteger:0];
-            vote = 0;
+            self.q.youVoted = [NSNumber numberWithInteger:2];
+            vote = 2;
         }
     } else { // you vote on a friend's pic
-        if (self.q.vote == 0) {
-            if (self.pView.thumbnail1.alpha == 1) {
-                [self.q setVote:1];
-                vote = 1;
-            } else {
-                [self.q setVote:2];
-                vote = 2;
-            }
+        if (self.pView.thumbnail1.alpha == 1) {
+            [self.q setVote:1];
+            vote = 1;
         } else {
-            [self.q setVote:0];
-            vote = 0;
+            [self.q setVote:2];
+            vote = 2;
         }
     }
     [self.q saveInBackground];

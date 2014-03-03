@@ -85,6 +85,8 @@
     [self.pView.thumbnail2 addTarget:self action:@selector(onTapPic2:) forControlEvents:UIControlEventTouchUpInside];
     self.pView.thumbnail2.tag = 2;
     
+    [self.pView enableSwipe];
+    
     // Format icons
     [self.pView colorIcons];
     

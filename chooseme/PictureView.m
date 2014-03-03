@@ -72,5 +72,40 @@
     self.numCommentsLabel.text = [NSString stringWithFormat:@"%d", comments];
 }
 
+- (void)enableSwipe
+{
+    self.userInteractionEnabled = YES;
+    self.bigPic.userInteractionEnabled = YES;
+    UISwipeGestureRecognizer *recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
+    recognizer.delegate = self;
+    recognizer.direction = (UISwipeGestureRecognizerDirectionRight|UISwipeGestureRecognizerDirectionLeft);
+    
+    [self.bigPic addGestureRecognizer:recognizer];
+}
+
+- (void)handleSwipe:(UISwipeGestureRecognizer *)swipe
+{
+    NSLog(@"receiving swipe.");
+    // direction doesn't matter. just toggle.
+    if (swipe.direction == UISwipeGestureRecognizerDirectionRight) {
+        NSLog(@"right swipe");
+    } else if (swipe.direction == UISwipeGestureRecognizerDirectionLeft) {
+        NSLog(@"left swipe.");
+    }
+}
+
+#pragma mark - Gesture Recognizer Delegate
+
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer{
+    return YES;
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer{
+    return YES;
+}
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch{
+    return YES;
+}
+
 
 @end

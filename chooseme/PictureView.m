@@ -74,11 +74,6 @@
     self.numCommentsLabel.textColor = color;
 }
 
-- (void)updateVotes:(int)votes
-{
-    self.numVotesLabel.text = [NSString stringWithFormat:@"%d", votes];
-}
-
 - (void)updateComments:(int)comments
 {
     self.numCommentsLabel.text = [NSString stringWithFormat:@"%d", comments];

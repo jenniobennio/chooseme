@@ -112,9 +112,10 @@
     
     // Format icons
     [self.pView colorIcons];
+    [self updateHeartIcon];
     
     // Set any text
-    [self.pView updateVotes:q.numReplies];
+    [self updateVoteCount];
     [self.pView updateComments:q.numComments];
 
     // Add as subview
@@ -152,11 +153,31 @@
 {
     [self reloadBigPic:self.q.image1];
     [self.pView highlightImage:1];
+    [self updateVoteCount];
+    [self updateHeartIcon];
 }
+
 - (void)onTapPic2:(UIButton *)button
 {
     [self reloadBigPic:self.q.image2];
     [self.pView highlightImage:2];
+    [self updateVoteCount];
+    [self updateHeartIcon];
+}
+
+- (void) updateHeartIcon
+{
+    int image = (self.pView.thumbnail1.alpha == 1)? 1 : 2;
+    
+    int vote = 0;
+    if ([[[PFUser currentUser] objectId] isEqualToString:self.q.author.objectId]) {
+        vote = [self.q.youVoted intValue];
+    } else {
+        vote = [self.q vote];
+    }
+    self.pView.heartIcon.image = [UIImage imageNamed:@"29-heart.png"]; // fix the disappearing alpha problem
+    UIColor *heartColor = (vote == image) ? [UIColor colorWithRed:1 green:0.07 blue:0.5 alpha:0.8] : [UIColor grayColor];
+    self.pView.heartIcon.image = [self.pView.heartIcon.image maskWithColor:heartColor];
 }
 
 - (void)handleRightSwipe:(UISwipeGestureRecognizer *)swipe
@@ -202,33 +223,51 @@
 
 - (void) doHeartPic
 {
-    BOOL vote;
+    int vote = 0; // 0 = no vote, 1 = image1, 2 = image2;
+    
     // ****** UPDATE MODEL ******
     // you vote on your own pic
     if ([[[PFUser currentUser] objectId] isEqualToString:[self.q.author objectId]]) {
-        if (self.q.youVoted == [NSNumber numberWithInteger:1]) {
-            self.q.youVoted = [NSNumber numberWithInteger:0];
-            vote = NO;
+        if (self.q.youVoted == [NSNumber numberWithInteger:0]) {
+            if (self.pView.thumbnail1.alpha == 1) {
+                self.q.youVoted = [NSNumber numberWithInteger:1];
+                vote = 1;
+            } else {
+                self.q.youVoted = [NSNumber numberWithInteger:2];
+                vote = 2;
+            }
         } else {
-            self.q.youVoted = [NSNumber numberWithInteger:1];
-            vote = YES;
+            self.q.youVoted = [NSNumber numberWithInteger:0];
+            vote = 0;
         }
     } else { // you vote on a friend's pic
-        if (self.q.vote) {
-            [self.q setVote:0];
-            vote = NO;
+        if (self.q.vote == 0) {
+            if (self.pView.thumbnail1.alpha == 1) {
+                [self.q setVote:1];
+                vote = 1;
+            } else {
+                [self.q setVote:2];
+                vote = 2;
+            }
         } else {
-            [self.q setVote:1];
-            vote = YES;
+            [self.q setVote:0];
+            vote = 0;
         }
     }
     [self.q saveInBackground];
     
     // ******** Update UI *********
-    self.pView.numVotesLabel.text = [NSString stringWithFormat:@"%d", self.q.numReplies];
-    self.pView.heartIcon.image = [UIImage imageNamed:@"29-heart.png"]; // fix the disappearing alpha problem
-    UIColor *color = vote ? [UIColor colorWithRed:1 green:0.07 blue:0.5 alpha:0.8] : [UIColor grayColor];
-    self.pView.heartIcon.image = [self.pView.heartIcon.image maskWithColor:color];
+    [self updateVoteCount];
+    [self updateHeartIcon];
+
+}
+
+- (void) updateVoteCount {
+    if (self.pView.thumbnail1.alpha == 1) {
+        self.pView.numVotesLabel.text = [NSString stringWithFormat:@"%d", self.q.numVoted1];
+    } else {
+        self.pView.numVotesLabel.text = [NSString stringWithFormat:@"%d", self.q.numVoted2];
+    }
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

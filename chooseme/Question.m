@@ -179,7 +179,10 @@
         if ([self.friendsVoted[i] intValue] != 0)
             totalCount++;
     }
-    return totalCount + [self.youVoted intValue];
+    
+    int didYouVote = ([self.youVoted intValue] == 0) ? 0 : 1;
+    
+    return totalCount + didYouVote;
 }
 
 - (int)numVoted1 {
@@ -190,7 +193,9 @@
         if ([self.friendsVoted[i] intValue] == 1)
             totalCount++;
     }
-    return totalCount;
+    
+    int didYouVote = ([self.youVoted intValue] == 1) ? 1 : 0;
+    return totalCount + didYouVote;
 }
 
 - (int)numVoted2 {
@@ -201,7 +206,9 @@
         if ([self.friendsVoted[i] intValue] == 2)
             totalCount++;
     }
-    return totalCount;
+    
+    int didYouVote = ([self.youVoted intValue] == 2) ? 1 : 0;
+    return totalCount + didYouVote;
 }
 
 - (int)numComments {

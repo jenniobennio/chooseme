@@ -23,7 +23,6 @@
 - (void)formatThumbnails;
 - (void)colorIcons;
 - (void)highlightImage:(int)index;
-- (void)updateVotes:(int)votes;
 - (void)updateComments:(int)comments;
 
 @end

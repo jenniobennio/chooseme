@@ -36,7 +36,7 @@
         [colors addObject:[UIColor colorWithRed:0.878 green:0.416 blue:0.039 alpha:0.75]];
         [colors addObject:[UIColor colorWithRed:0.929 green:0.345 blue:0.455 alpha:0.75]];
         [colors addObject:[UIColor colorWithRed:0.537 green:0.235 blue:0.663 alpha:0.75]];
-        [colors addObject:[UIColor colorWithRed:0.153 green:0.220 blue:0.298 alpha:0.75]];
+//        [colors addObject:[UIColor colorWithRed:0.153 green:0.220 blue:0.298 alpha:0.75]];
     }
     return self;
 }

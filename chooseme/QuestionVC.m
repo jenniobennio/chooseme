@@ -8,22 +8,34 @@
 
 #import "QuestionVC.h"
 #import "AddFriendCell.h"
+#import "PictureView.h"
+#import "UIImage+mask.h"
+#import "FriendCell.h"
 
 @interface QuestionVC ()
 
 // View elements
+@property (strong, nonatomic) IBOutlet UIView *titleView;
+@property (strong, nonatomic) IBOutlet UILabel *titleLabel;
+
 @property (strong, nonatomic) IBOutlet UITextField *questionTextField;
-@property (strong, nonatomic) IBOutlet UIButton *pic1;
-@property (strong, nonatomic) IBOutlet UIButton *pic2;
+//@property (strong, nonatomic) IBOutlet UIButton *pic1;
+//@property (strong, nonatomic) IBOutlet UIButton *pic2;
 @property (strong, nonatomic) IBOutlet UITableView *friendsTable;
+@property (strong, nonatomic) IBOutlet UICollectionView *friendsView;
 @property (strong, nonatomic) IBOutlet UIButton *submitButton;
+@property (strong, nonatomic) IBOutlet UIButton *backButton;
+@property (strong, nonatomic) IBOutlet UIButton *editButton;
+
+@property (strong, nonatomic) PictureView *pView;
 
 // Button actions
 - (IBAction)onBack:(id)sender;
 - (IBAction)onSubmit:(id)sender;
+- (IBAction)onEdit:(id)sender;
 
-- (IBAction)onPic1:(id)sender;
-- (IBAction)onPic2:(id)sender;
+- (void)onPic1;
+- (void)onPic2;
 
 // Friend picker + search bar
 @property (strong, nonatomic) FBFriendPickerViewController *friendPickerController;
@@ -57,12 +69,43 @@
     [self.friendsTable registerNib:[UINib nibWithNibName:@"AddFriendCell" bundle:nil] forCellReuseIdentifier:@"AddFriendCell"];
     self.friendsTable.delegate = self;
     self.friendsTable.dataSource = self;
+    
+    [self.friendsView registerClass:[FriendCell class] forCellWithReuseIdentifier:@"FriendCell"];
+    [self.friendsView registerNib:[UINib nibWithNibName:@"FriendCell" bundle:nil] forCellWithReuseIdentifier:@"FriendCell"];
+    self.friendsView.delegate = self;
+    self.friendsView.dataSource = self;
+    self.friendsView.backgroundColor = [UIColor clearColor];
+    
+    // Format title bar
+    UIColor *greenColor = [UIColor colorWithRed:0.329 green:0.733 blue:0.616 alpha:0.75];
+    self.titleView.backgroundColor = greenColor;
+    self.titleLabel.text = @"ASK A QUESTION";
+    
+    self.backButton.imageView.image = [self.backButton.imageView.image maskWithColor:[UIColor whiteColor]];
+    self.submitButton.imageView.image = [self.submitButton.imageView.image maskWithColor:[UIColor whiteColor]];
+    self.editButton.layer.cornerRadius = 25;
 
     // Pre-fill images and format
-    [self.pic1 setImage:self.question.image1 forState:UIControlStateNormal];
-    self.pic1.imageView.contentMode = UIViewContentModeScaleAspectFill;
-    [self.pic2 setImage:self.question.image2 forState:UIControlStateNormal];
-    self.pic2.imageView.contentMode = UIViewContentModeScaleAspectFill;
+    NSArray *nibViews = [[NSBundle mainBundle] loadNibNamed:@"PictureView" owner:self options:nil];
+    self.pView = [nibViews objectAtIndex:0];
+    self.pView.frame = CGRectMake(0, 40, self.view.frame.size.width, 368);
+    [self.pView hideDetails];
+    [self.pView formatThumbnails];
+    [self.pView.bigPic setImage:self.question.image1];
+    [self.pView.thumbnail1 setImage:self.question.image1 forState:UIControlStateNormal];
+    [self.pView.thumbnail2 setImage:self.question.image2 forState:UIControlStateNormal];
+    self.pView.thumbnail1.layer.borderColor = [greenColor CGColor];
+    self.pView.thumbnail2.layer.borderColor = [greenColor CGColor];
+    [self.pView highlightImage:1];
+    [self.view addSubview:self.pView];
+    [self.view sendSubviewToBack:self.pView];
+    
+    self.questionTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Share a thought" attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
+    
+//    [self.pic1 setImage:self.question.image1 forState:UIControlStateNormal];
+//    self.pic1.imageView.contentMode = UIViewContentModeScaleAspectFill;
+//    [self.pic2 setImage:self.question.image2 forState:UIControlStateNormal];
+//    self.pic2.imageView.contentMode = UIViewContentModeScaleAspectFill;
     
     // Load question text
     if (self.question.question)
@@ -117,7 +160,8 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [self.friendsTable reloadData];
+//    [self.friendsTable reloadData];
+    [self.friendsView reloadData];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -159,13 +203,18 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (IBAction)onPic1:(id)sender {
+- (IBAction)onEdit:(id)sender {
+    // FIXME: select correct pic to edit
+    [self onPic1];
+}
+
+- (void)onPic1 {
     NSLog(@"Selected pic1 to redo");
     [self.delegate pictureClicked:1];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (IBAction)onPic2:(id)sender {
+- (void)onPic2 {
     NSLog(@"Selected pic2 to redo");
     [self.delegate pictureClicked:2];
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -239,6 +288,7 @@
     }
     
     [self.submitButton setEnabled:self.question.friends.count > 0];
+    self.submitButton.imageView.image = [self.submitButton.imageView.image maskWithColor:[UIColor whiteColor]];
     
     NSLog(@"%@", text);
     
@@ -308,6 +358,27 @@
     [self.question.friendsVoted removeObjectAtIndex:indexPath.row];
     [self.friendsTable deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:YES];
     [self.friendsTable reloadData];
+}
+
+# pragma mark - collection view methods
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return self.question.friends.count;
+}
+
+// The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    FriendCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"FriendCell" forIndexPath:indexPath];
+    
+    NSString *friend = [self.question.friends[indexPath.row] name];
+    NSString *strurl = [[NSString alloc] initWithFormat:@"https://graph.facebook.com/%@/picture",[[self.question.friends objectAtIndex:indexPath.row] objectForKey:@"id"]];
+    NSURL *url = [NSURL URLWithString:strurl];
+    NSData *data = [NSData dataWithContentsOfURL:url];
+    [cell.friendImage setImage:[[UIImage alloc] initWithData:data]];
+    
+    NSLog(@"Collection View added friend %@", friend);
+
+    return cell;
 }
 
 #pragma mark - private methods

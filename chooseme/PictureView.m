@@ -29,6 +29,17 @@
 }
 */
 
+- (void)hideDetails
+{
+    // For the QuestionVC, hide lots of things
+    self.thumbnail1.titleLabel.text = @"";
+    self.thumbnail2.titleLabel.text = @"";
+    self.numVotesLabel.text = @"";
+    self.numCommentsLabel.text = @"";
+    self.heartIcon.image = nil;
+    self.commentIcon.image = nil;
+}
+
 - (void)formatThumbnails
 {
     self.thumbnail1.layer.borderWidth = 1;
@@ -47,9 +58,9 @@
     // TODO: Also, add a gray overlay?
     
     if (index == 1) {
-        self.thumbnail2.alpha = 0.25;
+        self.thumbnail2.alpha = 0.4;
     } else {
-        self.thumbnail1.alpha = 0.25;
+        self.thumbnail1.alpha = 0.4;
     }
 }
 

@@ -236,27 +236,45 @@
 
 - (void) doHeartPic
 {
-    int vote = 0; // 0 = no vote, 1 = image1, 2 = image2;
-    
     // ****** UPDATE MODEL ******
-    // you vote on your own pic
+    // First, check if you need to dislike an image.
+    BOOL dislike = NO;
+    int image = (self.pView.thumbnail1.alpha == 1) ? 1 : 2;
     if ([[[PFUser currentUser] objectId] isEqualToString:[self.q.author objectId]]) {
-        if (self.pView.thumbnail1.alpha == 1) {
-            self.q.youVoted = [NSNumber numberWithInteger:1];
-            vote = 1;
-        } else {
-            self.q.youVoted = [NSNumber numberWithInteger:2];
-            vote = 2;
+        if ([self.q.youVoted intValue] == image) {
+            self.q.youVoted = [NSNumber numberWithInteger:0];
+            dislike = YES;
         }
-    } else { // you vote on a friend's pic
-        if (self.pView.thumbnail1.alpha == 1) {
-            [self.q setVote:1];
-            vote = 1;
-        } else {
-            [self.q setVote:2];
-            vote = 2;
+    } else {
+        if ([self.q vote] == image) {
+            [self.q setVote:0];
+            dislike = YES;
         }
     }
+    
+    if (!dislike) {
+        // Second case, you need to like an image.
+        int vote = 0; // 0 = no vote, 1 = image1, 2 = image2;
+        // you vote on your own pic
+        if ([[[PFUser currentUser] objectId] isEqualToString:[self.q.author objectId]]) {
+            if (self.pView.thumbnail1.alpha == 1) {
+                self.q.youVoted = [NSNumber numberWithInteger:1];
+                vote = 1;
+            } else {
+                self.q.youVoted = [NSNumber numberWithInteger:2];
+                vote = 2;
+            }
+        } else { // you vote on a friend's pic
+            if (self.pView.thumbnail1.alpha == 1) {
+                [self.q setVote:1];
+                vote = 1;
+            } else {
+                [self.q setVote:2];
+                vote = 2;
+            }
+        }
+    }
+    
     [self.q saveInBackground];
     
     // ******** Update UI *********

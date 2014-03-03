@@ -65,6 +65,9 @@ takePicButtonLongPress;
 // Private variable for checking whether we just selected some image
 @property (nonatomic, assign) BOOL justSelectedImage;
 
+// BOOL to track whether Pinterest is default image source -- this affects formatting for image insets
+@property (nonatomic, assign) BOOL pinterestIsDefault;
+
 @end
 
 @implementation CameraVC
@@ -145,7 +148,10 @@ takePicButtonLongPress;
     } else if ([self.takePicButton.titleLabel.text isEqualToString:@"REDO"]) {
         [self.takePicButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 15, 0)];
     } else {
-        [self.takePicButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+        if ([self pinterestIsDefault])
+            [self.takePicButton setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+        else
+            [self.takePicButton setImageEdgeInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
     }
 }
 
@@ -267,6 +273,7 @@ takePicButtonLongPress;
     if (self.shouldSetDefaultPicSource) {
         self.defaultPicSource = self.galleryButton;
         [self.takePicButton setImage:[UIImage imageNamed:@"stack_of_photos-128.png"] forState:UIControlStateNormal];
+        self.pinterestIsDefault = NO;
         self.takePicButton.titleLabel.text = @"";
         self.shouldSetDefaultPicSource = NO;
     }
@@ -279,6 +286,7 @@ takePicButtonLongPress;
     if (self.shouldSetDefaultPicSource) {
         self.defaultPicSource = self.pinterestButton;
         [self.takePicButton setImage:[UIImage imageNamed:@"pinterest-128.png"] forState:UIControlStateNormal];
+        self.pinterestIsDefault = YES;
         self.takePicButton.titleLabel.text = @"";
         self.shouldSetDefaultPicSource = NO;
     }
@@ -294,6 +302,7 @@ takePicButtonLongPress;
     if (self.shouldSetDefaultPicSource) {
         self.defaultPicSource = self.searchButton;
         [self.takePicButton setImage:[UIImage imageNamed:@"search-128.png"] forState:UIControlStateNormal];
+        self.pinterestIsDefault = NO;
         self.takePicButton.titleLabel.text = @"";
         self.shouldSetDefaultPicSource = NO;
     }
@@ -500,6 +509,7 @@ takePicButtonLongPress;
     if (self.shouldSetDefaultPicSource) {
         self.defaultPicSource = self.cameraButton;
         [self.takePicButton setImage:[UIImage imageNamed:@"slr_camera-128.png"] forState:UIControlStateNormal];
+        self.pinterestIsDefault = NO;
         self.takePicButton.titleLabel.text = @"";
         self.shouldSetDefaultPicSource = NO;
     }

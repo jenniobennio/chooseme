@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Question.h"
 
 @interface PictureView : UIView <UIGestureRecognizerDelegate>
 @property (strong, nonatomic) IBOutlet UIImageView *bigPic;
@@ -24,5 +25,6 @@
 - (void)colorIcons;
 - (void)highlightImage:(int)index;
 - (void)updateComments:(int)comments;
+- (void)updatePercentages:(Question *)q;
 
 @end

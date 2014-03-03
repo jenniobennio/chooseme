@@ -8,6 +8,7 @@
 
 #import "PictureView.h"
 #import "UIImage+mask.h"
+#import "Question.h"
 
 @implementation PictureView
 
@@ -77,6 +78,18 @@
 - (void)updateComments:(int)comments
 {
     self.numCommentsLabel.text = [NSString stringWithFormat:@"%d", comments];
+}
+
+- (void)updatePercentages:(Question *)q
+{
+    NSString *percent1 = [NSString stringWithFormat:@"%d", [q percentPic:1]];
+    NSString *percent2 = [NSString stringWithFormat:@"%d", [q percentPic:2]];
+    
+    [self.thumbnail1 setTitle:percent1 forState:UIControlStateNormal];
+    [self.thumbnail2 setTitle:percent2 forState:UIControlStateNormal];
+    
+    self.thumbnail1.titleLabel.alpha = 0.95;
+    self.thumbnail2.titleLabel.alpha = 0.95;
 }
 
 @end

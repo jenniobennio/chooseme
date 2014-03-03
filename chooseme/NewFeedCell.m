@@ -66,8 +66,8 @@
     self.pView.frame = newFrame;
 
     // Set the images
-    [self.pView.thumbnail1 setImage:image1 forState:UIControlStateNormal];
-    [self.pView.thumbnail2 setImage:image2 forState:UIControlStateNormal];
+    [self.pView.thumbnail1 setBackgroundImage:image1 forState:UIControlStateNormal];
+    [self.pView.thumbnail2 setBackgroundImage:image2 forState:UIControlStateNormal];
 
     // Set the big pic background color to fade from
     self.pView.bigPicBgColor.backgroundColor = color;
@@ -117,7 +117,8 @@
     // Set any text
     [self updateVoteCount];
     [self.pView updateComments:q.numComments];
-
+    [self.pView updatePercentages:q];
+    
     // Add as subview
     [self.contentView addSubview:self.pView];
     
@@ -280,7 +281,6 @@
     // ******** Update UI *********
     [self updateVoteCount];
     [self updateHeartIcon];
-
 }
 
 - (void) updateVoteCount {
@@ -289,6 +289,7 @@
     } else {
         self.pView.numVotesLabel.text = [NSString stringWithFormat:@"%d", self.q.numVoted2];
     }
+    [self.pView updatePercentages:self.q];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

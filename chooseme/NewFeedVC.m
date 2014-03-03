@@ -73,7 +73,7 @@
     
     // Refresh control
     UIRefreshControl *refresh = [[UIRefreshControl alloc] init];
-    [refresh addTarget:self action:@selector(refreshMe:) forControlEvents:                         UIControlEventValueChanged];
+    [refresh addTarget:self action:@selector(refreshMe:) forControlEvents:UIControlEventValueChanged];
     [self.feedTable addSubview:refresh];
     
     // Load my data

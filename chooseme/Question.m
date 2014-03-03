@@ -216,15 +216,9 @@
 }
 
 - (int)percentPic:(int)picNum {
-    int count1 = 0;
-    int count2 = 0;
+    int count1 = [self numVoted1];
+    int count2 = [self numVoted2];
     int totalCount = [self numReplies];
-    
-    for (int i = 0; i < self.friendsVoted.count; i++) {
-        // Count the people who voted for pic1
-        if ([self.friendsVoted[i] intValue] == 1)
-            count1++;
-    }
     
     // Calculate percentages and make sure it adds up to 100
     if (totalCount != 0) {

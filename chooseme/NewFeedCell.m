@@ -85,7 +85,14 @@
     [self.pView.thumbnail2 addTarget:self action:@selector(onTapPic2:) forControlEvents:UIControlEventTouchUpInside];
     self.pView.thumbnail2.tag = 2;
     
-    [self.pView enableSwipe];
+    // Enable Swiping
+    self.pView.userInteractionEnabled = YES;
+    self.pView.bigPic.userInteractionEnabled = YES;
+    UISwipeGestureRecognizer *recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
+    recognizer.delegate = self;
+    recognizer.direction = (UISwipeGestureRecognizerDirectionRight|UISwipeGestureRecognizerDirectionLeft);
+    
+    [self.pView.bigPic addGestureRecognizer:recognizer];
     
     // Format icons
     [self.pView colorIcons];
@@ -136,11 +143,36 @@
     [self.pView highlightImage:2];
 }
 
+- (void)handleSwipe:(UISwipeGestureRecognizer *)swipe
+{
+    NSLog(@"receiving swipe.");
+    // direction doesn't matter. just toggle.
+    if (swipe.direction == UISwipeGestureRecognizerDirectionRight) {
+        NSLog(@"right swipe");
+    } else if (swipe.direction == UISwipeGestureRecognizerDirectionLeft) {
+        NSLog(@"left swipe.");
+    }
+}
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+
+#pragma mark - Gesture Recognizer Delegate
+
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer{
+    return YES;
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer{
+    return YES;
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch{
+    return YES;
 }
 
 @end

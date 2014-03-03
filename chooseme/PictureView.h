@@ -24,6 +24,5 @@
 - (void)highlightImage:(int)index;
 - (void)updateVotes:(int)votes;
 - (void)updateComments:(int)comments;
-- (void)enableSwipe;
 
 @end

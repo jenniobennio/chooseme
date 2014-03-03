@@ -11,7 +11,7 @@
 #import "UserQuestionView.h"
 #import "Question.h"
 
-@interface NewFeedCell : UITableViewCell
+@interface NewFeedCell : UITableViewCell <UIGestureRecognizerDelegate>
 
 @property (strong, nonatomic) PictureView *pView;
 @property (strong, nonatomic) UserQuestionView *uqView;

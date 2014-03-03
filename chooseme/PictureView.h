@@ -19,6 +19,7 @@
 @property (strong, nonatomic) IBOutlet UIImageView *heartIcon;
 @property (strong, nonatomic) IBOutlet UIImageView *commentIcon;
 
+- (void)hideDetails;
 - (void)formatThumbnails;
 - (void)colorIcons;
 - (void)highlightImage:(int)index;

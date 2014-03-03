@@ -31,6 +31,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *searchButton;
 @property (weak, nonatomic) UIButton *defaultPicSource;
 @property (nonatomic) BOOL shouldSetDefaultPicSource;
+@property (strong, nonatomic) IBOutlet UIButton *nextButton;
 
 // Button actions
 - (IBAction)takePic:(id)sender;
@@ -90,10 +91,18 @@ takePicButtonLongPress;
     [self formatPic:self.pic2 isSelected:NO];
     
     // Customize takePicButton depending on state
+    self.takePicButton.backgroundColor = [UIColor colorWithRed:0.329 green:0.733 blue:0.616 alpha:0.75];
     self.takePicButton.layer.cornerRadius = 25;
     [self.takePicButton.titleLabel setAdjustsFontSizeToFitWidth:YES];
     [self.takePicButton setTitle:@"+" forState:UIControlStateNormal];
     [self.takePicButton setTitle:@"REDO" forState:UIControlStateHighlighted];
+    
+    self.nextButton.imageView.image = [self.nextButton.imageView.image maskWithColor:[UIColor colorWithRed:0.329 green:0.733 blue:0.616 alpha:1]];
+    self.nextButton.backgroundColor = [UIColor colorWithWhite:.94 alpha:1];
+    self.nextButton.layer.cornerRadius = 25;
+    self.nextButton.layer.borderWidth = 1;
+    self.nextButton.layer.borderColor = [[UIColor colorWithRed:0.329 green:0.733 blue:0.616 alpha:0.75] CGColor];
+    self.nextButton.hidden = YES;
     
     UILongPressGestureRecognizer *longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(takePicButtonLongPress)];
     longPressRecognizer.delegate = self;
@@ -134,9 +143,14 @@ takePicButtonLongPress;
 
 - (void)viewDidAppear:(BOOL)animated
 {
+    self.nextButton.hidden = YES;
+    
     if (self.justSelectedImage) {
         // If both images are set, go to questionVC
         [self goToQuestionVC];
+    } else if (self.pic1.imageView.image && self.pic2.imageView.image) {
+        self.nextButton.imageView.image = [self.nextButton.imageView.image maskWithColor:[UIColor colorWithRed:0.329 green:0.733 blue:0.616 alpha:1]];
+        self.nextButton.hidden = NO;
     }
 }
 
@@ -423,14 +437,14 @@ takePicButtonLongPress;
     button.layer.masksToBounds = YES;
     
     if (selected)
-        button.layer.borderWidth = 3;
+        button.alpha = 1;
     else
-        button.layer.borderWidth = 1;
-    
+        button.alpha = 0.4;
+
     button.backgroundColor = [UIColor colorWithWhite:.76 alpha:1];
-    button.alpha = 0.8;
-    button.layer.borderColor = [UIColor.lightGrayColor CGColor];
-    button.layer.cornerRadius = 5;
+    button.layer.borderWidth = 1;
+    button.layer.borderColor = [[UIColor colorWithRed:0.329 green:0.733 blue:0.616 alpha:0.75] CGColor];[UIColor.lightGrayColor CGColor];
+    button.layer.cornerRadius = 25;
     [button.imageView setContentMode:UIViewContentModeScaleAspectFill];
 }
 
@@ -439,12 +453,12 @@ takePicButtonLongPress;
 {
     self.picIndex = index;
     if (index == 0) {
-        self.pic1.layer.borderWidth = 3;
-        self.pic2.layer.borderWidth = 1;
+        self.pic1.alpha = 1;
+        self.pic2.alpha = 0.4;
     }
     else {
-        self.pic1.layer.borderWidth = 1;
-        self.pic2.layer.borderWidth = 3;
+        self.pic2.alpha = 1;
+        self.pic1.alpha = 0.4;
     }
 }
 

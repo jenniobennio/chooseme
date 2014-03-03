@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4514" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4514" systemVersion="13A603" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
@@ -12,6 +12,7 @@
                 <outlet property="galleryButton" destination="c3g-4O-0yZ" id="meK-zb-GvZ"/>
                 <outlet property="mainPic" destination="T78-pM-AKV" id="wdW-IN-Gfg"/>
                 <outlet property="meButton" destination="fQV-Wy-4pm" id="q2q-bm-rLi"/>
+                <outlet property="nextButton" destination="ipe-Fg-25A" id="DYu-2N-qfy"/>
                 <outlet property="pic1" destination="jS4-HL-qP4" id="szy-cY-A7T"/>
                 <outlet property="pic2" destination="Srs-PC-D1b" id="bJo-ZA-Bpq"/>
                 <outlet property="pinterestButton" destination="dHX-5L-Ofu" id="14C-4y-oWi"/>
@@ -145,7 +146,7 @@
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C85-0Y-mJr">
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C85-0Y-mJr">
                     <rect key="frame" x="126" y="110" width="59" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <state key="normal" title="QuickFill">
@@ -155,7 +156,7 @@
                         <action selector="quickFill:" destination="-1" eventType="touchUpInside" id="6Ed-xh-WoW"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dsf-V0-nV2">
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dsf-V0-nV2">
                     <rect key="frame" x="257" y="191" width="37" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
@@ -169,14 +170,14 @@
                         <action selector="onClear:" destination="-1" eventType="touchUpInside" id="coc-Zo-pNI"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ipe-Fg-25A">
-                    <rect key="frame" x="262" y="371" width="32" height="30"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ipe-Fg-25A">
+                    <rect key="frame" x="254" y="391" width="50" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="32" id="G07-8P-M9u"/>
-                        <constraint firstAttribute="height" constant="30" id="bhh-XT-uxA"/>
+                        <constraint firstAttribute="width" constant="50" id="OMw-nj-kds"/>
+                        <constraint firstAttribute="height" constant="50" id="uQW-UN-jNz"/>
                     </constraints>
-                    <state key="normal" title="Next">
+                    <state key="normal" image="right-32.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -237,7 +238,7 @@
                 <constraint firstItem="mYJ-OK-HYe" firstAttribute="centerY" secondItem="fQV-Wy-4pm" secondAttribute="centerY" id="DPE-20-D00"/>
                 <constraint firstAttribute="trailing" secondItem="dsf-V0-nV2" secondAttribute="trailing" constant="26" id="Fe2-BU-cpa"/>
                 <constraint firstItem="dHX-5L-Ofu" firstAttribute="leading" secondItem="dQl-MG-sFR" secondAttribute="trailing" constant="23" id="FjP-ip-TDv"/>
-                <constraint firstItem="ipe-Fg-25A" firstAttribute="top" secondItem="Srs-PC-D1b" secondAttribute="bottom" constant="8" id="FrL-T9-YOP"/>
+                <constraint firstItem="ipe-Fg-25A" firstAttribute="top" secondItem="Srs-PC-D1b" secondAttribute="bottom" constant="28" id="FrL-T9-YOP"/>
                 <constraint firstAttribute="trailing" secondItem="h0R-PJ-Qan" secondAttribute="trailing" constant="16" id="FsV-yA-sXP"/>
                 <constraint firstAttribute="trailing" secondItem="jS4-HL-qP4" secondAttribute="trailing" constant="16" id="HL5-Cv-WEX"/>
                 <constraint firstItem="Srs-PC-D1b" firstAttribute="top" secondItem="h0R-PJ-Qan" secondAttribute="bottom" constant="28" id="Iil-od-aFo"/>
@@ -260,7 +261,7 @@
                 <constraint firstItem="2ZE-D9-CZk" firstAttribute="top" secondItem="dHX-5L-Ofu" secondAttribute="bottom" constant="42" id="rAw-vQ-4G0"/>
                 <constraint firstItem="P5h-rC-llG" firstAttribute="centerY" secondItem="2ZE-D9-CZk" secondAttribute="centerY" id="s0S-9n-QIX"/>
                 <constraint firstItem="T78-pM-AKV" firstAttribute="top" secondItem="1" secondAttribute="top" id="xZ1-l1-b5u"/>
-                <constraint firstAttribute="trailing" secondItem="ipe-Fg-25A" secondAttribute="trailing" constant="26" id="y2Y-tV-hd2"/>
+                <constraint firstAttribute="trailing" secondItem="ipe-Fg-25A" secondAttribute="trailing" constant="16" id="y2Y-tV-hd2"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
@@ -270,6 +271,7 @@
         <image name="111-user.png" width="24" height="21"/>
         <image name="112-group.png" width="32" height="21"/>
         <image name="pinterest-32.png" width="32" height="32"/>
+        <image name="right-32.png" width="32" height="32"/>
         <image name="search-32.png" width="32" height="32"/>
         <image name="slr_camera-32.png" width="32" height="32"/>
         <image name="stack_of_photos-32.png" width="32" height="32"/>

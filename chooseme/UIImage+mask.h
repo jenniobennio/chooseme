@@ -10,8 +10,9 @@
 
 @interface UIImage (mask)
 
--(UIImage *)maskWithColor:(UIColor *)color;
+- (UIImage *)maskWithColor:(UIColor *)color;
 - (UIImage*)imageWithShadow;
 - (UIImage *)invertImage;
+- (UIColor *)averageColor;
 
 @end

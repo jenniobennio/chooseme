@@ -22,7 +22,8 @@
 
 - (void)hideDetails;
 - (void)formatThumbnails;
-- (void)colorIcons;
+- (void)colorIcons:(UIImage *)image;
+- (UIColor *) calculateTextColor:(UIImage *)img;
 - (void)highlightImage:(int)index;
 - (void)updateComments:(int)comments;
 - (void)updatePercentages:(Question *)q;

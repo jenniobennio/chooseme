@@ -111,7 +111,7 @@
     [self.pView.heartIcon addGestureRecognizer:heartTap];
     
     // Format icons
-    [self.pView colorIcons];
+    [self.pView colorIcons:self.q.image1];
     [self updateHeartIcon];
     
     // Set any text
@@ -154,6 +154,7 @@
 {
     [self reloadBigPic:self.q.image1];
     [self.pView highlightImage:1];
+    [self.pView colorIcons:self.q.image1];
     [self updateVoteCount];
     [self updateHeartIcon];
 }
@@ -162,6 +163,7 @@
 {
     [self reloadBigPic:self.q.image2];
     [self.pView highlightImage:2];
+    [self.pView colorIcons:self.q.image2];
     [self updateVoteCount];
     [self updateHeartIcon];
 }
@@ -177,9 +179,15 @@
         vote = [self.q vote];
     }
     self.pView.heartIcon.image = [UIImage imageNamed:@"29-heart.png"]; // fix the disappearing alpha problem
-    UIColor *heartColor = (vote == image) ? [UIColor colorWithRed:1 green:0.07 blue:0.5 alpha:0.8] : [UIColor grayColor];
+    UIColor *defaultColor;
+    if (image == 1)
+        defaultColor = [self.pView calculateTextColor:self.q.image1];
+    else
+        defaultColor = [self.pView calculateTextColor:self.q.image2];
+    UIColor *heartColor = (vote == image) ? [UIColor colorWithRed:1 green:0.07 blue:0.5 alpha:0.8] : defaultColor;
     self.pView.heartIcon.image = [self.pView.heartIcon.image maskWithColor:heartColor];
 }
+
 
 - (void)handleRightSwipe:(UISwipeGestureRecognizer *)swipe
 {

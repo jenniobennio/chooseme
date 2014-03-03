@@ -66,13 +66,39 @@
     }
 }
 
-- (void)colorIcons
+- (void)colorIcons:(UIImage *)image
 {
-    UIColor *color = [UIColor grayColor];
+    UIColor *color = [self calculateTextColor:image];
     self.heartIcon.image = [self.heartIcon.image maskWithColor:color];
     self.commentIcon.image = [self.commentIcon.image maskWithColor:color];
     self.numVotesLabel.textColor = color;
     self.numCommentsLabel.textColor = color;
+}
+
+- (UIColor *) calculateTextColor:(UIImage *)img
+{
+    // Detect the average color of the bottom right corner of the image, and
+    // color the text/ icons appropriately
+    CGRect myImageArea = self.bigPic.frame;
+    myImageArea.origin.x = myImageArea.size.width - 100;
+    myImageArea.origin.y = myImageArea.size.height - 30;
+    myImageArea.size.width = 100;
+    myImageArea.size.height = 30;
+    CGImageRef mySubimage  = CGImageCreateWithImageInRect([img CGImage], myImageArea);
+    UIImage *image = [UIImage imageWithCGImage:mySubimage];
+    
+    // If the cropped image is not-nil, then check for the average color
+    UIColor *color = [UIColor lightGrayColor];
+    if (image) {
+        UIColor *avgColor = [image averageColor];
+        CGFloat red = 0.0, green = 0.0, blue = 0.0, alpha = 0.0;
+        [avgColor getRed:&red green:&green blue:&blue alpha:&alpha];
+        
+        CGFloat threshold = 50.0/255;
+        CGFloat bgDelta = ((red * 0.299) + (green * 0.587) + (blue * 0.114));
+        color = (1 - bgDelta < threshold) ? [UIColor grayColor] : [UIColor whiteColor];
+    }
+    return color;
 }
 
 - (void)updateComments:(int)comments

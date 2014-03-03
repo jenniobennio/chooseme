@@ -185,8 +185,32 @@
 
 - (void) doHeartPic
 {
-    NSLog(@"do heart pic. calling mask.");
-    self.pView.heartIcon.image = [self.pView.heartIcon.image maskWithColor:[UIColor colorWithRed:1 green:0.07 blue:0.5 alpha:0.8]];
+    BOOL vote;
+    // ****** UPDATE MODEL ******
+    // you vote on your own pic
+    if ([[[PFUser currentUser] objectId] isEqualToString:[self.q.author objectId]]) {
+        if (self.q.youVoted == [NSNumber numberWithInteger:1]) {
+            self.q.youVoted = [NSNumber numberWithInteger:0];
+            vote = NO;
+        } else {
+            self.q.youVoted = [NSNumber numberWithInteger:1];
+            vote = YES;
+        }
+    } else { // you vote on a friend's pic
+        if (self.q.vote) {
+            [self.q setVote:0];
+            vote = NO;
+        } else {
+            [self.q setVote:1];
+            vote = YES;
+        }
+    }
+    [self.q saveInBackground];
+    
+    // ******** Update UI *********
+    self.pView.numVotesLabel.text = [NSString stringWithFormat:@"%d", self.q.numReplies];
+    UIColor *color = vote ? [UIColor colorWithRed:1 green:0.07 blue:0.5 alpha:1] : [UIColor grayColor];
+    self.pView.heartIcon.image = [self.pView.heartIcon.image maskWithColor:color];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

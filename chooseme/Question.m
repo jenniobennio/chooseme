@@ -179,7 +179,7 @@
         if ([self.friendsVoted[i] intValue] != 0)
             totalCount++;
     }
-    return totalCount;
+    return totalCount + [self.youVoted intValue];
 }
 
 - (int)numVoted1 {

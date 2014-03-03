@@ -45,11 +45,12 @@
 - (void)highlightImage:(int)index
 {
     // TODO: Also, add a gray overlay?
-    
     if (index == 1) {
+        self.thumbnail1.alpha = 1;
         self.thumbnail2.alpha = 0.25;
     } else {
         self.thumbnail1.alpha = 0.25;
+        self.thumbnail2.alpha = 1;
     }
 }
 

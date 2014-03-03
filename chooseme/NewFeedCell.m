@@ -128,10 +128,12 @@
 - (void)onTapPic1:(UIButton *)button
 {
     [self reloadBigPic:self.q.image1];
+    [self.pView highlightImage:1];
 }
 - (void)onTapPic2:(UIButton *)button
 {
     [self reloadBigPic:self.q.image2];
+    [self.pView highlightImage:2];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

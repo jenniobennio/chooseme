@@ -140,7 +140,7 @@
     [self.submitButton setEnabled:self.question.friends.count > 0];
     
     // Don't show lines below available cells
-    self.friendsTable.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+//    self.friendsTable.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     
     // Add pan gestureRecognizer for going Back
 //    UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(onPan:)];

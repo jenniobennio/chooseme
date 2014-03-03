@@ -188,6 +188,17 @@
 
 
 # pragma mark - ScrollView methods
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+    if (decelerate == NO) {
+        [self centerTable];
+    }
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    [self centerTable];
+}
+
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     CGPoint offset = [scrollView contentOffset];
@@ -237,6 +248,12 @@
 - (void) refreshMe: (UIRefreshControl *)refresh;{
     [self reload];
     [refresh endRefreshing];
+}
+
+- (void)centerTable
+{
+    NSIndexPath *pathForCenterCell = [self.feedTable indexPathForRowAtPoint:CGPointMake(CGRectGetMidX(self.feedTable.bounds), CGRectGetMidY(self.feedTable.bounds))];
+    [self.feedTable scrollToRowAtIndexPath:pathForCenterCell atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
 }
 
 @end

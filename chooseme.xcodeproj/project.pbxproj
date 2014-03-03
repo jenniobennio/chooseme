@@ -77,6 +77,7 @@
 		D514C40118C2F828007DF913 /* search-128.png in Resources */ = {isa = PBXBuildFile; fileRef = D514C40018C2F828007DF913 /* search-128.png */; };
 		D514C40A18C30222007DF913 /* GoogleVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D514C40818C30222007DF913 /* GoogleVC.m */; };
 		D514C40B18C30222007DF913 /* GoogleVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D514C40918C30222007DF913 /* GoogleVC.xib */; };
+		D51DDC7918C442B9002169AA /* like-256.png in Resources */ = {isa = PBXBuildFile; fileRef = D51DDC7818C442B9002169AA /* like-256.png */; };
 		D5438AD618C1B34A00C94D3B /* PinterestVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D5438AD418C1B34A00C94D3B /* PinterestVC.m */; };
 		D5438AD718C1B34A00C94D3B /* PinterestVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5438AD518C1B34A00C94D3B /* PinterestVC.xib */; };
 		D5438ADA18C1B47F00C94D3B /* PinterestClient.m in Sources */ = {isa = PBXBuildFile; fileRef = D5438AD918C1B47F00C94D3B /* PinterestClient.m */; };
@@ -198,6 +199,7 @@
 		D514C40718C30222007DF913 /* GoogleVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoogleVC.h; sourceTree = "<group>"; };
 		D514C40818C30222007DF913 /* GoogleVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoogleVC.m; sourceTree = "<group>"; };
 		D514C40918C30222007DF913 /* GoogleVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GoogleVC.xib; sourceTree = "<group>"; };
+		D51DDC7818C442B9002169AA /* like-256.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "like-256.png"; sourceTree = "<group>"; };
 		D5438AD318C1B34A00C94D3B /* PinterestVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinterestVC.h; sourceTree = "<group>"; };
 		D5438AD418C1B34A00C94D3B /* PinterestVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinterestVC.m; sourceTree = "<group>"; };
 		D5438AD518C1B34A00C94D3B /* PinterestVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PinterestVC.xib; sourceTree = "<group>"; };
@@ -354,6 +356,7 @@
 				26BBA6F018C416C70071F80D /* add_user-32.png */,
 				26BBA6E218C3F9560071F80D /* back-25.png */,
 				26BBA6E018C3F8C50071F80D /* upload-25.png */,
+				D51DDC7818C442B9002169AA /* like-256.png */,
 				2680195E18C08EF400B4A22D /* 08-chat.png */,
 				26BBA6EE18C40A4F0071F80D /* play-32.png */,
 				2680195C18C08E9000B4A22D /* 29-heart.png */,
@@ -563,6 +566,7 @@
 				26BBA6E318C3F9560071F80D /* back-25.png in Resources */,
 				2627EA2218BDAF7000ECD2A5 /* 86-camera.png in Resources */,
 				D514C3F418C2EF86007DF913 /* stack_of_photos-128.png in Resources */,
+				D51DDC7918C442B9002169AA /* like-256.png in Resources */,
 				2627EA2818BDB07200ECD2A5 /* 112-group.png in Resources */,
 				D5074FDD18C06EF30028ED2F /* slr_camera-32.png in Resources */,
 				26351A9818A80EC7000A30C9 /* PostVC.xib in Resources */,

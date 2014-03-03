@@ -178,8 +178,25 @@
     }
 }
 
-- (void)doHeartPic:(UITapGestureRecognizer *)swipe
+- (void)doHeartPic:(UITapGestureRecognizer *)tap
 {
+    if (tap.numberOfTapsRequired == 2) {
+        UIImageView *largeHeart = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"like-256.png"]];
+        largeHeart.image = [largeHeart.image maskWithColor:[UIColor colorWithRed:1 green:0.07 blue:0.5 alpha:0.8]];
+        largeHeart.center = self.pView.bigPic.center;
+        [self.pView.bigPic addSubview:largeHeart];
+        
+        //largeHeart.transform = CGAffineTransformMakeScale(0.01, 0.01);
+        [UIView animateWithDuration:0.6 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+            //largeHeart.transform = CGAffineTransformIdentity;
+            largeHeart.transform = CGAffineTransformMakeScale(0.01, 0.01);
+        } completion:^(BOOL finished) {
+            if (finished) {
+                [largeHeart removeFromSuperview];
+            }
+        }];
+    }
+    
     [self doHeartPic];
 }
 

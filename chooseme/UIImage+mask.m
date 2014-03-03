@@ -51,4 +51,26 @@
     return shadowedImage;
 }
 
+- (UIImage *)invertImage
+{
+    UIGraphicsBeginImageContext(self.size);
+    CGContextSetBlendMode(UIGraphicsGetCurrentContext(), kCGBlendModeCopy);
+    CGRect imageRect = CGRectMake(0, 0, self.size.width, self.size.height);
+    [self drawInRect:imageRect];
+    
+    
+    CGContextSetBlendMode(UIGraphicsGetCurrentContext(), kCGBlendModeDifference);
+    // translate/flip the graphics context (for transforming from CG* coords to UI* coords
+    CGContextTranslateCTM(UIGraphicsGetCurrentContext(), 0, self.size.height);
+    CGContextScaleCTM(UIGraphicsGetCurrentContext(), 1.0, -1.0);
+    //mask the image
+    CGContextClipToMask(UIGraphicsGetCurrentContext(), imageRect,  self.CGImage);
+    CGContextSetFillColorWithColor(UIGraphicsGetCurrentContext(),[UIColor whiteColor].CGColor);
+    CGContextFillRect(UIGraphicsGetCurrentContext(), CGRectMake(0, 0, self.size.width, self.size.height));
+    UIImage *returnImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return returnImage;
+}
+
 @end

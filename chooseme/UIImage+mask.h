@@ -12,5 +12,6 @@
 
 -(UIImage *)maskWithColor:(UIColor *)color;
 - (UIImage*)imageWithShadow;
+- (UIImage *)invertImage;
 
 @end

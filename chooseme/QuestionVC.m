@@ -27,6 +27,8 @@
 @property (strong, nonatomic) IBOutlet UIButton *submitButton;
 @property (strong, nonatomic) IBOutlet UIButton *backButton;
 @property (strong, nonatomic) IBOutlet UIButton *editButton;
+@property (strong, nonatomic) IBOutlet UIButton *addFriendButton;
+@property (strong, nonatomic) IBOutlet PictureView *fakePView;
 
 @property (strong, nonatomic) PictureView *pView;
 
@@ -34,6 +36,7 @@
 - (IBAction)onBack:(id)sender;
 - (IBAction)onSubmit:(id)sender;
 - (IBAction)onEdit:(id)sender;
+- (IBAction)onAddFriends:(id)sender;
 
 - (void)onPic1;
 - (void)onPic2;
@@ -47,6 +50,9 @@
 @property (strong, nonatomic) NSString *myName;
 @property (strong, nonatomic) UIImage *myPic;
 @property (strong, nonatomic) NSString *facebookID;
+
+// Which pic to edit
+@property (nonatomic, assign) int editIndex;
 
 @end
 
@@ -80,12 +86,14 @@
     // Format title bar
     Colorful *colorManager = [Colorful sharedManager];
     UIColor *color = colorManager.colors[colorManager.colorIndex];
-    self.titleView.backgroundColor = color;
+    self.view.backgroundColor = color;
+    self.titleView.backgroundColor = [UIColor clearColor]; // so that it's not super dark
     self.titleLabel.text = @"ASK A QUESTION";
     
     self.backButton.imageView.image = [self.backButton.imageView.image maskWithColor:[UIColor whiteColor]];
     self.submitButton.imageView.image = [self.submitButton.imageView.image maskWithColor:[UIColor whiteColor]];
     self.editButton.layer.cornerRadius = 25;
+    self.addFriendButton.imageView.image = [self.addFriendButton.imageView.image maskWithColor:[UIColor whiteColor]];
 
     // Pre-fill images and format
     NSArray *nibViews = [[NSBundle mainBundle] loadNibNamed:@"PictureView" owner:self options:nil];
@@ -99,10 +107,21 @@
     self.pView.thumbnail1.layer.borderColor = [color CGColor];
     self.pView.thumbnail2.layer.borderColor = [color CGColor];
     [self.pView highlightImage:1];
+
+    // Set up button touch actions
+    self.editIndex = 1;
+    [self.pView.thumbnail1 addTarget:self action:@selector(onTapPic1:) forControlEvents:UIControlEventTouchUpInside];
+    self.pView.thumbnail1.tag = 1;
+    [self.pView.thumbnail2 addTarget:self action:@selector(onTapPic2:) forControlEvents:UIControlEventTouchUpInside];
+    self.pView.thumbnail2.tag = 2;
+    
     [self.view addSubview:self.pView];
     [self.view sendSubviewToBack:self.pView];
+    [self.view sendSubviewToBack:self.fakePView];
     
     self.questionTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Share a thought" attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
+    
+
     
 //    [self.pic1 setImage:self.question.image1 forState:UIControlStateNormal];
 //    self.pic1.imageView.contentMode = UIViewContentModeScaleAspectFill;
@@ -124,7 +143,7 @@
     self.friendsTable.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     
     // Add pan gestureRecognizer for going Back
-    UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(onPan:)];
+//    UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(onPan:)];
     
     // FIXME: Commenting this out for now.. It interferes with the gesture recognizer for editing friendsTable
 //    [self.view addGestureRecognizer:panGesture];
@@ -162,6 +181,8 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    self.addFriendButton.imageView.image = [self.addFriendButton.imageView.image maskWithColor:[UIColor whiteColor]];
+
 //    [self.friendsTable reloadData];
     [self.friendsView reloadData];
 }
@@ -214,8 +235,10 @@
 }
 
 - (IBAction)onEdit:(id)sender {
-    // FIXME: select correct pic to edit
-    [self onPic1];
+    if (self.editIndex == 1)
+        [self onPic1];
+    else
+        [self onPic2];
 }
 
 - (void)onPic1 {
@@ -385,6 +408,8 @@
     NSURL *url = [NSURL URLWithString:strurl];
     NSData *data = [NSData dataWithContentsOfURL:url];
     [cell.friendImage setImage:[[UIImage alloc] initWithData:data]];
+    cell.friendImage.layer.cornerRadius = 25;
+    cell.friendImage.clipsToBounds = YES;
     
     NSLog(@"Collection View added friend %@", friend);
 
@@ -446,4 +471,33 @@
     self.searchText = nil;
     [self.friendPickerController updateView];
 }
+
+- (void)onTapPic1:(UIButton *)button
+{
+    self.editIndex = 1;
+    [self reloadBigPic:self.question.image1];
+    [self.pView highlightImage:1];
+}
+
+- (void)onTapPic2:(UIButton *)button
+{
+    self.editIndex = 2;
+    [self reloadBigPic:self.question.image2];
+    [self.pView highlightImage:2];
+}
+
+- (void)reloadBigPic:(UIImage *)image1
+{
+    self.pView.bigPic.image = image1;
+    self.pView.thumbnail1.alpha = 0.0f;
+    self.pView.thumbnail2.alpha = 0.0f;
+    self.pView.bigPic.alpha = 0.0f;
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.5f];
+    self.pView.thumbnail1.alpha = 1.0f;
+    self.pView.thumbnail2.alpha = 1.0f;
+    self.pView.bigPic.alpha = 1.0f;
+    [UIView commitAnimations];
+}
+
 @end

@@ -6,8 +6,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="QuestionVC">
             <connections>
+                <outlet property="addFriendButton" destination="8Dx-Qa-alw" id="eeo-1r-qYw"/>
                 <outlet property="backButton" destination="V17-sD-M6B" id="HNh-Ai-w1q"/>
                 <outlet property="editButton" destination="bNT-gM-HS9" id="HgR-yK-AJe"/>
+                <outlet property="fakePView" destination="t5D-19-ZPw" id="Eai-45-OO6"/>
                 <outlet property="friendsView" destination="iGJ-lU-myH" id="aHD-EW-BtY"/>
                 <outlet property="questionTextField" destination="mR0-1Q-r93" id="few-Vf-NMj"/>
                 <outlet property="submitButton" destination="4pa-SQ-qgp" id="0ub-Aj-cZN"/>
@@ -80,37 +82,33 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t5D-19-ZPw" customClass="PictureView">
                     <rect key="frame" x="0.0" y="40" width="320" height="368"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <subviews>
-                        <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bNT-gM-HS9">
-                            <rect key="frame" x="265" y="5" width="50" height="50"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" red="0.93548318610000003" green="0.93548318610000003" blue="0.93548318610000003" alpha="1" colorSpace="calibratedRGB"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="50" id="7zO-sW-Oy5"/>
-                                <constraint firstAttribute="height" constant="50" id="DMO-0Q-Ude"/>
-                            </constraints>
-                            <state key="normal" image="187-pencil.png">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="onEdit:" destination="-1" eventType="touchUpInside" id="2aK-kW-l0F"/>
-                            </connections>
-                        </button>
-                    </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="trailing" secondItem="bNT-gM-HS9" secondAttribute="trailing" constant="5" id="kjf-GC-laC"/>
-                        <constraint firstItem="bNT-gM-HS9" firstAttribute="top" secondItem="t5D-19-ZPw" secondAttribute="top" constant="5" id="r9o-Ge-k9x"/>
                         <constraint firstAttribute="height" constant="368" id="zxQ-m9-s8k"/>
                     </constraints>
                 </view>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Share a thought" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="mR0-1Q-r93">
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Share a thought" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="mR0-1Q-r93">
                     <rect key="frame" x="12" y="214" width="296" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <textInputTraits key="textInputTraits" returnKeyType="done"/>
                 </textField>
+                <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bNT-gM-HS9">
+                    <rect key="frame" x="258" y="52" width="50" height="50"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="0.93548318610000003" green="0.93548318610000003" blue="0.93548318610000003" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="50" id="7zO-sW-Oy5"/>
+                        <constraint firstAttribute="height" constant="50" id="DMO-0Q-Ude"/>
+                    </constraints>
+                    <state key="normal" image="187-pencil.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="onEdit:" destination="-1" eventType="touchUpInside" id="2aK-kW-l0F"/>
+                    </connections>
+                </button>
                 <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="iGJ-lU-myH">
                     <rect key="frame" x="12" y="460" width="296" height="94"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -136,6 +134,17 @@
                         <action selector="onAddFriends:" destination="-1" eventType="touchUpInside" id="FtM-A4-Vj7"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PoC-lv-aoG">
+                    <rect key="frame" x="58" y="419" width="121" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" title="Add some friends">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="onAddFriends:" destination="-1" eventType="touchUpInside" id="Pyn-x0-xJr"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
@@ -150,6 +159,8 @@
                 <constraint firstItem="iGJ-lU-myH" firstAttribute="top" secondItem="8Dx-Qa-alw" secondAttribute="bottom" constant="14" id="Ra5-dx-6rX"/>
                 <constraint firstItem="8Dx-Qa-alw" firstAttribute="top" secondItem="t5D-19-ZPw" secondAttribute="bottom" constant="13" id="SQp-Ht-HX1"/>
                 <constraint firstAttribute="trailing" secondItem="mR0-1Q-r93" secondAttribute="trailing" constant="12" id="Z9b-E9-Eyh"/>
+                <constraint firstAttribute="trailing" secondItem="bNT-gM-HS9" secondAttribute="trailing" constant="12" id="cpf-HR-VZ8"/>
+                <constraint firstItem="bNT-gM-HS9" firstAttribute="top" secondItem="kcP-Mf-WJ9" secondAttribute="bottom" constant="12" id="d7A-pU-Pza"/>
                 <constraint firstItem="t5D-19-ZPw" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="ePP-fm-UXG"/>
                 <constraint firstAttribute="bottom" secondItem="iGJ-lU-myH" secondAttribute="bottom" constant="14" id="nZH-ed-fck"/>
                 <constraint firstItem="t5D-19-ZPw" firstAttribute="centerY" secondItem="mR0-1Q-r93" secondAttribute="centerY" id="ot0-dG-sH7"/>

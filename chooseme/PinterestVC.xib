@@ -6,7 +6,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PinterestVC">
             <connections>
+                <outlet property="backButton" destination="thh-El-cib" id="pgM-uI-6nF"/>
                 <outlet property="collectionView" destination="03y-SX-BVg" id="te0-ix-45S"/>
+                <outlet property="pinterestImage" destination="5K9-WB-CGC" id="Pib-Bl-sCX"/>
+                <outlet property="titleLabel" destination="6mv-AM-IT0" id="NMv-xj-h4u"/>
+                <outlet property="titleView" destination="Lh3-pS-iNd" id="QY9-06-yhi"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
         </placeholder>
@@ -15,8 +19,59 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="03y-SX-BVg">
-                    <rect key="frame" x="0.0" y="103" width="320" height="465"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lh3-pS-iNd">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <subviews>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6mv-AM-IT0">
+                            <rect key="frame" x="147" y="16" width="25" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="21" id="vma-V2-uoO"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="15"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="thh-El-cib">
+                            <rect key="frame" x="12" y="20" width="15" height="15"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <constraints>
+                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="15" id="A90-He-cxe"/>
+                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="15" id="P9e-cW-R6Y"/>
+                                <constraint firstAttribute="width" constant="15" id="UEr-bc-vbm"/>
+                                <constraint firstAttribute="height" constant="15" id="z91-R0-NcR"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="15"/>
+                            <state key="normal" image="back-25.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="onBack:" destination="-1" eventType="touchUpInside" id="5LI-Tf-7Aj"/>
+                            </connections>
+                        </button>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pinterest-128.png" translatesAutoresizingMaskIntoConstraints="NO" id="5K9-WB-CGC">
+                            <rect key="frame" x="114" y="17" width="20" height="20"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="20" id="CY0-qK-uP6"/>
+                                <constraint firstAttribute="width" constant="20" id="NiI-Tj-27P"/>
+                            </constraints>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="6mv-AM-IT0" firstAttribute="leading" secondItem="5K9-WB-CGC" secondAttribute="trailing" constant="13" id="9m4-eN-OWu"/>
+                        <constraint firstItem="thh-El-cib" firstAttribute="top" secondItem="Lh3-pS-iNd" secondAttribute="top" constant="20" id="JXb-HT-88U"/>
+                        <constraint firstItem="6mv-AM-IT0" firstAttribute="top" secondItem="Lh3-pS-iNd" secondAttribute="top" constant="16" id="WCd-Br-RE9"/>
+                        <constraint firstAttribute="height" constant="40" id="ix4-ss-GUS"/>
+                        <constraint firstItem="5K9-WB-CGC" firstAttribute="top" secondItem="Lh3-pS-iNd" secondAttribute="top" constant="17" id="lDS-Fw-uqL"/>
+                        <constraint firstItem="thh-El-cib" firstAttribute="leading" secondItem="Lh3-pS-iNd" secondAttribute="leading" constant="12" id="mGT-NG-cJ1"/>
+                        <constraint firstAttribute="centerX" secondItem="6mv-AM-IT0" secondAttribute="centerX" id="vg1-Ts-aQp"/>
+                    </constraints>
+                </view>
+                <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="03y-SX-BVg">
+                    <rect key="frame" x="0.0" y="40" width="320" height="528"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="nl3-Va-B9C">
                         <size key="itemSize" width="50" height="50"/>
@@ -30,39 +85,23 @@
                         <outlet property="delegate" destination="-1" id="dmq-ya-dEn"/>
                     </connections>
                 </collectionView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="pinterest-128.png" translatesAutoresizingMaskIntoConstraints="NO" id="5K9-WB-CGC">
-                    <rect key="frame" x="20" y="42" width="67" height="53"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="67" id="IqW-f2-dH1"/>
-                        <constraint firstAttribute="height" constant="53" id="mOj-TM-c3F"/>
-                    </constraints>
-                </imageView>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Choose a Pin" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uW2-Ir-H9s">
-                    <rect key="frame" x="102" y="58" width="131" height="21"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstItem="Lh3-pS-iNd" firstAttribute="top" secondItem="1" secondAttribute="top" id="4Aw-R5-S2r"/>
                 <constraint firstItem="03y-SX-BVg" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="7HQ-e7-sis"/>
-                <constraint firstItem="uW2-Ir-H9s" firstAttribute="leading" secondItem="5K9-WB-CGC" secondAttribute="trailing" constant="15" id="M5J-eM-Lyt"/>
+                <constraint firstItem="Lh3-pS-iNd" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="HJf-bi-lHa"/>
                 <constraint firstAttribute="bottom" secondItem="03y-SX-BVg" secondAttribute="bottom" id="NOR-fM-1qv"/>
-                <constraint firstItem="uW2-Ir-H9s" firstAttribute="leading" secondItem="5K9-WB-CGC" secondAttribute="trailing" constant="15" id="NwH-Ii-X7g"/>
-                <constraint firstItem="5K9-WB-CGC" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="20" id="Ru0-Hd-Urm"/>
-                <constraint firstItem="03y-SX-BVg" firstAttribute="top" secondItem="uW2-Ir-H9s" secondAttribute="bottom" constant="24" id="rnX-G2-A6j"/>
+                <constraint firstItem="03y-SX-BVg" firstAttribute="top" secondItem="Lh3-pS-iNd" secondAttribute="bottom" id="lTT-dF-8CC"/>
                 <constraint firstAttribute="trailing" secondItem="03y-SX-BVg" secondAttribute="trailing" id="sdc-oS-zDM"/>
-                <constraint firstAttribute="trailing" secondItem="uW2-Ir-H9s" secondAttribute="trailing" constant="87" id="xKe-vv-MCh"/>
-                <constraint firstItem="03y-SX-BVg" firstAttribute="top" secondItem="5K9-WB-CGC" secondAttribute="bottom" constant="8" id="xKu-9K-WGG"/>
+                <constraint firstAttribute="trailing" secondItem="Lh3-pS-iNd" secondAttribute="trailing" id="wUo-7y-JVD"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>
     </objects>
     <resources>
+        <image name="back-25.png" width="25" height="25"/>
         <image name="pinterest-128.png" width="128" height="128"/>
     </resources>
 </document>

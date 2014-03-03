@@ -10,8 +10,14 @@
 #import "GoogleClient.h"
 #import "PinCell.h"
 #import "MBProgressHUD.h"
+#import "Colorful.h"
+#import "UIImage+mask.h"
 
 @interface GoogleVC ()
+@property (strong, nonatomic) IBOutlet UIView *titleView;
+@property (strong, nonatomic) IBOutlet UILabel *titleLabel;
+@property (strong, nonatomic) IBOutlet UIButton *backButton;
+- (IBAction)onBack:(id)sender;
 
 @property(strong, nonatomic) NSMutableArray *searchResults;
 @property(nonatomic) NSInteger start;
@@ -45,6 +51,14 @@
     
     [self.collectionView setCollectionViewLayout:flowLayout];
     self.collectionView.backgroundColor = [UIColor clearColor];
+    
+    Colorful *colorManager = [Colorful sharedManager];
+    UIColor *color = colorManager.colors[colorManager.colorIndex];
+    self.titleView.backgroundColor = color;
+    self.titleLabel.text = @"GOOGLE IMAGE SEARCH";
+    self.backButton.imageView.image = [self.backButton.imageView.image maskWithColor:[UIColor whiteColor]];
+
+    [self.searchBar becomeFirstResponder];
 }
 
 #pragma mark - UICollectionView methods
@@ -125,4 +139,7 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)onBack:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 @end

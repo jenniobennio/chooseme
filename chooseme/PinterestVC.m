@@ -10,9 +10,16 @@
 #import "PinterestClient.h"
 #import "PinCell.h"
 #import "MBProgressHUD.h"
+#import "Colorful.h"
+#import "UIImage+mask.h"
 
 @interface PinterestVC ()
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (strong, nonatomic) IBOutlet UIView *titleView;
+@property (strong, nonatomic) IBOutlet UILabel *titleLabel;
+@property (strong, nonatomic) IBOutlet UIImageView *pinterestImage;
+@property (strong, nonatomic) IBOutlet UIButton *backButton;
+- (IBAction)onBack:(id)sender;
 
 // For now, this is an array of strings with the pin URL.
 @property (strong, nonatomic) NSMutableArray *pins;
@@ -52,6 +59,14 @@
         [self.collectionView reloadData];
         [MBProgressHUD hideHUDForView:self.view animated:YES];
     }];
+    
+    Colorful *colorManager = [Colorful sharedManager];
+    UIColor *color = colorManager.colors[colorManager.colorIndex];
+    self.titleView.backgroundColor = color;
+    self.titleLabel.text = @"ADD A PIN";
+    
+    self.pinterestImage.image = [self.pinterestImage.image maskWithColor:[UIColor whiteColor]];
+    self.backButton.imageView.image = [self.backButton.imageView.image maskWithColor:[UIColor whiteColor]];
 }
 
 #pragma mark - UICollectionView methods
@@ -84,4 +99,7 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)onBack:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 @end

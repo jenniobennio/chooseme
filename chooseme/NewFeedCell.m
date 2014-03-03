@@ -209,7 +209,8 @@
     
     // ******** Update UI *********
     self.pView.numVotesLabel.text = [NSString stringWithFormat:@"%d", self.q.numReplies];
-    UIColor *color = vote ? [UIColor colorWithRed:1 green:0.07 blue:0.5 alpha:1] : [UIColor grayColor];
+    self.pView.heartIcon.image = [UIImage imageNamed:@"29-heart.png"]; // fix the disappearing alpha problem
+    UIColor *color = vote ? [UIColor colorWithRed:1 green:0.07 blue:0.5 alpha:0.8] : [UIColor grayColor];
     self.pView.heartIcon.image = [self.pView.heartIcon.image maskWithColor:color];
 }
 

@@ -14,6 +14,7 @@
 #import "FacebookClient.h"
 #import "PinterestClient.h"
 #import "GoogleVC.h"
+#import "Colorful.h"
 
 @interface CameraVC ()
 
@@ -68,6 +69,10 @@ takePicButtonLongPress;
 // BOOL to track whether Pinterest is default image source -- this affects formatting for image insets
 @property (nonatomic, assign) BOOL pinterestIsDefault;
 
+// Random color
+@property (nonatomic, strong) UIColor *color;
+
+
 @end
 
 @implementation CameraVC
@@ -86,6 +91,11 @@ takePicButtonLongPress;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    Colorful *colorManager = [Colorful sharedManager];
+    // Pick a random color
+    colorManager.colorIndex = arc4random() % colorManager.colors.count;
+    self.color = colorManager.colors[colorManager.colorIndex];
 
     // Format things
     self.choosePicButton.layer.cornerRadius = 5;
@@ -94,7 +104,7 @@ takePicButtonLongPress;
     [self formatPic:self.pic2 isSelected:NO];
     
     // Customize takePicButton depending on state
-    self.takePicButton.backgroundColor = [UIColor colorWithRed:0.329 green:0.733 blue:0.616 alpha:0.75];
+    self.takePicButton.backgroundColor = self.color;
     self.takePicButton.layer.cornerRadius = 25;
     [self.takePicButton.titleLabel setAdjustsFontSizeToFitWidth:YES];
     [self.takePicButton setTitle:@"+" forState:UIControlStateNormal];
@@ -469,7 +479,7 @@ takePicButtonLongPress;
 
     button.backgroundColor = [UIColor colorWithWhite:.76 alpha:1];
     button.layer.borderWidth = 1;
-    button.layer.borderColor = [[UIColor colorWithRed:0.329 green:0.733 blue:0.616 alpha:0.75] CGColor];[UIColor.lightGrayColor CGColor];
+    button.layer.borderColor = [self.color CGColor];
     button.layer.cornerRadius = 25;
     [button.imageView setContentMode:UIViewContentModeScaleAspectFill];
 }

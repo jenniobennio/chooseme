@@ -560,7 +560,18 @@
 /* ⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇ */
 - (void)awesomeMenu:(AwesomeMenu *)menu didSelectIndex:(NSInteger)idx
 {
-    NSLog(@"Select the index : %d",idx);
+    int index = (int) idx;
+    NSLog(@"Select the index : %d",index);
+    
+    if (index == 0) {
+        [self takePic:nil];
+    } else if (index == 1) {
+        [self choosePicFromGoogle:nil];
+    } else if (index == 2) {
+        [self choosePicFromPinterest:nil];
+    } else {
+        [self choosePicFromGallery:nil];
+    }
 }
 - (void)awesomeMenuDidFinishAnimationClose:(AwesomeMenu *)menu {
     NSLog(@"Menu was closed!");

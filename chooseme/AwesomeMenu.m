@@ -103,33 +103,6 @@ static CGPoint RotateCGPointAroundCenter(CGPoint point, CGPoint center, float an
 - (UIImage*)image {
 	return _startButton.image;
 }
-
-- (void)setHighlightedImage:(UIImage *)highlightedImage {
-	_startButton.highlightedImage = highlightedImage;
-}
-
-- (UIImage*)highlightedImage {
-	return _startButton.highlightedImage;
-}
-
-
-- (void)setContentImage:(UIImage *)contentImage {
-	_startButton.contentImageView.image = contentImage;
-}
-
-- (UIImage*)contentImage {
-	return _startButton.contentImageView.image;
-}
-
-- (void)setHighlightedContentImage:(UIImage *)highlightedContentImage {
-	_startButton.contentImageView.highlightedImage = highlightedContentImage;
-}
-
-- (UIImage*)highlightedContentImage {
-	return _startButton.contentImageView.highlightedImage;
-}
-
-
                                
 #pragma mark - UIView's methods
 - (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event

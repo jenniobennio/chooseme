@@ -113,15 +113,12 @@
     UIImage *plusImage = [UIImage imageNamed:@"plus-48.png"];
     plusImage = [plusImage maskWithColor:color];
     
-    AwesomeMenuItem *cameraItem = [[AwesomeMenuItem alloc] initWithImage:cameraImage highlightedImage:cameraImage ContentImage:cameraImage highlightedContentImage:cameraImage];
-    AwesomeMenuItem *searchItem = [[AwesomeMenuItem alloc] initWithImage:searchImage highlightedImage:searchImage ContentImage:searchImage highlightedContentImage:searchImage];
-    AwesomeMenuItem *pinterestItem = [[AwesomeMenuItem alloc] initWithImage:pinterestImage highlightedImage:pinterestImage ContentImage:pinterestImage highlightedContentImage:pinterestImage];
-    AwesomeMenuItem *galleryItem = [[AwesomeMenuItem alloc] initWithImage:galleryImage highlightedImage:galleryImage ContentImage:galleryImage highlightedContentImage:galleryImage];
+    AwesomeMenuItem *cameraItem = [[AwesomeMenuItem alloc] initWithImage:cameraImage];
+    AwesomeMenuItem *searchItem = [[AwesomeMenuItem alloc] initWithImage:searchImage];
+    AwesomeMenuItem *pinterestItem = [[AwesomeMenuItem alloc] initWithImage:pinterestImage];
+    AwesomeMenuItem *galleryItem = [[AwesomeMenuItem alloc] initWithImage:galleryImage];
     
-    AwesomeMenuItem *startItem = [[AwesomeMenuItem alloc] initWithImage:plusImage
-                                                       highlightedImage:plusImage
-                                                           ContentImage:plusImage
-                                                highlightedContentImage:plusImage];
+    AwesomeMenuItem *startItem = [[AwesomeMenuItem alloc] initWithImage:plusImage];
     //startItem.contentImageView.alpha = 0;
     
     NSArray *menus = [NSArray arrayWithObjects:cameraItem, searchItem, pinterestItem, galleryItem, nil];

@@ -19,9 +19,6 @@
 @property (nonatomic, weak) id<AwesomeMenuDelegate> delegate;
 
 @property (nonatomic, strong) UIImage *image;
-@property (nonatomic, strong) UIImage *highlightedImage;
-@property (nonatomic, strong) UIImage *contentImage;
-@property (nonatomic, strong) UIImage *highlightedContentImage;
 
 @property (nonatomic, assign) CGFloat nearRadius;
 @property (nonatomic, assign) CGFloat endRadius;

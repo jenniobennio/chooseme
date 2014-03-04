@@ -19,18 +19,13 @@ static inline CGRect ScaleRect(CGRect rect, float n) {return CGRectMake((rect.si
 @synthesize delegate  = _delegate;
 
 #pragma mark - initialization & cleaning up
-- (id)initWithImage:(UIImage *)img 
-   highlightedImage:(UIImage *)himg
-       ContentImage:(UIImage *)cimg
-highlightedContentImage:(UIImage *)hcimg;
+- (id)initWithImage:(UIImage *)img;
 {
     if (self = [super init]) 
     {
         self.image = img;
-        self.highlightedImage = himg;
         self.userInteractionEnabled = YES;
-        _contentImageView = [[UIImageView alloc] initWithImage:cimg];
-        _contentImageView.highlightedImage = hcimg;
+        _contentImageView = [[UIImageView alloc] initWithImage:img];
         [self addSubview:_contentImageView];
     }
     return self;
@@ -85,13 +80,5 @@ highlightedContentImage:(UIImage *)hcimg;
 {
     self.highlighted = NO;
 }
-
-#pragma mark - instant methods
-- (void)setHighlighted:(BOOL)highlighted
-{
-    [super setHighlighted:highlighted];
-    [_contentImageView setHighlighted:highlighted];
-}
-
 
 @end

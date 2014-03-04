@@ -10,7 +10,7 @@
 
 @protocol AwesomeMenuItemDelegate;
 
-@interface AwesomeMenuItem : UIImageView
+@interface AwesomeMenuItem : UIImageView <UIGestureRecognizerDelegate>
 {
     UIImageView *_contentImageView;
     CGPoint _startPoint;
@@ -39,4 +39,6 @@
 @protocol AwesomeMenuItemDelegate <NSObject>
 - (void)AwesomeMenuItemTouchesBegan:(AwesomeMenuItem *)item WithTouches:(NSSet *)touches;
 - (void)AwesomeMenuItemTouchesEnd:(AwesomeMenuItem *)item;
+- (void)StartButtonLongPress;
+- (void)StartButtonTap;
 @end

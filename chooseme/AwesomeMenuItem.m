@@ -58,9 +58,32 @@ static inline CGRect ScaleRect(CGRect rect, float n) {return CGRectMake((rect.si
         
         self.layer.cornerRadius = 25;
         self.layer.masksToBounds = YES;
+        
+        UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(startButtonTap)];
+        tapGestureRecognizer.delegate = self;
+        [self addGestureRecognizer:tapGestureRecognizer];
+        
+        UILongPressGestureRecognizer *longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(startButtonLongPress)];
+        longPressRecognizer.delegate = self;
+        longPressRecognizer.minimumPressDuration = 1.0; //seconds
+        [self addGestureRecognizer:longPressRecognizer];
     }
     [self addSubview:_contentImageView];
     return self;
+}
+
+- (void) startButtonLongPress {
+    [self.delegate StartButtonLongPress];
+}
+
+- (void) startButtonTap {
+    [self.delegate StartButtonTap];
+}
+
+#pragma mark - GestureRecognizerDelegate methods
+//used for long press
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    return YES;
 }
 
 #pragma mark - UIView's methods
@@ -77,6 +100,10 @@ static inline CGRect ScaleRect(CGRect rect, float n) {return CGRectMake((rect.si
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    if (self.isStart) {
+        return;
+    }
+    
     if ([_delegate respondsToSelector:@selector(AwesomeMenuItemTouchesBegan:WithTouches:)])
     {
        [_delegate AwesomeMenuItemTouchesBegan:self WithTouches:touches];
@@ -86,6 +113,10 @@ static inline CGRect ScaleRect(CGRect rect, float n) {return CGRectMake((rect.si
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    if (self.isStart) {
+        return;
+    }
+    
     if ([_delegate respondsToSelector:@selector(AwesomeMenuItemTouchesEnd:)])
     {
         [_delegate AwesomeMenuItemTouchesEnd:self];

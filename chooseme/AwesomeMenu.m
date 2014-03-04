@@ -133,34 +133,44 @@ static CGPoint RotateCGPointAroundCenter(CGPoint point, CGPoint center, float an
 }
 
 #pragma mark - AwesomeMenuItem delegates
-- (void)AwesomeMenuItemTouchesBegan:(AwesomeMenuItem *)item WithTouches:(NSSet *)touches
+- (void) StartButtonLongPress
 {
-    if (item != _startButton) {
+    NSLog(@"getting long press.");
+    if (self.isExpanding) {
+        return;
+        
+    }
+    self.expanding = !self.isExpanding;
+}
+
+- (void) StartButtonTap
+{
+    if (self.isExpanding) {
         return;
     }
-    
-   int numTouches = (int)[touches count];
-    NSLog(@"touch count %d", numTouches);
-    
-    if (numTouches == 1 && _defaultIndex != -1) {
+    NSLog(@"start button tap.");
+    if (_defaultIndex != -1) {
         if ([_delegate respondsToSelector:@selector(awesomeMenu:didSelectIndex:)])
         {
             [_delegate awesomeMenu:self didSelectIndex:_defaultIndex];
         }
     }
-
-    if (numTouches == 2 || _defaultIndex == -1)
-    {
-        self.expanding = !self.isExpanding;
-    }
 }
+
+- (void)AwesomeMenuItemTouchesBegan:(AwesomeMenuItem *)item WithTouches:(NSSet *)touches
+{
+    NSLog(@"touches begin.");
+}
+
 - (void)AwesomeMenuItemTouchesEnd:(AwesomeMenuItem *)item
 {
+    NSLog(@"touches end");
     // exclude the "add" button
     if (item == _startButton) 
     {
         return;
     }
+    
     // blowup the selected menu button
     CAAnimationGroup *blowup = [self _blowupAnimationAtPoint:item.center];
     [item.layer addAnimation:blowup forKey:@"blowup"];

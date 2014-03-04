@@ -15,6 +15,8 @@
 #import "PinterestClient.h"
 #import "GoogleVC.h"
 #import "Colorful.h"
+#import "AwesomeMenu.h"
+#import "AwesomeMenuItem.h"
 
 @interface CameraVC ()
 
@@ -69,9 +71,13 @@
 // BOOL to track whether Pinterest is default image source -- this affects formatting for image insets
 @property (nonatomic, assign) BOOL pinterestIsDefault;
 
+@property (strong, nonatomic) UIWindow *window;
+
 @end
 
 @implementation CameraVC
+
+@synthesize window = _window;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -86,6 +92,33 @@
 {
     [super viewDidLoad];
     
+    // *************** Initialize Menu *********************************
+    UIImage *cameraImage = [UIImage imageNamed:@"slr_camera-32.png"];
+    UIImage *searchImage = [UIImage imageNamed:@"search-32.png"];
+    UIImage *pinterestImage = [UIImage imageNamed:@"pinterest-32.png"];
+    UIImage *galleryImage = [UIImage imageNamed:@"stack_of_photos-32.png"];
+    UIImage *plusImage = [UIImage imageNamed:@"plus-128.png"];
+    
+    AwesomeMenuItem *cameraItem = [[AwesomeMenuItem alloc] initWithImage:cameraImage highlightedImage:cameraImage ContentImage:cameraImage highlightedContentImage:cameraImage];
+    AwesomeMenuItem *searchItem = [[AwesomeMenuItem alloc] initWithImage:searchImage highlightedImage:searchImage ContentImage:searchImage highlightedContentImage:searchImage];
+    AwesomeMenuItem *pinterestItem = [[AwesomeMenuItem alloc] initWithImage:pinterestImage highlightedImage:pinterestImage ContentImage:pinterestImage highlightedContentImage:pinterestImage];
+    AwesomeMenuItem *galleryItem = [[AwesomeMenuItem alloc] initWithImage:galleryImage highlightedImage:galleryImage ContentImage:galleryImage highlightedContentImage:galleryImage];
+    
+    AwesomeMenuItem *startItem = [[AwesomeMenuItem alloc] initWithImage:plusImage
+                                                       highlightedImage:plusImage
+                                                           ContentImage:plusImage
+                                                highlightedContentImage:plusImage];
+    
+    NSArray *menus = [NSArray arrayWithObjects:cameraItem, searchItem, pinterestItem, galleryItem, nil];
+    AwesomeMenu *menu = [[AwesomeMenu alloc] initWithFrame:self.window.bounds startItem:startItem optionMenus:menus];
+    [self.view addSubview:menu];
+    /*[self.window addSubview:menu];
+    [self.window makeKeyAndVisible];*/
+    
+    //menu.delegate = self;
+
+    
+    //******************************************************************
     self.picIndex = 0;
     
     // Pick a random color
@@ -100,7 +133,7 @@
     [self formatPic:self.pic2 isSelected:NO];
     
     // Customize takePicButton depending on state
-    self.takePicButton.layer.cornerRadius = 25;
+    /*self.takePicButton.layer.cornerRadius = 25;
     [self.takePicButton.titleLabel setAdjustsFontSizeToFitWidth:YES];
     [self.takePicButton setTitle:@"+" forState:UIControlStateNormal];
     [self.takePicButton setTitle:@"REDO" forState:UIControlStateSelected];
@@ -108,7 +141,7 @@
     UILongPressGestureRecognizer *longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(takePicButtonLongPress)];
     longPressRecognizer.delegate = self;
     longPressRecognizer.minimumPressDuration = 1.0; //seconds
-    [self.takePicButton addGestureRecognizer:longPressRecognizer];
+    [self.takePicButton addGestureRecognizer:longPressRecognizer];*/
 
     // Mask friends/ me buttons with white color
     [self.friendsButton setImage:[[UIImage imageNamed:@"112-group.png"] maskWithColor:[UIColor whiteColor]] forState:UIControlStateNormal];

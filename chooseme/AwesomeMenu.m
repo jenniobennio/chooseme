@@ -47,6 +47,8 @@ static CGPoint RotateCGPointAroundCenter(CGPoint point, CGPoint center, float an
     
     id<AwesomeMenuDelegate> __weak _delegate;
     BOOL _isAnimating;
+    
+    int _defaultIndex;
 }
 
 @synthesize nearRadius, endRadius, farRadius, timeOffset, rotateAngle, menuWholeAngle, startPoint, expandRotation, closeRotation, animationDuration;
@@ -80,6 +82,8 @@ static CGPoint RotateCGPointAroundCenter(CGPoint point, CGPoint center, float an
         _startButton.center = self.startPoint;
 
         [self addSubview:_startButton];
+        
+        _defaultIndex = -1;
     }
     return self;
 }
@@ -129,9 +133,23 @@ static CGPoint RotateCGPointAroundCenter(CGPoint point, CGPoint center, float an
 }
 
 #pragma mark - AwesomeMenuItem delegates
-- (void)AwesomeMenuItemTouchesBegan:(AwesomeMenuItem *)item
+- (void)AwesomeMenuItemTouchesBegan:(AwesomeMenuItem *)item WithTouches:(NSSet *)touches
 {
-    if (item == _startButton) 
+    if (item != _startButton) {
+        return;
+    }
+    
+   int numTouches = (int)[touches count];
+    NSLog(@"touch count %d", numTouches);
+    
+    if (numTouches == 1 && _defaultIndex != -1) {
+        if ([_delegate respondsToSelector:@selector(awesomeMenu:didSelectIndex:)])
+        {
+            [_delegate awesomeMenu:self didSelectIndex:_defaultIndex];
+        }
+    }
+
+    if (numTouches == 2 || _defaultIndex == -1)
     {
         self.expanding = !self.isExpanding;
     }
@@ -147,6 +165,7 @@ static CGPoint RotateCGPointAroundCenter(CGPoint point, CGPoint center, float an
     CAAnimationGroup *blowup = [self _blowupAnimationAtPoint:item.center];
     [item.layer addAnimation:blowup forKey:@"blowup"];
     item.center = item.startPoint;
+    _defaultIndex = (int) [_menusArray indexOfObject:item];
     
     // shrink other menu buttons
     for (int i = 0; i < [_menusArray count]; i ++)

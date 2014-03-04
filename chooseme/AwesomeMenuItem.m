@@ -77,9 +77,9 @@ static inline CGRect ScaleRect(CGRect rect, float n) {return CGRectMake((rect.si
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    if ([_delegate respondsToSelector:@selector(AwesomeMenuItemTouchesBegan:)])
+    if ([_delegate respondsToSelector:@selector(AwesomeMenuItemTouchesBegan:WithTouches:)])
     {
-       [_delegate AwesomeMenuItemTouchesBegan:self];
+       [_delegate AwesomeMenuItemTouchesBegan:self WithTouches:touches];
     }
     
 }

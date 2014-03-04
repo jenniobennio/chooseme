@@ -37,6 +37,6 @@
 @end
 
 @protocol AwesomeMenuItemDelegate <NSObject>
-- (void)AwesomeMenuItemTouchesBegan:(AwesomeMenuItem *)item;
+- (void)AwesomeMenuItemTouchesBegan:(AwesomeMenuItem *)item WithTouches:(NSSet *)touches;
 - (void)AwesomeMenuItemTouchesEnd:(AwesomeMenuItem *)item;
 @end

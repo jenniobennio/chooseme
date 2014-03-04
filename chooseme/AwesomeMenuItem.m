@@ -44,13 +44,13 @@ static inline CGRect ScaleRect(CGRect rect, float n) {return CGRectMake((rect.si
 - (id) initCommon:(UIImage *)img
 {
     if (self.isStart) {
-        img = [img maskWithColor:[[Colorful sharedManager] currentColor]];
+        img = [img maskWithColor:[UIColor whiteColor]];
     }
     self.image = img;
     self.userInteractionEnabled = YES;
     _contentImageView = [[UIImageView alloc] initWithImage:img];
     if (self.isStart) {
-        _contentImageView.layer.backgroundColor = [[UIColor whiteColor] CGColor];
+        _contentImageView.layer.backgroundColor = [[[Colorful sharedManager] currentColor] CGColor];
         _contentImageView.layer.cornerRadius = 25;
         _contentImageView.clipsToBounds = YES;
         _contentImageView.layer.masksToBounds = YES;

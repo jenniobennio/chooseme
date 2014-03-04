@@ -109,7 +109,7 @@
     UIImage *searchImage = [UIImage imageNamed:@"search-32.png"];
     UIImage *pinterestImage = [UIImage imageNamed:@"pinterest-32.png"];
     UIImage *galleryImage = [UIImage imageNamed:@"stack_of_photos-32.png"];
-    UIImage *plusImage = [UIImage imageNamed:@"plus-48.png"];
+    UIImage *plusImage = [UIImage imageNamed:@"plus-50.png"];
     
     AwesomeMenuItem *cameraItem = [[AwesomeMenuItem alloc] initWithImage:cameraImage];
     AwesomeMenuItem *searchItem = [[AwesomeMenuItem alloc] initWithImage:searchImage];

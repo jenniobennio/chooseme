@@ -17,6 +17,8 @@
 @property (strong, nonatomic) UserQuestionView *uqView;
 @property (strong, nonatomic) Question *q;
 
+@property (strong, nonatomic) UITapGestureRecognizer *doubleTap;
+
 - (void)reloadUserPic:(UIImage *)userImage;
 - (void)reloadBigPic:(UIImage *)image1;
 //- (void)loadCell:(UIColor *)color withImage1:(UIImage *)image1 withImage2:(UIImage *)image2 withUserImage:(UIImage *)userImage;

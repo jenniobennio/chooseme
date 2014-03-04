@@ -118,4 +118,95 @@
     self.thumbnail2.titleLabel.alpha = 0.95;
 }
 
+- (void)populateData:(Question *)question withColor:(UIColor *)color
+{
+    UIImage *image1 = question.image1;
+    UIImage *image2 = question.image2;
+    
+    // Set the images
+    [self.thumbnail1 setBackgroundImage:image1 forState:UIControlStateNormal];
+    [self.thumbnail2 setBackgroundImage:image2 forState:UIControlStateNormal];
+    [self.bigPic setImage:image1];
+    
+    // Format the thumbnails
+    self.thumbnail1.layer.borderColor = [color CGColor];
+    self.thumbnail2.layer.borderColor = [color CGColor];
+    [self formatThumbnails];
+    [self highlightImage:1];
+    
+    // Format icons
+    [self colorIcons:question.image1];
+    [self updateHeartIcon:question];
+    
+    /*
+    // ************* Image Switching *********************
+    // Set up button touch actions
+    [self.pView.thumbnail1 addTarget:self action:@selector(onTapPic1:) forControlEvents:UIControlEventTouchUpInside];
+    self.pView.thumbnail1.tag = 1;
+    [self.pView.thumbnail2 addTarget:self action:@selector(onTapPic2:) forControlEvents:UIControlEventTouchUpInside];
+    self.pView.thumbnail2.tag = 2;
+    
+    // Enable Swiping
+    self.pView.userInteractionEnabled = YES;
+    self.pView.bigPic.userInteractionEnabled = YES;
+    UISwipeGestureRecognizer *rightSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleRightSwipe:)];
+    rightSwipe.delegate = self;
+    rightSwipe.direction = UISwipeGestureRecognizerDirectionRight;
+    UISwipeGestureRecognizer *leftSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleLeftSwipe:)];
+    leftSwipe.delegate = self;
+    leftSwipe.direction = UISwipeGestureRecognizerDirectionLeft;
+    
+    [self.pView.bigPic addGestureRecognizer:rightSwipe];
+    [self.pView.bigPic addGestureRecognizer:leftSwipe];
+    
+    // ************** Voting ********************************
+    // Enable double tap to vote
+    self.doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doHeartPic:)];
+    self.doubleTap.numberOfTapsRequired = 2;
+    [self.pView.bigPic addGestureRecognizer:self.doubleTap];
+    
+    self.pView.heartIcon.userInteractionEnabled = YES;
+    UITapGestureRecognizer *heartTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doHeartPic:)];
+    [self.pView.heartIcon addGestureRecognizer:heartTap];
+    */
+    
+    
+    // Set any text
+    [self updateVoteCount:question];
+    [self updateComments:question.numComments];
+    [self updatePercentages:question];
+    
+
+}
+
+- (void) updateHeartIcon:(Question *)q
+{
+    int image = (self.thumbnail1.alpha == 1)? 1 : 2;
+    
+    int vote = 0;
+    if ([[[PFUser currentUser] objectId] isEqualToString:q.author.objectId]) {
+        vote = [q.youVoted intValue];
+    } else {
+        vote = [q vote];
+    }
+    self.heartIcon.image = [UIImage imageNamed:@"29-heart.png"]; // fix the disappearing alpha problem
+    UIColor *defaultColor;
+    if (image == 1)
+        defaultColor = [self calculateTextColor:q.image1];
+    else
+        defaultColor = [self calculateTextColor:q.image2];
+    UIColor *heartColor = (vote == image) ? [UIColor colorWithRed:1 green:0.07 blue:0.5 alpha:0.8] : defaultColor;
+    self.heartIcon.image = [self.heartIcon.image maskWithColor:heartColor];
+}
+
+- (void) updateVoteCount:(Question *)q {
+    if (self.thumbnail1.alpha == 1) {
+        self.numVotesLabel.text = [NSString stringWithFormat:@"%d", q.numVoted1];
+    } else {
+        self.numVotesLabel.text = [NSString stringWithFormat:@"%d", q.numVoted2];
+    }
+    [self updatePercentages:q];
+}
+
+
 @end

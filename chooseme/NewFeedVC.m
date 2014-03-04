@@ -13,12 +13,13 @@
 #import "Question.h"
 #import "FacebookClient.h"
 #import "Colorful.h"
+#import "commentView.h"
+#import "AddFriendCell.h"
 
 @interface NewFeedVC ()
 
 @property (nonatomic, strong) NSMutableArray *questions;
 @property (strong, nonatomic) IBOutlet UILabel *titleLabel;
-@property (strong, nonatomic) IBOutlet UIView *titleView;
 @property (strong, nonatomic) IBOutlet UITableView *feedTable;
 
 @property (strong, nonatomic) NSMutableArray *colors;
@@ -31,6 +32,11 @@
 
 // Random color picked in CameraVC
 @property (nonatomic, strong) Colorful *colorManager;
+
+@property (nonatomic, strong) PictureView *currentPView;
+@property (nonatomic, assign) int currentIndex;
+@property (nonatomic, strong) PictureView *detailPView;
+@property (nonatomic, strong) commentView *cView;
 
 @end
 
@@ -144,48 +150,102 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.questions.count;
+    if (tableView.tag == 1)
+        return self.questions.count;
+    else
+        return ((Question *)self.questions[self.currentIndex]).friendsCommenting.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return self.view.frame.size.height - 40;
+    if (tableView.tag == 1)
+        return self.view.frame.size.height - 40;
+    else
+        return 40;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"NewFeedCell";
-    NewFeedCell *cell = (NewFeedCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    if ([self isFriends])
-        cell.backgroundColor = self.colorManager.colors[(indexPath.row + self.colorManager.friendsColorIndex + 1) % self.colorManager.colors.count];
-    else
-        cell.backgroundColor = self.colorManager.colors[(indexPath.row + self.colorManager.colorIndex + 1) % self.colorManager.colors.count];
-
-    // Load views and format them and stuff
-//    UIImage *image1 = [UIImage imageNamed:@"111834.jpg"];
-//    UIImage *image2 = [UIImage imageNamed:@"131466.jpg"];
-    Question *q = self.questions[indexPath.row];
-    if ([self isMe])
-        [cell loadCell:cell.backgroundColor withQuestion:q withUserImage:self.myPic];
-    else
-        [cell loadCell:cell.backgroundColor withQuestion:q withUserImage:[UIImage imageWithData:q.profilePic]];
+    if (tableView.tag == 1) {
+        static NSString *CellIdentifier = @"NewFeedCell";
+        NewFeedCell *cell = (NewFeedCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        if ([self isFriends])
+            cell.backgroundColor = self.colorManager.colors[(indexPath.row + self.colorManager.friendsColorIndex + 1) % self.colorManager.colors.count];
+        else
+            cell.backgroundColor = self.colorManager.colors[(indexPath.row + self.colorManager.colorIndex + 1) % self.colorManager.colors.count];
+        
+        // Load views and format them and stuff
+        //    UIImage *image1 = [UIImage imageNamed:@"111834.jpg"];
+        //    UIImage *image2 = [UIImage imageNamed:@"131466.jpg"];
+        Question *q = self.questions[indexPath.row];
+        if ([self isMe])
+            [cell loadCell:cell.backgroundColor withQuestion:q withUserImage:self.myPic];
+        else
+            [cell loadCell:cell.backgroundColor withQuestion:q withUserImage:[UIImage imageWithData:q.profilePic]];
         //withImage1:image1 withImage2:image2 withUserImage:self.myPic];
-    
-    
-    
-    // Need to set this so that top tableView can scrollToTop
-    cell.pView.friendsVotedScrollView.scrollsToTop = NO;
-    
-    // Set up gesture recognizers. Is this the right place to do this?
-//    UITapGestureRecognizer *tapPic1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTapPic1:)];
-//    UITapGestureRecognizer *tapPic2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTapPic2:)];
-//    [cell.pView.thumbnail1 addGestureRecognizer:tapPic1];
-//    [cell.pView.thumbnail2 addGestureRecognizer:tapPic2];
-    
-    return cell;
+        
+        // Need to set this so that top tableView can scrollToTop
+        cell.pView.friendsVotedScrollView.scrollsToTop = NO;
+        
+        // ************** Detail View ********************************
+        // Enable single tap to enter detail view
+        UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(enterDetailView:)];
+        singleTap.numberOfTapsRequired = 1;
+        [singleTap requireGestureRecognizerToFail:cell.doubleTap];
+        cell.pView.tag = indexPath.row;
+        [cell.pView addGestureRecognizer:singleTap];
+
+        return cell;
+    } else {
+        static NSString *CellIdentifier = @"AddFriendCell";
+        AddFriendCell *cell = (AddFriendCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        Question *q = self.questions[self.currentIndex];
+        NSString *strurl = [[NSString alloc] initWithFormat:@"https://graph.facebook.com/%@/picture",[q.friendsCommenting objectAtIndex:indexPath.row]];
+        NSURL *url = [NSURL URLWithString:strurl];
+        NSData *data = [NSData dataWithContentsOfURL:url];
+        [cell.pic setImage:[[UIImage alloc] initWithData:data]];
+        cell.name.text = ((Question *)self.questions[self.currentIndex]).friendsComments[indexPath.row];
+        NSLog(@"Comment read: %@", ((Question *)self.questions[self.currentIndex]).friendsComments[indexPath.row]);
+        
+        return cell;
+    }
 }
 
+# pragma mark - TextField delegate methods
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    CGRect newFrame = self.cView.frame;
+    newFrame.origin.y = 40;
+    newFrame.size.height = self.view.frame.size.height - 216-40;
+    [UIView animateWithDuration:0.4f animations:^{
+        self.cView.frame = newFrame;
+    }];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    // Pressing enter dismisses keyboard
+    [self.cView.commentTextField resignFirstResponder];
+    
+    CGRect newFrame = CGRectMake(0, 368, 320, 200);
+    [UIView animateWithDuration:0.4f animations:^{
+        self.cView.frame = newFrame;
+    }];
+
+    Question *q = self.questions[self.currentIndex];
+    [q.friendsCommenting addObject:self.myFacebookID];
+    [q.friendsComments addObject:self.cView.commentTextField.text];
+    NSLog(@"Comment submitted: %@", self.cView.commentTextField.text);
+    self.cView.commentTextField.text = @"";
+    
+    [q saveInBackground];
+    [self.cView.commentTable reloadData];
+    
+    return YES;
+}
 
 # pragma mark - ScrollView methods
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
@@ -229,6 +289,66 @@
 }
 
 # pragma mark - private methods
+
+- (void)enterDetailView:(UITapGestureRecognizer *)sender
+{
+    self.currentPView = (PictureView *)sender.view;
+    self.currentIndex = sender.view.tag;
+    NSLog(@"Enter detail view %d", sender.view.tag);
+
+    NSArray *nibViews = [[NSBundle mainBundle] loadNibNamed:@"PictureView" owner:self options:nil];
+    self.detailPView = [nibViews objectAtIndex:0];
+    UIColor *color = self.colorManager.colors[(self.colorManager.colorIndex+sender.view.tag+1)%self.colorManager.colors.count];
+    [self.detailPView populateData:self.questions[self.currentIndex] withColor:color];
+    self.detailPView.frame = CGRectMake(0, 40, 320, 368);
+    self.detailPView.xButton.hidden = NO;
+    self.detailPView.questionLabel.hidden = NO;
+    self.detailPView.questionLabel.text = ((Question *)self.questions[self.currentIndex]).question;
+    
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(exitDetailView)];
+    [self.detailPView addGestureRecognizer:singleTap];
+    [self.view addSubview:self.detailPView];
+    
+    CGRect newFrame = sender.view.frame;
+    sender.view.alpha = 0;
+    self.currentPView.alpha = 0;
+    [UIView animateWithDuration:0.4f animations:^{
+        self.detailPView.frame = newFrame;
+        self.feedTable.alpha = 0;
+        self.view.backgroundColor = [UIColor whiteColor];
+    }];
+    
+    nibViews = [[NSBundle mainBundle] loadNibNamed:@"commentView" owner:self options:nil];
+    self.cView = [nibViews objectAtIndex:0];
+    newFrame = self.cView.frame;
+    newFrame.origin.y = 368;
+    self.cView.frame = newFrame;
+    self.cView.commentTextField.delegate = self;
+    [self.cView.commentTable registerNib:[UINib nibWithNibName:@"AddFriendCell" bundle:nil] forCellReuseIdentifier:@"AddFriendCell"];
+    self.cView.commentTable.delegate = self;
+    self.cView.commentTable.dataSource = self;
+    
+    [self.view addSubview:self.cView];
+}
+
+- (void)exitDetailView
+{
+    NSLog(@"Exit detail view");
+    
+    CGRect newFrame = self.currentPView.frame;
+    newFrame.origin = CGPointMake(0, 40);
+    
+    [UIView animateWithDuration:0.4f animations:^{
+        self.detailPView.frame = newFrame;
+        self.feedTable.alpha = 1;
+        self.view.backgroundColor = self.colorManager.colors[(self.colorManager.colorIndex+self.currentIndex+1)%self.colorManager.colors.count];
+    } completion:^(BOOL finished) {
+        self.currentPView.alpha = 1;
+        [self.detailPView removeFromSuperview];
+        [self.cView removeFromSuperview];
+    }];
+    
+}
 
 - (BOOL)isFriends
 {

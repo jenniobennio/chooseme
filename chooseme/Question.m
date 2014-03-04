@@ -122,7 +122,19 @@
     self[@"friendsVoted"] = array;
 }
 
+- (NSMutableArray *) friendsCommenting {
+    return self[@"friendsCommenting"];
+}
+- (void) setFriendsCommenting:(NSMutableArray *) array {
+    self[@"friendsCommenting"] = array;
+}
 
+- (NSMutableArray *) friendsComments {
+    return self[@"friendsComments"];
+}
+- (void) setFriendsComments:(NSMutableArray *) array {
+    self[@"friendsComments"] = array;
+}
 
 - (NSString *)formattedQuestion
 {
@@ -212,7 +224,7 @@
 }
 
 - (int)numComments {
-    return 0;
+    return self.friendsCommenting.count;
 }
 
 - (int)percentPic:(int)picNum {

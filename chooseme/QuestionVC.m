@@ -126,6 +126,8 @@
     if (!self.question.friends) {
         self.question.friends = [[NSMutableArray alloc] init];
         self.question.friendsVoted = [[NSMutableArray alloc] init];
+        self.question.friendsCommenting = [[NSMutableArray alloc] init];
+        self.question.friendsComments = [[NSMutableArray alloc] init];
     }
     // Submit button enabled only if at least one friend added
     [self.submitButton setEnabled:self.question.friends.count > 0];

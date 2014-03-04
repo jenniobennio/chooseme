@@ -19,6 +19,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *numCommentsLabel;
 @property (strong, nonatomic) IBOutlet UIImageView *heartIcon;
 @property (strong, nonatomic) IBOutlet UIImageView *commentIcon;
+@property (strong, nonatomic) IBOutlet UIButton *xButton;
+@property (strong, nonatomic) IBOutlet UILabel *questionLabel;
 
 - (void)hideDetails;
 - (void)formatThumbnails;
@@ -27,5 +29,6 @@
 - (void)highlightImage:(int)index;
 - (void)updateComments:(int)comments;
 - (void)updatePercentages:(Question *)q;
+- (void)populateData:(Question *)question withColor:(UIColor *)color;
 
 @end

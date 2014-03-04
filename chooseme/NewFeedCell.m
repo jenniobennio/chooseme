@@ -102,9 +102,9 @@
     
     // ************** Voting ********************************
     // Enable double tap to vote
-    UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doHeartPic:)];
-    doubleTap.numberOfTapsRequired = 2;
-    [self.pView.bigPic addGestureRecognizer:doubleTap];
+    self.doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doHeartPic:)];
+    self.doubleTap.numberOfTapsRequired = 2;
+    [self.pView.bigPic addGestureRecognizer:self.doubleTap];
     
     self.pView.heartIcon.userInteractionEnabled = YES;
     UITapGestureRecognizer *heartTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doHeartPic:)];

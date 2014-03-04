@@ -32,6 +32,9 @@
 @property (nonatomic, strong) NSMutableArray *friends;
 @property (nonatomic, strong) NSMutableArray *friendsVoted;
 
+@property (nonatomic, strong) NSMutableArray *friendsCommenting;
+@property (nonatomic, strong) NSMutableArray *friendsComments;
+
 // local client property not backed up to parse. use it to store the index of current user in the friends array.
 @property (assign) int myVoteIndex;
 

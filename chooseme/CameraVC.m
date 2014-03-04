@@ -119,14 +119,12 @@
     AwesomeMenuItem *galleryItem = [[AwesomeMenuItem alloc] initWithImage:galleryImage];
     
     AwesomeMenuItem *startItem = [[AwesomeMenuItem alloc] initWithImage:plusImage];
-    //startItem.contentImageView.alpha = 0;
     
     NSArray *menus = [NSArray arrayWithObjects:cameraItem, searchItem, pinterestItem, galleryItem, nil];
     AwesomeMenu *menu = [[AwesomeMenu alloc] initWithFrame:self.window.bounds startItem:startItem optionMenus:menus];
     [self.view addSubview:menu];
     
     menu.delegate = self;
-
     
     //******************************************************************
 

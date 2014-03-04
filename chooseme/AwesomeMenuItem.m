@@ -45,26 +45,15 @@ static inline CGRect ScaleRect(CGRect rect, float n) {return CGRectMake((rect.si
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    self.highlighted = YES;
     if ([_delegate respondsToSelector:@selector(AwesomeMenuItemTouchesBegan:)])
     {
        [_delegate AwesomeMenuItemTouchesBegan:self];
     }
     
 }
-- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    // if move out of 2x rect, cancel highlighted.
-    CGPoint location = [[touches anyObject] locationInView:self];
-    if (!CGRectContainsPoint(ScaleRect(self.bounds, 2.0f), location))
-    {
-        self.highlighted = NO;
-    }
-    
-}
+
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    self.highlighted = NO;
     // if stop in the area of 2x rect, response to the touches event.
     CGPoint location = [[touches anyObject] locationInView:self];
     if (CGRectContainsPoint(ScaleRect(self.bounds, 2.0f), location))
@@ -74,11 +63,6 @@ static inline CGRect ScaleRect(CGRect rect, float n) {return CGRectMake((rect.si
             [_delegate AwesomeMenuItemTouchesEnd:self];
         }
     }
-}
-
-- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    self.highlighted = NO;
 }
 
 @end

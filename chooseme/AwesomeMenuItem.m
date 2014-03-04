@@ -50,7 +50,7 @@ static inline CGRect ScaleRect(CGRect rect, float n) {return CGRectMake((rect.si
     self.userInteractionEnabled = YES;
     _contentImageView = [[UIImageView alloc] initWithImage:img];
     if (self.isStart) {
-        _contentImageView.layer.backgroundColor = [[UIColor clearColor] CGColor];
+        _contentImageView.layer.backgroundColor = [[UIColor whiteColor] CGColor];
         _contentImageView.layer.cornerRadius = 25;
         _contentImageView.clipsToBounds = YES;
         _contentImageView.layer.masksToBounds = YES;

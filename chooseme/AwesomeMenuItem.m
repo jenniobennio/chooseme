@@ -68,11 +68,11 @@ static inline CGRect ScaleRect(CGRect rect, float n) {return CGRectMake((rect.si
 {
     [super layoutSubviews];
     
-    self.bounds = CGRectMake(0, 0, self.image.size.width, self.image.size.height);
+    float width = self.isStart? 50 : 25;
+    float height = self.isStart? 50 : 25;
     
-    /*float width = _contentImageView.image.size.width;
-    float height = _contentImageView.image.size.height;
-    _contentImageView.frame = CGRectMake(self.bounds.size.width/2 - width/2, self.bounds.size.height/2 - height/2, width, height);*/
+    self.bounds = CGRectMake(0, 0, width, height);
+    _contentImageView.frame = CGRectMake(self.bounds.size.width/2 - width/2, self.bounds.size.height/2 - height/2, width, height);
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event

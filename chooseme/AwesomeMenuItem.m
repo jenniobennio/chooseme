@@ -55,6 +55,9 @@ static inline CGRect ScaleRect(CGRect rect, float n) {return CGRectMake((rect.si
         _contentImageView.clipsToBounds = YES;
         _contentImageView.layer.masksToBounds = YES;
         _contentImageView.contentMode = UIViewContentModeScaleAspectFill;
+        
+        self.layer.cornerRadius = 25;
+        self.layer.masksToBounds = YES;
     }
     [self addSubview:_contentImageView];
     return self;

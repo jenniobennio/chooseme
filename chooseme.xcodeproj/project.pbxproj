@@ -81,8 +81,7 @@
 		D51DDC7918C442B9002169AA /* like-256.png in Resources */ = {isa = PBXBuildFile; fileRef = D51DDC7818C442B9002169AA /* like-256.png */; };
 		D51DDC8618C596D9002169AA /* AwesomeMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = D51DDC8318C596D9002169AA /* AwesomeMenu.m */; };
 		D51DDC8718C596D9002169AA /* AwesomeMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D51DDC8518C596D9002169AA /* AwesomeMenuItem.m */; };
-		D51DDC8A18C59AEC002169AA /* plus-32.png in Resources */ = {isa = PBXBuildFile; fileRef = D51DDC8918C59AEC002169AA /* plus-32.png */; };
-		D51DDC8C18C59B16002169AA /* plus-128.png in Resources */ = {isa = PBXBuildFile; fileRef = D51DDC8B18C59B16002169AA /* plus-128.png */; };
+		D51DDC9018C5A054002169AA /* plus-48.png in Resources */ = {isa = PBXBuildFile; fileRef = D51DDC8F18C5A054002169AA /* plus-48.png */; };
 		D5438AD618C1B34A00C94D3B /* PinterestVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D5438AD418C1B34A00C94D3B /* PinterestVC.m */; };
 		D5438AD718C1B34A00C94D3B /* PinterestVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5438AD518C1B34A00C94D3B /* PinterestVC.xib */; };
 		D5438ADA18C1B47F00C94D3B /* PinterestClient.m in Sources */ = {isa = PBXBuildFile; fileRef = D5438AD918C1B47F00C94D3B /* PinterestClient.m */; };
@@ -211,8 +210,7 @@
 		D51DDC8318C596D9002169AA /* AwesomeMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AwesomeMenu.m; sourceTree = "<group>"; };
 		D51DDC8418C596D9002169AA /* AwesomeMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AwesomeMenuItem.h; sourceTree = "<group>"; };
 		D51DDC8518C596D9002169AA /* AwesomeMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AwesomeMenuItem.m; sourceTree = "<group>"; };
-		D51DDC8918C59AEC002169AA /* plus-32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plus-32.png"; sourceTree = "<group>"; };
-		D51DDC8B18C59B16002169AA /* plus-128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plus-128.png"; sourceTree = "<group>"; };
+		D51DDC8F18C5A054002169AA /* plus-48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plus-48.png"; sourceTree = "<group>"; };
 		D5438AD318C1B34A00C94D3B /* PinterestVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinterestVC.h; sourceTree = "<group>"; };
 		D5438AD418C1B34A00C94D3B /* PinterestVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinterestVC.m; sourceTree = "<group>"; };
 		D5438AD518C1B34A00C94D3B /* PinterestVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PinterestVC.xib; sourceTree = "<group>"; };
@@ -363,6 +361,7 @@
 		263519FD18A5D1FF000A30C9 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				D51DDC8F18C5A054002169AA /* plus-48.png */,
 				26BBA6F918C429840071F80D /* arrow-48.png */,
 				26BBA6FB18C438040071F80D /* icon_5440.png */,
 				26BBA6E418C3FA290071F80D /* add_user-25.png */,
@@ -372,8 +371,6 @@
 				D51DDC7818C442B9002169AA /* like-256.png */,
 				2680195E18C08EF400B4A22D /* 08-chat.png */,
 				26BBA6EE18C40A4F0071F80D /* play-32.png */,
-				D51DDC8918C59AEC002169AA /* plus-32.png */,
-				D51DDC8B18C59B16002169AA /* plus-128.png */,
 				2680195C18C08E9000B4A22D /* 29-heart.png */,
 				2627EA2918BDB09800ECD2A5 /* 117-todo.png */,
 				2627EA2718BDB07200ECD2A5 /* 112-group.png */,
@@ -570,17 +567,16 @@
 				26BBA6F818C41DCC0071F80D /* FriendCell.xib in Resources */,
 				2680195618C0770800B4A22D /* NewFeedVC.xib in Resources */,
 				2680195F18C08EF400B4A22D /* 08-chat.png in Resources */,
-				D51DDC8C18C59B16002169AA /* plus-128.png in Resources */,
 				263295E818B33DA700A84CB2 /* QuestionVC.xib in Resources */,
 				2680195D18C08E9000B4A22D /* 29-heart.png in Resources */,
 				D514C3F618C2EFC0007DF913 /* slr_camera-128.png in Resources */,
 				D514C40B18C30222007DF913 /* GoogleVC.xib in Resources */,
+				D51DDC9018C5A054002169AA /* plus-48.png in Resources */,
 				D514C40118C2F828007DF913 /* search-128.png in Resources */,
 				D5074FE118C06F130028ED2F /* pinterest-32.png in Resources */,
 				2632962D18B5DBDE00A84CB2 /* 111834.jpg in Resources */,
 				D5438AD718C1B34A00C94D3B /* PinterestVC.xib in Resources */,
 				D5438AE118C1D89900C94D3B /* pinterest-128.png in Resources */,
-				D51DDC8A18C59AEC002169AA /* plus-32.png in Resources */,
 				26351A0D18A5D1FF000A30C9 /* Main_iPad.storyboard in Resources */,
 				26BBA6EF18C40A4F0071F80D /* play-32.png in Resources */,
 				2680196B18C09D1200B4A22D /* NewFeedCell.xib in Resources */,

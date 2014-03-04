@@ -10,6 +10,7 @@
 #import <Parse/Parse.h>
 #import "QuestionVC.h"
 #import "PinterestVC.h"
+#import "AwesomeMenu.h"
 
 @protocol CameraVCDelegate <NSObject>
 -(void)previousPage:(NSUInteger)index;
@@ -17,7 +18,7 @@
 @end
 
 @interface CameraVC : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate, QuestionVCDelegate,
-    PinterestVCDelegate, UIGestureRecognizerDelegate>
+    PinterestVCDelegate, UIGestureRecognizerDelegate, AwesomeMenuDelegate>
 
 // CameraVC's delegate will be the AppViewController for swipe navigating between pages
 @property (nonatomic, weak) id<CameraVCDelegate> delegate;

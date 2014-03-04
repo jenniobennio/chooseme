@@ -15,7 +15,6 @@
 #import "PinterestClient.h"
 #import "GoogleVC.h"
 #import "Colorful.h"
-#import "AwesomeMenu.h"
 #import "AwesomeMenuItem.h"
 
 @interface CameraVC ()
@@ -92,12 +91,27 @@
 {
     [super viewDidLoad];
     
+    self.picIndex = 0;
+    
+    // Pick a random color
+    self.colorManager = [Colorful sharedManager];
+    [self.colorManager randColor];
+    UIColor *color = [self.colorManager currentColor];
+    
+    // Init currentQuestion
+    self.currentQuestion = [[Question alloc] init];
+    
+    // Format thumbnail buttons
+    [self formatPic:self.pic1 isSelected:YES];
+    [self formatPic:self.pic2 isSelected:NO];
+    
     // *************** Initialize Menu *********************************
     UIImage *cameraImage = [UIImage imageNamed:@"slr_camera-32.png"];
     UIImage *searchImage = [UIImage imageNamed:@"search-32.png"];
     UIImage *pinterestImage = [UIImage imageNamed:@"pinterest-32.png"];
     UIImage *galleryImage = [UIImage imageNamed:@"stack_of_photos-32.png"];
-    UIImage *plusImage = [UIImage imageNamed:@"plus-128.png"];
+    UIImage *plusImage = [UIImage imageNamed:@"plus-48.png"];
+    plusImage = [plusImage maskWithColor:color];
     
     AwesomeMenuItem *cameraItem = [[AwesomeMenuItem alloc] initWithImage:cameraImage highlightedImage:cameraImage ContentImage:cameraImage highlightedContentImage:cameraImage];
     AwesomeMenuItem *searchItem = [[AwesomeMenuItem alloc] initWithImage:searchImage highlightedImage:searchImage ContentImage:searchImage highlightedContentImage:searchImage];
@@ -108,30 +122,17 @@
                                                        highlightedImage:plusImage
                                                            ContentImage:plusImage
                                                 highlightedContentImage:plusImage];
+    //startItem.contentImageView.alpha = 0;
     
     NSArray *menus = [NSArray arrayWithObjects:cameraItem, searchItem, pinterestItem, galleryItem, nil];
     AwesomeMenu *menu = [[AwesomeMenu alloc] initWithFrame:self.window.bounds startItem:startItem optionMenus:menus];
     [self.view addSubview:menu];
-    /*[self.window addSubview:menu];
-    [self.window makeKeyAndVisible];*/
     
-    //menu.delegate = self;
+    menu.delegate = self;
 
     
     //******************************************************************
-    self.picIndex = 0;
-    
-    // Pick a random color
-    self.colorManager = [Colorful sharedManager];
-    [self.colorManager randColor];
 
-    // Init currentQuestion
-    self.currentQuestion = [[Question alloc] init];
-    
-    // Format thumbnail buttons
-    [self formatPic:self.pic1 isSelected:YES];
-    [self formatPic:self.pic2 isSelected:NO];
-    
     // Customize takePicButton depending on state
     /*self.takePicButton.layer.cornerRadius = 25;
     [self.takePicButton.titleLabel setAdjustsFontSizeToFitWidth:YES];
@@ -555,6 +556,22 @@
         else
             [self.takePicButton setImageEdgeInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
     }
+}
+
+#pragma mark - image source menu delegate
+
+/* ⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇ */
+/* ⬇⬇⬇⬇⬇⬇ GET RESPONSE OF MENU ⬇⬇⬇⬇⬇⬇ */
+/* ⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇ */
+- (void)awesomeMenu:(AwesomeMenu *)menu didSelectIndex:(NSInteger)idx
+{
+    NSLog(@"Select the index : %d",idx);
+}
+- (void)awesomeMenuDidFinishAnimationClose:(AwesomeMenu *)menu {
+    NSLog(@"Menu was closed!");
+}
+- (void)awesomeMenuDidFinishAnimationOpen:(AwesomeMenu *)menu {
+    NSLog(@"Menu is open!");
 }
 
 @end

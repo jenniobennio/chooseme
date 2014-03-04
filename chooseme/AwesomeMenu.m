@@ -7,6 +7,7 @@
 //
 
 #import "AwesomeMenu.h"
+#import "Colorful.h"
 #import <QuartzCore/QuartzCore.h>
 
 static CGFloat const kAwesomeMenuDefaultNearRadius = 110.0f;
@@ -76,9 +77,7 @@ static CGPoint RotateCGPointAroundCenter(CGPoint point, CGPoint center, float an
         // assign startItem to "Add" Button.
         _startButton = startItem;
         _startButton.delegate = self;
-        _startButton.frame = CGRectMake(0, 0, 50, 50);
         _startButton.center = self.startPoint;
-        _startButton.layer.cornerRadius = 25;
 
         [self addSubview:_startButton];
     }

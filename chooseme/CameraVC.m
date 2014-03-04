@@ -96,7 +96,6 @@
     // Pick a random color
     self.colorManager = [Colorful sharedManager];
     [self.colorManager randColor];
-    UIColor *color = [self.colorManager currentColor];
     
     // Init currentQuestion
     self.currentQuestion = [[Question alloc] init];
@@ -111,14 +110,13 @@
     UIImage *pinterestImage = [UIImage imageNamed:@"pinterest-32.png"];
     UIImage *galleryImage = [UIImage imageNamed:@"stack_of_photos-32.png"];
     UIImage *plusImage = [UIImage imageNamed:@"plus-48.png"];
-    plusImage = [plusImage maskWithColor:color];
     
     AwesomeMenuItem *cameraItem = [[AwesomeMenuItem alloc] initWithImage:cameraImage];
     AwesomeMenuItem *searchItem = [[AwesomeMenuItem alloc] initWithImage:searchImage];
     AwesomeMenuItem *pinterestItem = [[AwesomeMenuItem alloc] initWithImage:pinterestImage];
     AwesomeMenuItem *galleryItem = [[AwesomeMenuItem alloc] initWithImage:galleryImage];
     
-    AwesomeMenuItem *startItem = [[AwesomeMenuItem alloc] initWithImage:plusImage];
+    AwesomeMenuItem *startItem = [[AwesomeMenuItem alloc] initStartWithImage:plusImage];
     
     NSArray *menus = [NSArray arrayWithObjects:cameraItem, searchItem, pinterestItem, galleryItem, nil];
     AwesomeMenu *menu = [[AwesomeMenu alloc] initWithFrame:self.window.bounds startItem:startItem optionMenus:menus];

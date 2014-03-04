@@ -27,11 +27,12 @@
 @property (nonatomic) CGPoint endPoint;
 @property (nonatomic) CGPoint nearPoint;
 @property (nonatomic) CGPoint farPoint;
+@property (assign) BOOL isStart;
 
 @property (nonatomic, weak) id<AwesomeMenuItemDelegate> delegate;
 
 - (id)initWithImage:(UIImage *)img;
-
+- (id)initStartWithImage:(UIImage *)img;
 
 @end
 

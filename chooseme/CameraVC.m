@@ -105,6 +105,8 @@
     [self formatPic:self.pic2 isSelected:NO];
     
     // *************** Initialize Menu *********************************
+    self.takePicButton.hidden = YES;
+    
     UIImage *cameraImage = [UIImage imageNamed:@"slr_camera-32.png"];
     UIImage *searchImage = [UIImage imageNamed:@"search-32.png"];
     UIImage *pinterestImage = [UIImage imageNamed:@"pinterest-32.png"];

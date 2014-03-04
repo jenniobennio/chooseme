@@ -10,9 +10,9 @@
 #import "Colorful.h"
 #import <QuartzCore/QuartzCore.h>
 
-static CGFloat const kAwesomeMenuDefaultNearRadius = 110.0f;
-static CGFloat const kAwesomeMenuDefaultEndRadius = 120.0f;
-static CGFloat const kAwesomeMenuDefaultFarRadius = 140.0f;
+static CGFloat const kAwesomeMenuDefaultNearRadius = 70.0f;
+static CGFloat const kAwesomeMenuDefaultEndRadius = 80.0f;
+static CGFloat const kAwesomeMenuDefaultFarRadius = 90.0f;
 static CGFloat const kAwesomeMenuDefaultStartPointX =  160.0;
 static CGFloat const kAwesomeMenuDefaultStartPointY = 480.0; /*240.0;*/
 static CGFloat const kAwesomeMenuDefaultTimeOffset = 0.036f;

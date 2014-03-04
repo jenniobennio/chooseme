@@ -299,6 +299,7 @@ static CGPoint RotateCGPointAroundCenter(CGPoint point, CGPoint center, float an
         [animationgroup setValue:@"firstAnimation" forKey:@"id"];
     }
     
+    item.alpha = 1.0;
     [item.layer addAnimation:animationgroup forKey:@"Expand"];
     item.center = item.endPoint;
     
@@ -354,6 +355,7 @@ static CGPoint RotateCGPointAroundCenter(CGPoint point, CGPoint center, float an
         [animationgroup setValue:@"lastAnimation" forKey:@"id"];
     }
     
+    item.alpha = 0.0;
     [item.layer addAnimation:animationgroup forKey:@"Close"];
     item.center = item.startPoint;
     

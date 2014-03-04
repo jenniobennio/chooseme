@@ -156,6 +156,7 @@ static CGPoint RotateCGPointAroundCenter(CGPoint point, CGPoint center, float an
         if (otherItem.tag == item.tag) {
             continue;
         }
+        otherItem.alpha = 0.0;
         [otherItem.layer addAnimation:shrink forKey:@"shrink"];
 
         otherItem.center = otherItem.startPoint;

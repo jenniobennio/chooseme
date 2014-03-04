@@ -65,6 +65,8 @@
 		26BBA6FA18C429840071F80D /* arrow-48.png in Resources */ = {isa = PBXBuildFile; fileRef = 26BBA6F918C429840071F80D /* arrow-48.png */; };
 		26BBA6FC18C438040071F80D /* icon_5440.png in Resources */ = {isa = PBXBuildFile; fileRef = 26BBA6FB18C438040071F80D /* icon_5440.png */; };
 		26BBA6FF18C446680071F80D /* Colorful.m in Sources */ = {isa = PBXBuildFile; fileRef = 26BBA6FE18C446680071F80D /* Colorful.m */; };
+		26BBA70518C5D1200071F80D /* commentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26BBA70418C5D1200071F80D /* commentView.m */; };
+		26BBA70718C5D1300071F80D /* commentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26BBA70618C5D1300071F80D /* commentView.xib */; };
 		B031302B82C840708B86AE68 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43619A4B92F840368B218FE4 /* libPods.a */; };
 		D5074FD318C05EB70028ED2F /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5074FD218C05EB70028ED2F /* Parse.framework */; };
 		D5074FDD18C06EF30028ED2F /* slr_camera-32.png in Resources */ = {isa = PBXBuildFile; fileRef = D5074FDC18C06EF30028ED2F /* slr_camera-32.png */; };
@@ -188,6 +190,9 @@
 		26BBA6FB18C438040071F80D /* icon_5440.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_5440.png; sourceTree = "<group>"; };
 		26BBA6FD18C446680071F80D /* Colorful.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Colorful.h; sourceTree = "<group>"; };
 		26BBA6FE18C446680071F80D /* Colorful.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Colorful.m; sourceTree = "<group>"; };
+		26BBA70318C5D1200071F80D /* commentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = commentView.h; sourceTree = "<group>"; };
+		26BBA70418C5D1200071F80D /* commentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = commentView.m; sourceTree = "<group>"; };
+		26BBA70618C5D1300071F80D /* commentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = commentView.xib; sourceTree = "<group>"; };
 		39891BCB79A34F009E78550D /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		43619A4B92F840368B218FE4 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5074FD218C05EB70028ED2F /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
@@ -442,6 +447,9 @@
 				2680195718C08CFD00B4A22D /* PictureView.h */,
 				2680195818C08CFD00B4A22D /* PictureView.m */,
 				2680196F18C1BE3B00B4A22D /* PictureView.xib */,
+				26BBA70318C5D1200071F80D /* commentView.h */,
+				26BBA70418C5D1200071F80D /* commentView.m */,
+				26BBA70618C5D1300071F80D /* commentView.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -585,6 +593,7 @@
 				26BBA6F318C419530071F80D /* 187-pencil.png in Resources */,
 				26BBA6E118C3F8C50071F80D /* upload-25.png in Resources */,
 				26351A1218A5D1FF000A30C9 /* Images.xcassets in Resources */,
+				26BBA70718C5D1300071F80D /* commentView.xib in Resources */,
 				26351A8618A72449000A30C9 /* AppViewController.xib in Resources */,
 				26351A0A18A5D1FF000A30C9 /* Main_iPhone.storyboard in Resources */,
 				2632962E18B5DBDE00A84CB2 /* 131466.jpg in Resources */,
@@ -674,6 +683,7 @@
 				2680196E18C1BE2F00B4A22D /* UserQuestionView.m in Sources */,
 				26351A9318A7F59E000A30C9 /* Question.m in Sources */,
 				26351A0318A5D1FF000A30C9 /* main.m in Sources */,
+				26BBA70518C5D1200071F80D /* commentView.m in Sources */,
 				26644CC318B723C000806490 /* AddFriendCell.m in Sources */,
 				D51DDC8718C596D9002169AA /* AwesomeMenuItem.m in Sources */,
 				2680195518C0770800B4A22D /* NewFeedVC.m in Sources */,

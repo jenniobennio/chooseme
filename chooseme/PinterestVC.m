@@ -61,7 +61,7 @@
     }];
     
     Colorful *colorManager = [Colorful sharedManager];
-    UIColor *color = colorManager.colors[colorManager.colorIndex];
+    UIColor *color = [colorManager currentColor];
     self.titleView.backgroundColor = color;
     self.titleLabel.text = @"Add a Pin";
     

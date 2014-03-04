@@ -22,9 +22,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *titleLabel;
 @property (strong, nonatomic) IBOutlet UITableView *feedTable;
 
-@property (strong, nonatomic) NSMutableArray *colors;
-@property (nonatomic, assign) int lastIndexDisplayed;
-
 // Private user data
 @property (strong, nonatomic) NSString *myFacebookID;
 @property (strong, nonatomic) NSString *myName;
@@ -70,9 +67,9 @@
     self.colorManager = [Colorful sharedManager];
     if ([self isFriends]) {
         self.colorManager.friendsColorIndex = arc4random() % self.colorManager.colors.count;
-        self.view.backgroundColor = self.colorManager.colors[(self.colorManager.friendsColorIndex+1) % self.colorManager.colors.count];
+        self.view.backgroundColor = [self.colorManager currentFriendsColor];
     } else
-        self.view.backgroundColor = self.colorManager.colors[(self.colorManager.colorIndex+1) % self.colorManager.colors.count];
+        self.view.backgroundColor = [self.colorManager currentColor:1];
     
     // Don't show lines below available cells
     self.feedTable.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
@@ -171,9 +168,9 @@
         NewFeedCell *cell = (NewFeedCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         if ([self isFriends])
-            cell.backgroundColor = self.colorManager.colors[(indexPath.row + self.colorManager.friendsColorIndex + 1) % self.colorManager.colors.count];
+            cell.backgroundColor = [self.colorManager currentFriendsColor:indexPath.row];
         else
-            cell.backgroundColor = self.colorManager.colors[(indexPath.row + self.colorManager.colorIndex + 1) % self.colorManager.colors.count];
+            cell.backgroundColor = [self.colorManager currentColor:indexPath.row+1];
         
         // Load views and format them and stuff
         //    UIImage *image1 = [UIImage imageNamed:@"111834.jpg"];
@@ -266,9 +263,9 @@
     if (offset.y - index*528 > 330) {
         UIColor *newColor;
         if ([self isFriends])
-            newColor = self.colorManager.colors[(self.colorManager.friendsColorIndex + 1 +index+1) % self.colorManager.colors.count];
+            newColor = [self.colorManager currentFriendsColor:index+1];
         else
-            newColor = self.colorManager.colors[(self.colorManager.colorIndex + 1 +index+1) % self.colorManager.colors.count];
+            newColor = [self.colorManager currentColor:index+2];
         if (self.view.backgroundColor != newColor) {
             [UIView animateWithDuration:0.3 animations:^{
                 self.view.backgroundColor = newColor;
@@ -277,9 +274,9 @@
     } else {
         UIColor *newColor;
         if ([self isFriends])
-            newColor = self.colorManager.colors[(self.colorManager.friendsColorIndex + 1 + index) % self.colorManager.colors.count];
+            newColor = [self.colorManager currentFriendsColor:index];
         else
-            newColor = self.colorManager.colors[(self.colorManager.colorIndex + 1 + index) % self.colorManager.colors.count];
+            newColor = [self.colorManager currentColor:index+1];
         if (self.view.backgroundColor != newColor) {
             [UIView animateWithDuration:0.3 animations:^{
                 self.view.backgroundColor = newColor;
@@ -298,7 +295,7 @@
 
     NSArray *nibViews = [[NSBundle mainBundle] loadNibNamed:@"PictureView" owner:self options:nil];
     self.detailPView = [nibViews objectAtIndex:0];
-    UIColor *color = self.colorManager.colors[(self.colorManager.colorIndex+sender.view.tag+1)%self.colorManager.colors.count];
+    UIColor *color = [self.colorManager currentColor:sender.view.tag+1];
     [self.detailPView populateData:self.questions[self.currentIndex] withColor:color];
     self.detailPView.frame = CGRectMake(0, 40, 320, 368);
     self.detailPView.xButton.hidden = NO;
@@ -341,7 +338,7 @@
     [UIView animateWithDuration:0.4f animations:^{
         self.detailPView.frame = newFrame;
         self.feedTable.alpha = 1;
-        self.view.backgroundColor = self.colorManager.colors[(self.colorManager.colorIndex+self.currentIndex+1)%self.colorManager.colors.count];
+        self.view.backgroundColor = [self.colorManager currentColor:self.currentIndex+1];
     } completion:^(BOOL finished) {
         self.currentPView.alpha = 1;
         [self.detailPView removeFromSuperview];

@@ -13,6 +13,8 @@
 @synthesize colorIndex;
 @synthesize colors;
 
+// Using the singleton design pattern
+
 + (id)sharedManager {
     static Colorful *sharedMyManager = nil;
     static dispatch_once_t onceToken;
@@ -28,7 +30,10 @@
 }
 
 - (UIColor *)currentColor {
-    return colors[colorIndex];
+    return [self currentColor:0];
+}
+- (UIColor *)currentColor:(int)index {
+    return colors[(colorIndex + index) % colors.count];
 }
 
 - (UIColor *)randFriendsColor {
@@ -37,7 +42,10 @@
 }
 
 - (UIColor *)currentFriendsColor {
-    return colors[friendsColorIndex];
+    return [self currentFriendsColor:0];
+}
+- (UIColor *)currentFriendsColor:(int)index {
+    return colors[(friendsColorIndex+index) % colors.count];
 }
 
 
@@ -55,7 +63,7 @@
         [colors addObject:[UIColor colorWithRed:0.878 green:0.416 blue:0.039 alpha:0.75]];
         [colors addObject:[UIColor colorWithRed:0.929 green:0.345 blue:0.455 alpha:0.75]];
         [colors addObject:[UIColor colorWithRed:0.537 green:0.235 blue:0.663 alpha:0.75]];
-//        [colors addObject:[UIColor colorWithRed:0.153 green:0.220 blue:0.298 alpha:0.75]];
+//        [colors addObject:[UIColor colorWithRed:0.153 green:0.220 blue:0.298 alpha:0.75]]; // ugly gray
     }
     return self;
 }

@@ -469,12 +469,16 @@
 {
     self.picIndex = index;
     if (index == 0) {
-        self.pic1.alpha = 1;
-        self.pic2.alpha = 0.4;
+        [UIView animateWithDuration:0.4f animations:^{
+            self.pic1.alpha = 1;
+            self.pic2.alpha = 0.4;
+        }];
     }
     else {
-        self.pic2.alpha = 1;
-        self.pic1.alpha = 0.4;
+        [UIView animateWithDuration:0.4f animations:^{
+            self.pic2.alpha = 1;
+            self.pic1.alpha = 0.4;
+        }];
     }
 }
 

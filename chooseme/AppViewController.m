@@ -8,7 +8,6 @@
 
 #import "AppViewController.h"
 #import "CameraVC.h"
-#import "FeedVC.h"
 #import "NewFeedVC.h"
 #import <Parse/Parse.h>
 @interface AppViewController ()
@@ -63,11 +62,6 @@
     }
     
     self.pageVC = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
-    
-    for (UIGestureRecognizer *recognizer in self.pageVC.gestureRecognizers) {
-//        recognizer.enabled = NO;
-        NSLog(@"Gesture recognizer");
-    }
     
     self.pageVC.dataSource = self;
     [[self.pageVC view] setFrame:[[self view] bounds]];
@@ -142,11 +136,6 @@
         return self.myQuestionsVC;
     } else
         return nil;
-    
-    //        FeedVC *childViewController = [[FeedVC alloc] initWithNibName:@"FeedVC" bundle:nil];
-    //        childViewController.index = index;
-    //        childViewController.delegate = self;
-    //        return childViewController;
 }
 
 - (void)previousPage:(NSUInteger)index

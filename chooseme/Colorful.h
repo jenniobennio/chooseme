@@ -23,8 +23,10 @@
 
 - (UIColor *)randColor;
 - (UIColor *)currentColor;
+- (UIColor *)currentColor:(int)index;
 
 - (UIColor *)randFriendsColor;
 - (UIColor *)currentFriendsColor;
+- (UIColor *)currentFriendsColor:(int)index;
 
 @end

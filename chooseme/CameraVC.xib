@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4514" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4514" systemVersion="13A603" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
@@ -90,11 +90,11 @@
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mYJ-OK-HYe">
-                    <rect key="frame" x="12" y="516" width="30" height="30"/>
+                    <rect key="frame" x="12" y="511" width="40" height="40"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="30" id="Hsn-mG-dsu"/>
-                        <constraint firstAttribute="height" constant="30" id="kJ8-D3-NaP"/>
+                        <constraint firstAttribute="width" constant="40" id="Hsn-mG-dsu"/>
+                        <constraint firstAttribute="height" constant="40" id="kJ8-D3-NaP"/>
                     </constraints>
                     <state key="normal" image="112-group.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -104,11 +104,11 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fQV-Wy-4pm">
-                    <rect key="frame" x="278" y="516" width="30" height="30"/>
+                    <rect key="frame" x="268" y="511" width="40" height="40"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="30" id="34H-6H-bbh"/>
-                        <constraint firstAttribute="height" constant="30" id="xxS-5R-u7U"/>
+                        <constraint firstAttribute="width" constant="40" id="34H-6H-bbh"/>
+                        <constraint firstAttribute="height" constant="40" id="xxS-5R-u7U"/>
                     </constraints>
                     <state key="normal" image="111-user.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>

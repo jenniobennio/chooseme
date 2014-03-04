@@ -53,7 +53,7 @@
     self.collectionView.backgroundColor = [UIColor clearColor];
     
     Colorful *colorManager = [Colorful sharedManager];
-    UIColor *color = colorManager.colors[colorManager.colorIndex];
+    UIColor *color = [colorManager currentColor];
     self.titleView.backgroundColor = color;
     self.titleLabel.text = @"Find an image via Google";
     self.backButton.imageView.image = [self.backButton.imageView.image maskWithColor:[UIColor whiteColor]];

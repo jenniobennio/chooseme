@@ -269,7 +269,15 @@ static CGPoint RotateCGPointAroundCenter(CGPoint point, CGPoint center, float an
     rotateAnimation.duration = animationDuration;
     rotateAnimation.keyTimes = [NSArray arrayWithObjects:
                                 [NSNumber numberWithFloat:.3], 
-                                [NSNumber numberWithFloat:.4], nil]; 
+                                [NSNumber numberWithFloat:.4], nil];
+    
+    CABasicAnimation *opacityAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
+    opacityAnimation.duration = animationDuration;
+    opacityAnimation.fromValue = [NSNumber numberWithFloat:0.3f];
+    opacityAnimation.toValue = [NSNumber numberWithFloat:1.0f];
+    opacityAnimation.removedOnCompletion = NO;
+    opacityAnimation.fillMode = kCAFillModeBoth;
+    opacityAnimation.additive = NO;
     
     CAKeyframeAnimation *positionAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position"];
     positionAnimation.duration = animationDuration;
@@ -282,7 +290,7 @@ static CGPoint RotateCGPointAroundCenter(CGPoint point, CGPoint center, float an
     CGPathRelease(path);
     
     CAAnimationGroup *animationgroup = [CAAnimationGroup animation];
-    animationgroup.animations = [NSArray arrayWithObjects:positionAnimation, rotateAnimation, nil];
+    animationgroup.animations = [NSArray arrayWithObjects:opacityAnimation, positionAnimation, rotateAnimation, nil];
     animationgroup.duration = animationDuration;
     animationgroup.fillMode = kCAFillModeForwards;
     animationgroup.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
@@ -309,7 +317,15 @@ static CGPoint RotateCGPointAroundCenter(CGPoint point, CGPoint center, float an
     }
     
     int tag = 1000 + _flag;
-     AwesomeMenuItem *item = (AwesomeMenuItem *)[self viewWithTag:tag];
+    AwesomeMenuItem *item = (AwesomeMenuItem *)[self viewWithTag:tag];
+    
+    CABasicAnimation *opacityAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
+    opacityAnimation.duration = animationDuration;
+    opacityAnimation.fromValue = [NSNumber numberWithFloat:1.0f];
+    opacityAnimation.toValue = [NSNumber numberWithFloat:0.0f];
+    opacityAnimation.removedOnCompletion = NO;
+    opacityAnimation.fillMode = kCAFillModeBoth;
+    opacityAnimation.additive = NO;
     
     CAKeyframeAnimation *rotateAnimation = [CAKeyframeAnimation animationWithKeyPath:@"transform.rotation.z"];
     rotateAnimation.values = [NSArray arrayWithObjects:[NSNumber numberWithFloat:0.0f],[NSNumber numberWithFloat:closeRotation],[NSNumber numberWithFloat:0.0f], nil];
@@ -329,7 +345,7 @@ static CGPoint RotateCGPointAroundCenter(CGPoint point, CGPoint center, float an
     CGPathRelease(path);
     
     CAAnimationGroup *animationgroup = [CAAnimationGroup animation];
-    animationgroup.animations = [NSArray arrayWithObjects:positionAnimation, rotateAnimation, nil];
+    animationgroup.animations = [NSArray arrayWithObjects:opacityAnimation, positionAnimation, rotateAnimation, nil];
     animationgroup.duration = animationDuration;
     animationgroup.fillMode = kCAFillModeForwards;
     animationgroup.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
@@ -340,10 +356,11 @@ static CGPoint RotateCGPointAroundCenter(CGPoint point, CGPoint center, float an
     
     [item.layer addAnimation:animationgroup forKey:@"Close"];
     item.center = item.startPoint;
-
+    
     _flag --;
 }
 - (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag {
+    
     if([[anim valueForKey:@"id"] isEqual:@"lastAnimation"]) {
         if(self.delegate && [self.delegate respondsToSelector:@selector(awesomeMenuDidFinishAnimationClose:)]){
             [self.delegate awesomeMenuDidFinishAnimationClose:self];

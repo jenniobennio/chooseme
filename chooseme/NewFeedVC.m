@@ -162,7 +162,7 @@
     if (tableView.tag == 1)
         return self.view.frame.size.height - 40;
     else
-        return 40;
+        return 44;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -202,6 +202,9 @@
         static NSString *CellIdentifier = @"AddFriendCell";
         AddFriendCell *cell = (AddFriendCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.name.textColor = [self.colorManager currentColor:self.currentIndex+1];
+        cell.pic.layer.cornerRadius = 22;
+        cell.pic.clipsToBounds = YES;
         
         Question *q = self.questions[self.currentIndex];
         NSString *strurl = [[NSString alloc] initWithFormat:@"https://graph.facebook.com/%@/picture",[q.friendsCommenting objectAtIndex:indexPath.row]];
@@ -244,6 +247,7 @@
     
     [q saveInBackground];
     [self.cView.commentTable reloadData];
+    [self.detailPView updateComments:[q numComments]];
     
     return YES;
 }
@@ -300,6 +304,7 @@
     NSArray *nibViews = [[NSBundle mainBundle] loadNibNamed:@"PictureView" owner:self options:nil];
     self.detailPView = [nibViews objectAtIndex:0];
     UIColor *color = [self.colorManager currentColor:sender.view.tag+1];
+    [self.detailPView highlightImage:self.currentPView.highlightedIndex+1];
     [self.detailPView populateData:self.questions[self.currentIndex] withColor:color];
     self.detailPView.frame = CGRectMake(0, 40, 320, 368);
     self.detailPView.xButton.hidden = NO;
@@ -312,10 +317,10 @@
     
     CGRect newFrame = sender.view.frame;
     sender.view.alpha = 0;
+    self.feedTable.alpha = 0;
     self.currentPView.alpha = 0;
     [UIView animateWithDuration:0.4f animations:^{
         self.detailPView.frame = newFrame;
-        self.feedTable.alpha = 0;
         self.view.backgroundColor = [UIColor whiteColor];
     }];
     
@@ -328,8 +333,17 @@
     [self.cView.commentTable registerNib:[UINib nibWithNibName:@"AddFriendCell" bundle:nil] forCellReuseIdentifier:@"AddFriendCell"];
     self.cView.commentTable.delegate = self;
     self.cView.commentTable.dataSource = self;
+    [self.cView.myPic setImage:self.myPic];
+    self.cView.myPic.clipsToBounds = YES;
+    self.cView.myPic.layer.cornerRadius = 22;
+    self.cView.commentTextField.textColor = color;
+//    self.cView.commentTable.backgroundColor = [self.colorManager currentColor:self.currentIndex+1];
     
     [self.view addSubview:self.cView];
+    self.cView.alpha = 0;
+    [UIView animateWithDuration:0.4f delay:0.4f options:UIViewAnimationOptionCurveEaseIn animations:^{
+        self.cView.alpha = 1;
+    } completion:nil];
 }
 
 - (void)exitDetailView
@@ -339,14 +353,16 @@
     CGRect newFrame = self.currentPView.frame;
     newFrame.origin = CGPointMake(0, 40);
     
+    [self.cView removeFromSuperview];
     [UIView animateWithDuration:0.4f animations:^{
         self.detailPView.frame = newFrame;
         self.feedTable.alpha = 1;
         self.view.backgroundColor = [self.colorManager currentColor:self.currentIndex+1];
     } completion:^(BOOL finished) {
         self.currentPView.alpha = 1;
+        Question *q = self.questions[self.currentIndex];
+        [self.currentPView updateComments:[q numComments]];
         [self.detailPView removeFromSuperview];
-        [self.cView removeFromSuperview];
     }];
     
 }

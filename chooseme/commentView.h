@@ -11,5 +11,6 @@
 @interface commentView : UIView
 @property (strong, nonatomic) IBOutlet UITableView *commentTable;
 @property (strong, nonatomic) IBOutlet UITextField *commentTextField;
+@property (strong, nonatomic) IBOutlet UIImageView *myPic;
 
 @end

@@ -11,34 +11,43 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" tag="2" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Rvz-Dl-Df5">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="170"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="156"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </tableView>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Add a comment" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="GJH-O5-0KX">
-                    <rect key="frame" x="9" y="170" width="301" height="30"/>
+                    <rect key="frame" x="57" y="156" width="254" height="44"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="30" id="Z1X-oo-LvY"/>
-                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="C8E-Dx-i9i">
+                    <rect key="frame" x="2" y="156" width="44" height="44"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="44" id="HWz-TB-XDx"/>
+                        <constraint firstAttribute="height" constant="44" id="JQk-a0-1jT"/>
+                    </constraints>
+                </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="GJH-O5-0KX" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="9" id="Ftz-xd-en7"/>
                 <constraint firstItem="Rvz-Dl-Df5" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="IKk-ay-Hhb"/>
-                <constraint firstItem="GJH-O5-0KX" firstAttribute="top" secondItem="Rvz-Dl-Df5" secondAttribute="bottom" id="L3s-jd-boU"/>
+                <constraint firstAttribute="bottom" secondItem="C8E-Dx-i9i" secondAttribute="bottom" id="Mcl-aj-GuT"/>
+                <constraint firstItem="GJH-O5-0KX" firstAttribute="top" secondItem="Rvz-Dl-Df5" secondAttribute="bottom" id="PAQ-Sq-pgT"/>
+                <constraint firstAttribute="trailing" secondItem="GJH-O5-0KX" secondAttribute="trailing" constant="9" id="POQ-oc-Jau"/>
                 <constraint firstItem="Rvz-Dl-Df5" firstAttribute="top" secondItem="1" secondAttribute="top" id="ThE-BA-Jzi"/>
-                <constraint firstAttribute="trailing" secondItem="GJH-O5-0KX" secondAttribute="trailing" constant="10" id="VZK-Dl-RoJ"/>
                 <constraint firstAttribute="trailing" secondItem="Rvz-Dl-Df5" secondAttribute="trailing" id="Vzu-3e-whF"/>
-                <constraint firstAttribute="bottom" secondItem="GJH-O5-0KX" secondAttribute="bottom" id="ri9-PY-yfw"/>
+                <constraint firstAttribute="bottom" secondItem="GJH-O5-0KX" secondAttribute="bottom" id="XvE-Ow-scl"/>
+                <constraint firstItem="C8E-Dx-i9i" firstAttribute="top" secondItem="Rvz-Dl-Df5" secondAttribute="bottom" id="XvV-S9-Vau"/>
+                <constraint firstItem="GJH-O5-0KX" firstAttribute="leading" secondItem="C8E-Dx-i9i" secondAttribute="trailing" constant="11" id="oNI-ST-DKu"/>
+                <constraint firstItem="C8E-Dx-i9i" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="2" id="tUE-DZ-n9W"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="commentTable" destination="Rvz-Dl-Df5" id="Cet-Ka-1rF"/>
                 <outlet property="commentTextField" destination="GJH-O5-0KX" id="Mdh-Ii-3x9"/>
+                <outlet property="myPic" destination="C8E-Dx-i9i" id="s1r-sZ-OBD"/>
             </connections>
         </view>
     </objects>

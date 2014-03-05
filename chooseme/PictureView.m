@@ -64,6 +64,7 @@
         self.thumbnail1.alpha = 0.4;
         self.thumbnail2.alpha = 1;
     }
+    self.highlightedIndex = index-1;
 }
 
 - (void)colorIcons:(UIImage *)image
@@ -126,13 +127,16 @@
     // Set the images
     [self.thumbnail1 setBackgroundImage:image1 forState:UIControlStateNormal];
     [self.thumbnail2 setBackgroundImage:image2 forState:UIControlStateNormal];
-    [self.bigPic setImage:image1];
+    if (self.highlightedIndex == 0)
+        [self.bigPic setImage:image1];
+    else
+        [self.bigPic setImage:image2];
     
     // Format the thumbnails
     self.thumbnail1.layer.borderColor = [color CGColor];
     self.thumbnail2.layer.borderColor = [color CGColor];
     [self formatThumbnails];
-    [self highlightImage:1];
+    [self highlightImage:self.highlightedIndex+1];
     
     // Format icons
     [self colorIcons:question.image1];

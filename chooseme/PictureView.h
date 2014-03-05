@@ -22,6 +22,8 @@
 @property (strong, nonatomic) IBOutlet UIButton *xButton;
 @property (strong, nonatomic) IBOutlet UILabel *questionLabel;
 
+@property (assign, nonatomic) int highlightedIndex;
+
 - (void)hideDetails;
 - (void)formatThumbnails;
 - (void)colorIcons:(UIImage *)image;

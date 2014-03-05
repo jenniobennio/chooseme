@@ -145,8 +145,8 @@ static CGPoint RotateCGPointAroundCenter(CGPoint point, CGPoint center, float an
 
 - (void) StartButtonTap
 {
-    if (self.isExpanding) {
-        return;
+    if (self.isExpanding || _defaultIndex == -1) {
+        self.expanding = !self.isExpanding;
     }
     NSLog(@"start button tap.");
     if (_defaultIndex != -1) {

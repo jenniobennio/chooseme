@@ -91,8 +91,6 @@
         self.myFacebookID = [facebookClient myFacebookID];
         self.myPic = [facebookClient myPic];
         
-        NSLog(@"%@", self.myFacebookID);
-        
         [self loadQuestionsArray:self.myFacebookID];
     };
     if ([[FacebookClient instance] myFacebookID] == nil) { // hasn't loaded yet
@@ -112,7 +110,7 @@
     if ([self isMe]) {
         PFQuery *query = [Question query];
         // FIXME: Newest posts on top for now.. Eventually, custom order by recently edited or unresolved
-        [query orderByDescending:@"createdAt"];
+        [query orderByDescending:@"time"];
         [query whereKey:@"author" equalTo:[PFUser currentUser]];
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
             self.questions = [objects mutableCopy];
@@ -232,9 +230,15 @@
         cell.name.textColor = [UIColor whiteColor];
         cell.pic.layer.cornerRadius = cell.pic.frame.size.width/2;
         cell.pic.clipsToBounds = YES;
-        cell.speechBubble.backgroundColor = [self.colorManager currentColor:self.currentIndex+1];
+        if ([self isMe])
+            cell.speechBubble.backgroundColor = [self.colorManager currentColor:self.currentIndex+1];
+        else
+            cell.speechBubble.backgroundColor = [self.colorManager currentFriendsColor:self.currentIndex];
         cell.speechBubble.layer.cornerRadius = 5;
-        cell.triangleView.image = [cell.triangleView.image maskWithColor:[self.colorManager currentColor:self.currentIndex+1]];
+        if ([self isMe])
+            cell.triangleView.image = [cell.triangleView.image maskWithColor:[self.colorManager currentColor:self.currentIndex+1]];
+        else
+            cell.triangleView.image = [cell.triangleView.image maskWithColor:[self.colorManager currentFriendsColor:self.currentIndex]];
         
         Question *q = self.questions[self.currentIndex];
         NSString *strurl = [[NSString alloc] initWithFormat:@"https://graph.facebook.com/%@/picture",[q.friendsCommenting objectAtIndex:indexPath.row]];
@@ -278,6 +282,7 @@
     [q saveInBackground];
     [self.cView.commentTable reloadData];
     [self.detailPView updateComments:[q numComments]];
+    self.cView.noCommentsLabel.hidden = YES;
     
     return YES;
 }
@@ -333,13 +338,19 @@
 
     NSArray *nibViews = [[NSBundle mainBundle] loadNibNamed:@"PictureView" owner:self options:nil];
     self.detailPView = [nibViews objectAtIndex:0];
-    UIColor *color = [self.colorManager currentColor:sender.view.tag+1];
+    UIColor *color;
+    if ([self isMe])
+        color = [self.colorManager currentColor:sender.view.tag+1];
+    else
+        color = [self.colorManager currentFriendsColor:sender.view.tag];
+    
     [self.detailPView highlightImage:self.currentPView.highlightedIndex+1];
     [self.detailPView populateData:self.questions[self.currentIndex] withColor:color];
     self.detailPView.frame = CGRectMake(0, 40, 320, 368);
     self.detailPView.xButton.hidden = NO;
     self.detailPView.questionLabel.hidden = NO;
     self.detailPView.questionLabel.text = ((Question *)self.questions[self.currentIndex]).question;
+    self.detailPView.questionLabel.textColor = self.detailPView.numVotesLabel.textColor;
     
     // Set up button touch actions
     [self.detailPView.thumbnail1 addTarget:self action:@selector(onTapPic1:) forControlEvents:UIControlEventTouchUpInside];
@@ -374,7 +385,6 @@
     self.cView.myPic.clipsToBounds = YES;
     self.cView.myPic.layer.cornerRadius = self.cView.myPic.frame.size.width/2;
     self.cView.commentTextField.textColor = color;
-//    self.cView.commentTable.backgroundColor = [self.colorManager currentColor:self.currentIndex+1];
     self.cView.lineView.backgroundColor = color;
     if (((Question *)self.questions[self.currentIndex]).friendsCommenting.count > 0)
         self.cView.noCommentsLabel.hidden = YES;
@@ -397,7 +407,10 @@
     [UIView animateWithDuration:0.4f animations:^{
         self.detailPView.frame = newFrame;
         self.feedTable.alpha = 1;
-        self.view.backgroundColor = [self.colorManager currentColor:self.currentIndex+1];
+        if ([self isMe])
+            self.view.backgroundColor = [self.colorManager currentColor:self.currentIndex+1];
+        else
+            self.view.backgroundColor = [self.colorManager currentFriendsColor:self.currentIndex];
     } completion:^(BOOL finished) {
         self.currentPView.alpha = 1;
         Question *q = self.questions[self.currentIndex];
@@ -405,6 +418,7 @@
         [self.detailPView removeFromSuperview];
     }];
     
+    [self centerTable];
 }
 
 - (BOOL)isFriends
@@ -437,6 +451,7 @@
     [self.detailPView colorIcons:q.image1];
     [self.detailPView updateVoteCount:q];
     [self.detailPView updateHeartIcon:q];
+    self.detailPView.questionLabel.textColor = self.detailPView.numVotesLabel.textColor;
 }
 
 - (void)onTapPic2:(UIButton *)button
@@ -448,6 +463,8 @@
     [self.detailPView colorIcons:q.image2];
     [self.detailPView updateVoteCount:q];
     [self.detailPView updateHeartIcon:q];
+    self.detailPView.questionLabel.textColor = self.detailPView.numVotesLabel.textColor;
+
 }
 
 @end

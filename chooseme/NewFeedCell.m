@@ -46,6 +46,7 @@
 
 - (void)loadCell:(UIColor *)color withQuestion:(Question *)q withUserImage:(UIImage *)userImage
 {
+    BOOL isMe = [PFUser.currentUser.objectId isEqualToString:q.author.objectId];
     self.q = q;
     
     UIImage *image1 = q.image1;
@@ -72,13 +73,23 @@
     // Set the big pic background color to fade from
     self.pView.bigPicBgColor.backgroundColor = color;
     // Load and fade in big pic
-    [self reloadBigPic:image1];
+    if ((!isMe && q.vote==0) || [q numVoted1] >= [q numVoted2]) {
+        [self reloadBigPic:image1];
+    } else {
+        [self reloadBigPic:image2];
+    }
 
     // Format the thumbnails
     self.pView.thumbnail1.layer.borderColor = [color CGColor];
     self.pView.thumbnail2.layer.borderColor = [color CGColor];
     [self.pView formatThumbnails];
-    [self.pView highlightImage:1];
+    
+    // Highlight the one with a higher percentage
+    if ((!isMe && q.vote==0) || [q numVoted1] >= [q numVoted2]) {
+        [self.pView highlightImage:1];
+    } else {
+        [self.pView highlightImage:2];
+    }
     
     // ************* Image Switching *********************
     // Set up button touch actions
@@ -111,7 +122,10 @@
     [self.pView.heartIcon addGestureRecognizer:heartTap];
     
     // Format icons
-    [self.pView colorIcons:self.q.image1];
+    if (self.pView.highlightedIndex == 0)
+        [self.pView colorIcons:self.q.image1];
+    else
+        [self.pView colorIcons:self.q.image2];
     [self updateHeartIcon];
     
     // Set any text
@@ -179,11 +193,7 @@
         vote = [self.q vote];
     }
     self.pView.heartIcon.image = [UIImage imageNamed:@"29-heart.png"]; // fix the disappearing alpha problem
-    UIColor *defaultColor;
-    if (image == 1)
-        defaultColor = [self.pView calculateTextColor:self.q.image1];
-    else
-        defaultColor = [self.pView calculateTextColor:self.q.image2];
+    UIColor *defaultColor = self.pView.numVotesLabel.textColor;
     UIColor *heartColor = (vote == image) ? [UIColor colorWithRed:1 green:0.07 blue:0.5 alpha:0.8] : defaultColor;
     self.pView.heartIcon.image = [self.pView.heartIcon.image maskWithColor:heartColor];
 }
@@ -292,11 +302,13 @@
 }
 
 - (void) updateVoteCount {
+    /*
     if (self.pView.thumbnail1.alpha == 1) {
-        self.pView.numVotesLabel.text = [NSString stringWithFormat:@"%d", self.q.numVoted1];
+        self.pView.numVotesLabel.text = [NSString stringWithFormat:@"%d / %d", self.q.numVoted1, self.q.numReplies];
     } else {
-        self.pView.numVotesLabel.text = [NSString stringWithFormat:@"%d", self.q.numVoted2];
-    }
+        self.pView.numVotesLabel.text = [NSString stringWithFormat:@"%d / %d", self.q.numVoted2, self.q.numReplies];
+    }*/
+    self.pView.numVotesLabel.text = [NSString stringWithFormat:@"%d", self.q.numReplies];
     [self.pView updatePercentages:self.q];
 }
 

@@ -7,7 +7,6 @@
 //
 
 #import "CameraVC.h"
-#import "FeedVC.h"
 #import "Question.h"
 #import "UIImage+mask.h"
 #import "UIImageView+AFNetworking.h"

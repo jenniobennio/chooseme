@@ -33,15 +33,9 @@
 		26351A2518A5D1FF000A30C9 /* choosemeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 26351A2418A5D1FF000A30C9 /* choosemeTests.m */; };
 		26351A3118A5D24D000A30C9 /* CameraVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 26351A2F18A5D24D000A30C9 /* CameraVC.m */; };
 		26351A3218A5D24D000A30C9 /* CameraVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26351A3018A5D24D000A30C9 /* CameraVC.xib */; };
-		26351A3618A5FB6B000A30C9 /* FeedVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 26351A3418A5FB6B000A30C9 /* FeedVC.m */; };
-		26351A3718A5FB6B000A30C9 /* FeedVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26351A3518A5FB6B000A30C9 /* FeedVC.xib */; };
 		26351A8518A72449000A30C9 /* AppViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26351A8318A72449000A30C9 /* AppViewController.m */; };
 		26351A8618A72449000A30C9 /* AppViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26351A8418A72449000A30C9 /* AppViewController.xib */; };
-		26351A8E18A7EEF4000A30C9 /* FeedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 26351A8D18A7EEF4000A30C9 /* FeedCell.m */; };
-		26351A9018A7EF0C000A30C9 /* FeedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26351A8F18A7EF0C000A30C9 /* FeedCell.xib */; };
 		26351A9318A7F59E000A30C9 /* Question.m in Sources */ = {isa = PBXBuildFile; fileRef = 26351A9218A7F59E000A30C9 /* Question.m */; };
-		26351A9718A80EC7000A30C9 /* PostVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 26351A9518A80EC7000A30C9 /* PostVC.m */; };
-		26351A9818A80EC7000A30C9 /* PostVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26351A9618A80EC7000A30C9 /* PostVC.xib */; };
 		26644CC318B723C000806490 /* AddFriendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 26644CC118B723C000806490 /* AddFriendCell.m */; };
 		26644CC418B723C000806490 /* AddFriendCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26644CC218B723C000806490 /* AddFriendCell.xib */; };
 		2668E3A718C6EB81008BDA55 /* ImageBubbleMaskiphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 2668E3A618C6EB81008BDA55 /* ImageBubbleMaskiphone.png */; };
@@ -150,20 +144,11 @@
 		26351A2E18A5D24D000A30C9 /* CameraVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraVC.h; sourceTree = "<group>"; };
 		26351A2F18A5D24D000A30C9 /* CameraVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraVC.m; sourceTree = "<group>"; };
 		26351A3018A5D24D000A30C9 /* CameraVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraVC.xib; sourceTree = "<group>"; };
-		26351A3318A5FB6B000A30C9 /* FeedVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedVC.h; sourceTree = "<group>"; };
-		26351A3418A5FB6B000A30C9 /* FeedVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedVC.m; sourceTree = "<group>"; };
-		26351A3518A5FB6B000A30C9 /* FeedVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedVC.xib; sourceTree = "<group>"; };
 		26351A8218A72449000A30C9 /* AppViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppViewController.h; sourceTree = "<group>"; };
 		26351A8318A72449000A30C9 /* AppViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppViewController.m; sourceTree = "<group>"; };
 		26351A8418A72449000A30C9 /* AppViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AppViewController.xib; sourceTree = "<group>"; };
-		26351A8C18A7EEF4000A30C9 /* FeedCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedCell.h; sourceTree = "<group>"; };
-		26351A8D18A7EEF4000A30C9 /* FeedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedCell.m; sourceTree = "<group>"; };
-		26351A8F18A7EF0C000A30C9 /* FeedCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedCell.xib; sourceTree = "<group>"; };
 		26351A9118A7F59E000A30C9 /* Question.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Question.h; sourceTree = "<group>"; };
 		26351A9218A7F59E000A30C9 /* Question.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Question.m; sourceTree = "<group>"; };
-		26351A9418A80EC7000A30C9 /* PostVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostVC.h; sourceTree = "<group>"; };
-		26351A9518A80EC7000A30C9 /* PostVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostVC.m; sourceTree = "<group>"; };
-		26351A9618A80EC7000A30C9 /* PostVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostVC.xib; sourceTree = "<group>"; };
 		26644CC018B723C000806490 /* AddFriendCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddFriendCell.h; sourceTree = "<group>"; };
 		26644CC118B723C000806490 /* AddFriendCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddFriendCell.m; sourceTree = "<group>"; };
 		26644CC218B723C000806490 /* AddFriendCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddFriendCell.xib; sourceTree = "<group>"; };
@@ -357,6 +342,9 @@
 				2680196818C09C8C00B4A22D /* NewFeedCell.m */,
 				2680196718C09C8C00B4A22D /* NewFeedCell.h */,
 				2680196A18C09D1200B4A22D /* NewFeedCell.xib */,
+				26644CC018B723C000806490 /* AddFriendCell.h */,
+				26644CC118B723C000806490 /* AddFriendCell.m */,
+				26644CC218B723C000806490 /* AddFriendCell.xib */,
 				2680197218C2615900B4A22D /* Views */,
 				D52B901918B32214004005D7 /* Model */,
 				26BBA6DF18C3F2AD0071F80D /* Categories */,
@@ -369,7 +357,6 @@
 				D5438ADB18C1C3B400C94D3B /* PinCell.h */,
 				D5438ADC18C1C3B400C94D3B /* PinCell.m */,
 				D5438ADE18C1C49500C94D3B /* PinCell.xib */,
-				2680197118C2613C00B4A22D /* OldFiles */,
 			);
 			path = chooseme;
 			sourceTree = "<group>";
@@ -431,25 +418,6 @@
 				26351A2118A5D1FF000A30C9 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		2680197118C2613C00B4A22D /* OldFiles */ = {
-			isa = PBXGroup;
-			children = (
-				26644CC018B723C000806490 /* AddFriendCell.h */,
-				26644CC118B723C000806490 /* AddFriendCell.m */,
-				26644CC218B723C000806490 /* AddFriendCell.xib */,
-				26351A3318A5FB6B000A30C9 /* FeedVC.h */,
-				26351A3418A5FB6B000A30C9 /* FeedVC.m */,
-				26351A3518A5FB6B000A30C9 /* FeedVC.xib */,
-				26351A8C18A7EEF4000A30C9 /* FeedCell.h */,
-				26351A8D18A7EEF4000A30C9 /* FeedCell.m */,
-				26351A8F18A7EF0C000A30C9 /* FeedCell.xib */,
-				26351A9418A80EC7000A30C9 /* PostVC.h */,
-				26351A9518A80EC7000A30C9 /* PostVC.m */,
-				26351A9618A80EC7000A30C9 /* PostVC.xib */,
-			);
-			name = OldFiles;
 			sourceTree = "<group>";
 		};
 		2680197218C2615900B4A22D /* Views */ = {
@@ -614,7 +582,6 @@
 				26351A0A18A5D1FF000A30C9 /* Main_iPhone.storyboard in Resources */,
 				2632962E18B5DBDE00A84CB2 /* 131466.jpg in Resources */,
 				26BBA6FC18C438040071F80D /* icon_5440.png in Resources */,
-				26351A9018A7EF0C000A30C9 /* FeedCell.xib in Resources */,
 				D5438ADF18C1C49500C94D3B /* PinCell.xib in Resources */,
 				26351A0118A5D1FF000A30C9 /* InfoPlist.strings in Resources */,
 				2627EA2A18BDB09800ECD2A5 /* 117-todo.png in Resources */,
@@ -624,8 +591,6 @@
 				D51DDC7918C442B9002169AA /* like-256.png in Resources */,
 				2627EA2818BDB07200ECD2A5 /* 112-group.png in Resources */,
 				D5074FDD18C06EF30028ED2F /* slr_camera-32.png in Resources */,
-				26351A9818A80EC7000A30C9 /* PostVC.xib in Resources */,
-				26351A3718A5FB6B000A30C9 /* FeedVC.xib in Resources */,
 				26BBA6E518C3FA290071F80D /* add_user-25.png in Resources */,
 				2680196618C0968E00B4A22D /* UserQuestionView.xib in Resources */,
 				D514C3FF18C2F81E007DF913 /* search-32.png in Resources */,
@@ -688,14 +653,11 @@
 				26351A8518A72449000A30C9 /* AppViewController.m in Sources */,
 				2680196918C09C8C00B4A22D /* NewFeedCell.m in Sources */,
 				D5438ADD18C1C3B400C94D3B /* PinCell.m in Sources */,
-				26351A3618A5FB6B000A30C9 /* FeedVC.m in Sources */,
-				26351A9718A80EC7000A30C9 /* PostVC.m in Sources */,
 				D514C3F918C2F484007DF913 /* GoogleClient.m in Sources */,
 				D51DDC8618C596D9002169AA /* AwesomeMenu.m in Sources */,
 				D514C3F218C28AA1007DF913 /* FacebookClient.m in Sources */,
 				D5A457C818C6EBC200279F00 /* QuestionKeeper.m in Sources */,
 				26351A0718A5D1FF000A30C9 /* AppDelegate.m in Sources */,
-				26351A8E18A7EEF4000A30C9 /* FeedCell.m in Sources */,
 				2680195918C08CFD00B4A22D /* PictureView.m in Sources */,
 				2627EA2D18BDBDDE00ECD2A5 /* UIImage+mask.m in Sources */,
 				2680196E18C1BE2F00B4A22D /* UserQuestionView.m in Sources */,

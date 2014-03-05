@@ -190,7 +190,7 @@
     
     self.question.facebookID = self.facebookID;
     self.question.author = [PFUser currentUser];
-    self.question.profilePic = UIImageJPEGRepresentation(self.myPic, 0.05f);
+    self.question.profilePic = UIImageJPEGRepresentation(self.myPic, 0.5f);
     self.question.name = self.myName;
     
     self.question.time = [NSDate date];

@@ -100,6 +100,7 @@
 		D572FE5718B1DC35000DB1D0 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D572FE5618B1DC35000DB1D0 /* Security.framework */; };
 		D572FE5918B1DC3C000DB1D0 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D572FE5818B1DC3C000DB1D0 /* StoreKit.framework */; };
 		D572FE5B18B1DC46000DB1D0 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D572FE5A18B1DC46000DB1D0 /* SystemConfiguration.framework */; };
+		D5A457C818C6EBC200279F00 /* QuestionKeeper.m in Sources */ = {isa = PBXBuildFile; fileRef = D5A457C718C6EBC200279F00 /* QuestionKeeper.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -235,6 +236,8 @@
 		D572FE5618B1DC35000DB1D0 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		D572FE5818B1DC3C000DB1D0 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		D572FE5A18B1DC46000DB1D0 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		D5A457C618C6EBC200279F00 /* QuestionKeeper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionKeeper.h; sourceTree = "<group>"; };
+		D5A457C718C6EBC200279F00 /* QuestionKeeper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionKeeper.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -337,6 +340,8 @@
 				263295E418B33DA700A84CB2 /* QuestionVC.h */,
 				263295E518B33DA700A84CB2 /* QuestionVC.m */,
 				263295E618B33DA700A84CB2 /* QuestionVC.xib */,
+				D5A457C618C6EBC200279F00 /* QuestionKeeper.h */,
+				D5A457C718C6EBC200279F00 /* QuestionKeeper.m */,
 				26BBA6F418C41DBB0071F80D /* FriendCell.h */,
 				26BBA6F518C41DBB0071F80D /* FriendCell.m */,
 				26BBA6F718C41DCC0071F80D /* FriendCell.xib */,
@@ -676,6 +681,7 @@
 				D514C3F918C2F484007DF913 /* GoogleClient.m in Sources */,
 				D51DDC8618C596D9002169AA /* AwesomeMenu.m in Sources */,
 				D514C3F218C28AA1007DF913 /* FacebookClient.m in Sources */,
+				D5A457C818C6EBC200279F00 /* QuestionKeeper.m in Sources */,
 				26351A0718A5D1FF000A30C9 /* AppDelegate.m in Sources */,
 				26351A8E18A7EEF4000A30C9 /* FeedCell.m in Sources */,
 				2680195918C08CFD00B4A22D /* PictureView.m in Sources */,

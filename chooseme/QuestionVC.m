@@ -12,6 +12,7 @@
 #import "UIImage+mask.h"
 #import "FriendCell.h"
 #import "Colorful.h"
+#import "QuestionKeeper.h"
 
 @interface QuestionVC ()
 
@@ -215,6 +216,8 @@
         colorManager.colorIndex = colorManager.colors.count-1;
     else
         colorManager.colorIndex = colorManager.colorIndex-1;
+    
+    [[QuestionKeeper instance] setLastPosted:self.question];
     
     [self.delegate clearImages:YES];
     [self dismissViewControllerAnimated:YES completion:nil];

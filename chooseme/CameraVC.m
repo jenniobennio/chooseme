@@ -16,6 +16,7 @@
 #import "GoogleVC.h"
 #import "Colorful.h"
 #import "AwesomeMenuItem.h"
+#import "QuestionKeeper.h"
 
 @interface CameraVC ()
 
@@ -151,6 +152,11 @@
         [PinterestClient instance]; // Pinterest depends on facebook id values.
     };
     [[FacebookClient instance] meRequest:success];
+    
+    [QuestionKeeper instance];
+    
+    // Load question hack
+    
     
     // Error if camera doesn't exist
     /*if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {

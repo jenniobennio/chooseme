@@ -15,6 +15,7 @@
 #import "Colorful.h"
 #import "commentView.h"
 #import "AddFriendCell.h"
+#import "QuestionKeeper.h"
 
 @interface NewFeedVC ()
 
@@ -107,6 +108,22 @@
         [query whereKey:@"author" equalTo:[PFUser currentUser]];
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
             self.questions = [objects mutableCopy];
+            
+            Question *lastPosted = [[QuestionKeeper instance] lastPosted];
+            BOOL contains = NO;
+            if (lastPosted != nil) {
+                for (Question* question in self.questions) {
+                    if ([[question objectId] isEqualToString:[lastPosted objectId]]) {
+                        contains = YES;
+                        break;
+                    }
+                }
+                
+                if (!contains) {
+                    [self.questions insertObject:lastPosted atIndex:0];
+                }
+            }
+            
             [self.feedTable reloadData];
             [self.refresh endRefreshing];
         }];

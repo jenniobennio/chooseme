@@ -32,5 +32,8 @@
 - (void)updateComments:(int)comments;
 - (void)updatePercentages:(Question *)q;
 - (void)populateData:(Question *)question withColor:(UIColor *)color;
+- (void) updateHeartIcon:(Question *)q;
+- (void) updateVoteCount:(Question *)q;
+- (void)reloadBigPic:(UIImage *)image1;
 
 @end

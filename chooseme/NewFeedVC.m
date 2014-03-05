@@ -311,6 +311,12 @@
     self.detailPView.questionLabel.hidden = NO;
     self.detailPView.questionLabel.text = ((Question *)self.questions[self.currentIndex]).question;
     
+    // Set up button touch actions
+    [self.detailPView.thumbnail1 addTarget:self action:@selector(onTapPic1:) forControlEvents:UIControlEventTouchUpInside];
+    self.detailPView.thumbnail1.tag = 1;
+    [self.detailPView.thumbnail2 addTarget:self action:@selector(onTapPic2:) forControlEvents:UIControlEventTouchUpInside];
+    self.detailPView.thumbnail2.tag = 2;
+    
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(exitDetailView)];
     [self.detailPView addGestureRecognizer:singleTap];
     [self.view addSubview:self.detailPView];
@@ -386,5 +392,29 @@
     NSIndexPath *pathForCenterCell = [self.feedTable indexPathForRowAtPoint:CGPointMake(CGRectGetMidX(self.feedTable.bounds), CGRectGetMidY(self.feedTable.bounds))];
     [self.feedTable scrollToRowAtIndexPath:pathForCenterCell atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
 }
+
+
+- (void)onTapPic1:(UIButton *)button
+{
+    Question *q = self.questions[self.currentIndex];
+    
+    [self.detailPView reloadBigPic:q.image1];
+    [self.detailPView highlightImage:1];
+    [self.detailPView colorIcons:q.image1];
+    [self.detailPView updateVoteCount:q];
+    [self.detailPView updateHeartIcon:q];
+}
+
+- (void)onTapPic2:(UIButton *)button
+{
+    Question *q = self.questions[self.currentIndex];
+
+    [self.detailPView reloadBigPic:q.image2];
+    [self.detailPView highlightImage:2];
+    [self.detailPView colorIcons:q.image2];
+    [self.detailPView updateVoteCount:q];
+    [self.detailPView updateHeartIcon:q];
+}
+
 
 @end

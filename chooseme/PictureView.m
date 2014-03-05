@@ -213,4 +213,19 @@
 }
 
 
+- (void)reloadBigPic:(UIImage *)image1
+{
+    self.bigPic.image = image1;
+    self.thumbnail1.alpha = 0.0f;
+    self.thumbnail2.alpha = 0.0f;
+    self.bigPic.alpha = 0.0f;
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.5f];
+    self.thumbnail1.alpha = 1.0f;
+    self.thumbnail2.alpha = 1.0f;
+    self.bigPic.alpha = 1.0f;
+    [UIView commitAnimations];
+}
+
+
 @end

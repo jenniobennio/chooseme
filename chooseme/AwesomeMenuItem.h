@@ -33,6 +33,7 @@
 
 - (id)initWithImage:(UIImage *)img;
 - (id)initStartWithImage:(UIImage *)img;
+- (void) recolor;
 
 @end
 

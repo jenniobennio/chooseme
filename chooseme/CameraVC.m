@@ -72,6 +72,8 @@
 
 @property (strong, nonatomic) UIWindow *window;
 
+@property (strong, nonatomic) AwesomeMenuItem *startButton;
+
 @end
 
 @implementation CameraVC
@@ -119,6 +121,7 @@
     AwesomeMenuItem *galleryItem = [[AwesomeMenuItem alloc] initWithImage:galleryImage];
     
     AwesomeMenuItem *startItem = [[AwesomeMenuItem alloc] initStartWithImage:plusImage];
+    self.startButton = startItem;
     
     NSArray *menus = [NSArray arrayWithObjects:cameraItem, searchItem, pinterestItem, galleryItem, nil];
     AwesomeMenu *menu = [[AwesomeMenu alloc] initWithFrame:self.window.bounds startItem:startItem optionMenus:menus];
@@ -175,6 +178,8 @@
     self.takePicButton.backgroundColor = color;
     self.pic1.layer.borderColor = [color CGColor];
     self.pic2.layer.borderColor = [color CGColor];
+    
+    [self.startButton recolor];
     
     // Set insets
     [self setInsets];

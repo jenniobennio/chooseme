@@ -123,4 +123,10 @@ static inline CGRect ScaleRect(CGRect rect, float n) {return CGRectMake((rect.si
     }
 }
 
+- (void) recolor {
+    if (self.isStart) {
+        _contentImageView.layer.backgroundColor = [[[Colorful sharedManager] currentColor] CGColor];
+    }
+}
+
 @end

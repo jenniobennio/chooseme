@@ -44,6 +44,9 @@
 		26351A9818A80EC7000A30C9 /* PostVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26351A9618A80EC7000A30C9 /* PostVC.xib */; };
 		26644CC318B723C000806490 /* AddFriendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 26644CC118B723C000806490 /* AddFriendCell.m */; };
 		26644CC418B723C000806490 /* AddFriendCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26644CC218B723C000806490 /* AddFriendCell.xib */; };
+		2668E3A718C6EB81008BDA55 /* ImageBubbleMaskiphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 2668E3A618C6EB81008BDA55 /* ImageBubbleMaskiphone.png */; };
+		2668E3A918C6EE4B008BDA55 /* topic-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 2668E3A818C6EE4B008BDA55 /* topic-50.png */; };
+		2668E3AB18C6F1FE008BDA55 /* play-26.png in Resources */ = {isa = PBXBuildFile; fileRef = 2668E3AA18C6F1FE008BDA55 /* play-26.png */; };
 		2680195518C0770800B4A22D /* NewFeedVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2680195318C0770800B4A22D /* NewFeedVC.m */; };
 		2680195618C0770800B4A22D /* NewFeedVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2680195418C0770800B4A22D /* NewFeedVC.xib */; };
 		2680195918C08CFD00B4A22D /* PictureView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2680195818C08CFD00B4A22D /* PictureView.m */; };
@@ -164,6 +167,9 @@
 		26644CC018B723C000806490 /* AddFriendCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddFriendCell.h; sourceTree = "<group>"; };
 		26644CC118B723C000806490 /* AddFriendCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddFriendCell.m; sourceTree = "<group>"; };
 		26644CC218B723C000806490 /* AddFriendCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddFriendCell.xib; sourceTree = "<group>"; };
+		2668E3A618C6EB81008BDA55 /* ImageBubbleMaskiphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ImageBubbleMaskiphone.png; sourceTree = "<group>"; };
+		2668E3A818C6EE4B008BDA55 /* topic-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "topic-50.png"; sourceTree = "<group>"; };
+		2668E3AA18C6F1FE008BDA55 /* play-26.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "play-26.png"; sourceTree = "<group>"; };
 		2680195218C0770800B4A22D /* NewFeedVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewFeedVC.h; sourceTree = "<group>"; };
 		2680195318C0770800B4A22D /* NewFeedVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewFeedVC.m; sourceTree = "<group>"; };
 		2680195418C0770800B4A22D /* NewFeedVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewFeedVC.xib; sourceTree = "<group>"; };
@@ -371,6 +377,7 @@
 		263519FD18A5D1FF000A30C9 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				2668E3A618C6EB81008BDA55 /* ImageBubbleMaskiphone.png */,
 				26BBA6F918C429840071F80D /* arrow-48.png */,
 				D51DDC9118C5BA99002169AA /* plus-50.png */,
 				26BBA6FB18C438040071F80D /* icon_5440.png */,
@@ -396,7 +403,9 @@
 				2627EA2518BDB06D00ECD2A5 /* 111-user.png */,
 				2627EA2318BDB02F00ECD2A5 /* 11-clock.png */,
 				2627EA2118BDAF7000ECD2A5 /* 86-camera.png */,
+				2668E3A818C6EE4B008BDA55 /* topic-50.png */,
 				2632962B18B5DBDE00A84CB2 /* 111834.jpg */,
+				2668E3AA18C6F1FE008BDA55 /* play-26.png */,
 				2632962C18B5DBDE00A84CB2 /* 131466.jpg */,
 				263519FE18A5D1FF000A30C9 /* chooseme-Info.plist */,
 				263519FF18A5D1FF000A30C9 /* InfoPlist.strings */,
@@ -584,6 +593,7 @@
 				263295E818B33DA700A84CB2 /* QuestionVC.xib in Resources */,
 				2680195D18C08E9000B4A22D /* 29-heart.png in Resources */,
 				D514C3F618C2EFC0007DF913 /* slr_camera-128.png in Resources */,
+				2668E3A718C6EB81008BDA55 /* ImageBubbleMaskiphone.png in Resources */,
 				D514C40B18C30222007DF913 /* GoogleVC.xib in Resources */,
 				D514C40118C2F828007DF913 /* search-128.png in Resources */,
 				D5074FE118C06F130028ED2F /* pinterest-32.png in Resources */,
@@ -591,6 +601,7 @@
 				D5438AD718C1B34A00C94D3B /* PinterestVC.xib in Resources */,
 				D5438AE118C1D89900C94D3B /* pinterest-128.png in Resources */,
 				26351A0D18A5D1FF000A30C9 /* Main_iPad.storyboard in Resources */,
+				2668E3AB18C6F1FE008BDA55 /* play-26.png in Resources */,
 				26BBA6EF18C40A4F0071F80D /* play-32.png in Resources */,
 				2680196B18C09D1200B4A22D /* NewFeedCell.xib in Resources */,
 				2627EA2418BDB02F00ECD2A5 /* 11-clock.png in Resources */,
@@ -621,6 +632,7 @@
 				2627EA2618BDB06D00ECD2A5 /* 111-user.png in Resources */,
 				26BBA6F118C416C70071F80D /* add_user-32.png in Resources */,
 				26351A3218A5D24D000A30C9 /* CameraVC.xib in Resources */,
+				2668E3A918C6EE4B008BDA55 /* topic-50.png in Resources */,
 				26BBA6FA18C429840071F80D /* arrow-48.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

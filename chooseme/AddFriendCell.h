@@ -11,5 +11,7 @@
 @interface AddFriendCell : UITableViewCell
 @property (strong, nonatomic) IBOutlet UIImageView *pic;
 @property (strong, nonatomic) IBOutlet UILabel *name;
+@property (strong, nonatomic) IBOutlet UIImageView *speechBubble;
+@property (strong, nonatomic) IBOutlet UIImageView *triangleView;
 
 @end

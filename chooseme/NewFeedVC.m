@@ -16,6 +16,7 @@
 #import "commentView.h"
 #import "AddFriendCell.h"
 #import "QuestionKeeper.h"
+#import "UIImage+mask.h"
 
 @interface NewFeedVC ()
 
@@ -224,9 +225,12 @@
         static NSString *CellIdentifier = @"AddFriendCell";
         AddFriendCell *cell = (AddFriendCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.name.textColor = [self.colorManager currentColor:self.currentIndex+1];
-        cell.pic.layer.cornerRadius = 22;
+        cell.name.textColor = [UIColor whiteColor];
+        cell.pic.layer.cornerRadius = cell.pic.frame.size.width/2;
         cell.pic.clipsToBounds = YES;
+        cell.speechBubble.backgroundColor = [self.colorManager currentColor:self.currentIndex+1];
+        cell.speechBubble.layer.cornerRadius = 5;
+        cell.triangleView.image = [cell.triangleView.image maskWithColor:[self.colorManager currentColor:self.currentIndex+1]];
         
         Question *q = self.questions[self.currentIndex];
         NSString *strurl = [[NSString alloc] initWithFormat:@"https://graph.facebook.com/%@/picture",[q.friendsCommenting objectAtIndex:indexPath.row]];
@@ -361,11 +365,15 @@
     [self.cView.commentTable registerNib:[UINib nibWithNibName:@"AddFriendCell" bundle:nil] forCellReuseIdentifier:@"AddFriendCell"];
     self.cView.commentTable.delegate = self;
     self.cView.commentTable.dataSource = self;
+    self.cView.commentTable.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.cView.myPic setImage:self.myPic];
     self.cView.myPic.clipsToBounds = YES;
-    self.cView.myPic.layer.cornerRadius = 22;
+    self.cView.myPic.layer.cornerRadius = self.cView.myPic.frame.size.width/2;
     self.cView.commentTextField.textColor = color;
 //    self.cView.commentTable.backgroundColor = [self.colorManager currentColor:self.currentIndex+1];
+    self.cView.lineView.backgroundColor = color;
+    if (((Question *)self.questions[self.currentIndex]).friendsCommenting.count > 0)
+        self.cView.noCommentsLabel.hidden = YES;
     
     [self.view addSubview:self.cView];
     self.cView.alpha = 0;
@@ -437,6 +445,5 @@
     [self.detailPView updateVoteCount:q];
     [self.detailPView updateHeartIcon:q];
 }
-
 
 @end

@@ -10,7 +10,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" tag="2" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Rvz-Dl-Df5">
+                <tableView clipsSubviews="YES" tag="2" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Rvz-Dl-Df5">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="156"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -22,32 +22,54 @@
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="C8E-Dx-i9i">
-                    <rect key="frame" x="2" y="156" width="44" height="44"/>
+                    <rect key="frame" x="9" y="164" width="30" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="44" id="HWz-TB-XDx"/>
-                        <constraint firstAttribute="height" constant="44" id="JQk-a0-1jT"/>
+                        <constraint firstAttribute="width" constant="30" id="HWz-TB-XDx"/>
+                        <constraint firstAttribute="height" constant="30" id="JQk-a0-1jT"/>
                     </constraints>
                 </imageView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ddb-5J-KOa">
+                    <rect key="frame" x="0.0" y="155" width="320" height="1"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="gBJ-tf-g4B"/>
+                    </constraints>
+                </view>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No comments. Be first" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dd2-jw-vf4">
+                    <rect key="frame" x="74" y="68" width="172" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstAttribute="trailing" secondItem="ddb-5J-KOa" secondAttribute="trailing" id="0cH-mb-2rq"/>
                 <constraint firstItem="Rvz-Dl-Df5" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="IKk-ay-Hhb"/>
-                <constraint firstAttribute="bottom" secondItem="C8E-Dx-i9i" secondAttribute="bottom" id="Mcl-aj-GuT"/>
+                <constraint firstAttribute="bottom" secondItem="C8E-Dx-i9i" secondAttribute="bottom" constant="6" id="Mcl-aj-GuT"/>
                 <constraint firstItem="GJH-O5-0KX" firstAttribute="top" secondItem="Rvz-Dl-Df5" secondAttribute="bottom" id="PAQ-Sq-pgT"/>
                 <constraint firstAttribute="trailing" secondItem="GJH-O5-0KX" secondAttribute="trailing" constant="9" id="POQ-oc-Jau"/>
+                <constraint firstAttribute="centerX" secondItem="dd2-jw-vf4" secondAttribute="centerX" id="TKu-SI-tuD"/>
                 <constraint firstItem="Rvz-Dl-Df5" firstAttribute="top" secondItem="1" secondAttribute="top" id="ThE-BA-Jzi"/>
+                <constraint firstItem="GJH-O5-0KX" firstAttribute="top" secondItem="ddb-5J-KOa" secondAttribute="bottom" id="UmE-M7-HEU"/>
                 <constraint firstAttribute="trailing" secondItem="Rvz-Dl-Df5" secondAttribute="trailing" id="Vzu-3e-whF"/>
                 <constraint firstAttribute="bottom" secondItem="GJH-O5-0KX" secondAttribute="bottom" id="XvE-Ow-scl"/>
-                <constraint firstItem="C8E-Dx-i9i" firstAttribute="top" secondItem="Rvz-Dl-Df5" secondAttribute="bottom" id="XvV-S9-Vau"/>
-                <constraint firstItem="GJH-O5-0KX" firstAttribute="leading" secondItem="C8E-Dx-i9i" secondAttribute="trailing" constant="11" id="oNI-ST-DKu"/>
-                <constraint firstItem="C8E-Dx-i9i" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="2" id="tUE-DZ-n9W"/>
+                <constraint firstItem="C8E-Dx-i9i" firstAttribute="top" secondItem="Rvz-Dl-Df5" secondAttribute="bottom" constant="8" id="XvV-S9-Vau"/>
+                <constraint firstItem="Rvz-Dl-Df5" firstAttribute="centerY" secondItem="dd2-jw-vf4" secondAttribute="centerY" id="cgv-JK-crW"/>
+                <constraint firstItem="ddb-5J-KOa" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="eZm-Sz-it4"/>
+                <constraint firstItem="GJH-O5-0KX" firstAttribute="leading" secondItem="C8E-Dx-i9i" secondAttribute="trailing" constant="18" id="oNI-ST-DKu"/>
+                <constraint firstItem="C8E-Dx-i9i" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="9" id="tUE-DZ-n9W"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="commentTable" destination="Rvz-Dl-Df5" id="Cet-Ka-1rF"/>
                 <outlet property="commentTextField" destination="GJH-O5-0KX" id="Mdh-Ii-3x9"/>
+                <outlet property="lineView" destination="ddb-5J-KOa" id="h9W-52-Myl"/>
                 <outlet property="myPic" destination="C8E-Dx-i9i" id="s1r-sZ-OBD"/>
+                <outlet property="noCommentsLabel" destination="dd2-jw-vf4" id="Pd8-2W-98A"/>
             </connections>
         </view>
     </objects>

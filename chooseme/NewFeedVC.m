@@ -99,6 +99,11 @@
     }
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self loadQuestionsArray:self.myFacebookID];
+}
 
 - (void) loadQuestionsArray:(NSString *)facebookId {
     if ([self isMe]) {
@@ -113,7 +118,7 @@
             BOOL contains = NO;
             if (lastPosted != nil) {
                 for (Question* question in self.questions) {
-                    if ([[question objectId] isEqualToString:[lastPosted objectId]]) {
+                    if ([[question question] isEqualToString:[lastPosted question]]) {
                         contains = YES;
                         break;
                     }

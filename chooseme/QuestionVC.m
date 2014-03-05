@@ -186,7 +186,7 @@
 }
 
 - (IBAction)onSubmit:(id)sender {
-    NSLog(@"Posting question.");
+    NSLog(@"Posting question with ID %@", self.question.objectId);
     
     self.question.facebookID = self.facebookID;
     self.question.author = [PFUser currentUser];

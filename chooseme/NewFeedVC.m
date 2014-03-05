@@ -132,14 +132,16 @@
             
             [self.feedTable reloadData];
             [self.refresh endRefreshing];
+            [self centerTable];
         }];
     } else {
         // FIXME: this is NOT performant
         PFQuery *query = [Question query];
+        [query orderByDescending:@"time"];
         self.questions = [[NSMutableArray alloc] init];
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
             
-            for (Question* question in [[objects reverseObjectEnumerator] allObjects]) {
+            for (Question* question in objects) {
                 for (int i = 0; i < question.friends.count; i++) {
                     NSDictionary *friend = [question.friends objectAtIndex:i];
                     if ([friend[@"id"] isEqualToString:facebookId]) {
@@ -152,6 +154,7 @@
             
             [self.feedTable reloadData];
             [self.refresh endRefreshing];
+            [self centerTable];
         }];
     }
     
@@ -385,6 +388,7 @@
     self.cView.myPic.clipsToBounds = YES;
     self.cView.myPic.layer.cornerRadius = self.cView.myPic.frame.size.width/2;
     self.cView.commentTextField.textColor = color;
+    self.cView.commentTextField.autocapitalizationType = UITextAutocapitalizationTypeSentences;
     self.cView.lineView.backgroundColor = color;
     if (((Question *)self.questions[self.currentIndex]).friendsCommenting.count > 0)
         self.cView.noCommentsLabel.hidden = YES;

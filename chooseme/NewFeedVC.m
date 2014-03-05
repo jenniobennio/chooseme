@@ -91,6 +91,8 @@
         self.myFacebookID = [facebookClient myFacebookID];
         self.myPic = [facebookClient myPic];
         
+        NSLog(@"%@", self.myFacebookID);
+        
         [self loadQuestionsArray:self.myFacebookID];
     };
     if ([[FacebookClient instance] myFacebookID] == nil) { // hasn't loaded yet
@@ -193,32 +195,34 @@
     if (tableView.tag == 1) {
         static NSString *CellIdentifier = @"NewFeedCell";
         NewFeedCell *cell = (NewFeedCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        if ([self isFriends])
-            cell.backgroundColor = [self.colorManager currentFriendsColor:indexPath.row];
-        else
-            cell.backgroundColor = [self.colorManager currentColor:indexPath.row+1];
-        
-        // Load views and format them and stuff
-        //    UIImage *image1 = [UIImage imageNamed:@"111834.jpg"];
-        //    UIImage *image2 = [UIImage imageNamed:@"131466.jpg"];
-        Question *q = self.questions[indexPath.row];
-        if ([self isMe])
-            [cell loadCell:cell.backgroundColor withQuestion:q withUserImage:self.myPic];
-        else
-            [cell loadCell:cell.backgroundColor withQuestion:q withUserImage:[UIImage imageWithData:q.profilePic]];
-        //withImage1:image1 withImage2:image2 withUserImage:self.myPic];
-        
-        // Need to set this so that top tableView can scrollToTop
-        cell.pView.friendsVotedScrollView.scrollsToTop = NO;
-        
-        // ************** Detail View ********************************
-        // Enable single tap to enter detail view
-        UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(enterDetailView:)];
-        singleTap.numberOfTapsRequired = 1;
-        [singleTap requireGestureRecognizerToFail:cell.doubleTap];
-        cell.pView.tag = indexPath.row;
-        [cell.pView addGestureRecognizer:singleTap];
+        if (self.questions.count > 0) {
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            if ([self isFriends])
+                cell.backgroundColor = [self.colorManager currentFriendsColor:indexPath.row];
+            else
+                cell.backgroundColor = [self.colorManager currentColor:indexPath.row+1];
+            
+            // Load views and format them and stuff
+            //    UIImage *image1 = [UIImage imageNamed:@"111834.jpg"];
+            //    UIImage *image2 = [UIImage imageNamed:@"131466.jpg"];
+            Question *q = self.questions[indexPath.row];
+            if ([self isMe])
+                [cell loadCell:cell.backgroundColor withQuestion:q withUserImage:self.myPic];
+            else
+                [cell loadCell:cell.backgroundColor withQuestion:q withUserImage:[UIImage imageWithData:q.profilePic]];
+            //withImage1:image1 withImage2:image2 withUserImage:self.myPic];
+            
+            // Need to set this so that top tableView can scrollToTop
+            cell.pView.friendsVotedScrollView.scrollsToTop = NO;
+            
+            // ************** Detail View ********************************
+            // Enable single tap to enter detail view
+            UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(enterDetailView:)];
+            singleTap.numberOfTapsRequired = 1;
+            [singleTap requireGestureRecognizerToFail:cell.doubleTap];
+            cell.pView.tag = indexPath.row;
+            [cell.pView addGestureRecognizer:singleTap];
+        }
 
         return cell;
     } else {

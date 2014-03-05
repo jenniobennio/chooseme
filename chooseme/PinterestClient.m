@@ -64,11 +64,14 @@
     NSString *susyID = @"100007870230658";
     NSString *jennyID = @"1056420028";
     NSString *subhaID = @"712153";
+    NSString *dustieID = @"100007914517190";
     
     self.usernameMap = [[NSMutableDictionary alloc] init];
     [self.usernameMap setObject:@"susychoosy5" forKey:susyID];
     [self.usernameMap setObject:@"jenniobennio" forKey:jennyID];
     [self.usernameMap setObject:@"subhastar" forKey:subhaID];
+    [self.usernameMap setObject:@"frankunderwood3" forKey:dustieID];
+
 }
 
 - (void) populatePinURLs:(NSString *)getPinsURL andCallback:(void (^)(NSMutableArray *pins))success {

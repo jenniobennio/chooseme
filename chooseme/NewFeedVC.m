@@ -35,6 +35,8 @@
 @property (nonatomic, strong) PictureView *detailPView;
 @property (nonatomic, strong) commentView *cView;
 
+@property (nonatomic, strong) UIRefreshControl *refresh;
+
 @end
 
 @implementation NewFeedVC
@@ -75,9 +77,9 @@
     self.feedTable.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     
     // Refresh control
-    UIRefreshControl *refresh = [[UIRefreshControl alloc] init];
-    [refresh addTarget:self action:@selector(refreshMe:) forControlEvents:UIControlEventValueChanged];
-    [self.feedTable addSubview:refresh];
+    self.refresh = [[UIRefreshControl alloc] init];
+    [self.refresh addTarget:self action:@selector(refreshMe:) forControlEvents:UIControlEventValueChanged];
+    [self.feedTable addSubview:self.refresh];
     
     // Load my data
     void (^onSuccess)(void) = ^{
@@ -106,6 +108,7 @@
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
             self.questions = [objects mutableCopy];
             [self.feedTable reloadData];
+            [self.refresh endRefreshing];
         }];
     } else {
         // FIXME: this is NOT performant
@@ -125,6 +128,7 @@
             }
             
             [self.feedTable reloadData];
+            [self.refresh endRefreshing];
         }];
     }
     
@@ -357,14 +361,8 @@
     return (self.index == 2);
 }
 
-- (void)reload
-{
-    [self loadQuestionsArray:self.myFacebookID];
-}
-
 - (void) refreshMe: (UIRefreshControl *)refresh;{
-    [self reload];
-    [refresh endRefreshing];
+    [self loadQuestionsArray:self.myFacebookID];
 }
 
 - (void)centerTable

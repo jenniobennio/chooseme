@@ -26,6 +26,10 @@
 
 - (UIColor *)randColor {
     colorIndex = arc4random() % colors.count;
+    
+    // FIXME: Seeded for demo
+    colorIndex = 5;
+    
     return colors[colorIndex];
 }
 
@@ -38,6 +42,10 @@
 
 - (UIColor *)randFriendsColor {
     friendsColorIndex = arc4random() % colors.count;
+    
+    // FIXME: Seeded for demo
+    friendsColorIndex = 0;
+    
     return colors[friendsColorIndex];
 }
 

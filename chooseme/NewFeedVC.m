@@ -70,7 +70,7 @@
     
     self.colorManager = [Colorful sharedManager];
     if ([self isFriends]) {
-        self.colorManager.friendsColorIndex = arc4random() % self.colorManager.colors.count;
+        [self.colorManager randFriendsColor];
         self.view.backgroundColor = [self.colorManager currentFriendsColor];
     } else
         self.view.backgroundColor = [self.colorManager currentColor:1];
@@ -104,6 +104,7 @@
 {
     [super viewWillAppear:animated];
     [self loadQuestionsArray:self.myFacebookID];
+    
 }
 
 - (void) loadQuestionsArray:(NSString *)facebookId {
@@ -119,7 +120,7 @@
             BOOL contains = NO;
             if (lastPosted != nil) {
                 for (Question* question in self.questions) {
-                    if ([[question question] isEqualToString:[lastPosted question]]) {
+                    if ([[question objectId] isEqualToString:[lastPosted objectId]]) {
                         contains = YES;
                         break;
                     }
@@ -131,8 +132,10 @@
             }
             
             [self.feedTable reloadData];
+            self.view.backgroundColor = [self.colorManager currentColor:1];
             [self.refresh endRefreshing];
-            [self centerTable];
+            [self.feedTable scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:YES];
+//            [self centerTable];
         }];
     } else {
         // FIXME: this is NOT performant
@@ -153,8 +156,10 @@
             }
             
             [self.feedTable reloadData];
+            self.view.backgroundColor = [self.colorManager currentFriendsColor];
             [self.refresh endRefreshing];
-            [self centerTable];
+            [self.feedTable scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:YES];
+//            [self centerTable];
         }];
     }
     

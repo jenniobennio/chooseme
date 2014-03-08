@@ -60,7 +60,8 @@
 @property (strong, nonatomic) UIImage *image1;
 @property (strong, nonatomic) UIImage *image2;
 
-// Private variable for checking whether we just selected some image
+// BOOL for checking whether we just selected some image
+// Used for when we're re-doing images, if YES, we can move onto QuestionVC
 @property (nonatomic, assign) BOOL justSelectedImage;
 
 // For setting default picture source
@@ -151,6 +152,8 @@
         [PinterestClient instance]; // Pinterest depends on facebook id values.
     };
     [[FacebookClient instance] meRequest:success];
+    // Cache descriptor for friends
+    [[FacebookClient instance] loadCache];
     
     [QuestionKeeper instance];
     

@@ -48,4 +48,15 @@
     }];
 }
 
+- (FBCacheDescriptor *)loadCache
+{
+    if (!self.cacheDescriptor) {
+        // Create a cache descriptor based on the default friend picker data fetch settings
+        self.cacheDescriptor = [FBFriendPickerViewController cacheDescriptor];
+        // Pre-fetch and cache friend data
+        [self.cacheDescriptor prefetchAndCacheForSession:FBSession.activeSession];
+    }
+    return self.cacheDescriptor;
+}
+
 @end

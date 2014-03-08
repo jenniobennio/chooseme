@@ -13,6 +13,7 @@
 #import "FriendCell.h"
 #import "Colorful.h"
 #import "QuestionKeeper.h"
+#import "FacebookClient.h"
 
 @interface QuestionVC ()
 
@@ -138,29 +139,21 @@
     [self.view addGestureRecognizer:panGesture];
     
     // Create request for user's Facebook data
-    FBRequest *request = [FBRequest requestForMe];
+    void (^onSuccess)(void) = ^{
+        FacebookClient *facebookClient = [FacebookClient instance];
+        
+        self.myName = [facebookClient myName];
+        self.facebookID = [facebookClient myFacebookID];
+        self.myPic = [facebookClient myPic];
+    };
+    if ([[FacebookClient instance] myFacebookID] == nil) { // hasn't loaded yet
+        [[FacebookClient instance] meRequest:onSuccess];
+    } else {
+        onSuccess();
+    }
     
-    // Send request to Facebook
-    [request startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
-        if (!error) {
-            // result is a dictionary with the user's Facebook data
-            NSDictionary *userData = (NSDictionary *)result;
-            
-            NSString *facebookID = userData[@"id"];
-            NSString *name = userData[@"name"];
-            NSURL *pictureURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", facebookID]];
-            
-            // Assign the data accordingly
-            self.myName = name;
-            self.facebookID = facebookID;
-            self.myPic = [UIImage imageWithData:[NSData dataWithContentsOfURL:pictureURL]];
-        }    }];
-    
-    // FIXME: Find a better place to instantiate this cacheDescriptor, preferably, right after we successfully log in?
     // Create a cache descriptor based on the default friend picker data fetch settings
-    self.cacheDescriptor = [FBFriendPickerViewController cacheDescriptor];
-    // Pre-fetch and cache friend data
-    [self.cacheDescriptor prefetchAndCacheForSession:FBSession.activeSession];
+    self.cacheDescriptor = [[FacebookClient instance] loadCache];
 }
 
 - (void)viewDidUnload

@@ -46,6 +46,7 @@ static inline CGRect ScaleRect(CGRect rect, float n) {return CGRectMake((rect.si
     if (self.isStart) {
         img = [img maskWithColor:[UIColor whiteColor]];
     }
+    self.imageRef = img;
     self.image = img;
     self.userInteractionEnabled = YES;
     _contentImageView = [[UIImageView alloc] initWithImage:img];
@@ -126,6 +127,20 @@ static inline CGRect ScaleRect(CGRect rect, float n) {return CGRectMake((rect.si
 - (void) recolor {
     if (self.isStart) {
         _contentImageView.layer.backgroundColor = [[[Colorful sharedManager] currentColor] CGColor];
+    }
+}
+
+- (void) hidePlus {
+    if (self.isStart) {
+        self.image = nil;
+        self.contentImageView.image = nil;
+    }
+}
+
+- (void) showPlus {
+    if (self.isStart) {
+        self.image = self.imageRef;
+        self.contentImageView.image = self.imageRef;
     }
 }
 

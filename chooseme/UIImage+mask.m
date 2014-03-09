@@ -18,7 +18,7 @@
     CGRect bounds = CGRectMake(0,0,width,height);
     
     CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-    CGContextRef bitmapContext = CGBitmapContextCreate(NULL, width, height, 8, 0, colorSpace, kCGImageAlphaPremultipliedLast);
+    CGContextRef bitmapContext = CGBitmapContextCreate(NULL, width, height, 8, 0, colorSpace, (CGBitmapInfo)kCGImageAlphaPremultipliedLast);
     CGContextClipToMask(bitmapContext, bounds, maskImage);
     CGContextSetFillColorWithColor(bitmapContext, color.CGColor);
     CGContextFillRect(bitmapContext, bounds);
@@ -36,7 +36,7 @@
 - (UIImage *)imageWithBorder {
     CGColorSpaceRef colourSpace = CGColorSpaceCreateDeviceRGB();
     CGContextRef shadowContext = CGBitmapContextCreate(NULL, self.size.width + 10, self.size.height + 10, CGImageGetBitsPerComponent(self.CGImage), 0,
-                                                       colourSpace, kCGImageAlphaPremultipliedLast);
+                                                       colourSpace, (CGBitmapInfo)kCGImageAlphaPremultipliedLast);
     CGColorSpaceRelease(colourSpace);
     
     CGContextSetShadowWithColor(shadowContext, CGSizeMake(-1, 1), 1, [UIColor blackColor].CGColor);
@@ -55,7 +55,7 @@
 - (UIImage*)imageWithShadow {
     CGColorSpaceRef colourSpace = CGColorSpaceCreateDeviceRGB();
     CGContextRef shadowContext = CGBitmapContextCreate(NULL, self.size.width + 10, self.size.height + 10, CGImageGetBitsPerComponent(self.CGImage), 0,
-                                                       colourSpace, kCGImageAlphaPremultipliedLast);
+                                                       colourSpace, (CGBitmapInfo)kCGImageAlphaPremultipliedLast);
     CGColorSpaceRelease(colourSpace);
     
     CGContextSetShadowWithColor(shadowContext, CGSizeMake(-1, 1), 1, [UIColor blackColor].CGColor);

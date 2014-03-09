@@ -9,6 +9,7 @@
 #import "PictureView.h"
 #import "UIImage+mask.h"
 #import "Question.h"
+#import "MBProgressHUD.h"
 
 @implementation PictureView
 
@@ -44,6 +45,8 @@
 
 - (void) load_images
 {
+//    [MBProgressHUD showHUDAddedTo:self.bigPicBgColor animated:YES];
+    
     [self.thumbnail1 setBackgroundImage:self.q.image1 forState:UIControlStateNormal];
     [self.thumbnail2 setBackgroundImage:self.q.image2 forState:UIControlStateNormal];
     
@@ -51,6 +54,8 @@
         [self reloadBigPic:self.q.image1];
     else
         [self reloadBigPic:self.q.image2];
+//    [MBProgressHUD hideHUDForView:self.bigPicBgColor animated:YES];
+
 }
 
 - (void)highlightImage:(int)index

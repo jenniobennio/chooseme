@@ -21,6 +21,8 @@
 @interface NewFeedVC ()
 
 @property (nonatomic, strong) NSMutableArray *questions;
+@property (nonatomic, strong) NSMutableArray *questions_prev;
+
 @property (strong, nonatomic) IBOutlet UILabel *titleLabel;
 @property (strong, nonatomic) IBOutlet UITableView *feedTable;
 
@@ -108,6 +110,7 @@
 }
 
 - (void) loadQuestionsArray:(NSString *)facebookId {
+    self.questions_prev = self.questions;
     if ([self isMe]) {
         PFQuery *query = [Question query];
         // FIXME: Newest posts on top for now.. Eventually, custom order by recently edited or unresolved
@@ -131,7 +134,9 @@
                 }
             }
             
-            [self.feedTable reloadData];
+            // Only reload table if questions are different
+            if (self.questions.count != self.questions_prev.count)
+                [self.feedTable reloadData];
             self.view.backgroundColor = [self.colorManager currentColor:1];
             [self.refresh endRefreshing];
             [self.feedTable scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:YES];
@@ -155,7 +160,9 @@
                 }
             }
             
-            [self.feedTable reloadData];
+            // Only reload table if questions are different
+            if (self.questions.count != self.questions_prev.count)
+                [self.feedTable reloadData];
             self.view.backgroundColor = [self.colorManager currentFriendsColor];
             [self.refresh endRefreshing];
             [self.feedTable scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:YES];

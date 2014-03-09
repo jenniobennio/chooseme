@@ -26,18 +26,11 @@
     self.q = question;
     self.highlightedIndex = 1;
     
-    // Set the thumbnails
-    [self.thumbnail1 setBackgroundImage:self.q.image1 forState:UIControlStateNormal];
-    [self.thumbnail2 setBackgroundImage:self.q.image2 forState:UIControlStateNormal];
+    // Set the pictures (thumbnail + big pic)
+    [self performSelectorInBackground:@selector(load_images) withObject:nil];
     self.thumbnail1.tag = 1;
     self.thumbnail2.tag = 2;
     [self formatThumbnails:color];
-
-    // Set the big pic
-    if (self.highlightedIndex == 1)
-        [self.bigPic setImage:self.q.image1];
-    else
-        [self.bigPic setImage:self.q.image2];
     self.bigPicBgColor.backgroundColor = color;
     
     // Format icons
@@ -47,6 +40,17 @@
     [self updateVoteCount];
     [self updateCommentCount];
     [self updatePercentages];
+}
+
+- (void) load_images
+{
+    [self.thumbnail1 setBackgroundImage:self.q.image1 forState:UIControlStateNormal];
+    [self.thumbnail2 setBackgroundImage:self.q.image2 forState:UIControlStateNormal];
+    
+    if (self.highlightedIndex == 1)
+        [self.bigPic setImage:self.q.image1];
+    else
+        [self.bigPic setImage:self.q.image2];
 }
 
 - (void)highlightImage:(int)index
@@ -141,7 +145,6 @@
 {
     UIColor *color = [self calculateTextColor:self.bigPic.image];
     
-//    self.heartIcon.image = [self.heartIcon.image maskWithColor:color];
     self.commentIcon.image = [self.commentIcon.image maskWithColor:color];
     self.numVotesLabel.textColor = color;
     self.numCommentsLabel.textColor = color;
@@ -152,6 +155,9 @@
 
 - (UIColor *) calculateTextColor:(UIImage *)img
 {
+    // FIXME: For question text in middle of image, we shouldn't be
+    // using the same calculated color from the bottom right??
+    
     // Detect the average color of the bottom right corner of the image, and
     // color the text/ icons appropriately
     CGRect myImageArea = self.bigPic.frame;

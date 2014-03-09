@@ -110,7 +110,6 @@
         [self.uqView.userPic setImageWithURLRequest:request placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
             [self reloadUserPic:image];
         } failure:nil];
-        self.uqView.userPic.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:picURL]];
     }
     
     // Format the view

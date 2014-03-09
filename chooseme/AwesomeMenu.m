@@ -229,7 +229,7 @@ static CGPoint RotateCGPointAroundCenter(CGPoint point, CGPoint center, float an
 
 
 - (void)_setMenu {
-	int count = [_menusArray count];
+	int count = (int)[_menusArray count];
     for (int i = 0; i < count; i ++)
     {
         AwesomeMenuItem *item = [_menusArray objectAtIndex:i];
@@ -273,7 +273,7 @@ static CGPoint RotateCGPointAroundCenter(CGPoint point, CGPoint center, float an
     // expand or close animation
     if (!_timer) 
     {
-        _flag = self.isExpanding ? 0 : ([_menusArray count] - 1);
+        _flag = self.isExpanding ? 0 : ((int)[_menusArray count] - 1);
         SEL selector = self.isExpanding ? @selector(_expand) : @selector(_close);
 
         // Adding timer to runloop to make sure UI event won't block the timer from firing

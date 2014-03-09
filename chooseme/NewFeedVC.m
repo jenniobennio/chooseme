@@ -342,15 +342,15 @@
 {
     self.currentPView = (PictureView *)sender.view;
     self.currentIndex = sender.view.tag;
-    NSLog(@"Enter detail view %d", sender.view.tag);
+    NSLog(@"Enter detail view %d", (int)sender.view.tag);
 
     NSArray *nibViews = [[NSBundle mainBundle] loadNibNamed:@"PictureView" owner:self options:nil];
     self.detailPView = [nibViews objectAtIndex:0];
     UIColor *color;
     if ([self isMe])
-        color = [self.colorManager currentColor:sender.view.tag+1];
+        color = [self.colorManager currentColor:(int)sender.view.tag+1];
     else
-        color = [self.colorManager currentFriendsColor:sender.view.tag];
+        color = [self.colorManager currentFriendsColor:(int)sender.view.tag];
     
     [self.detailPView populateData:self.questions[self.currentIndex] withColor:color];
     [self.detailPView highlightImage:self.currentPView.highlightedIndex];

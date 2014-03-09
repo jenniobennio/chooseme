@@ -111,10 +111,10 @@
         self.start = self.start + 8;
         
         if (self.start < 20) {
-            NSLog(@"updating start and calling recursive %d %d", self.start, self.searchResults.count);
+            NSLog(@"updating start and calling recursive %ld %ld", self.start, self.searchResults.count);
             [self handleSearch:searchText];
         } else {
-            NSLog(@"reloading. %d %d", self.start, self.searchResults.count);
+            NSLog(@"reloading. %ld %ld", self.start, self.searchResults.count);
             [self.collectionView reloadData];
             [MBProgressHUD hideHUDForView:self.view animated:YES];
         }

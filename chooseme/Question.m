@@ -233,7 +233,7 @@
 }
 
 - (int)numComments {
-    return self.friendsCommenting.count;
+    return (int)self.friendsCommenting.count;
 }
 
 - (int)percentPic:(int)picNum {

@@ -146,9 +146,9 @@
         // FIXME: this is NOT performant
         PFQuery *query = [Question query];
         [query orderByDescending:@"time"];
-        self.questions = [[NSMutableArray alloc] init];
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-            
+            self.questions = [[NSMutableArray alloc] init];
+
             for (Question* question in objects) {
                 for (int i = 0; i < question.friends.count; i++) {
                     NSDictionary *friend = [question.friends objectAtIndex:i];
@@ -161,8 +161,10 @@
             }
             
             // Only reload table if questions are different
-            if (self.questions.count != self.questions_prev.count)
+            if (self.questions.count != self.questions_prev.count) {
+                NSLog(@"Re-loading table");
                 [self.feedTable reloadData];
+            }
             self.view.backgroundColor = [self.colorManager currentFriendsColor];
             [self.refresh endRefreshing];
             [self.feedTable scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:YES];

@@ -162,7 +162,7 @@
             
             // Only reload table if questions are different
             if (self.questions.count != self.questions_prev.count) {
-                NSLog(@"Re-loading table");
+//                NSLog(@"Re-loading table");
                 [self.feedTable reloadData];
             }
             self.view.backgroundColor = [self.colorManager currentFriendsColor];

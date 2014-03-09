@@ -94,6 +94,13 @@
     NSArray *nibViews = [[NSBundle mainBundle] loadNibNamed:@"PictureView" owner:self options:nil];
     self.pView = [nibViews objectAtIndex:0];
     self.pView.frame = CGRectMake(0, 64, self.view.frame.size.width, 344);
+    
+    // fakePView was used to set up autolayout constraints, so send it all the way to the back
+    // pView contains the actual image data, etc
+    [self.view addSubview:self.pView];
+    [self.view sendSubviewToBack:self.pView];
+    [self.view sendSubviewToBack:self.fakePView];
+    
     [self.pView populateData:self.question withColor:color];
     
     NSLog(@"QuestionVC viewDidLoad");
@@ -104,12 +111,6 @@
     self.editIndex = 1;
     [self.pView.thumbnail1 addTarget:self action:@selector(onTapPic1:) forControlEvents:UIControlEventTouchUpInside];
     [self.pView.thumbnail2 addTarget:self action:@selector(onTapPic2:) forControlEvents:UIControlEventTouchUpInside];
-    
-    // fakePView was used to set up autolayout constraints, so send it all the way to the back
-    // pView contains the actual image data, etc
-    [self.view addSubview:self.pView];
-    [self.view sendSubviewToBack:self.pView];
-    [self.view sendSubviewToBack:self.fakePView];
     
     // Format question textField
     UIColor *textcolor = [self.pView calculateTextColor:self.question.image1];

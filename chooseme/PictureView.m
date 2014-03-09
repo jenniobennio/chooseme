@@ -48,9 +48,9 @@
     [self.thumbnail2 setBackgroundImage:self.q.image2 forState:UIControlStateNormal];
     
     if (self.highlightedIndex == 1)
-        [self.bigPic setImage:self.q.image1];
+        [self reloadBigPic:self.q.image1];
     else
-        [self.bigPic setImage:self.q.image2];
+        [self reloadBigPic:self.q.image2];
 }
 
 - (void)highlightImage:(int)index

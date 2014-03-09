@@ -8,6 +8,7 @@
 
 #import "NewFeedCell.h"
 #import "UIImage+mask.h"
+#import "UIImageView+AFNetworking.h"
 
 @implementation NewFeedCell
 
@@ -30,30 +31,10 @@
     [UIView commitAnimations];
 }
 
-- (void)reloadBigPic:(UIImage *)image1
-{
-    self.pView.bigPic.image = image1;
-    self.pView.thumbnail1.alpha = 0.0f;
-    self.pView.thumbnail2.alpha = 0.0f;
-    self.pView.bigPic.alpha = 0.0f;
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:0.5f];
-    self.pView.thumbnail1.alpha = 1.0f;
-    self.pView.thumbnail2.alpha = 1.0f;
-    self.pView.bigPic.alpha = 1.0f;
-    [UIView commitAnimations];
-}
-
 - (void)loadCell:(UIColor *)color withQuestion:(Question *)q withUserImage:(UIImage *)userImage
 {
     BOOL isMe = [PFUser.currentUser.objectId isEqualToString:q.author.objectId];
     self.q = q;
-    
-    UIImage *image1 = q.image1;
-    UIImage *image2 = q.image2;
-    
-    // Use the URL instead
-//    UIImage *userImage = [UIImage imageWithData:q.profilePic];
     
     ///////////////////////////
     // First, load PictureView
@@ -65,24 +46,8 @@
     CGRect newFrame = self.pView.frame;
     newFrame.origin = CGPointMake(0, 0);
     self.pView.frame = newFrame;
-
-    // Set the images
-    [self.pView.thumbnail1 setBackgroundImage:image1 forState:UIControlStateNormal];
-    [self.pView.thumbnail2 setBackgroundImage:image2 forState:UIControlStateNormal];
-
-    // Set the big pic background color to fade from
-    self.pView.bigPicBgColor.backgroundColor = color;
-    // Load and fade in big pic
-    if ((!isMe && q.vote==0) || [q numVoted1] >= [q numVoted2]) {
-        [self reloadBigPic:image1];
-    } else {
-        [self reloadBigPic:image2];
-    }
-
-    // Format the thumbnails
-    self.pView.thumbnail1.layer.borderColor = [color CGColor];
-    self.pView.thumbnail2.layer.borderColor = [color CGColor];
-    [self.pView formatThumbnails];
+    
+    [self.pView populateData:q withColor:color];
     
     // Highlight the one with a higher percentage
     if ((!isMe && q.vote==0) || [q numVoted1] >= [q numVoted2]) {
@@ -94,9 +59,7 @@
     // ************* Image Switching *********************
     // Set up button touch actions
     [self.pView.thumbnail1 addTarget:self action:@selector(onTapPic1:) forControlEvents:UIControlEventTouchUpInside];
-    self.pView.thumbnail1.tag = 1;
     [self.pView.thumbnail2 addTarget:self action:@selector(onTapPic2:) forControlEvents:UIControlEventTouchUpInside];
-    self.pView.thumbnail2.tag = 2;
     
     // Enable Swiping
     self.pView.userInteractionEnabled = YES;
@@ -121,18 +84,6 @@
     UITapGestureRecognizer *heartTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doHeartPic:)];
     [self.pView.heartIcon addGestureRecognizer:heartTap];
     
-    // Format icons
-    if (self.pView.highlightedIndex == 0)
-        [self.pView colorIcons:self.q.image1];
-    else
-        [self.pView colorIcons:self.q.image2];
-    [self updateHeartIcon];
-    
-    // Set any text
-    [self updateVoteCount];
-    [self.pView updateComments:q.numComments];
-    [self.pView updatePercentages:q];
-    
     // Add as subview
     [self.contentView addSubview:self.pView];
     
@@ -149,8 +100,18 @@
     
     // Set the profile image background color to fade from
     self.uqView.userPicBgColor.backgroundColor = color;
-    // Load and fade in user pic
-    [self reloadUserPic:userImage];
+    
+    if (userImage) {
+        // Load and fade in user pic
+        [self reloadUserPic:userImage];
+    } else {
+        NSURL *picURL = [NSURL URLWithString:[[NSString alloc] initWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1",q.facebookID]];
+        NSURLRequest *request = [NSURLRequest requestWithURL:picURL];
+        [self.uqView.userPic setImageWithURLRequest:request placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+            [self reloadUserPic:image];
+        } failure:nil];
+        self.uqView.userPic.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:picURL]];
+    }
     
     // Format the view
     self.uqView.colorView.backgroundColor = color;
@@ -166,38 +127,13 @@
 
 - (void)onTapPic1:(UIButton *)button
 {
-    [self reloadBigPic:self.q.image1];
     [self.pView highlightImage:1];
-    [self.pView colorIcons:self.q.image1];
-    [self updateVoteCount];
-    [self updateHeartIcon];
 }
 
 - (void)onTapPic2:(UIButton *)button
 {
-    [self reloadBigPic:self.q.image2];
     [self.pView highlightImage:2];
-    [self.pView colorIcons:self.q.image2];
-    [self updateVoteCount];
-    [self updateHeartIcon];
 }
-
-- (void) updateHeartIcon
-{
-    int image = (self.pView.thumbnail1.alpha == 1)? 1 : 2;
-    
-    int vote = 0;
-    if ([[[PFUser currentUser] objectId] isEqualToString:self.q.author.objectId]) {
-        vote = [self.q.youVoted intValue];
-    } else {
-        vote = [self.q vote];
-    }
-    self.pView.heartIcon.image = [UIImage imageNamed:@"29-heart.png"]; // fix the disappearing alpha problem
-    UIColor *defaultColor = self.pView.numVotesLabel.textColor;
-    UIColor *heartColor = (vote == image) ? [UIColor colorWithRed:1 green:0.07 blue:0.5 alpha:0.8] : defaultColor;
-    self.pView.heartIcon.image = [self.pView.heartIcon.image maskWithColor:heartColor];
-}
-
 
 - (void)handleRightSwipe:(UISwipeGestureRecognizer *)swipe
 {
@@ -297,19 +233,7 @@
     [self.q saveInBackground];
     
     // ******** Update UI *********
-    [self updateVoteCount];
-    [self updateHeartIcon];
-}
-
-- (void) updateVoteCount {
-    /*
-    if (self.pView.thumbnail1.alpha == 1) {
-        self.pView.numVotesLabel.text = [NSString stringWithFormat:@"%d / %d", self.q.numVoted1, self.q.numReplies];
-    } else {
-        self.pView.numVotesLabel.text = [NSString stringWithFormat:@"%d / %d", self.q.numVoted2, self.q.numReplies];
-    }*/
-    self.pView.numVotesLabel.text = [NSString stringWithFormat:@"%d", self.q.numReplies];
-    [self.pView updatePercentages:self.q];
+    [self.pView update];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

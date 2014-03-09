@@ -9,10 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface commentView : UIView
-@property (strong, nonatomic) IBOutlet UITableView *commentTable;
-@property (strong, nonatomic) IBOutlet UITextField *commentTextField;
-@property (strong, nonatomic) IBOutlet UIImageView *myPic;
-@property (strong, nonatomic) IBOutlet UIView *lineView;
-@property (strong, nonatomic) IBOutlet UILabel *noCommentsLabel;
+@property (weak, nonatomic) IBOutlet UITableView *commentTable;
+@property (weak, nonatomic) IBOutlet UITextField *commentTextField;
+@property (weak, nonatomic) IBOutlet UIImageView *myPic;
+@property (weak, nonatomic) IBOutlet UIView *lineView;
+@property (weak, nonatomic) IBOutlet UILabel *noCommentsLabel;
 
 @end

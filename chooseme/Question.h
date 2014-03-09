@@ -13,7 +13,6 @@
 
 @property (nonatomic, strong) PFUser *author;
 @property (nonatomic, strong) NSString *facebookID;
-@property (nonatomic, strong) NSData *profilePic;
 @property (nonatomic, strong) NSString *name;
 
 @property (nonatomic, strong) NSDate *time;
@@ -26,6 +25,7 @@
 - (void)setImage2WithURL:(NSURL *)imageURL;
 - (void)setImage1WithData:(NSData *)imageData;
 - (void)setImage2WithData:(NSData *)imageData;
+- (void)clearPic:(int)index;
 
 @property (nonatomic, strong) NSNumber *youVoted;
 

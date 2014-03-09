@@ -215,7 +215,7 @@
             if ([self isMe])
                 [cell loadCell:cell.backgroundColor withQuestion:q withUserImage:self.myPic];
             else
-                [cell loadCell:cell.backgroundColor withQuestion:q withUserImage:[UIImage imageWithData:q.profilePic]];
+                [cell loadCell:cell.backgroundColor withQuestion:q withUserImage:nil]; //q.profilePic]];
             //withImage1:image1 withImage2:image2 withUserImage:self.myPic];
             
             // Need to set this so that top tableView can scrollToTop
@@ -289,7 +289,7 @@
     
     [q saveInBackground];
     [self.cView.commentTable reloadData];
-    [self.detailPView updateComments:[q numComments]];
+    [self.detailPView update];
     self.cView.noCommentsLabel.hidden = YES;
     
     return YES;
@@ -352,8 +352,9 @@
     else
         color = [self.colorManager currentFriendsColor:sender.view.tag];
     
-    [self.detailPView highlightImage:self.currentPView.highlightedIndex+1];
     [self.detailPView populateData:self.questions[self.currentIndex] withColor:color];
+    [self.detailPView highlightImage:self.currentPView.highlightedIndex];
+    
     self.detailPView.frame = CGRectMake(0, 40, 320, 368);
     self.detailPView.xButton.hidden = NO;
     self.detailPView.questionLabel.hidden = NO;
@@ -362,9 +363,7 @@
     
     // Set up button touch actions
     [self.detailPView.thumbnail1 addTarget:self action:@selector(onTapPic1:) forControlEvents:UIControlEventTouchUpInside];
-    self.detailPView.thumbnail1.tag = 1;
     [self.detailPView.thumbnail2 addTarget:self action:@selector(onTapPic2:) forControlEvents:UIControlEventTouchUpInside];
-    self.detailPView.thumbnail2.tag = 2;
     
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(exitDetailView)];
     [self.detailPView addGestureRecognizer:singleTap];
@@ -422,8 +421,7 @@
             self.view.backgroundColor = [self.colorManager currentFriendsColor:self.currentIndex];
     } completion:^(BOOL finished) {
         self.currentPView.alpha = 1;
-        Question *q = self.questions[self.currentIndex];
-        [self.currentPView updateComments:[q numComments]];
+        [self.currentPView update];
         [self.detailPView removeFromSuperview];
     }];
     
@@ -453,27 +451,12 @@
 
 - (void)onTapPic1:(UIButton *)button
 {
-    Question *q = self.questions[self.currentIndex];
-    
-    [self.detailPView reloadBigPic:q.image1];
     [self.detailPView highlightImage:1];
-    [self.detailPView colorIcons:q.image1];
-    [self.detailPView updateVoteCount:q];
-    [self.detailPView updateHeartIcon:q];
-    self.detailPView.questionLabel.textColor = self.detailPView.numVotesLabel.textColor;
 }
 
 - (void)onTapPic2:(UIButton *)button
 {
-    Question *q = self.questions[self.currentIndex];
-
-    [self.detailPView reloadBigPic:q.image2];
     [self.detailPView highlightImage:2];
-    [self.detailPView colorIcons:q.image2];
-    [self.detailPView updateVoteCount:q];
-    [self.detailPView updateHeartIcon:q];
-    self.detailPView.questionLabel.textColor = self.detailPView.numVotesLabel.textColor;
-
 }
 
 @end

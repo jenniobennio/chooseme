@@ -21,28 +21,32 @@
     return self;
 }
 
-- (void)hideDetails
+- (void)populateData:(Question *)question withColor:(UIColor *)color
 {
-    // For the QuestionVC, hide lots of things
-    self.thumbnail1.titleLabel.text = @"";
-    self.thumbnail2.titleLabel.text = @"";
-    self.numVotesLabel.text = @"";
-    self.numCommentsLabel.text = @"";
-    self.heartIcon.image = nil;
-    self.commentIcon.image = nil;
-}
+    self.q = question;
+    self.highlightedIndex = 1;
+    
+    // Set the thumbnails
+    [self.thumbnail1 setBackgroundImage:self.q.image1 forState:UIControlStateNormal];
+    [self.thumbnail2 setBackgroundImage:self.q.image2 forState:UIControlStateNormal];
+    self.thumbnail1.tag = 1;
+    self.thumbnail2.tag = 2;
+    [self formatThumbnails:color];
 
-- (void)formatThumbnails
-{
-    self.thumbnail1.layer.borderWidth = 1;
-    self.thumbnail1.layer.cornerRadius = 25;
-    [self.thumbnail1.imageView setContentMode:UIViewContentModeScaleAspectFill];
-    self.thumbnail1.layer.masksToBounds = YES;
-
-    self.thumbnail2.layer.borderWidth = 1;
-    self.thumbnail2.layer.cornerRadius = 25;
-    [self.thumbnail2.imageView setContentMode:UIViewContentModeScaleAspectFill];
-    self.thumbnail2.layer.masksToBounds = YES;
+    // Set the big pic
+    if (self.highlightedIndex == 1)
+        [self.bigPic setImage:self.q.image1];
+    else
+        [self.bigPic setImage:self.q.image2];
+    self.bigPicBgColor.backgroundColor = color;
+    
+    // Format icons
+    [self colorIcons];
+    
+    // Set any text
+    [self updateVoteCount];
+    [self updateCommentCount];
+    [self updatePercentages];
 }
 
 - (void)highlightImage:(int)index
@@ -55,17 +59,95 @@
         self.thumbnail2.alpha = 1;
     }
     
-    // highlightedIndex is 0-indexed
-    self.highlightedIndex = index-1;
+    if (self.highlightedIndex != index) {
+        self.highlightedIndex = index;
+        if (index == 1)
+            [self reloadBigPic:self.q.image1];
+        else
+            [self reloadBigPic:self.q.image2];
+        
+        if (self.heartIcon.image) {
+            [self colorIcons];
+        }
+    }
+    
 }
 
-- (void)colorIcons:(UIImage *)image
+- (void)hideDetails
 {
-    UIColor *color = [self calculateTextColor:image];
-    self.heartIcon.image = [self.heartIcon.image maskWithColor:color];
+    // For the QuestionVC, hide lots of things
+    self.thumbnail1.titleLabel.text = @"";
+    self.thumbnail2.titleLabel.text = @"";
+    self.numVotesLabel.text = @"";
+    self.numCommentsLabel.text = @"";
+    self.heartIcon.image = nil;
+    self.commentIcon.image = nil;
+}
+
+- (void)update
+{
+    [self updateVoteCount];
+    [self updateCommentCount];
+    [self updatePercentages];
+    [self updateHeartIcon];
+}
+
+
+# pragma mark - private methods
+ 
+- (void)formatThumbnails:(UIColor *)color
+{
+    if (self.highlightedIndex == 1) {
+        self.thumbnail1.alpha = 1;
+        self.thumbnail2.alpha = 0.4;
+    } else {
+        self.thumbnail1.alpha = 0.4;
+        self.thumbnail2.alpha = 1;
+    }
+    
+    self.thumbnail1.layer.borderColor = [color CGColor];
+    self.thumbnail1.layer.borderWidth = 1;
+    self.thumbnail1.layer.cornerRadius = 25;
+    [self.thumbnail1.imageView setContentMode:UIViewContentModeScaleAspectFill];
+    self.thumbnail1.layer.masksToBounds = YES;
+
+    self.thumbnail2.layer.borderColor = [color CGColor];
+    self.thumbnail2.layer.borderWidth = 1;
+    self.thumbnail2.layer.cornerRadius = 25;
+    [self.thumbnail2.imageView setContentMode:UIViewContentModeScaleAspectFill];
+    self.thumbnail2.layer.masksToBounds = YES;
+}
+
+- (void)reloadBigPic:(UIImage *)image1
+{
+    self.bigPic.image = image1;
+    self.thumbnail1.alpha = 0.0f;
+    self.thumbnail2.alpha = 0.0f;
+    self.bigPic.alpha = 0.0f;
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.5f];
+    if (self.highlightedIndex == 1) {
+        self.thumbnail1.alpha = 1.0f;
+        self.thumbnail2.alpha = 0.4f;
+    } else {
+        self.thumbnail2.alpha = 1.0f;
+        self.thumbnail1.alpha = 0.4f;
+    }
+    self.bigPic.alpha = 1.0f;
+    [UIView commitAnimations];
+}
+
+- (void)colorIcons
+{
+    UIColor *color = [self calculateTextColor:self.bigPic.image];
+    
+//    self.heartIcon.image = [self.heartIcon.image maskWithColor:color];
     self.commentIcon.image = [self.commentIcon.image maskWithColor:color];
     self.numVotesLabel.textColor = color;
     self.numCommentsLabel.textColor = color;
+    self.questionLabel.textColor = color;
+    
+    [self updateHeartIcon];
 }
 
 - (UIColor *) calculateTextColor:(UIImage *)img
@@ -94,21 +176,49 @@
 //        NSLog(@"%f %f", threshold, bgDelta);
         color = (1 - bgDelta < threshold) ? [UIColor grayColor] : [UIColor whiteColor];
     }
+
     return color;
 }
 
-- (void)updateComments:(int)comments
+- (void) updateHeartIcon
 {
-    self.numCommentsLabel.text = [NSString stringWithFormat:@"%d", comments];
+    int image = (self.thumbnail1.alpha == 1)? 1 : 2;
+    
+    int vote = 0;
+    if ([[[PFUser currentUser] objectId] isEqualToString:self.q.author.objectId]) {
+        vote = [self.q.youVoted intValue];
+    } else {
+        vote = [self.q vote];
+    }
+    self.heartIcon.image = [UIImage imageNamed:@"29-heart.png"]; // fix the disappearing alpha problem
+    UIColor *defaultColor = self.numVotesLabel.textColor;
+    UIColor *heartColor = (vote == image) ? [UIColor colorWithRed:1 green:0.07 blue:0.5 alpha:0.8] : defaultColor;
+    self.heartIcon.image = [self.heartIcon.image maskWithColor:heartColor];
 }
 
-- (void)updatePercentages:(Question *)q
+- (void) updateVoteCount {
+    // FIXME: numVoted or numReplies?
+    
+    /*if (self.thumbnail1.alpha == 1) {
+        self.numVotesLabel.text = [NSString stringWithFormat:@"%d / %d", q.numVoted1, q.numReplies];
+    } else {
+        self.numVotesLabel.text = [NSString stringWithFormat:@"%d / %d", q.numVoted2, q.numReplies];
+    }*/
+    self.numVotesLabel.text = [NSString stringWithFormat:@"%d", self.q.numReplies];
+}
+
+- (void)updateCommentCount
 {
-    NSString *percent1 = [NSString stringWithFormat:@"%d", [q percentPic:1]];
-    NSString *percent2 = [NSString stringWithFormat:@"%d", [q percentPic:2]];
+    self.numCommentsLabel.text = [NSString stringWithFormat:@"%d", self.q.numComments];
+}
+
+- (void)updatePercentages
+{
+    NSString *percent1 = [NSString stringWithFormat:@"%d", [self.q percentPic:1]];
+    NSString *percent2 = [NSString stringWithFormat:@"%d", [self.q percentPic:2]];
     
-    
-    if (![PFUser.currentUser.objectId isEqualToString:q.author.objectId] && q.vote == 0) {
+    // Don't show percentage data if a friend hasn't voted
+    if (![PFUser.currentUser.objectId isEqualToString:self.q.author.objectId] && self.q.vote == 0) {
         [self.thumbnail1 setTitle:@"" forState:UIControlStateNormal];
         [self.thumbnail2 setTitle:@"" forState:UIControlStateNormal];
     } else {
@@ -119,79 +229,5 @@
         self.thumbnail2.titleLabel.alpha = 0.95;
     }
 }
-
-- (void)populateData:(Question *)question withColor:(UIColor *)color
-{
-    UIImage *image1 = question.image1;
-    UIImage *image2 = question.image2;
-    
-    // Set the images
-    [self.thumbnail1 setBackgroundImage:image1 forState:UIControlStateNormal];
-    [self.thumbnail2 setBackgroundImage:image2 forState:UIControlStateNormal];
-    if (self.highlightedIndex == 0)
-        [self.bigPic setImage:image1];
-    else
-        [self.bigPic setImage:image2];
-    
-    // Format the thumbnails
-    self.thumbnail1.layer.borderColor = [color CGColor];
-    self.thumbnail2.layer.borderColor = [color CGColor];
-    [self formatThumbnails];
-    [self highlightImage:self.highlightedIndex+1];
-    
-    // Format icons
-    if (self.highlightedIndex == 0)
-        [self colorIcons:question.image1];
-    else
-        [self colorIcons:question.image2];
-    [self updateHeartIcon:question];
-    
-    // Set any text
-    [self updateVoteCount:question];
-    [self updateComments:question.numComments];
-    [self updatePercentages:question];
-}
-
-- (void) updateHeartIcon:(Question *)q
-{
-    int image = (self.thumbnail1.alpha == 1)? 1 : 2;
-    
-    int vote = 0;
-    if ([[[PFUser currentUser] objectId] isEqualToString:q.author.objectId]) {
-        vote = [q.youVoted intValue];
-    } else {
-        vote = [q vote];
-    }
-    self.heartIcon.image = [UIImage imageNamed:@"29-heart.png"]; // fix the disappearing alpha problem
-    UIColor *defaultColor = self.numVotesLabel.textColor;
-    UIColor *heartColor = (vote == image) ? [UIColor colorWithRed:1 green:0.07 blue:0.5 alpha:0.8] : defaultColor;
-    self.heartIcon.image = [self.heartIcon.image maskWithColor:heartColor];
-}
-
-- (void) updateVoteCount:(Question *)q {
-    /*if (self.thumbnail1.alpha == 1) {
-        self.numVotesLabel.text = [NSString stringWithFormat:@"%d / %d", q.numVoted1, q.numReplies];
-    } else {
-        self.numVotesLabel.text = [NSString stringWithFormat:@"%d / %d", q.numVoted2, q.numReplies];
-    }*/
-    self.numVotesLabel.text = [NSString stringWithFormat:@"%d", q.numReplies];
-    [self updatePercentages:q];
-}
-
-
-- (void)reloadBigPic:(UIImage *)image1
-{
-    self.bigPic.image = image1;
-    self.thumbnail1.alpha = 0.0f;
-    self.thumbnail2.alpha = 0.0f;
-    self.bigPic.alpha = 0.0f;
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:0.5f];
-    self.thumbnail1.alpha = 1.0f;
-    self.thumbnail2.alpha = 1.0f;
-    self.bigPic.alpha = 1.0f;
-    [UIView commitAnimations];
-}
-
 
 @end

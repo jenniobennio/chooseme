@@ -94,21 +94,16 @@
     NSArray *nibViews = [[NSBundle mainBundle] loadNibNamed:@"PictureView" owner:self options:nil];
     self.pView = [nibViews objectAtIndex:0];
     self.pView.frame = CGRectMake(0, 64, self.view.frame.size.width, 344);
+    [self.pView populateData:self.question withColor:color];
+    
+    NSLog(@"QuestionVC viewDidLoad");
+    
     [self.pView hideDetails];
-    [self.pView formatThumbnails];
-    [self.pView.bigPic setImage:self.question.image1];
-    [self.pView.thumbnail1 setImage:self.question.image1 forState:UIControlStateNormal];
-    [self.pView.thumbnail2 setImage:self.question.image2 forState:UIControlStateNormal];
-    self.pView.thumbnail1.layer.borderColor = [color CGColor];
-    self.pView.thumbnail2.layer.borderColor = [color CGColor];
-    [self.pView highlightImage:1];
 
     // Set up button touch actions
     self.editIndex = 1;
     [self.pView.thumbnail1 addTarget:self action:@selector(onTapPic1:) forControlEvents:UIControlEventTouchUpInside];
-    self.pView.thumbnail1.tag = 1;
     [self.pView.thumbnail2 addTarget:self action:@selector(onTapPic2:) forControlEvents:UIControlEventTouchUpInside];
-    self.pView.thumbnail2.tag = 2;
     
     // fakePView was used to set up autolayout constraints, so send it all the way to the back
     // pView contains the actual image data, etc
@@ -117,8 +112,10 @@
     [self.view sendSubviewToBack:self.fakePView];
     
     // Format question textField
+    UIColor *textcolor = [self.pView calculateTextColor:self.question.image1];
+    self.questionTextField.textColor = textcolor;
     self.questionTextField.autocapitalizationType = UITextAutocapitalizationTypeSentences;
-    self.questionTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Share a thought" attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
+    self.questionTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Share a thought" attributes:@{NSForegroundColorAttributeName: textcolor}];
 
     // Load question text
     if (self.question.question)
@@ -183,7 +180,6 @@
     
     self.question.facebookID = self.facebookID;
     self.question.author = [PFUser currentUser];
-    self.question.profilePic = UIImageJPEGRepresentation(self.myPic, 0.5f);
     self.question.name = self.myName;
     
     self.question.time = [NSDate date];
@@ -423,29 +419,23 @@
 - (void)onTapPic1:(UIButton *)button
 {
     self.editIndex = 1;
-    [self reloadBigPic:self.question.image1];
     [self.pView highlightImage:1];
+    
+    UIColor *textcolor = [self.pView calculateTextColor:self.question.image1];
+    self.questionTextField.textColor = textcolor;
+    self.questionTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Share a thought" attributes:@{NSForegroundColorAttributeName: textcolor}];
+
 }
 
 - (void)onTapPic2:(UIButton *)button
 {
     self.editIndex = 2;
-    [self reloadBigPic:self.question.image2];
     [self.pView highlightImage:2];
-}
+    
+    UIColor *textcolor = [self.pView calculateTextColor:self.question.image2];
+    self.questionTextField.textColor = textcolor;
+    self.questionTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Share a thought" attributes:@{NSForegroundColorAttributeName: textcolor}];
 
-- (void)reloadBigPic:(UIImage *)image1
-{
-    self.pView.bigPic.image = image1;
-    self.pView.thumbnail1.alpha = 0.0f;
-    self.pView.thumbnail2.alpha = 0.0f;
-    self.pView.bigPic.alpha = 0.0f;
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:0.5f];
-    self.pView.thumbnail1.alpha = 1.0f;
-    self.pView.thumbnail2.alpha = 1.0f;
-    self.pView.bigPic.alpha = 1.0f;
-    [UIView commitAnimations];
 }
 
 @end

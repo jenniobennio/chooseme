@@ -9,8 +9,15 @@
 #import "Question.h"
 #import <Parse/PFObject+Subclass.h>
 
+@interface Question () {
+    UIImage *_image1;
+    UIImage *_image2;
+}
+
+@end
+
 @implementation Question
-@dynamic facebookID, author, profilePic, image1, image2;
+@dynamic facebookID, author, image1, image2;
 @synthesize myVoteIndex;
 
 + (NSString *)parseClassName {
@@ -29,13 +36,6 @@
 }
 - (void) setAuthor:(PFUser *) user {
     self[@"author"] = user;
-}
-
-- (NSData *) profilePic {
-    return self[@"profilePic"];
-}
-- (void) setProfilePic:(NSData *) image {
-    self[@"profilePic"] = image;
 }
 
 - (NSString *) name {
@@ -60,16 +60,24 @@
 }
 
 - (UIImage *) image1 {
-    UIImage *result;
-    if (self[@"imageData1"] != nil) {
-        NSData *imageData = self[@"imageData1"];
-        result = [UIImage imageWithData:imageData];
-    } else {
-        NSString *picURL = self[@"imageURL1"];
-        result = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:picURL]]];
+    if (!_image1) {
+        if (self[@"imageData1"] != nil) {
+            NSData *imageData = self[@"imageData1"];
+            _image1 = [UIImage imageWithData:imageData];
+        } else {
+            NSString *picURL = self[@"imageURL1"];
+            _image1 = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:picURL]]];
+        }
     }
     
-    return result;
+    return _image1;
+}
+
+- (void)clearPic:(int)index {
+    if (index == 1)
+        _image1 = nil;
+    else
+        _image2 = nil;
 }
 
 - (void) setImage1WithData:(NSData *)imageData {
@@ -81,16 +89,17 @@
 }
 
 - (UIImage *) image2 {
-    UIImage *result;
-    if (self[@"imageData2"] != nil) {
-        NSData *imageData = self[@"imageData2"];
-        result = [UIImage imageWithData:imageData];
-    } else {
-        NSString *picURL = self[@"imageURL2"];
-        result = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:picURL]]];
+    if (!_image2) {
+        if (self[@"imageData2"] != nil) {
+            NSData *imageData = self[@"imageData2"];
+            _image2 = [UIImage imageWithData:imageData];
+        } else {
+            NSString *picURL = self[@"imageURL2"];
+            _image2 = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:picURL]]];
+        }
     }
     
-    return result;
+    return _image2;
 }
 
 - (void) setImage2WithData:(NSData *)imageData {
@@ -253,7 +262,10 @@
 }
 
 -(int)vote {
-    return [[self.friendsVoted objectAtIndex:self.myVoteIndex] intValue];
+    if (self.friendsVoted.count > 0)
+        return [[self.friendsVoted objectAtIndex:self.myVoteIndex] intValue];
+    else
+        return 0;
 }
 
 @end

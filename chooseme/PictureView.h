@@ -10,30 +10,26 @@
 #import "Question.h"
 
 @interface PictureView : UIView <UIGestureRecognizerDelegate>
-@property (strong, nonatomic) IBOutlet UIImageView *bigPic;
-@property (strong, nonatomic) IBOutlet UIView *bigPicBgColor;
-@property (strong, nonatomic) IBOutlet UIButton *thumbnail1;
-@property (strong, nonatomic) IBOutlet UIButton *thumbnail2;
-@property (strong, nonatomic) IBOutlet UIScrollView *friendsVotedScrollView;
-@property (strong, nonatomic) IBOutlet UILabel *numVotesLabel;
-@property (strong, nonatomic) IBOutlet UILabel *numCommentsLabel;
-@property (strong, nonatomic) IBOutlet UIImageView *heartIcon;
-@property (strong, nonatomic) IBOutlet UIImageView *commentIcon;
-@property (strong, nonatomic) IBOutlet UIButton *xButton;
-@property (strong, nonatomic) IBOutlet UILabel *questionLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *bigPic;
+@property (weak, nonatomic) IBOutlet UIView *bigPicBgColor;
+@property (weak, nonatomic) IBOutlet UIButton *thumbnail1;
+@property (weak, nonatomic) IBOutlet UIButton *thumbnail2;
+@property (weak, nonatomic) IBOutlet UIScrollView *friendsVotedScrollView;
+@property (weak, nonatomic) IBOutlet UILabel *numVotesLabel;
+@property (weak, nonatomic) IBOutlet UILabel *numCommentsLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *heartIcon;
+@property (weak, nonatomic) IBOutlet UIImageView *commentIcon;
+@property (weak, nonatomic) IBOutlet UIButton *xButton;
+@property (weak, nonatomic) IBOutlet UILabel *questionLabel;
 
 @property (assign, nonatomic) int highlightedIndex;
+@property (strong, nonatomic) Question *q;
 
-- (void)hideDetails;
-- (void)formatThumbnails;
-- (void)colorIcons:(UIImage *)image;
-- (UIColor *) calculateTextColor:(UIImage *)img;
-- (void)highlightImage:(int)index;
-- (void)updateComments:(int)comments;
-- (void)updatePercentages:(Question *)q;
 - (void)populateData:(Question *)question withColor:(UIColor *)color;
-- (void) updateHeartIcon:(Question *)q;
-- (void) updateVoteCount:(Question *)q;
-- (void)reloadBigPic:(UIImage *)image1;
+- (void)highlightImage:(int)index;
+- (void)hideDetails;
+- (void)update;
+
+- (UIColor *) calculateTextColor:(UIImage *)img;
 
 @end

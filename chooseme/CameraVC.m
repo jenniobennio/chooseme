@@ -74,7 +74,7 @@
 @property (strong, nonatomic) UIWindow *window;
 
 @property (strong, nonatomic) AwesomeMenuItem *startButton;
-
+ 
 @end
 
 @implementation CameraVC
@@ -433,10 +433,13 @@
 # pragma mark - QuestionVCDelegate methods
 
 - (void)pictureClicked:(int)picNum {
-    if (picNum == 1)
+    if (picNum == 1) {
         [self onPic1:nil];
-    else
+        [self.currentQuestion clearPic:1];
+    } else {
         [self onPic2:nil];
+        [self.currentQuestion clearPic:2];
+    }
 }
 
 - (void)clearImages:(BOOL)submit {

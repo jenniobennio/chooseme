@@ -9,11 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @interface UserQuestionView : UIView
-@property (strong, nonatomic) IBOutlet UIImageView *userPic;
-@property (strong, nonatomic) IBOutlet UIView *userPicBgColor;
-@property (strong, nonatomic) IBOutlet UIView *colorView;
-@property (strong, nonatomic) IBOutlet UILabel *questionLabel;
-@property (strong, nonatomic) IBOutlet UILabel *nameLabel;
-@property (strong, nonatomic) IBOutlet UILabel *timestampLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *userPic;
+@property (weak, nonatomic) IBOutlet UIView *userPicBgColor;
+@property (weak, nonatomic) IBOutlet UIView *colorView;
+@property (weak, nonatomic) IBOutlet UILabel *questionLabel;
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *timestampLabel;
 
 @end

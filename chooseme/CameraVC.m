@@ -593,6 +593,7 @@
         [self choosePicFromGallery:nil];
     }
 }
+
 - (void)awesomeMenuDidFinishAnimationClose:(AwesomeMenu *)menu {
     NSLog(@"Menu was closed!");
 }

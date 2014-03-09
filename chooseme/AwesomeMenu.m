@@ -177,6 +177,15 @@ static CGPoint RotateCGPointAroundCenter(CGPoint point, CGPoint center, float an
     item.center = item.startPoint;
     _defaultIndex = (int) [_menusArray indexOfObject:item];
     
+    // rotate start button back to normal
+    float angle = self.isExpanding ? -M_PI_4 : 0.0f;
+    [UIView animateWithDuration:animationDuration animations:^{
+        _startButton.transform = CGAffineTransformMakeRotation(angle);
+    }];
+    
+    // hide the start button
+    [_startButton hidePlus];
+    
     // shrink other menu buttons
     for (int i = 0; i < [_menusArray count]; i ++)
     {
@@ -191,12 +200,6 @@ static CGPoint RotateCGPointAroundCenter(CGPoint point, CGPoint center, float an
         otherItem.center = otherItem.startPoint;
     }
     _expanding = NO;
-    
-    // rotate start button
-    float angle = self.isExpanding ? -M_PI_4 : 0.0f;
-    [UIView animateWithDuration:animationDuration animations:^{
-        _startButton.transform = CGAffineTransformMakeRotation(angle);
-    }];
     
     if ([_delegate respondsToSelector:@selector(awesomeMenu:didSelectIndex:)])
     {
@@ -291,6 +294,9 @@ static CGPoint RotateCGPointAroundCenter(CGPoint point, CGPoint center, float an
         return;
     }
     
+    // expanding means you're about to choose, so reset the default index in case it closes without making a choice.
+    _defaultIndex = -1;
+    
     int tag = 1000 + _flag;
     AwesomeMenuItem *item = (AwesomeMenuItem *)[self viewWithTag:tag];
     
@@ -334,7 +340,6 @@ static CGPoint RotateCGPointAroundCenter(CGPoint point, CGPoint center, float an
     item.center = item.endPoint;
     
     _flag ++;
-    
 }
 
 - (void)_close
@@ -394,6 +399,9 @@ static CGPoint RotateCGPointAroundCenter(CGPoint point, CGPoint center, float an
 - (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag {
     
     if([[anim valueForKey:@"id"] isEqual:@"lastAnimation"]) {
+        if (_defaultIndex == -1) {
+            [_startButton showPlus];
+        }
         if(self.delegate && [self.delegate respondsToSelector:@selector(awesomeMenuDidFinishAnimationClose:)]){
             [self.delegate awesomeMenuDidFinishAnimationClose:self];
         }

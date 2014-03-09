@@ -45,15 +45,16 @@
 
 - (void) load_images
 {
-//    [MBProgressHUD showHUDAddedTo:self.bigPicBgColor animated:YES];
-    
-    [self.thumbnail1 setBackgroundImage:self.q.image1 forState:UIControlStateNormal];
-    [self.thumbnail2 setBackgroundImage:self.q.image2 forState:UIControlStateNormal];
+    //    [MBProgressHUD showHUDAddedTo:self.bigPicBgColor animated:YES];
     
     if (self.highlightedIndex == 1)
         [self reloadBigPic:self.q.image1];
     else
         [self reloadBigPic:self.q.image2];
+    
+    [self.thumbnail1 setBackgroundImage:self.q.image1 forState:UIControlStateNormal];
+    [self.thumbnail2 setBackgroundImage:self.q.image2 forState:UIControlStateNormal];
+    
 //    [MBProgressHUD hideHUDForView:self.bigPicBgColor animated:YES];
 
 }

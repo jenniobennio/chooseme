@@ -175,6 +175,7 @@ static CGPoint RotateCGPointAroundCenter(CGPoint point, CGPoint center, float an
     CAAnimationGroup *blowup = [self _blowupAnimationAtPoint:item.center];
     [item.layer addAnimation:blowup forKey:@"blowup"];
     item.center = item.startPoint;
+    item.layer.zPosition = 1;
     _defaultIndex = (int) [_menusArray indexOfObject:item];
     
     // rotate start button back to normal

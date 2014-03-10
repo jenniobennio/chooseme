@@ -193,7 +193,15 @@
     
     [self.question saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
-            NSLog(@"successfully posted question");
+            NSLog(@"successfully posted question. sending push!");
+            // Create our Installation query
+            PFQuery *pushQuery = [PFInstallation query];
+            [pushQuery whereKey:@"deviceType" equalTo:@"ios"]; // yeah ok theoretically should search for friends but w/e it's a demo.
+            
+            // Send push notification to query
+            [PFPush sendPushMessageToQueryInBackground:pushQuery
+                                           withMessage:@"Hello World!"];
+            
         } else {
             NSLog(@"failed to post question.");
         }

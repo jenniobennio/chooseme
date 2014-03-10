@@ -9,6 +9,8 @@
                 <outlet property="cameraButton" destination="E1u-GF-wfn" id="hWB-Oh-3BO"/>
                 <outlet property="friendsButton" destination="mYJ-OK-HYe" id="d9N-P4-wsS"/>
                 <outlet property="galleryButton" destination="c3g-4O-0yZ" id="meK-zb-GvZ"/>
+                <outlet property="instructionLabel1" destination="ad4-7p-uhB" id="sCr-ig-Hm8"/>
+                <outlet property="instructionLabel2" destination="KAR-zZ-EW9" id="Axo-me-sHn"/>
                 <outlet property="mainPic" destination="T78-pM-AKV" id="wdW-IN-Gfg"/>
                 <outlet property="meButton" destination="fQV-Wy-4pm" id="q2q-bm-rLi"/>
                 <outlet property="pic1" destination="jS4-HL-qP4" id="szy-cY-A7T"/>
@@ -16,6 +18,7 @@
                 <outlet property="pinterestButton" destination="dHX-5L-Ofu" id="14C-4y-oWi"/>
                 <outlet property="searchButton" destination="dQl-MG-sFR" id="T6V-Of-qg9"/>
                 <outlet property="takePicButton" destination="2ZE-D9-CZk" id="XNb-Q1-qhe"/>
+                <outlet property="titleLabel" destination="ryw-Wv-RYR" id="MWN-gU-XXK"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
         </placeholder>
@@ -24,12 +27,33 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="T78-pM-AKV">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.59999999999999964" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Green-blurry-lights1922.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="T78-pM-AKV">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" red="0.93548318610000003" green="0.93548318610000003" blue="0.93548318610000003" alpha="1" colorSpace="calibratedRGB"/>
                     <gestureRecognizers/>
                 </imageView>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Take your first picture               Tap the +" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="200" translatesAutoresizingMaskIntoConstraints="NO" id="ad4-7p-uhB">
+                    <rect key="frame" x="50" y="200" width="200" height="100"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="22"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Take your second picture" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="190" translatesAutoresizingMaskIntoConstraints="NO" id="KAR-zZ-EW9">
+                    <rect key="frame" x="60" y="290" width="190" height="100"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="22"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="ChooseMe" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="320" translatesAutoresizingMaskIntoConstraints="NO" id="ryw-Wv-RYR">
+                    <rect key="frame" x="0.0" y="38" width="320" height="122"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="50"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
                 <button opaque="NO" clipsSubviews="YES" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2ZE-D9-CZk">
                     <rect key="frame" x="135" y="506" width="50" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -174,7 +198,7 @@
                     </connections>
                 </button>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.93548318610000003" green="0.93548318610000003" blue="0.93548318610000003" alpha="1" colorSpace="calibratedRGB"/>
             <gestureRecognizers/>
             <constraints>
                 <constraint firstItem="2ZE-D9-CZk" firstAttribute="top" secondItem="dHX-5L-Ofu" secondAttribute="bottom" constant="54" id="1Y8-0O-iiV"/>
@@ -209,6 +233,7 @@
     <resources>
         <image name="111-user.png" width="24" height="21"/>
         <image name="112-group.png" width="32" height="21"/>
+        <image name="Green-blurry-lights1922.jpg" width="1300" height="863"/>
         <image name="pinterest-32.png" width="32" height="32"/>
         <image name="search-32.png" width="32" height="32"/>
         <image name="slr_camera-32.png" width="32" height="32"/>

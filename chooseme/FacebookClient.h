@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <Parse/Parse.h>
+#import "Question.h"
 
 @interface FacebookClient : NSObject
 
@@ -20,5 +21,6 @@
 
 - (void) meRequest:(void (^)())onSuccess;
 - (FBCacheDescriptor *)loadCache;
+- (void)postToFriend:(Question *)q;
 
 @end

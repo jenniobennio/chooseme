@@ -22,13 +22,14 @@
     return self;
 }
 
-- (void)populateData:(Question *)question withColor:(UIColor *)color
+- (void)populateData:(Question *)question withColor:(UIColor *)color andLoad:(BOOL)load
 {
     self.q = question;
     self.highlightedIndex = 1;
     
     // Set the pictures (thumbnail + big pic)
-    [self performSelectorInBackground:@selector(load_images) withObject:nil];
+    if (load)
+        [self performSelectorInBackground:@selector(load_images) withObject:nil];
     self.thumbnail1.tag = 1;
     self.thumbnail2.tag = 2;
     [self formatThumbnails:color];
@@ -41,6 +42,11 @@
     [self updateVoteCount];
     [self updateCommentCount];
     [self updatePercentages];
+}
+
+- (void)populateData:(Question *)question withColor:(UIColor *)color
+{
+    [self populateData:question withColor:color andLoad:YES];
 }
 
 - (void) load_images

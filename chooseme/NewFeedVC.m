@@ -66,7 +66,7 @@
     
     // Set title
     if ([self isMe])
-        self.titleLabel.text = @"MY QUESTIONS";
+        self.titleLabel.text = @"My Questions";
     else
         self.titleLabel.text = @"FRIENDS' QUESTIONS";
     

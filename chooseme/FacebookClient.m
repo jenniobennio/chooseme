@@ -59,4 +59,60 @@
     return self.cacheDescriptor;
 }
 
+- (void)postToFriend:(Question *)q
+{
+    NSLog(@"Post to friend");
+    
+    NSString *fbAccessToken = [[[FBSession activeSession] accessTokenData] accessToken];
+    NSLog(@"access token: %@", fbAccessToken);
+    
+    NSDictionary *params0 = [NSDictionary dictionaryWithObjectsAndKeys:
+                            @"727526547279997", @"client_id",
+                            @"6ee3807135f35e6aab61eccb6bb8e83a", @"client_secret",
+//                            @"This is a test message", @"client_credentials",
+                            nil
+                            ];
+
+    NSString *queryURL0 = @"/oauth/access_token";
+    [FBRequestConnection startWithGraphPath:queryURL0
+                                 parameters:params0
+                                 HTTPMethod:@"GET"
+                          completionHandler:^(
+                                              FBRequestConnection *connection,
+                                              id result,
+                                              NSError *error
+                                              ) {
+                              /* handle the result */
+                              NSLog(@"Got access token");
+                              
+                              if (error)
+                                  NSLog(@"%@", error);
+                          }];
+
+    
+
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
+                            fbAccessToken, @"access_token",
+                            @"/testurl?param1=value1", @"href",
+                            @"This is a test message", @"template",
+                            nil
+                            ];
+    
+    NSString *queryURL = [NSString stringWithFormat:@"/%@/notifications", q.facebookID];
+    [FBRequestConnection startWithGraphPath:queryURL
+                                 parameters:params
+                                 HTTPMethod:@"POST"
+                          completionHandler:^(
+                                              FBRequestConnection *connection,
+                                              id result,
+                                              NSError *error
+                                              ) {
+                              /* handle the result */
+                              NSLog(@"posted");
+                              
+                              if (error)
+                                  NSLog(@"%@", error);
+                          }];
+}
+
 @end

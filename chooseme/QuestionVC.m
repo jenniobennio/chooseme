@@ -94,14 +94,18 @@
     NSArray *nibViews = [[NSBundle mainBundle] loadNibNamed:@"PictureView" owner:self options:nil];
     self.pView = [nibViews objectAtIndex:0];
     self.pView.frame = CGRectMake(0, 64, self.view.frame.size.width, 344);
+
+    [self.pView.bigPic setImage:self.image1];
+    [self.pView.thumbnail1 setBackgroundImage:self.image1 forState:UIControlStateNormal];
+    [self.pView.thumbnail2 setBackgroundImage:self.image2 forState:UIControlStateNormal];
+
+    [self.pView populateData:self.question withColor:color andLoad:NO];
     
     // fakePView was used to set up autolayout constraints, so send it all the way to the back
     // pView contains the actual image data, etc
     [self.view addSubview:self.pView];
     [self.view sendSubviewToBack:self.pView];
     [self.view sendSubviewToBack:self.fakePView];
-    
-    [self.pView populateData:self.question withColor:color];
     
     NSLog(@"QuestionVC viewDidLoad");
     
@@ -190,6 +194,8 @@
         self.question.question = @"Which one?";
 
     self.question.youVoted = [NSNumber numberWithInt:0];
+    
+//    [[FacebookClient instance] postToFriend:self.question];
     
     [self.question saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {

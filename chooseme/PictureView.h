@@ -25,6 +25,7 @@
 @property (assign, nonatomic) int highlightedIndex;
 @property (strong, nonatomic) Question *q;
 
+- (void)populateData:(Question *)question withColor:(UIColor *)color andLoad:(BOOL)load;
 - (void)populateData:(Question *)question withColor:(UIColor *)color;
 - (void)highlightImage:(int)index;
 - (void)hideDetails;

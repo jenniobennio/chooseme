@@ -14,12 +14,14 @@
 - (void)clearImages:(BOOL)submit;
 @end
 
-@interface QuestionVC : UIViewController <UITextFieldDelegate, FBFriendPickerDelegate, UISearchBarDelegate, UICollectionViewDataSource, UICollectionViewDelegate>
+@interface QuestionVC : UIViewController <UITextFieldDelegate, FBFriendPickerDelegate, UISearchBarDelegate, UICollectionViewDataSource, UICollectionViewDelegate, FBWebDialogsDelegate>
 // CameraVC will be its delegate so we can pass it information (e.g. which pic was selected to redo, whether we submitted)
 @property (nonatomic, weak) id <QuestionVCDelegate> delegate;
 
 // Current Question object
 @property (nonatomic, strong) Question *question;
+@property (nonatomic, strong) UIImage *image1;
+@property (nonatomic, strong) UIImage *image2;
 
 // FB cacheDescriptor for friends list
 @property (strong, nonatomic) FBCacheDescriptor *cacheDescriptor;

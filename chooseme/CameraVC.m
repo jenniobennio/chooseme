@@ -20,6 +20,10 @@
 @interface CameraVC ()
 
 // View elements
+@property (strong, nonatomic) IBOutlet UILabel *titleLabel;
+@property (strong, nonatomic) IBOutlet UILabel *instructionLabel1;
+@property (strong, nonatomic) IBOutlet UILabel *instructionLabel2;
+
 @property (strong, nonatomic) IBOutlet UIImageView *mainPic;
 @property (strong, nonatomic) IBOutlet UIButton *pic1;
 @property (strong, nonatomic) IBOutlet UIButton *pic2;
@@ -110,10 +114,10 @@
     // *************** Initialize Menu *********************************
     self.takePicButton.hidden = YES;
     
-    UIImage *cameraImage = [UIImage imageNamed:@"slr_camera-32.png"];
-    UIImage *searchImage = [UIImage imageNamed:@"search-32.png"];
-    UIImage *pinterestImage = [UIImage imageNamed:@"pinterest-32.png"];
-    UIImage *galleryImage = [UIImage imageNamed:@"stack_of_photos-32.png"];
+    UIImage *cameraImage = [[UIImage imageNamed:@"slr_camera-32.png"] maskWithColor:[UIColor whiteColor]];
+    UIImage *searchImage = [[UIImage imageNamed:@"search-32.png"] maskWithColor:[UIColor whiteColor]];
+    UIImage *pinterestImage = [[UIImage imageNamed:@"pinterest-32.png"] maskWithColor:[UIColor whiteColor]];
+    UIImage *galleryImage = [[UIImage imageNamed:@"stack_of_photos-32.png"] maskWithColor:[UIColor whiteColor]];
     UIImage *plusImage = [UIImage imageNamed:@"plus-50.png"];
     
     AwesomeMenuItem *cameraItem = [[AwesomeMenuItem alloc] initWithImage:cameraImage];
@@ -197,6 +201,10 @@
 {
     [super viewDidAppear:animated];
     
+    [UIView animateWithDuration:0.4f animations:^{
+        self.titleLabel.alpha = 1;
+    }];
+    
     // If both images are set (and just selected an image for redo), go to questionVC
     if (self.justSelectedImage) {
         [self goToQuestionVC];
@@ -212,6 +220,8 @@
     } else {
         self.takePicButton.selected = NO;
     }
+    self.instructionLabel1.hidden = NO;
+    self.instructionLabel2.hidden = YES;
     [self setInsets];
     
     [self selectPic:0];
@@ -238,6 +248,8 @@
     } else {
         self.takePicButton.selected = NO;
     }
+    self.instructionLabel1.hidden = YES;
+    self.instructionLabel2.hidden = NO;
     [self setInsets];
     
     [self selectPic:1];
@@ -358,11 +370,12 @@
         self.takePicButton.titleLabel.text = @"";
         self.shouldSetDefaultPicSource = NO;
     }
-    [self hideImageSourceButtons];
     
     GoogleVC *googleVC = [[GoogleVC alloc] initWithNibName:@"GoogleVC" bundle:nil];
     googleVC.delegate = self;
     [self presentViewController:googleVC animated:YES completion:nil];
+    
+    [self hideImageSourceButtons];
 }
 
 # pragma mark - UIImagePicker methods
@@ -371,6 +384,7 @@
     
     UIImage *chosenImage = info[UIImagePickerControllerEditedImage]; // for edited (cropped) image
     self.mainPic.image = chosenImage;
+    self.mainPic.alpha = 1;
     
     if (self.picIndex == 0) {
         self.image1 = chosenImage;
@@ -390,6 +404,7 @@
     // Set BOOL so we know we can possibly move onto QuestionVC
     self.justSelectedImage = YES;
     
+    [self doPic2];
     [picker dismissViewControllerAnimated:YES completion:NULL];
 }
 
@@ -407,6 +422,7 @@
 
 - (void)pinChosen:(NSURL *)pinURL {
     [self.mainPic setImageWithURL:pinURL];
+    self.mainPic.alpha = 1;
     UIImage *chosenImage = self.mainPic.image;
     
     if (self.picIndex == 0) {
@@ -426,13 +442,16 @@
     
     // Set BOOL so we know we can possibly move onto QuestionVC
     self.justSelectedImage = YES;
-    
+    [self doPic2];
     
 }
 
 # pragma mark - QuestionVCDelegate methods
 
 - (void)pictureClicked:(int)picNum {
+    self.instructionLabel1.text = @"Re-take your first picture";
+    self.instructionLabel2.text = @"Re-take your second picture";
+
     if (picNum == 1) {
         [self onPic1:nil];
         [self.currentQuestion clearPic:1];
@@ -446,7 +465,13 @@
     NSLog(@"Clear images");
     self.currentQuestion = [[Question alloc] init];
 
-    [self.mainPic setImage:nil];
+    [self.mainPic setImage:[UIImage imageNamed:@"Green-blurry-lights1922.jpg"]];
+    self.titleLabel.hidden = NO;
+    self.instructionLabel1.hidden = NO;
+    self.instructionLabel2.hidden = YES;
+    self.instructionLabel1.text = @"Take your first picture";
+    self.instructionLabel2.text = @"Take your second picture";
+    
     [self.pic1 setImage:nil forState:UIControlStateNormal];
     [self.pic1.imageView setImage:nil];
     [self.pic2 setImage:nil forState:UIControlStateNormal];
@@ -539,6 +564,8 @@
     if (self.pic1.imageView.image && self.pic2.imageView.image) {
         QuestionVC *questionVC = [[QuestionVC alloc] initWithNibName:@"QuestionVC" bundle:nil];
         questionVC.question = self.currentQuestion;
+        questionVC.image1 = self.pic1.imageView.image;
+        questionVC.image2 = self.pic2.imageView.image;
         
         // Set delegate so we can later pass info from questionVC to cameraVC
         questionVC.delegate = self;
@@ -558,6 +585,14 @@
     self.cameraButton.hidden = YES;
     self.pinterestButton.hidden = YES;
     self.searchButton.hidden = YES;
+    
+}
+
+- (void)doPic2
+{
+    self.titleLabel.hidden = YES;
+    self.instructionLabel1.hidden = YES;
+    self.instructionLabel2.hidden = NO;
 }
 
 - (void)setInsets {

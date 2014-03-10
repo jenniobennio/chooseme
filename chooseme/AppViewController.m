@@ -152,4 +152,11 @@
     [self.pageVC setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
 }
 
+- (void) openQuestionsView;
+{
+    UIViewController *initialViewController = [self viewControllerAtIndex:0];
+    NSArray *viewControllers = [NSArray arrayWithObject:initialViewController];
+    [self.pageVC setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionReverse animated:NO completion:nil];
+}
+
 @end

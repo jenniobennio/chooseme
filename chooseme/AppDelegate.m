@@ -52,8 +52,14 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)newDeviceToken {
     [currentInstallation saveInBackground];
 }
 
-- (void)application:(UIApplication *)application
-didReceiveRemoteNotification:(NSDictionary *)userInfo {
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    if (application.applicationState == UIApplicationStateActive) {
+        AppViewController *viewController = (AppViewController *) self.window.rootViewController;
+        [viewController openQuestionsView];
+    }
+    
+    // FIXME: should also open up in the backgrounded/ just opened case.
+
     [PFPush handlePush:userInfo];
 }
 

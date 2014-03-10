@@ -181,7 +181,7 @@
 }
 
 - (IBAction)onSubmit:(id)sender {
-    NSLog(@"Posting question with ID %@", self.question.objectId);
+    NSLog(@"Posting question.");
     
     self.question.facebookID = self.facebookID;
     self.question.author = [PFUser currentUser];
@@ -199,7 +199,17 @@
     
     [self.question saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
-            NSLog(@"successfully posted question");
+            NSLog(@"successfully posted question. sending push!");
+            // Create our Installation query
+            PFQuery *pushQuery = [PFInstallation query];
+            [pushQuery whereKey:@"deviceType" equalTo:@"ios"]; // yeah ok theoretically should search for friends but w/e it's a demo.
+            
+            // Send push notification to query
+            NSString *name = [[FacebookClient instance] myName];
+            NSString *message = [NSString stringWithFormat:@"%@ has asked you a new question!", name];
+            [PFPush sendPushMessageToQueryInBackground:pushQuery
+                                           withMessage:message];
+            
         } else {
             NSLog(@"failed to post question.");
         }

@@ -362,7 +362,7 @@
     FriendCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"FriendCell" forIndexPath:indexPath];
     
 //    NSString *friend = [self.question.friends[indexPath.row] name];
-    NSString *strurl = [[NSString alloc] initWithFormat:@"https://graph.facebook.com/%@/picture",[[self.question.friends objectAtIndex:indexPath.row] objectForKey:@"id"]];
+    NSString *strurl = [[NSString alloc] initWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1",[[self.question.friends objectAtIndex:indexPath.row] objectForKey:@"id"]];
     NSURL *url = [NSURL URLWithString:strurl];
     NSData *data = [NSData dataWithContentsOfURL:url];
     [cell.friendImage setImage:[[UIImage alloc] initWithData:data]];

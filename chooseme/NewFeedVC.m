@@ -41,6 +41,8 @@
 
 @property (nonatomic, strong) UIRefreshControl *refresh;
 
+@property (nonatomic, assign) BOOL wasRefreshed;
+
 @end
 
 @implementation NewFeedVC
@@ -135,8 +137,10 @@
             }
             
             // Only reload table if questions are different
-            if (self.questions.count != self.questions_prev.count)
+            if (self.wasRefreshed || self.questions.count != self.questions_prev.count) {
                 [self.feedTable reloadData];
+                self.wasRefreshed = NO;
+            }
             self.view.backgroundColor = [self.colorManager currentColor:1];
             [self.refresh endRefreshing];
             [self.feedTable scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:YES];
@@ -161,9 +165,10 @@
             }
             
             // Only reload table if questions are different
-            if (self.questions.count != self.questions_prev.count) {
-//                NSLog(@"Re-loading table");
+            if (self.wasRefreshed || self.questions.count != self.questions_prev.count) {
+                NSLog(@"Re-loading table");
                 [self.feedTable reloadData];
+                self.wasRefreshed = NO;
             }
             self.view.backgroundColor = [self.colorManager currentFriendsColor];
             [self.refresh endRefreshing];
@@ -448,6 +453,7 @@
 }
 
 - (void) refreshMe: (UIRefreshControl *)refresh;{
+    self.wasRefreshed = YES;
     [self loadQuestionsArray:self.myFacebookID];
 }
 

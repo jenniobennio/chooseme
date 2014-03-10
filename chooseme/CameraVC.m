@@ -104,6 +104,9 @@
     self.colorManager = [Colorful sharedManager];
     [self.colorManager randColor];
     
+    [self.mainPic setImage:[UIImage imageNamed:@"bokeh.jpg"]];
+    self.mainPic.alpha = 0.8;
+    
     // Init currentQuestion
     self.currentQuestion = [[Question alloc] init];
     
@@ -465,7 +468,9 @@
     NSLog(@"Clear images");
     self.currentQuestion = [[Question alloc] init];
 
-    [self.mainPic setImage:[UIImage imageNamed:@"Green-blurry-lights1922.jpg"]];
+    [self.mainPic setImage:[UIImage imageNamed:@"bokeh.jpg"]];
+    self.mainPic.alpha = 0.8;
+
     self.titleLabel.hidden = NO;
     self.instructionLabel1.hidden = NO;
     self.instructionLabel2.hidden = YES;

@@ -13,4 +13,6 @@
 @interface AppViewController : UIViewController <UIPageViewControllerDataSource, CameraVCDelegate, NewFeedVCDelegate>
 
 @property (strong, nonatomic) UIPageViewController *pageVC;
+
+- (void) openQuestionsView;
 @end

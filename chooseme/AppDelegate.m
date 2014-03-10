@@ -54,6 +54,11 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)newDeviceToken {
 
 - (void)application:(UIApplication *)application
 didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    if (application.applicationState == UIApplicationStateActive) {
+        NSLog(@"receiving push, app in foreground.");
+    } else {
+        NSLog(@"receiving push, app just opened.");
+    }
     [PFPush handlePush:userInfo];
 }
 
